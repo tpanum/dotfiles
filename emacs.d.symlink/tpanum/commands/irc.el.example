@@ -1,0 +1,9 @@
+;;;###autoload
+(defun tpanum/erc-connect ()
+  "Prompts for a channel, then connects to IRC."
+  (interactive)
+  (erc :server    "irc.freenode.net"
+       :port      6667
+       :nick      "FREENODE_NICK"
+       :password  "FREENODE_PASSWORD"
+       :full-name "Thomas Kobber Panum"))

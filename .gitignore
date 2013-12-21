@@ -1,0 +1,13 @@
+# Emacs installed stuff
+
+emacs.d.symlink/elpa
+emacs.d.symlink/loaddefs.el
+emacs.d.symlink/backups
+emacs.d.symlink/auto-save-list
+
+*.elc
+
+emacs.d.symlink/tpanum/commands/irc.el
+
+# Personal git config
+git/gitconfig.symlink
