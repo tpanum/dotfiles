@@ -8,3 +8,5 @@
 ;; move backups into .emacs.d/backups
 (setq backup-directory-alist
       (list (cons "." (expand-file-name "backups" user-emacs-directory))))
+
+(setq initial-scratch-message nil)

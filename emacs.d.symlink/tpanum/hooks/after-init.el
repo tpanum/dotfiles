@@ -1,7 +1,6 @@
 ;; keybindings
 
-;; Allows for for scandinavian keybindings
-(defun fc-kbd (str)
-(read-kbd-macro str))
-
-(define-key global-map (fc-kbd "C-ø") 'ace-jump-mode)
+;; C-å
+(define-key global-map [67109112] 'ace-jump-mode)
+;; C-ø
+(define-key global-map [67109093] 'tpanum/open-shell-in-ansi-term)

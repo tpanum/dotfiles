@@ -47,6 +47,7 @@
  'fill-column-indicator
  'smartparens
  'ace-jump-mode
+ 'paredit
  'popup
  'dash
  'auto-complete
@@ -54,7 +55,6 @@
  'flymake-cursor
  'ido-ubiquitious
  'hlinum
- 'paredit
  'haml-mode
  'sass-mode
  'scss-mode
