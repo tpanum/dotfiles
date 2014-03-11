@@ -1,5 +1,4 @@
 ;; keybindings
-
 ;; C-å
 (define-key global-map [67109112] 'ace-jump-mode)
 ;; C-ø

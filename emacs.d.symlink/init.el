@@ -1,4 +1,4 @@
-;; tpanum's Emacs configuration
+;; Tpanum's Emacs configuration
 
 (defun tpanum/load-init-file (path &optional noerror)
   "This loads a file from inside the the .emacs.d directory"

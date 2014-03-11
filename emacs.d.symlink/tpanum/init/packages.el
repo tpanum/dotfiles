@@ -42,21 +42,32 @@
   (tpanum/package-delete-unless-listed packages))
 
 (tpanum/package-install-and-remove-to-match-list
+ 'auctex
  'color-theme
- 'color-theme-sanityinc-tomorrow
+ 'ample-theme
+ 'ack
  'fill-column-indicator
  'smartparens
  'ace-jump-mode
+ 'ess
  'paredit
  'popup
  'dash
- 'auto-complete
+ 'company
  'erlang
  'flymake-cursor
  'ido-ubiquitious
- 'hlinum
+ 'smex
+ 'yasnippet
+ 'writeroom-mode
+ 'writegood-mode
+ 'multi-term
+ 'dart-mode
+ 'git-rebase-mode
+ 'git-commit-mode
+ 'magit
+ 'magit-log-edit
  'haml-mode
  'sass-mode
  'scss-mode
- 'auctex
  )

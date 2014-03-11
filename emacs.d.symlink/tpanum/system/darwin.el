@@ -34,3 +34,22 @@
 
 ;; allow for unicode keybindings
 (prefer-coding-system 'utf-8-unix)
+
+;; tex path for .app
+(getenv "PATH")
+ (setenv "PATH"
+(concat
+ "/usr/texbin" ":"
+
+(getenv "PATH")))
+
+(defun toggle-frame-fullscreen ()
+"Toggle full screen"
+(interactive)
+(set-frame-parameter
+nil 'fullscreen
+(when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+
+;; enables /usr/bin
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))

@@ -1,1 +1,1 @@
-(setq jeg2-wrap-limit 80)
+(setq jeg2-wrap-limit 50)
