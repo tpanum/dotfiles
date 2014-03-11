@@ -130,7 +130,7 @@ setup_irc () {
         user ' - What is your freenode password?'
         read -e irc_password
 
-        sed -e "s/FREENODE_NICK/$git_authorname/g" -e "s/FREENODE_PASSWORD/$git_authoremail/g" emacs.d.symlink/tpanum/commands/irc.el.example > emacs.d.symlink/tpanum/commands/irc.el
+        sed -e "s/FREENODE_NICK/$irc_nick/g" -e "s/FREENODE_PASSWORD/$irc_password/g" emacs.d.symlink/tpanum/commands/irc.el.example > emacs.d.symlink/tpanum/commands/irc.el
 
         success 'setup irc'
     fi
