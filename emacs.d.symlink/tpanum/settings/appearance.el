@@ -5,7 +5,12 @@
 (setq inhibit-splash-screen t)
 
 ;; load theme
-(load-theme 'ample t)
+(setq calendar-location-name "Aalborg, Denmark")
+(setq calendar-latitude 57.02)
+(setq calendar-longitude -9.54)
+
+(require 'theme-changer)
+(change-theme 'flatland 'tangotango)
 
 ;; remove scrollbar
 (toggle-scroll-bar -1)

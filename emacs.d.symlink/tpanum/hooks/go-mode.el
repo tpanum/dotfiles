@@ -1,0 +1,2 @@
+(smartparens-mode)
+(flycheck-mode)

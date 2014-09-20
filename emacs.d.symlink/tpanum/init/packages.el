@@ -1,4 +1,4 @@
-;; Stolen from JEG2
+;; Stolen from jeg2
 
 ;; Idea from Ryan Davis:
 ;; http://blog.zenspider.com/blog/2013/06/my-emacs-setup-packages.html
@@ -30,8 +30,24 @@
 
 (defun tpanum/package-delete-unless-listed (packages)
   "Remove packages not explicitly declared."
-  (dolist (package (mapcar 'car package-alist))
-    (unless (memq package packages) (tpanum/package-delete-by-name package))))
+  (let ((packages-and-dependencies (tpanum/packages-requirements packages)))
+    (dolist (package (mapcar 'car package-alist))
+      (unless (memq package packages-and-dependencies)
+        (tpanum/package-delete-by-name package)))))
+
+(defun tpanum/packages-requirements (packages)
+  "List of dependencies for packages."
+  (delete-dups (apply 'append (mapcar 'tpanum/package-requirements packages))))
+
+(defun tpanum/package-requirements (package)
+  "List of recursive dependencies for a package."
+  (let ((package-info (cdr (assoc package package-alist))))
+     (cond ((null package-info) (list package))
+           (t
+            (tpanum/flatten
+             (cons package
+                   (mapcar 'tpanum/package-requirements
+                           (mapcar 'car (package-desc-reqs package-info)))))))))
 
 (defun tpanum/package-install-and-remove-to-match-list (&rest packages)
   "Sync packages so the installed list matches the passed list."
@@ -45,6 +61,9 @@
  'auctex
  'color-theme
  'ample-theme
+ 'tangotango-theme
+ 'espresso-theme
+ 'theme-changer
  'ack
  'fill-column-indicator
  'smartparens
@@ -54,15 +73,25 @@
  'popup
  'dash
  'company
+ 'undo-tree
+ 'goto-chg
+ 'evil
+ 'evil-leader
  'erlang
+ 'epl
+ 'pkg-info
+ 'flycheck
  'flymake-cursor
  'ido-ubiquitious
  'smex
  'yasnippet
+ 'rainbow-mode
+ 'scss-mode
  'writeroom-mode
  'writegood-mode
  'multi-term
  'dart-mode
+ 'powerline
  'git-rebase-mode
  'git-commit-mode
  'magit
@@ -70,4 +99,11 @@
  'haml-mode
  'sass-mode
  'scss-mode
+ 'js-comint
+ 'js2-mode
+ 'simple-httpd
+ 'skewer-mode
+ 'ac-js2
+ 'go-mode
+ 'flatland-theme
  )
