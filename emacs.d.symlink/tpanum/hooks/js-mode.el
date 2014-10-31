@@ -2,7 +2,6 @@
 (setq fci-rule-column jeg2-wrap-limit)
 (fci-mode)
 (js2-mode)
-(skewer-mode)
 
 (local-set-key (kbd "C-c v w") 'fci-mode)
 

@@ -9,8 +9,7 @@
 (setq calendar-latitude 57.02)
 (setq calendar-longitude -9.54)
 
-(require 'theme-changer)
-(change-theme 'flatland 'tangotango)
+(load-theme 'flatland t)
 
 ;; remove scrollbar
 (toggle-scroll-bar -1)

@@ -7,7 +7,7 @@
 
 (dolist (repo '(("elpa"      . "http://tromey.com/elpa/")
                 ("marmalade" . "http://marmalade-repo.org/packages/")
-                ("melpa"     . "http://melpa.milkbox.net/packages/")))
+                ("melpa"     . "http://melpa.org/packages/")))
   (add-to-list 'package-archives repo))
 
 (defun tpanum/package-refresh-and-install (name)
@@ -58,7 +58,7 @@
   (tpanum/package-delete-unless-listed packages))
 
 (tpanum/package-install-and-remove-to-match-list
- 'auctex
+ 'color-theme-sanityinc-tomorrow
  'color-theme
  'ample-theme
  'tangotango-theme
@@ -77,12 +77,14 @@
  'goto-chg
  'evil
  'evil-leader
+ 'evil-nerd-commenter
  'erlang
  'epl
  'pkg-info
  'flycheck
  'flymake-cursor
  'ido-ubiquitious
+ 'ido-vertical-mode
  'smex
  'yasnippet
  'rainbow-mode

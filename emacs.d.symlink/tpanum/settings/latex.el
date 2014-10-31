@@ -4,6 +4,7 @@
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
 
+(setq TeX-show-compilation nil)
 ;;set xetex mode in tex/latex
 
 (add-hook 'LaTeX-mode-hook (lambda()
