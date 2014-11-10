@@ -21,12 +21,11 @@
 
 (defun tpanum/package-version-for (package)
   "Get the version of a loaded package."
-  (package-desc-vers (cdr (assoc package package-alist))))
+  (package-desc-version (car (cdr (assoc package package-alist)))))
 
 (defun tpanum/package-delete-by-name (package)
   "Remove a package by name."
-  (package-delete (symbol-name package)
-                  (package-version-join (tpanum/package-version-for package))))
+  (package-delete (car (cdr (assoc package package-alist)))))
 
 (defun tpanum/package-delete-unless-listed (packages)
   "Remove packages not explicitly declared."
@@ -41,7 +40,7 @@
 
 (defun tpanum/package-requirements (package)
   "List of recursive dependencies for a package."
-  (let ((package-info (cdr (assoc package package-alist))))
+  (let ((package-info (car (cdr (assoc package package-alist)))))
      (cond ((null package-info) (list package))
            (t
             (tpanum/flatten
@@ -58,54 +57,25 @@
   (tpanum/package-delete-unless-listed packages))
 
 (tpanum/package-install-and-remove-to-match-list
- 'color-theme-sanityinc-tomorrow
- 'color-theme
- 'ample-theme
- 'tangotango-theme
- 'espresso-theme
- 'theme-changer
- 'ack
- 'fill-column-indicator
- 'smartparens
  'ace-jump-mode
- 'ess
- 'paredit
- 'popup
- 'dash
+ 'ack
  'company
- 'undo-tree
- 'goto-chg
+ 'erlang
+ 'ess
  'evil
  'evil-leader
- 'evil-nerd-commenter
- 'erlang
- 'epl
- 'pkg-info
+ 'fill-column-indicator
+ 'flatland-theme
  'flycheck
  'flymake-cursor
- 'ido-ubiquitious
+ 'go-mode
  'ido-vertical-mode
- 'smex
- 'yasnippet
- 'rainbow-mode
- 'scss-mode
- 'writeroom-mode
- 'writegood-mode
- 'multi-term
- 'dart-mode
- 'powerline
- 'git-rebase-mode
- 'git-commit-mode
- 'magit
- 'magit-log-edit
- 'haml-mode
- 'sass-mode
- 'scss-mode
  'js-comint
  'js2-mode
- 'simple-httpd
- 'skewer-mode
- 'ac-js2
- 'go-mode
- 'flatland-theme
+ 'less-css-mode
+ 'paredit
+ 'rainbow-mode
+ 'smartparens
+ 'smex
+ 'yasnippet
  )

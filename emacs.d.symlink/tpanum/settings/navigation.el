@@ -1,9 +1,10 @@
 (ido-mode                      1)
-(setq ido-everywhere           t)
 (setq ido-enable-flex-matching t)
 (ido-vertical-mode 1)
 
 (global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
 (global-evil-leader-mode)
 
 (evil-mode 1)
@@ -11,21 +12,31 @@
 (evil-leader/set-leader "<SPC>")
 
 (evil-leader/set-key
-  "c" 'ace-jump-char-mode
-  "l" 'ace-jump-line-mode
-  "w" 'ace-jump-word-mode
-  "e" 'find-file
-  "b" 'switch-to-buffer
-  "k" 'kill-buffer
-  "pi" 'package-install
-  "g" 'keyboard-quit
-  "xc" 'save-buffers-kill-terminal
+  "0" 'delete-window
   "1" 'delete-other-windows
-  "o" 'other-window
+  "2" 'split-window-below
+  "3" 'split-window-right
+  "b" 'switch-to-buffer
+  "c" 'ace-jump-char-mode
+  "e" 'find-file
+  "g" 'keyboard-quit
   "irc" 'tpanum/erc-connect
+  "k" 'kill-buffer
+  "l" 'ace-jump-line-mode
+  "o" 'other-window
+  "pi" 'package-install
+  "w" 'ace-jump-word-mode
+  "xc" 'save-buffers-kill-terminal
+  "xe" 'eval-last-sexp
   )
 
-(toggle-uniquify-buffer-names)
+;; Change duplicate buffer names from name<2> to dir/name
+(setq uniquify-buffer-name-style 'forward)
+
+(global-set-key (kbd "S-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-<up>") 'shrink-window)
+(global-set-key (kbd "S-<down>") 'enlarge-window)
 
 ;; esc quits
 (defun minibuffer-keyboard-quit ()

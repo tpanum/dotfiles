@@ -3,6 +3,8 @@
 (fci-mode)
 (js2-mode)
 
+(setq-default js2-basic-offset 2)
+
 (local-set-key (kbd "C-c v w") 'fci-mode)
 
 ;; show junk whitespace
