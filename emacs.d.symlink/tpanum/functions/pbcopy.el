@@ -31,7 +31,6 @@
 ;; (require 'pbcopy)
 ;; (turn-on-pbcopy)
 
-
 ;;; Code:
 (defvar pbcopy-program (executable-find "pbcopy")
   "Name of Pbcopy program tool.")

@@ -145,6 +145,14 @@ FUN function callback"
   "-" 'org-cycle-list-bullet
   (kbd "<tab>") 'org-cycle)
 
+;; leader maps
+(evil-leader/set-key-for-mode 'org-mode
+  "t"  'org-show-todo-tree
+  "a"  'org-agenda
+  "c"  'org-archive-subtree
+  "l"  'evil-org-open-links
+)
+
 ;; normal & insert state shortcuts.
 (mapc (lambda (state)
         (evil-define-key state evil-org-mode-map

@@ -1,1 +1,1 @@
-(setq blog-home "~/Desktop/blog2014")
+(setq blog-home "~/work/blog")

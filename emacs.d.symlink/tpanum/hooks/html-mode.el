@@ -11,6 +11,13 @@
 ;; activate character pairing
 (smartparens-mode)
 
+;; smart auto-taggind
+(require 'tagedit)
+(tagedit-mode)
+(tagedit-add-experimental-features)
+
+(aggressive-indent-mode)
+
 ;; do some spell checking (requires:  brew install aspell --lang=en)
 (flyspell-prog-mode)
 
@@ -20,5 +27,3 @@
 (local-set-key (kbd "C-c RET") 'jeg2/newline-between)  ; an override
 
 (local-set-key (kbd "C-c <") 'jeg2/html-insert-open-and-close-tag)
-
-;; (evil-define-key 'normal local-map (kbd "d t") 'sgml-delete-tag)

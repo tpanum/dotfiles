@@ -1,0 +1,182 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/panum/.emacs.d/elpa/" . "smyx-theme-20141106.933/")
+ ("/Users/panum/work/gocode/src/github.com/rakyll/" . "magicmime/")
+ ("/Users/panum/Downloads/" . "peon/")
+ ("/Users/" . "panum/")
+ ("/Users/panum/work/gocode/src/github.com/rwynn/" . "gtm/")
+ ("/Users/panum/work/gocode/src/github.com/" . "rakyll/")
+ ("/Users/panum/work/gocode/src/" . "github.com/")
+ ("/Users/panum/work/gocode/" . "src/")
+ ("/Users/panum/work/dev/bactr/rabbitmq-tutorials/" . "javascript-nodejs/")
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/server/" . "methods/")
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/controllers/" . "labels/")
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/layouts/" . "dashboard/")
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/labels/" . "labels_forms/")
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/" . "labels/")
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/" . "views/")
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/" . "server/")
+ ("/Users/panum/work/dev/bactr/frontend/" . "bactr-em/")
+ ("/Users/panum/work/dev/bactr/" . "peon_go/")
+ ("/Users/panum/work/dev/" . "bactr/")
+ ("/Users/panum/work/" . "dev/")
+ ("/Users/panum/.dotfiles/emacs.d.symlink/" . "tpanum/")
+ ("/Users/panum/.dotfiles/emacs.d.symlink/tpanum/" . "settings/")
+ ("/Users/panum/.emacs.d/tpanum/" . "settings/")
+ ("/Users/panum/.emacs.d/" . "tpanum/")
+ ("/Users/panum/.dotfiles/" . "applications/")
+ ("/Users/panum/" . ".emacs.d/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/panum/.dotfiles/emacs.d.symlink/tpanum/settings/"
+ "/Users/panum/.emacs.d/tpanum/settings/"
+ "/Users/panum/.emacs.d/tpanum/init/"
+ "/Users/panum/.emacs.d/elpa/smyx-theme-20141106.933/"
+ "/Users/panum/work/dev/bactr/peon_go/"
+ "/Users/panum/"
+ "/Users/panum/Desktop/"
+ "/Users/panum/work/gocode/src/github.com/rakyll/magicmime/"
+ "/Users/panum/Downloads/peon/"
+ "/Users/panum/.dotfiles/applications/"
+ "/Users/panum/work/gocode/src/github.com/rwynn/gtm/"
+ "/Users/panum/work/dev/bactr/mqTest/"
+ "/Users/panum/work/dev/bactr/rabbitmq-tutorials/javascript-nodejs/"
+ "/Users/panum/work/dev/bactr/frontend/bactr-em/server/methods/"
+ "/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/labels/labels_forms/"
+ "/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/labels/labels_edit/"
+ "/Users/panum/work/dev/bactr/frontend/bactr-em/client/controllers/labels/"
+ "/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/layouts/dashboard/"
+ "/Users/panum/.dotfiles/bin/"
+ "/Users/panum/.emacs.d/"
+ "/Users/panum/.dotfiles/emacs.d.symlink/"
+ "/Users/panum/.emacs.d/tpanum/hooks/"
+ "/Users/panum/.dotfiles/homebrew/"
+ "/Users/panum/Dropbox/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "navigation.el"
+ "appearance.el"
+ "packages.el"
+ "smyx-theme.el"
+ "crawler.go"
+ "smyx-theme-autoloads.el"
+ "todo.org"
+ ".DS_Store"
+ "autohooks.el"
+ "magicmime.go"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/panum/.dotfiles/emacs.d.symlink/tpanum/settings/" (21608 377 0 0) "wrap.elc" "wrap.el" "whitespace.elc" "whitespace.el" "tramp.elc" "tramp.el" "ssh.elc" "ssh.el" "snippets.elc" "snippets.el" "shell.elc" "shell.el" "pairs.elc" "pairs.el" "navigation.elc" "navigation.el" "modeline.elc" "modeline.el" "markdown.elc" "markdown.el" "linum.elc" "linum.el" "latex.elc" "latex.el" "extensions.elc" "extensions.el" "expansion.elc" "expansion.el" "ess.elc" "ess.el" "blog.elc" "blog.el" "appearance.elc" "appearance.el" ".#appearance.el" "../" "./")
+
+ ("/Users/panum/.emacs.d/tpanum/settings/" (21608 231 0 0) "wrap.elc" "wrap.el" "whitespace.elc" "whitespace.el" "tramp.elc" "tramp.el" "ssh.elc" "ssh.el" "snippets.elc" "snippets.el" "shell.elc" "shell.el" "pairs.elc" "pairs.el" "navigation.elc" "navigation.el" "modeline.elc" "modeline.el" "markdown.elc" "markdown.el" "linum.elc" "linum.el" "latex.elc" "latex.el" "extensions.elc" "extensions.el" "expansion.elc" "expansion.el" "ess.elc" "ess.el" "blog.elc" "blog.el" "appearance.elc" "appearance.el" "../" "./")
+
+ ("/Users/panum/.emacs.d/" (21608 359 0 0) "tpanum/" "smex-items" "loaddefs.el" "init.el" "ido.last" "elpa/" "backups/" "auto-save-list/" "../" "./")
+
+ ("/Users/panum/.emacs.d/tpanum/init/" (21608 231 0 0) "system.elc" "system.el" "settings.elc" "settings.el" "packages.elc" "packages.el" "freshen.elc" "freshen.el" "compile.elc" "compile.el" "autoloads.elc" "autoloads.el" "autohooks.elc" "autohooks.el" "../" "./")
+
+ ("/Users/panum/.dotfiles/emacs.d.symlink/" (21607 65097 0 0) "tpanum/" "smex-items" "loaddefs.el" "init.el" "ido.last" "elpa/" "backups/" "auto-save-list/" "../" "./")
+
+ ("/Users/panum/.dotfiles/emacs.d.symlink/tpanum/init/" (21608 84 0 0) "system.elc" "system.el" "settings.elc" "settings.el" "packages.elc" "packages.el" "freshen.elc" "freshen.el" "compile.elc" "compile.el" "autoloads.elc" "autoloads.el" "autohooks.elc" "autohooks.el" "../" "./")
+
+ ("/Users/panum/.emacs.d/elpa/" (21607 65520 0 0) "yasnippet-20141102.1554/" "undo-tree-20140509.522/" "smyx-theme-20141106.933/" "smex-20141027.245/" "smartparens-20141107.1100/" "rainbow-mode-0.10/" "pkg-info-20140610.630/" "paredit-20140128.1248/" "less-css-mode-20140919.524/" "js2-mode-20141105.154/" "js-comint-20080530.757/" "ido-vertical-mode-20140516.1920/" "helm-20141114.2229/" "goto-chg-20131228.1459/" "go-mode-20141025.219/" "flymake-cursor-20130822.1032/" "flycheck-20141102.652/" "fill-column-indicator-20140509.1101/" "evil-leader-20140606.543/" "evil-20141105.106/" "ess-20141108.1734/" "erlang-20141104.17/" "epl-20140823.609/" "dash-20141106.455/" "company-20141108.1756/" "async-20141001.151/" "archives/" "ack-1.3/" "ace-jump-mode-20140616.115/" "../" "./")
+
+ ("/Users/panum/.emacs.d/elpa/smyx-theme-20141106.933/" (21607 64874 0 0) "smyx-theme.el" "smyx-theme-pkg.elc" "smyx-theme-pkg.el" "smyx-theme-autoloads.el" "../" "./")
+
+ ("/Users/panum/" (21607 62913 0 0) "work/" "todo.org" "Public/" "Pictures/" "Music/" "Movies/" "Library/" "Dropbox/" "Downloads/" "Documents/" "Desktop/" "Applications/" ".zshrc" ".viminfo" ".Trash/" ".ssh/" ".npm/" ".node-gyp/" ".mongorc.js" ".meteorsession" ".meteor/" ".gitignore" ".gitconfig" ".erlang.cookie" ".emacs.d/" ".DS_Store" ".dropbox/" ".dotfiles/" ".CFUserTextEncoding" ".bash_history" "#todo.org#" "../" "./")
+
+ ("/Users/panum/Desktop/" (21607 52169 0 0) ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/peon_go/" (21607 61574 0 0) "oplog.go" "main.go" "mailbox.go" "label.go" "crawler.go" "../" "./")
+
+ ("/Users/panum/work/gocode/src/github.com/rakyll/magicmime/" (21607 33873 0 0) "testdata/" "README.md" "magicmime_test.go" "magicmime.go" "example_test.go" ".git/" "../" "./")
+
+ ("/Users/panum/work/gocode/src/github.com/rakyll/" (21607 33870 0 0) "magicmime/" "../" "./")
+
+ ("/Users/panum/work/gocode/src/github.com/" (21607 33870 0 0) "tpanum/" "streadway/" "sloonz/" "rwynn/" "rakyll/" "pebbe/" "jhillyerd/" "../" "./")
+
+ ("/Users/panum/work/gocode/src/" (21607 32769 0 0) "labix.org/" "gopkg.in/" "github.com/" "code.google.com/" "../" "./")
+
+ ("/Users/panum/Downloads/peon/" (21454 47686 0 0) "resetgmail.js" "README.md" "pipingtest.go" "peon_test.go" "peon.go" "output.mp3" "noir.aif" "Godeps" "config.json" "../" "./")
+
+ ("/Users/panum/Downloads/" (21607 14341 0 0) "wallhaven-74042.png" "Pictures/" "pet_magnus.pdf" "pet_magnus.jpg" "peon/" "MsCheeks BJ.mp4" "mcbj.rar" "Billie Banks POV BJ.mp4" "Astronaut_Mike_Hopkins_on_Dec._24_Spacewalk.jpg" "About Downloads.lpdf/" "7372643860_266aa3ca55_o.jpg" "7372643860_266aa3ca55_o-2.jpg" "453915main_2010-3355_full.jpg" "03751_thegreenergrass_2880x1800.jpg" "03697_vammervikensatnight_2880x1800.jpg" "03621_twilight_2880x1800.jpg" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/gocode/src/github.com/rwynn/gtm/" (21603 28662 0 0) "README.md" "gtm.go" "consistent/" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/panum/work/gocode/src/github.com/rwynn/" (21603 28417 0 0) "gtm/" "../" "./")
+
+ ("/Users/panum/work/gocode/pkg/" (21603 19912 0 0) "darwin_amd64/" "../" "./")
+
+ ("/Users/panum/work/gocode/" (21603 19912 0 0) "src/" "pkg/" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/" (21603 23166 0 0) "rabbitmq-tutorials/" "peon_go/" "peon/" "mqTest/" "mongo_gridfs/" "mailang/" "gridfuse/" "frontend/" "erlang-ffmpeg/" "emailClassification/" "db/" "bactr-dev-server/" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/peon/" (21325 31276 0 0) "test/" "src/" "rel/" "rebar.config" "rebar" "include/" "erl_crash.dump" "ebin/" "deps/" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/mqTest/" (21603 22676 0 0) "send.js" "receive.js" "node_modules/" "main.js" "main.go" "amqp_hacks.js" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/rabbitmq-tutorials/javascript-nodejs/" (21603 22589 0 0) "worker.js" "send.js" "receive_logs.js" "receive.js" "README.md" "package.json" "node_modules/" "new_task.js" "emit_log.js" "amqp-hacks.js" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/rabbitmq-tutorials/" (21603 22434 0 0) "travisci.py" "test.py" "ruby-amqp/" "ruby/" "README.md" "python-puka/" "python/" "php/" "perl/" "Makefile" "LICENSE.txt" "javascript-nodejs/" "java/" "haskell/" "go/" "erlang/" "dotnet/" "clojure/" "bin/" ".travis.yml" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/panum/Dropbox/" (21602 24085 0 0) "todo.org" "Icon
+" ".DS_Store" ".dropbox.cache/" ".dropbox" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/server/methods/" (21601 17004 0 0) "mailboxes.js" "labels.js" "app.js" "../" "./")
+
+ ("/Users/panum/work/" (21603 18811 0 0) "university/" "presentations/" "noir_music/" "machine_learning/" "graphics/" "gocode/" "dev/" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/server/" (21586 49133 0 0) "views/" "publish/" "methods/" "lib/" "db/" "controllers/" "collections/" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/labels/labels_forms/" (21601 14948 0 0) "labels_forms.less" "labels_forms.js" "labels_forms.html" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/controllers/labels/" (21601 13371 0 0) "labels_index.js" "labels_edit.js" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/controllers/" (21599 12025 0 0) "mailboxes/" "landing_page/" "labels/" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/layouts/dashboard/" (21601 11025 0 0) "dashboard.less" "dashboard.js" "dashboard.html" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/layouts/" (21598 15802 0 0) "master_layout/" "dashboard/" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/labels/labels_edit/" (21599 11148 0 0) "labels_edit.less" "labels_edit.js" "labels_edit.html" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/labels/" (21599 11289 0 0) "labels_new/" "labels_forms/" "labels_edit/" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/views/" (21599 12902 0 0) "shared/" "login/" "layouts/" "labels/" "home/" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/client/" (21598 24362 0 0) "views/" "methods/" "lib/" "controllers/" "collections/" "app.less" "app.js" "app.html" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/bactr-em/" (21598 21644 0 0) "settings.json" "server/" "scripts/" "public/" "packages/" "mup.json" "lib/" "config/" "client/" "both/" ".meteor/" ".em/" ".DS_Store" "../" "./")
+
+ ("/Users/panum/work/dev/bactr/frontend/" (21597 12587 0 0) "testpop3.js" "Semantic-UI/" "presummer2014_bactr/" "bactr_revamped/" "bactr-em/" "bactr/" ".DS_Store" "#Dockerfile#" "../" "./")
+
+ ("/Users/panum/work/dev/" (21601 5777 0 0) "bactr/" ".DS_Store" "../" "./")
+
+ ("/Users/panum/.dotfiles/applications/" (21600 64850 0 0) "install.sh" "emacs.sh" "applications.sh" "../" "./")
+
+ ("/Users/panum/.dotfiles/bin/" (21601 8478 0 0) "nvm" "dot" "../" "./")
+
+ ("/Users/" (21600 39956 0 0) "Shared/" "panum/" "Guest/" ".localized" "../" "./")
+
+ ("/Users/panum/.dotfiles/emacs.d.symlink/tpanum/" (21600 45640 0 0) "system/" "snippets/" "settings/" "init/" "hooks/" "functions/" "commands/" "../" "./")
+
+ ("/Users/panum/.emacs.d/tpanum/hooks/" (21600 52374 0 0) "web-mode.elc" "web-mode.el" "text-mode.elc" "text-mode.el" "term-mode.elc" "term-mode.el" "smartparens-mode.elc" "smartparens-mode.el" "sh-mode.elc" "sh-mode.el" "scss-mode.elc" "scss-mode.el" "ruby-mode.elc" "ruby-mode.el" "prog-mode.elc" "prog-mode.el" "org-mode.elc" "org-mode.el" "markdown-mode.elc" "markdown-mode.el" "lisp-interaction-mode.elc" "lisp-interaction-mode.el" "js-mode.elc" "js-mode.el" "inferior-ess-mode.elc" "inferior-ess-mode.el" "inf-ruby-mode.elc" "inf-ruby-mode.el" "ielm-mode.elc" "ielm-mode.el" "html-mode.elc" "html-mode.el" "go-mode.elc" "go-mode.el" "erlang-mode.elc" "erlang-mode.el" "emacs-lisp-mode.elc" "emacs-lisp-mode.el" "dired-mode.elc" "dired-mode.el" "css-mode.elc" "css-mode.el" "after-init.elc" "after-init.el" "../" "./")
+
+ ("/Users/panum/.dotfiles/homebrew/" (21600 49992 0 0) "install.sh" "../" "./")
+
+ ("/Users/panum/.dotfiles/" (21600 45794 0 0) "script/" "osx/" "homebrew/" "git/" "emacs.d.symlink/" "bin/" "applications/" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/panum/.dropbox/" (21600 51557 0 0) "unlink.db" "logs/" "instance_db/" "instance1/" "info.json" "host.db" "dropbox.pid" "../" "./")
+
+ ("/Users/panum/.emacs.d/tpanum/" (21600 45640 0 0) "system/" "snippets/" "settings/" "init/" "hooks/" "functions/" "commands/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

@@ -11,7 +11,8 @@ brew install brew-cask
 
 # Emacs
 brew tap railwaycat/emacsmacport
-brew install emacs-mac
+brew install emacs-mac --icon-modern
+brew install aspell --lang=en
 
 # Node
 brew install nvm
@@ -23,11 +24,14 @@ curl https://install.meteor.com/ | sh
 # Go
 brew install go
 
-# .app Applications
+# Ack
+brew install ack
 
-brew tap caskroom/cask
-brew install brew-cask
+# .app Applications
+brew cask install alfred
+brew cask alfred link
 
 brew cask install google-chrome
 brew cask install dropbox
 brew cask install mactex
+brew cask install skype

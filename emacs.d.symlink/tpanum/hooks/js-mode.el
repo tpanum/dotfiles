@@ -1,7 +1,7 @@
 ;; show wrap guide
 (setq fci-rule-column jeg2-wrap-limit)
 (fci-mode)
-(js2-mode)
+;;(js2-mode)
 
 (setq-default js2-basic-offset 2)
 
@@ -22,5 +22,5 @@
 
 (local-set-key (kbd "C-c t s") 'jeg2/toggle-string-type)
 
-(require 'js-comint)
-(setq inferior-js-program-command "rhino")
+;;(require 'js-comint)
+;;(setq inferior-js-program-command "rhino")

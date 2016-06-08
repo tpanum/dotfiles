@@ -1,17 +1,21 @@
+;; change default font
+(set-face-attribute 'default nil :family "Fira Code" :height 130)
+(set-face-attribute 'mode-line nil :height 135)
+
+;; additional line spacing
+(add-text-properties (point-min) (point-max)
+                     '(line-spacing 0.25 line-height 1.25))
+
 ;; hide the menu bar
 (menu-bar-mode 0)
 
 ;; disable the splash screen
 (setq inhibit-splash-screen t)
 
-;; load theme
-(setq calendar-location-name "Aalborg, Denmark")
-(setq calendar-latitude 57.02)
-(setq calendar-longitude -9.54)
+;; smyx theme with cusomizations
+(load-theme 'material  t)
 
-(load-theme 'flatland t)
-
-;; remove scrollbar
+;; scrollbar
 (toggle-scroll-bar -1)
 
 ;; remove toolbar
@@ -33,3 +37,7 @@
 
 ;; This is bound to f11 in Emacs 24.4
 (toggle-frame-fullscreen)
+
+;; fix background color of mode-line
+;;(set-face-background 'mode-line "#4F4F4F")
+

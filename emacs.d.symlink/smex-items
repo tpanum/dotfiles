@@ -1,0 +1,19 @@
+
+;; ----- smex-history -----
+(
+ counsel-M-x
+ counsel-ag
+ swiper
+ execute-extended-command
+ R
+ S
+ cd
+)
+
+;; ----- smex-data -----
+(
+ (execute-extended-command . 1)
+ (swiper . 1)
+ (counsel-ag . 1)
+ (counsel-M-x . 1)
+)

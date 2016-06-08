@@ -59,23 +59,39 @@
 (tpanum/package-install-and-remove-to-match-list
  'ace-jump-mode
  'ack
+ 'aggressive-indent
+ 'auctex
  'company
+ 'counsel
  'erlang
  'ess
  'evil
  'evil-leader
+ 'feature-mode
  'fill-column-indicator
- 'flatland-theme
  'flycheck
  'flymake-cursor
+ 'gh
  'go-mode
- 'ido-vertical-mode
- 'js-comint
  'js2-mode
  'less-css-mode
+ 'magit
+ 'material-theme
  'paredit
  'rainbow-mode
  'smartparens
- 'smex
+ 'swiper
+ 'tagedit
+ 'toml-mode
+ 'yaml-mode
  'yasnippet
  )
+
+(defvar user-vendor-directory (file-name-sans-extension
+               (expand-file-name "vendor" user-emacs-directory)))
+
+(defun tpanum/load-local-package (package)
+  "This loads a vender package"
+  (let ((path (file-name-sans-extension
+               (expand-file-name package user-vendor-directory))))
+    (add-to-list 'load-path path)))
