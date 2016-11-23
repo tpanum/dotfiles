@@ -18,6 +18,7 @@
   "g" 'keyboard-quit
   "hf" 'describe-function
   "hk" 'describe-key
+  "hr" 'info-emacs-manual
   "hv" 'describe-variable
   "irc" 'tpanum/erc-connect
   "k" 'kill-buffer
@@ -53,6 +54,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
     (abort-recursive-edit)))
 
+(defmacro minibuffer-quit-and-run (&rest body)
+  "Quit the minibuffer and run BODY afterwards."
+  `(progn
+     (run-at-time nil nil
+                  (lambda ()
+                    (put 'quit 'error-message "Quit")
+                    ,@body))
+     (minibuffer-keyboard-quit)))
+
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
@@ -68,66 +78,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key ivy-minibuffer-map (kbd "M-k") 'ivy-previous-line)
 (define-key ivy-minibuffer-map (kbd "<RET>") 'ivy-alt-done)
 
+(defun tpanum/ivy-ag-search ()
+  (interactive)
+  (minibuffer-quit-and-run
+   (let ((selected-candidate (concat (file-name-as-directory ivy--directory) ivy--current)))
+  (if (file-directory-p selected-candidate) (counsel-ag "" selected-candidate) (counsel-ag "" ivy--directory)))))
+
+
+(define-key ivy-minibuffer-map (kbd "$") 'tpanum/ivy-ag-search)
+
 ;; size of ivy buffer
 (setq ivy-height 30)
-
-;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-;; (define-key helm-map (kbd "M-k") 'helm-previous-line)
-;; (define-key helm-map (kbd "M-j") 'helm-next-line)
-;; (define-key helm-map (kbd "<backspace>") 'tpanum/helm-ido-delete)
-;; (define-key helm-map (kbd "<RET>") 'tpanum/helm-ido-confirm)
-;; (define-key helm-map (kbd "<tab>") 'helm-maybe-exit-minibuffer)
-;; (define-key helm-map (kbd ":") 'tpanum/helm-do-ag)
-
-
-
-;; (require 'helm)
-;; (require 'helm-config)
-
-;; (defun tpanum/helm-ido-delete ()
-;;   "Go up directory if pattern is empty"
-;;   (interactive)
-;;   (if (file-directory-p helm-pattern)
-;;       (helm-find-files-up-one-level 1)
-;;     (delete-backward-char 1)))
-
-;; (defun tpanum/helm-ido-confirm ()
-;;   "Confirm and open file, else if directory navigate to it"
-;;   (interactive)
-;;   (let ((selection (car (helm-marked-candidates))))
-;;     (if (file-directory-p (if (stringp selection) (selection) (buffer-name selection)))
-;; 	(helm-execute-persistent-action)
-;;       (helm-maybe-exit-minibuffer)
-;;       ))
-;;   )
-
-;; (defun tpanum/helm-ido-confirm ()
-;;   "Confirm and open file, else if directory navigate to it"
-;;   (interactive)
-;;   (message (car helm-marked-candidates))
-;;   )
-
-
-;; (defun tpanum/helm-do-ag ()
-;;   "Starts searching selected folder with ag"
-;;   (interactive)
-;;   (if (file-directory-p (car (helm-marked-candidates)))
-;;       (let ((helm-ag-command-option "--ignore *.test -i -t") )
-;;         ;; run after exit the current minibuffer operation
-;;         (setq helm-last-selected-directory (concat (car (helm-marked-candidates)) "/"))
-;;         (run-with-timer
-;;          0 nil (lambda () (call-interactively (helm-do-ag helm-last-selected-directory))))
-;;         (minibuffer-keyboard-quit)
-;;         )))
-
-;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-;; (define-key helm-map (kbd "M-k") 'helm-previous-line)
-;; (define-key helm-map (kbd "M-j") 'helm-next-line)
-;; (define-key helm-map (kbd "<backspace>") 'tpanum/helm-ido-delete)
-;; (define-key helm-map (kbd "<RET>") 'tpanum/helm-ido-confirm)
-;; (define-key helm-map (kbd "<tab>") 'helm-maybe-exit-minibuffer)
-;; (define-key helm-map (kbd ":") 'tpanum/helm-do-ag)
-
-;; (setq helm-split-window-in-side-p           t
-;;       helm-buffers-fuzzy-matching           t
-;;       helm-ff-file-name-history-use-recentf t)

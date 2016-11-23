@@ -40,4 +40,3 @@
 
 ;; fix background color of mode-line
 ;;(set-face-background 'mode-line "#4F4F4F")
-

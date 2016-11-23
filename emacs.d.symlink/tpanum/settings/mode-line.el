@@ -1,3 +1,11 @@
+(defface egoge-display-time
+   '((((type x w32 mac))
+      ;; #060525 is the background colour of my default face.
+      (:foreground "#fff" :inherit bold))
+     (((type tty))
+      (:foreground "blue")))
+   "Face used to display the time in the mode line.")
+
 (setq display-time-string-forms
        '((propertize (concat " " 24-hours ":" minutes " ")
                      'face 'egoge-display-time)))
@@ -14,15 +22,14 @@
 
 ;; use the function in conjunction with :eval and format-mode-line in your mode-line-format
 (setq-default mode-line-format
-     (list 
+     (list
       '((:eval (simple-mode-line-render
                 ;; left
                 (concat
-                 (propertize (format-mode-line "  %b") 'face 'bold)
-                 (format-mode-line " [%*]")
+                 (if (buffer-modified-p) "  🔴 " "  🔵 ")
+                 (propertize (format-mode-line "%b") 'face 'bold)
                  (format-mode-line " (%m)")
-                 ) 
-                
+                 )
                 ;; right
                 (format-mode-line ""))))
      'global-mode-string))

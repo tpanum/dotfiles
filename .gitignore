@@ -9,6 +9,9 @@ emacs.d.symlink/url
 *.elc
 
 emacs.d.symlink/tpanum/commands/irc.el
+emacs.d.symlink/abbrev_defs
+emacs.d.symlink/eshell/history
+emacs.d.symlink/eshell/lastdir
 
 # Personal git config
 git/gitconfig.symlink

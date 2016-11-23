@@ -76,6 +76,7 @@
  'js2-mode
  'less-css-mode
  'magit
+ 'markdown-mode
  'material-theme
  'paredit
  'rainbow-mode
@@ -83,6 +84,7 @@
  'swiper
  'tagedit
  'toml-mode
+ 'vue-mode
  'yaml-mode
  'yasnippet
  )
