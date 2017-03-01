@@ -5,7 +5,7 @@
 
 (require 'find-lisp)
 
-(setq tpanum-autoload-file (concat user-emacs-directory "loaddefs.el"))
+(setq tpanum-autoload-file (concat user-emacs-directory "tpanum/" "loaddefs.el"))
 
 (defun tpanum/autoload-directories (directories)
   "Regenerate the autoload definitions file if necessary and load it."
@@ -34,7 +34,7 @@
   (tpanum/autoload-directories
    (mapcar (lambda (directory) (concat user-emacs-directory directory "/"))
            '("tpanum/functions" "tpanum/commands")))
-  (add-to-list 'load-path user-emacs-directory t)
+  (add-to-list 'load-path (concat user-emacs-directory "tpanum/") t)
   (load tpanum-autoload-file))
 
 (tpanum/prepare-autoloads)

@@ -63,8 +63,7 @@
  'auctex
  'company
  'counsel
- 'erlang
- 'ess
+ 'ein
  'evil
  'evil-leader
  'feature-mode

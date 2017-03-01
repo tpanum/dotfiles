@@ -1,7 +1,7 @@
 # Emacs installed stuff
 
 emacs.d.symlink/elpa
-emacs.d.symlink/loaddefs.el
+emacs.d.symlink/tpanum/loaddefs.el
 emacs.d.symlink/backups
 emacs.d.symlink/auto-save-list
 emacs.d.symlink/url
