@@ -78,14 +78,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key ivy-minibuffer-map (kbd "M-k") 'ivy-previous-line)
 (define-key ivy-minibuffer-map (kbd "<RET>") 'ivy-alt-done)
 
-(defun tpanum/ivy-ag-search ()
+(defun tpanum/ivy-rg-search ()
   (interactive)
   (minibuffer-quit-and-run
-   (let ((selected-candidate (concat (file-name-as-directory ivy--directory) ivy--current)))
-  (if (file-directory-p selected-candidate) (counsel-ag "" selected-candidate) (counsel-ag "" ivy--directory)))))
+   (let ((selected-candidate (concat (file-name-as-directory ivy--directory) (ivy-state-current ivy-last))))
+  (if (file-directory-p selected-candidate) (counsel-rg "" selected-candidate) (counsel-rg "" ivy--directory)))))
 
 
-(define-key ivy-minibuffer-map (kbd "$") 'tpanum/ivy-ag-search)
+(define-key ivy-minibuffer-map (kbd "$") 'tpanum/ivy-rg-search)
 
 ;; size of ivy buffer
 (setq ivy-height 30)
