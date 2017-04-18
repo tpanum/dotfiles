@@ -8,6 +8,7 @@
 (evil-leader/set-leader "<SPC>")
 
 (evil-leader/set-key
+  "aa" 'apropos
   "0" 'delete-window
   "1" 'delete-other-windows
   "2" 'split-window-below
