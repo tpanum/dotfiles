@@ -4,7 +4,6 @@ then
     exit 1
 fi
 
-
 # Setup cask
 brew tap caskroom/cask
 brew install brew-cask
@@ -14,24 +13,13 @@ brew tap railwaycat/emacsmacport
 brew install emacs-mac --icon-modern
 brew install aspell --lang=en
 
-# Node
-brew install nvm
-nvm install stable
-
-# Meteor
-curl https://install.meteor.com/ | sh
-
 # Go
 brew install go
 
-# Ack
-brew install ack
+# rg (replacement for grep)
+brew install ripgrep
 
 # .app Applications
-brew cask install alfred
-brew cask alfred link
-
 brew cask install google-chrome
 brew cask install dropbox
 brew cask install mactex
-brew cask install skype
