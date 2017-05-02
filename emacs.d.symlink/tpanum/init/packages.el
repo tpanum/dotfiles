@@ -78,6 +78,7 @@
  'markdown-mode
  'material-theme
  'paredit
+ 'protobuf-mode
  'rainbow-mode
  'smartparens
  'swiper
