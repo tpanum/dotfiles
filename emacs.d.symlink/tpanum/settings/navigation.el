@@ -7,6 +7,7 @@
 
 (evil-leader/set-leader "<SPC>")
 
+
 (evil-leader/set-key
   "aa" 'apropos
   "0" 'delete-window
@@ -14,7 +15,6 @@
   "2" 'split-window-below
   "3" 'split-window-right
   "b" 'ivy-switch-buffer
-  "c" 'ace-jump-char-mode
   "e" 'find-file
   "g" 'keyboard-quit
   "hf" 'describe-function
@@ -23,11 +23,9 @@
   "hv" 'describe-variable
   "irc" 'tpanum/erc-connect
   "k" 'kill-buffer
-  "l" 'ace-jump-line-mode
   "o" 'other-window
   "pi" 'package-install
   "s" 'eshell-here
-  "w" 'ace-jump-word-mode
   "xc" 'save-buffers-kill-terminal
   "xe" 'eval-last-sexp
   )
@@ -43,6 +41,8 @@
 (global-set-key (kbd "S-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "S-<up>") 'shrink-window)
 (global-set-key (kbd "S-<down>") 'enlarge-window)
+(global-set-key (kbd "M-=") 'text-scale-increase)
+(global-set-key (kbd "M--") 'text-scale-decrease)
 
 ;; esc quits
 (defun minibuffer-keyboard-quit ()
