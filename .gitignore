@@ -1,5 +1,6 @@
 # Emacs installed stuff
 
+emacs.d.symlink/custom.el
 emacs.d.symlink/elpa
 emacs.d.symlink/tpanum/loaddefs.el
 emacs.d.symlink/backups

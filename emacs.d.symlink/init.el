@@ -24,17 +24,3 @@
 
 ;; Launch todo
 (find-file "~/todo.org")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (protobuf-mode yasnippet yaml-mode vue-mode toml-mode tagedit smartparens rainbow-mode paredit material-theme markdown-mode magit less-css-mode js2-mode go-mode gh flymake-cursor flycheck fill-column-indicator feature-mode evil-leader evil ein counsel company auctex aggressive-indent ack ace-jump-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

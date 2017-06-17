@@ -13,3 +13,6 @@
 
 ;; load minimal early system settings
 (tpanum/load-init-file "tpanum/system/minimal.el")
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)

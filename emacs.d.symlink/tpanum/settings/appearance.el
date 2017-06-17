@@ -1,6 +1,5 @@
 ;; change default font
 (set-face-attribute 'default nil :family "Fira Code" :height 130)
-(set-face-attribute 'mode-line nil :height 135)
 
 ;; additional line spacing
 (add-text-properties (point-min) (point-max)
@@ -37,6 +36,3 @@
 
 ;; This is bound to f11 in Emacs 24.4
 (toggle-frame-fullscreen)
-
-;; fix background color of mode-line
-;;(set-face-background 'mode-line "#4F4F4F")

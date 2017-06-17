@@ -63,6 +63,7 @@
  'auctex
  'company
  'counsel
+ 'dockerfile-mode
  'ein
  'evil
  'evil-leader

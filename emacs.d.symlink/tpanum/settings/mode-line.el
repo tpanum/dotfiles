@@ -1,6 +1,8 @@
+(custom-set-faces `(mode-line ((t (:height 110 :box (:line-width 4 :color ,(face-background 'mode-line)))))))
+(custom-set-faces `(mode-line-inactive ((t (:height 110 :box (:line-width 4 :color ,(face-background 'mode-line-inactive)))))))
+
 (defface egoge-display-time
    '((((type x w32 mac))
-      ;; #060525 is the background colour of my default face.
       (:foreground "#fff" :inherit bold))
      (((type tty))
       (:foreground "blue")))
@@ -16,7 +18,7 @@
 (defun simple-mode-line-render (left right)
   "Return a string of `window-width' length containing LEFT, and RIGHT
  aligned respectively."
-  (let* ((available-width (- (window-width) (length left) 10)))
+  (let* ((available-width (- (window-width) (length left) -10)))
     (format (format " %%s %%%ds " available-width) left right)))
 
 
@@ -27,7 +29,7 @@
                 ;; left
                 (concat
                  (if (buffer-modified-p) "  🔴 " "  🔵 ")
-                 (propertize (format-mode-line "%b") 'face 'bold)
+                 (format-mode-line "%b")
                  (format-mode-line " (%m)")
                  )
                 ;; right
