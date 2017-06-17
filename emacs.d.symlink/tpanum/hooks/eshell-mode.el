@@ -16,7 +16,7 @@
 (local-set-key (kbd "M-k") 'eshell-previous-input)
 (local-set-key (kbd "M-j") 'eshell-next-input)
 
-(setenv "GOPATH" "/Users/thomaskobberpanum/go")
+(setenv "GOPATH" "/Users/panum/work/gocode")
 
 (setenv "DOCKER_HOST" "tcp://192.168.59.103:2376")
 (setenv "DOCKER_CERT_PATH" "/Users/panum/.boot2docker/certs/boot2docker-vm")
