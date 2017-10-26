@@ -12,7 +12,7 @@
 (setq inhibit-splash-screen t)
 
 ;; smyx theme with cusomizations
-(load-theme 'material  t)
+(load-theme 'dracula t)
 
 ;; scrollbar
 (toggle-scroll-bar -1)

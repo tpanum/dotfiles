@@ -64,9 +64,11 @@
  'company
  'counsel
  'dockerfile-mode
+ 'dracula-theme
  'ein
  'evil
  'evil-leader
+ 'evil-nerd-commenter
  'feature-mode
  'fill-column-indicator
  'flycheck

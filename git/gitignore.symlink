@@ -17,6 +17,9 @@ Icon
 
 # --- EMACS ---
 
+# --- JUPYTER ---
+.ipynb_checkpoints
+
 # -*- mode: gitignore; -*-
 *~
 \#*\#

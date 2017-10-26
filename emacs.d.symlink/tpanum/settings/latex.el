@@ -4,12 +4,9 @@
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
 
-(setq TeX-show-compilation nil)
-;;set xetex mode in tex/latex
-
 (add-hook 'LaTeX-mode-hook (lambda()
                              (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
                              (setq TeX-command-default "XeLaTeX")
                              (setq TeX-save-query nil)
-                             (setq TeX-show-compilation t)
+                             (setq TeX-show-compilation nil)
                              ))

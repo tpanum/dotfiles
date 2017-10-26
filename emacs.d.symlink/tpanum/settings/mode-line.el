@@ -28,7 +28,7 @@
       '((:eval (simple-mode-line-render
                 ;; left
                 (concat
-                 (if (buffer-modified-p) "  🔴 " "  🔵 ")
+                 (if (buffer-modified-p) "  [+] " "  ")
                  (format-mode-line "%b")
                  (format-mode-line " (%m)")
                  )

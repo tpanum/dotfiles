@@ -5,8 +5,9 @@
 (evil-mode 1)
 (ivy-mode 1)
 
-(evil-leader/set-leader "<SPC>")
+(evilnc-default-hotkeys)
 
+(evil-leader/set-leader "<SPC>")
 
 (evil-leader/set-key
   "aa" 'apropos
@@ -15,6 +16,7 @@
   "2" 'split-window-below
   "3" 'split-window-right
   "b" 'ivy-switch-buffer
+  "cl" 'evilnc-comment-or-uncomment-lines
   "e" 'find-file
   "g" 'keyboard-quit
   "hf" 'describe-function
@@ -86,7 +88,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (if (file-directory-p selected-candidate) (counsel-rg "" selected-candidate) (counsel-rg "" ivy--directory)))))
 
 
-(define-key ivy-minibuffer-map (kbd "$") 'tpanum/ivy-rg-search)
+(define-key ivy-minibuffer-map (kbd "C-s") 'tpanum/ivy-rg-search)
 
 ;; size of ivy buffer
 (setq ivy-height 30)
