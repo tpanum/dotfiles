@@ -1,0 +1,4 @@
+[submodule "nix/nixpkgs-mozilla"]
+	path = nix/nixpkgs-mozilla
+	url = https://github.com/mozilla/nixpkgs-mozilla
+	branch = master

@@ -65,14 +65,13 @@
  'counsel
  'dockerfile-mode
  'dracula-theme
- 'ein
  'evil
- 'evil-leader
  'evil-nerd-commenter
  'feature-mode
  'fill-column-indicator
  'flycheck
  'flymake-cursor
+ 'general
  'gh
  'go-mode
  'js2-mode
@@ -80,6 +79,8 @@
  'magit
  'markdown-mode
  'material-theme
+ 'mu4e-alert
+ 'nix-mode
  'paredit
  'protobuf-mode
  'rainbow-mode

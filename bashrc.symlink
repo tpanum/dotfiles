@@ -1,0 +1,4 @@
+if [ "$DESKTOP_SESSION" = "gnome3" ]
+then
+    alias open='gvfs-open'
+fi

@@ -14,5 +14,14 @@ emacs.d.symlink/abbrev_defs
 emacs.d.symlink/eshell/history
 emacs.d.symlink/eshell/lastdir
 
+
+emacs.d.symlink/.emacs.desktop
+emacs.d.symlink/.emacs.desktop.lock
+emacs.d.symlink/network-security.data
+emacs.d.symlink/session*
+
 # Personal git config
 git/gitconfig.symlink
+
+# Nix
+nix/hardware-configuration.nix

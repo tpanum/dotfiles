@@ -4,7 +4,7 @@
 ;; http://blog.zenspider.com/blog/2013/06/my-emacs-setup-osx.html
 
 ;; load OS specific settings
-(tpanum/load-init-file (concat "tpanum/system/" (symbol-name system-type)) t)
+(tpanum/load-init-file (concat "tpanum/system/" (replace-regexp-in-string "/" "-" (symbol-name  system-type))) t)
 
 ;; load system specific settings
 ;; fx. osx (remember to set proper system name in System Preferences > Sharing > Computer Name)

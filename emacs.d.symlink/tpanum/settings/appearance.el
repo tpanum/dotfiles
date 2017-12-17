@@ -1,5 +1,5 @@
 ;; change default font
-(set-face-attribute 'default nil :family "Fira Code" :height 130)
+(set-face-attribute 'default nil :family "Fira Mono" :height 130)
 
 ;; additional line spacing
 (add-text-properties (point-min) (point-max)
@@ -23,7 +23,8 @@
 ;; remove menu bar
 (menu-bar-mode -1)
 
-;; http://bzg.fr/emacs-strip-tease.html
+;; save window state
+(desktop-save-mode 1)
 
 ;; Prevent the cursor from blinking
 (blink-cursor-mode 0)
