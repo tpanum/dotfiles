@@ -1,0 +1,607 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Feb  5 22:34:17 2018
+;; Desktop file format version 208
+;; Emacs version 25.3.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (23160 52697 789240 711000) (desktop . "208") "tpanum@t470s" nil nil ((((font-backend xft x) (font . "-CTDB-Fira Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1") (font-parameter . "Fira Mono Medium 11") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#b2b2b2") (background-color . "#292b2e") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (scroll-bar-foreground . "#D8DEE9") (scroll-bar-background . "#4C566A") (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (scroll-bar-height . 0) (alpha) (fullscreen) (display-type . color) (background-mode . dark) (cursor-color . "#e3dedd") (sticky) (environment) (fullscreen-restore) (frameset--id . "5150-70D0-5846-7D72") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . ":0") (explicit-name) (user-size . t) (visibility . t) (height . 41) (width . 81) (left . 197) (top . 102)) ((min-height . 4) (min-width . 10) (min-height-ignore . 3) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 76) (min-pixel-width . 90) (min-pixel-height-ignore . 57) (min-pixel-width-ignore . 36) (min-pixel-height-safe . 19) (min-pixel-width-safe . 18)) leaf (pixel-width . 752) (pixel-height . 769) (total-width . 83) (total-height . 40) (normal-height . 1.0) (normal-width . 1.0) (buffer "network.nix" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 665) (start . 1))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("peter" "rj" "johan" "egon" "jon" "org-ref" "kaspar" "jens" "dddd"))
+(setq regexp-search-ring '("exchang" "mailsploit" "fool" "and ther" "With" "Println" "Print" "\\<30\\>" "super" "rand" "?====" "Nav" "Page" "buf" "Time" "cdp"))
+(setq register-alist '((106) (113) (48 . "  users.extraUsers.tpanum = {\n    isNormalUser = true;\n    extraGroups = [\n      \"networkmanager\"\n      \"audio\"\n      \"pulse\"\n      \"wheel\"\n      \"wireshark\"\n      \"docker\"\n      \"davfs2\"\n    ];\n    shell = pkgs.bash;\n    uid = 1000;\n  };\n")))
+(setq file-name-history '("/home/tpanum/.davfs2/davfs2.conf" "/home/tpanum/.davfs2/secrets" "/mnt/network/onedrive-aau/yes.txt" "/home/tpanum/.davfs2" "/home/tpanum/.smb-secrets" "/home/tpanum/.dotfiles/nix.nosync/network/network.nix" "/home/tpanum/.themes/macos/gtk-3.0/gtk-keys.css" "/home/tpanum/go/src/github.com/tpanum/style-crawler/docker/docker.go" "/home/tpanum/go/src/github.com/tpanum/style-crawler/main.go" "/home/tpanum/.config/gtk-3.0/gtk-keys.css" "/home/tpanum/go/src/github.com/chromedp/examples/standalone/utils.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/store/utils.go" "/home/tpanum/go/src/github.com/chromedp/examples/screenshot/main.go" "/home/tpanum/go/src/github.com/chromedp/examples/standalone/main.go" "/home/tpanum/phd-plan/gantt.org" "/home/tpanum/research/phd/gantt.org" "/home/tpanum/.dotfiles/.emacs.d/tpanum/snippets/go-mode/ife" "/home/tpanum/.dotfiles/.emacs.d/tpanum/snippets/org-mode/" "/home/tpanum/.dotfiles/.emacs.d/tpanum/snippets/org-mode/#" "/home/tpanum/.bashrc" "/home/tpanum/go/src/github.com/tpanum/flag-admin/frontend/js/app.js" "/home/tpanum/go/src/github.com/tpanum/flag-admin/frontend/js/components/" "/home/tpanum/go/src/github.com/tpanum/flag-admin/frontend/js/components/login_form.vue" "/home/tpanum/go/src/github.com/tpanum/flag-admin/main.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/endpoints/endpoints.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/endpoints/group.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/frontend/index.js" "/home/tpanum/go/src/github.com/tpanum/flag-admin/frontend/" "/home/tpanum/go/src/github.com/tpanum/flag-admin/frontend/index.html" "/home/tpanum/go/src/github.com/tpanum/flag-admin/endpoints/flag_test.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/endpoints/" "/home/tpanum/go/src/github.com/tpanum/flag-admin/endpoints/flag.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/store" "/home/tpanum/go/src/github.com/tpanum/flag-admin/" "/home/tpanum/go/src/github.com/tpanum/flag-admin/models/store.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/models/" "/home/tpanum/go/src/github.com/tpanum/flag-admin/models/models.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/models/exercise.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/models/group.go" "/home/tpanum/go/src/github.com/tpanum/flag-admin/models/flag.go" "/home/tpanum/research/phd/plan.org" "/home/tpanum/.emacs.d/tpanum/settings/mail.el" "/home/tpanum/.emacs.d/tpanum/commands/mail.el" "/home/tpanum/.emacs.d/tpanum/settings/navigation.el" "/home/tpanum/.config/bspwm/bspwmrc" "/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/mail.el" "/home/tpanum/" "/home/tpanum/stubby.nix" "/home/tpanum/.emacs.d/tpanum/settings/appearance.el" "/home/tpanum/.emacs.d/init.el" "/home/tpanum/.dotfiles/.emacs.d/tpanum/init/packages.el" "/home/tpanum/.emacs.d/tpanum/functions/org-gantt.el" "/home/tpanum/backup.sh" "/home/tpanum/.dotfiles/nix.nosync/commandline/commandline.nix" "/home/tpanum/phd-plan/doc/plan.org" "/home/tpanum/.config/polybar/config" "/home/tpanum/research/phd/" "/home/tpanum/phd-plan/doc/collab_agreement.org" "/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/org.el" "/home/tpanum/.dotfiles/.emacs.d/tpanum/hooks/org-mode.el" "/home/tpanum/.dotfiles/.config/sxhkd/sxhkdrc" "/home/tpanum/research/bibliography.bib" "/home/tpanum/phd-plan/plan.tex" "/home/tpanum/.emacs.d/tpanum/init/packages.el" "/home/tpanum/.emacs.d/tpanum/settings/org.el" "/home/tpanum/phd-plan/plan.pdf" "/home/tpanum/phd-plan/references.bib" "/home/tpanum/.icons/default/" "/home/tpanum/.icons/default/index.theme" "/home/tpanum/.dotfiles/nix.nosync/desktop/desktop.nix" "/home/tpanum/phd-plan/10.1007_s10618-016-0459-9.pdf" "/home/tpanum/phd-plan/papers/" "/home/tpanum/phd-plan/papers/bibtex.bib" "/home/tpanum/phd-plan/" "/home/tpanum/phd-plan/papers/p16-barreno.pdf" "/home/tpanum/phd-plan/papers/bibliography.bib" "/home/tpanum/phd-plan/plan.org" "/home/tpanum/.config/i3lock/lock.sh" "/home/tpanum/test_bg.sh" "/home/tpanum/training-platform/" "/home/tpanum/training-platform/readme.md" "/home/tpanum/hackit2018/private/results.md" "/home/tpanum/hackit2018/private/result.txt" "/home/tpanum/.config/sxhkd/sxhkdrc" "/home/tpanum/.dotfiles/nix/network/network.nix" "/home/tpanum/.dotfiles/nix/desktop/desktop.nix" "/home/tpanum/.mbsyncrc" "/home/tpanum/.config/scripts/notify-volume.sh" "/home/tpanum/.config/scripts/check_mail.sh" "/home/tpanum/.notmuch-config" "/home/tpanum/.dotfiles/nix/email.nix" "/home/tpanum/.msmtp.log" "/home/tpanum/.emacs.d/tpanum/settings/typing.el" "/home/tpanum/test_uni.el" "/home/tpanum/.signature" "/home/tpanum/.msmtprc" "/home/tpanum/mini_projects_17/Peter_Stegger.org" "/home/tpanum/mini_projects_17/Thomas_Comments.org" "/home/tpanum/mini_projects_17/Lars_Comments.org"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/nix.nosync/network/network.nix"
+  "network.nix"
+  'nix-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode company-mode which-key-mode TeX-PDF-mode)
+  665
+  '(609 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (483 672 754 678 751 800 425 674 609 419 417 414 338 803 912 882))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.davfs2/davfs2.conf"
+  "davfs2.conf"
+  'conf-unix-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  32
+  '(32 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (32 13 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/nix.nosync/desktop/desktop.nix"
+  "desktop.nix"
+  'nix-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode company-mode which-key-mode TeX-PDF-mode)
+  3746
+  '(3746 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (3746 3980 3931 1 3935 1225 2268 2838 2147 2641 2725 2379 196 3352 3224 118))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/research/phd/plan.org"
+  "plan.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode yas-minor-mode evil-org-mode which-key-mode TeX-PDF-mode)
+  9391
+  '(9391 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (9391 7104 4909 3145 3087 106 89 8582 8475 8347 16639 1520 6096 6096 13977 13119))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.smb-secrets"
+  ".smb-secrets"
+  'fundamental-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  33
+  '(33 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (33 18 52 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.themes/macos/gtk-3.0/gtk-keys.css"
+  "gtk-keys.css"
+  'css-mode
+  '(ivy-mode flyspell-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode whitespace-mode rainbow-mode TeX-PDF-mode)
+  1866
+  '(1866 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1864 2646))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.config/gtk-3.0/gtk-keys.css"
+  "gtk-keys.css"
+  'css-mode
+  '(ivy-mode flyspell-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode whitespace-mode rainbow-mode TeX-PDF-mode)
+  1864
+  '(1864 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1950 2646 2096 2002 1959 1915 1873 1993))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/style-crawler/main.go"
+  "main.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  4845
+  '(4845 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (4920 4970 4960 3882 4797 2318 2228 2017 1912 1910 1635 1633 3648 3646 3594 3455))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/style-crawler/docker/docker.go"
+  "docker.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  782
+  '(782 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (643 834 588 430))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/chromedp/examples/standalone/main.go"
+  "main.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  2323
+  '(2323 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (2323 2186 1239 462 2221 2342 3867 2042 3242 3966 1064 3291 1029 2203 992 905))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.mbsyncrc"
+  ".mbsyncrc"
+  'fundamental-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  436
+  '(436 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (436 303 217 183 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/chromedp/examples/standalone/utils.go"
+  "utils.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  368
+  '(368 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (368 853 854))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/flag-admin/store/utils.go"
+  "utils.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  49
+  '(49 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (854 423 437 49 16))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/chromedp/examples/screenshot/main.go"
+  "main.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  1019
+  '(1019 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (1019 769 685 603 456 331 237 207 172 123 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.emacs.d/tpanum/settings/mail.el"
+  "mail.el"
+  'emacs-lisp-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode paredit-mode TeX-PDF-mode)
+  1056
+  '(1056 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1056 1105 1103 1377 1133 994 949 657 519 450 373 280 176 1 1378 1375))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/phd-plan/gantt.org"
+  "gantt.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode yas-minor-mode evil-org-mode which-key-mode TeX-PDF-mode)
+  292
+  '(292 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (515 79 770 103 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/nix.nosync/commandline/commandline.nix"
+  "commandline.nix"
+  'nix-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode company-mode which-key-mode TeX-PDF-mode)
+  1560
+  '(1560 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (1560 1214 1229))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.bashrc"
+  ".bashrc"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode TeX-PDF-mode)
+  686
+  '(686 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (641 772))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/flag-admin/endpoints/endpoints.go"
+  "endpoints.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  1490
+  '(1490 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1490 1429 809 768 1380 1184 1188 933 1553))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/flag-admin/main.go"
+  "main.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  395
+  '(395 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (288 148 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/flag-admin/store/store.go"
+  "store.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  3151
+  '(3151 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (3151 3073 766 904 3749 3791 3748 3733 3699 3682 3468 3453 3419 3402 3158 2910))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/flag-admin/endpoints/group.go"
+  "group.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  681
+  '(681 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (681 512 509 682 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/flag-admin/store/models.go"
+  "models.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1 738 773 401 1087 1164 962 938 925 804 666 540 516 921 535 360))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/flag-admin/endpoints/flag.go"
+  "flag.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  100
+  '(100 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (217 843 1769 1497 99 654 1524 958))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/go/src/github.com/tpanum/flag-admin/endpoints/flag_test.go"
+  "flag_test.go"
+  'go-mode
+  '(ivy-mode undo-tree-mode smartparens-mode yas-minor-mode company-mode which-key-mode flycheck-mode TeX-PDF-mode)
+  798
+  '(798 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (988 2687 2584 2465 2454 2341 2210 2079 1919 1279 1229 1126 1009 798 678 461))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.emacs.d/tpanum/loaddefs.el"
+  "loaddefs.el"
+  'emacs-lisp-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode paredit-mode TeX-PDF-mode)
+  9711
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.emacs.d/tpanum/settings/org.el"
+  "org.el"
+  'emacs-lisp-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode paredit-mode TeX-PDF-mode)
+  9
+  '(9 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (52))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.emacs.d/tpanum/commands/mail.el"
+  "mail.el"
+  'emacs-lisp-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode paredit-mode TeX-PDF-mode)
+  98
+  '(98 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1 99))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.notmuch-config"
+  ".notmuch-config"
+  'fundamental-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  1628
+  '(1628 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (1628 136 519 1137 1636 1913 2511 2511))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.config/bspwm/bspwmrc"
+  "bspwmrc"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode TeX-PDF-mode)
+  2433
+  '(2433 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (2433 2487 2448 2454 2086 607 633 1543 1534 36 2027 2027 2027 1724 1724 1768))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.emacs.d/tpanum/settings/appearance.el"
+  "appearance.el"
+  'emacs-lisp-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode paredit-mode TeX-PDF-mode)
+  511
+  '(511 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (503 519 392 373 25 229 96 1 96 96 80 374 96 96))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.emacs.d/tpanum/init/packages.el"
+  "packages.el"
+  'emacs-lisp-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode paredit-mode TeX-PDF-mode)
+  2805
+  '(2805 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (2883 2722 2346 2346 2888 2346 2745 2745 2745 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/todo.org"
+  "todo.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  4
+  '(4 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (4 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.emacs.d/tpanum/functions/org-gantt.el"
+  "org-gantt.el"
+  'emacs-lisp-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode paredit-mode TeX-PDF-mode)
+  68448
+  '(68448 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (68448 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/backup.sh"
+  "backup.sh"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode TeX-PDF-mode)
+  631
+  '(631 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (899 627 855 3 1865 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/phd-plan/doc/plan.org"
+  "plan.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode yas-minor-mode evil-org-mode which-key-mode TeX-PDF-mode)
+  11
+  '(11 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (1804))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.config/sxhkd/sxhkdrc"
+  "sxhkdrc"
+  'fundamental-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  3613
+  '(3613 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (3605 3609 3609 3609 3609 3594 3555 3521 3457 3364 3218 3127 2990 2971 2831 2741))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.config/polybar/config"
+  "config"
+  'conf-windows-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode which-key-mode rainbow-mode TeX-PDF-mode)
+  5548
+  '(5548 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (5654 5757 5814 5933 6024 6401 5461 5299 5140 5025 4893 4869 4855 4826 4784 4681))))
+
+(desktop-create-buffer 208
+  nil
+  "phd"
+  'dired-mode
+  '(ivy-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  229
+  '(229 nil)
+  t
+  '("/home/tpanum/research/phd/")
+  '((overwrite-mode))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/phd-plan/doc/collab_agreement.org"
+  "collab_agreement.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode yas-minor-mode evil-org-mode which-key-mode TeX-PDF-mode)
+  49
+  '(49 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (49))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/.emacs.d/tpanum/hooks/org-mode.el"
+  "org-mode.el"
+  'emacs-lisp-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode paredit-mode TeX-PDF-mode)
+  5931
+  '(5931 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (5931 1 5914 5867 4953 4026 3755 3509 2647 2304 2182 1785 1625 1486 1417 1223))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.config/scripts/notify-volume.sh"
+  "notify-volume.sh"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1 32))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/phd-plan/plan.tex"
+  "plan.tex"
+  'latex-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  5818
+  '(5818 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (case-fold-search . t))
+  '((mark-ring (5818 5888 5875 5801 5787 5765 5751 5723 5709 5676 5662 5608 5594 5536 5520 5443))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.msmtp.log"
+  ".msmtp.log"
+  'fundamental-mode
+  '(ivy-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.config/i3lock/lock.sh"
+  "lock.sh"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1 1 530 530))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/training-platform/readme.md"
+  "readme.md"
+  'markdown-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  557
+  '(557 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring (426))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/hackit2018/private/results.md"
+  "results.md"
+  'markdown-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  219
+  '(219 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring (219))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/hackit2018/private/result.txt"
+  "result.txt"
+  'text-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode which-key-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.config/scripts/check_mail.sh"
+  "check_mail.sh"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode yas-minor-mode company-mode which-key-mode whitespace-mode TeX-PDF-mode)
+  260
+  '(260 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (168 130 40 29 31 168 211 211 211 211 166 98 2 2 3 3))))
+

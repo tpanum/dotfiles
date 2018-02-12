@@ -1,0 +1,83 @@
+#! /bin/sh
+
+# Launch sxhkd
+sxhkd &
+xsetroot -cursor_name left_ptr &
+
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+
+bspc config border_width         4
+bspc config window_gap          15
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   false
+bspc config gapless_monocle      true
+bspc config paddingless_monocle	 false
+
+bspc config normal_border_color		"#4c566a"
+bspc config focused_border_color	"#5e81ac"
+bspc config presel_feedback_color	"#5e81ac"
+
+bspc rule -a Emacs state=tiled
+bspc rule -a Gimp state=floating follow=on
+bspc rule -a Nautilus state=floating follow=on
+
+apply_background() {
+    OVERLAY=/home/tpanum/.config/wallpaper/nixos-logo.png
+    BACKGROUND_DIR="/home/tpanum/.backgrounds"
+    SOLID_COLOR="#2E3440"
+
+    xrandr --query | grep -E " connected " -A 1 --no-group-separator | paste - - -d" " | while read -r screen  ; do
+        NAME=$(echo "$screen" | awk '{ print $1 }')
+        RESOLUTION=$(echo "$screen" | grep -oE '[0-9]+x[0-9]+' | head -n 1)
+        IMAGE_FILE=$(echo "$BACKGROUND_DIR/$RESOLUTION-bg.png")
+        ACTIVE=$(echo "$screen" | grep -oE '[0-9]+\.[0-9]+\*')
+
+        if [ ! -z ${ACTIVE} ]; then
+            if [ ! -e "$IMAGE_FILE" ]
+            then
+                mkdir -p "$BACKGROUND_DIR"
+                convert -size $(echo $RESOLUTION) xc:"$SOLID_COLOR" "$IMAGE_FILE"
+                composite -gravity center $OVERLAY "$IMAGE_FILE" "$IMAGE_FILE"
+            fi
+
+            feh --bg-scale --no-fehbg "$IMAGE_FILE"
+        fi
+    done
+}
+
+setup_monitors() {
+    DETECTED_KNOWN_MONITOR=$(autorandr 2>&1 | grep "\(detected\)\f*" | cut -d " " -f1)
+    if [ ! -z ${DETECTED_KNOWN_MONITOR=} ]; then
+        (pkill polybar)&
+        autorandr --change
+    fi
+
+    MAIN_MONITOR=$(xrandr --query | grep -E "connected primary" | cut -d " " -f1)
+    EXTERNAL_MONITOR=$(xrandr --query | grep -E "HDMI-?[0-9]+ connected" | cut -d " " -f1)
+
+    (MONITOR=$MAIN_MONITOR polybar --reload nord) &
+    if [ ! -z ${EXTERNAL_MONITOR} ]; then
+        xrandr --output $EXTERNAL_MONITOR --auto --right-of $MAIN_MONITOR
+
+        bspc monitor $MAIN_MONITOR -d 1 2 3 4 5 6
+        bspc monitor $EXTERNAL_MONITOR -d 7
+    else
+        bspc monitor $MAIN_MONITOR -d 1 2 3 4 5 6
+    fi
+
+    apply_background
+}
+
+setup_monitors
+
+bspc subscribe monitor | while read -r line; do
+  case $line in
+      monitor_add*|monitor_geometry*|monitor_remove*)
+          setup_monitors
+      ;;
+      *)
+      ;;
+  esac
+done

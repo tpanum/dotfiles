@@ -1,0 +1,169 @@
+#
+# wm independent hotkeys
+#
+
+# layout switcher
+super + shift + Tab
+    (setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap -option caps:escape dk || setxkbmap -option caps:escape us
+
+# terminal emulator
+{Super_L, Super_R}; Return
+	urxvt
+
+# program launcher
+{Super_L, Super_R}; space
+	rofi -show drun -show-icons -display-run 'Run' -display-drun 'Programs'
+
+{Super_L, Super_R}; w
+	rofi -show window -display-run 'Window' -show-icons
+
+super + shift + space
+	rofi -show find -modi find:~/.config/rofi/finder.sh
+
+# make sxhkd reload its configuration files:
+{Super_L, Super_R}; r
+	pkill -USR1 -x sxhkd
+	pkill -USR1 -x bspwm
+
+# volume
+XF86Audio{Raise,Lower}Volume
+	sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 {+,-}5% ; /home/tpanum/.config/scripts/notify-volume.sh"
+
+XF86AudioMute
+	pactl set-sink-mute 0 toggle
+
+# screen brightness
+XF86MonBrightness{Down,Up}
+    xbacklight -{dec,inc} 5 -steps 1
+
+#
+# bspwm hotkeys
+#
+
+# quit bspwm normally
+super + alt + Escape
+	bspc quit
+
+# lock
+{Super_L, Super_R}; u
+	~/.config/i3lock/lock.sh
+
+# close and kill
+{Super_L, Super_R}; q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+{Super_L, Super_R}; m
+	bspc desktop -l next
+
+# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
+super + y
+	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {x,y,z}
+	bspc node -g {locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+Super_L; {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+Super_R; {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+# focus the node for the given path jump
+# super + {p,b,comma,period}
+#	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+Super_L; {p,n}
+	bspc desktop -f {prev,next}.local
+
+Super_R; {p,n}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+Print
+    scrot 'screenshot_%Y-%m-%d-%S.png' -e 'mv $f ~/Pictures ; nomacs ~/Pictures/$f'
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# music player controls
+XF86AudioPlay
+    playerctl play-pause
+
+XF86AudioNext
+    playerctl next
+
+XF86AudioPrev
+    playerctl previous 
+
+super + v
+    XF86Paste

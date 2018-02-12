@@ -1,27 +1,48 @@
-# Emacs installed stuff
+# --- OSX ---
 
-emacs.d.symlink/custom.el
-emacs.d.symlink/elpa
-emacs.d.symlink/tpanum/loaddefs.el
-emacs.d.symlink/backups
-emacs.d.symlink/auto-save-list
-emacs.d.symlink/url
+.DS_Store
+.AppleDouble
+.LSOverride
 
+# Icon must ends with two \r.
+Icon
+
+# Git
+.gitconfig
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# --- EMACS ---
+
+# --- JUPYTER ---
+.ipynb_checkpoints
+
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
 *.elc
+auto-save-list
+tramp
+.\#*
 
-emacs.d.symlink/tpanum/commands/irc.el
-emacs.d.symlink/abbrev_defs
-emacs.d.symlink/eshell/history
-emacs.d.symlink/eshell/lastdir
+# Org-mode
+.org-id-locations
+*_archive
 
+# flymake-mode
+*_flymake.*
 
-emacs.d.symlink/.emacs.desktop
-emacs.d.symlink/.emacs.desktop.lock
-emacs.d.symlink/network-security.data
-emacs.d.symlink/session*
+# eshell files
+/eshell/history
+/eshell/lastdir
 
-# Personal git config
-git/gitconfig.symlink
-
-# Nix
-nix/hardware-configuration.nix
+# elpa packages
+/elpa/

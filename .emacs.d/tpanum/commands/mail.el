@@ -1,0 +1,5 @@
+(defun tpanum/notmuch-inbox ()
+  (interactive)
+  (require 'notmuch)
+  (notmuch-tree "tag:inbox")
+)
