@@ -4,6 +4,8 @@ then
 fi
 
 export GOPATH="/home/tpanum/go"
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
 
 # speed up bash reverse search
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -16,5 +18,7 @@ function wifi-connect () {
          nmcli dev wifi connect "$1" password "$2"
 }
 
-alias analysis-start='docker run -d -p 8888:8888 -v $(pwd):/work tpanum/analysis-box'
+alias analysis-start='docker run -it -p 8888:8888 -p 6006:6006 -v $(pwd):/work tpanum/analysis-box'
 alias open='xdg-open'
+alias shutdown='wmctrl -c "firefox" && sleep 0.5 && /run/current-system/sw/bin/shutdown'
+alias reboot='wmctrl -c "firefox" && sleep 0.5 && /run/current-system/sw/bin/reboot'

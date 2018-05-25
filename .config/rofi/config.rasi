@@ -3,17 +3,14 @@
 //----------------------
 
 configuration {
-	modi: 			"drun,run,window";
-	width: 			750;
-	lines: 			6;
-	font: 			"Hack 14";
-	show-match: 		true;
-	separator-style: 	"solid";
-	hide-scrollbar: 	true;
-    }
+    modi: 			"drun,run,window";
+    width: 			750;
+    lines: 			6;
+    font: 			"Hack 12";
+}
 
 //----------------------
-// Theme Settings 
+// Theme Settings
 //----------------------
 
 //----------------------
@@ -39,8 +36,16 @@ configuration {
     nord15: 			 #B48EAD;
     background:                  @nord0;
     foreground:                  @nord4;
-    selected-normal-foreground:  @nord4;
-    normal-foreground:           @foreground;
+
+    highlight: bold #EBCB8B;
+
+    selected-normal-foreground:  @foreground;
+    selected-normal-background:  @nord1;
+
+    element-normal-foreground:  @nord4;
+    element-normal-background:  @background;
+
+    normal-foreground:           @nord13;
     alternate-normal-background: @nord0;
     selected-urgent-foreground:  @nord4;
     urgent-foreground:           @foreground;
@@ -51,7 +56,6 @@ configuration {
     bordercolor:                 @nord10;
     alternate-normal-foreground: @foreground;
     normal-background:           @background;
-    selected-normal-background:  @nord3;
     border-color:                @nord10;
     spacing:                     2;
     separatorcolor:              @blue;
@@ -70,33 +74,33 @@ configuration {
 
 #mainbox {
     border:  4;
-    padding: 20;
 }
 
 #message {
-    border:       4px 4px 4px ;
-    border-color: @separatorcolor;
-    padding:      20 ;
+    margin: 4px 0px 0px 0px;
+    padding: 4px 8px;
 }
 
 #textbox {
-    text-color: @foreground;
+    text-color: @nord3;
+    horizontal-align: 0.5;
+    font: 			"Hack 10";
 }
 
 #listview {
     fixed-height: 0;
-    padding:	  5 0 0;
-    spacing:      5px ;
+    padding:	  4 8 0 8;
 }
 
 #element {
     border: 0;
-    padding: 5px;
+    padding: 5px 15px;
 }
 
 #element.normal.normal {
-    background-color: @normal-background;
-    text-color:       @normal-foreground;
+    background-color: @element-normal-background;
+    text-color:       @element-normal-foreground;
+    highlight:       @nord14;
 }
 
 #element.normal.urgent {
@@ -107,6 +111,13 @@ configuration {
 #element.normal.active {
     background-color: @active-background;
     text-color:       @active-foreground;
+    highlight:       @nord14;
+}
+
+
+#element.selected.highlighted {
+    background-color: @selected-normal-background;
+    text-color:       @nord14;
 }
 
 #element.selected.normal {
@@ -125,8 +136,8 @@ configuration {
 }
 
 #element.alternate.normal {
-    background-color: @alternate-normal-background;
-    text-color:       @alternate-normal-foreground;
+    background-color: @element-normal-background;
+    text-color:       @element-normal-foreground;
 }
 
 #element.alternate.urgent {
@@ -145,10 +156,8 @@ configuration {
 }
 
 #inputbar {
-    spacing:    5;
     text-color: @normal-foreground;
-    padding:    5px ;
-    border:	0 0 2;
+    border:	0 0 4;
     border-color: @separatorcolor;
 }
 
@@ -159,10 +168,14 @@ configuration {
 
 #entry {
     spacing:    0;
+    padding: 6px 0 6px 4px;
     text-color: @normal-foreground;
 }
 
 #prompt {
     spacing:    0;
-    text-color: @normal-foreground;
+    padding: 4px 0 4px 10px;
+    text-color: @normal-background;
+    background-color: @border-color;
+    font: 			"Hack 14";
 }

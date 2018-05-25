@@ -6,16 +6,6 @@
 ;; nerd commenter
 (evilnc-default-hotkeys)
 
-(defun minibuffer-keyboard-quit ()
-  "Abort recursive edit.
-In Delete Selection mode, if the mark is active, just deactivate it;
-then it takes a second \\[keyboard-quit] to abort the minibuffer."
-  (interactive)
-  (if (and delete-selection-mode transient-mark-mode mark-active)
-      (setq deactivate-mark  t)
-    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-    (abort-recursive-edit)))
-
 (general-evil-setup t)
 (general-define-key
  :states '(normal visual emacs)
@@ -23,21 +13,23 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  "aa" 'apropos
 
  "w" 'other-window
- "Wd" 'delete-window
  "Wod" 'delete-other-windows
  "Wsv" 'split-window-below
  "Wsh" 'split-window-right
- "cl" 'evilnc-comment-or-uncomment-lines
 
  "q" 'kill-this-buffer
+ "Q" 'quit-window
  "f" 'find-file
 
  "hf" 'describe-function
  "hk" 'describe-key
+ "hm" 'describe-mode
  "hr" 'info-emacs-manual
  "hv" 'describe-variable
 
  "irc" 'tpanum/erc-connect
+
+ "gs" 'magit-status
 
  "b" 'ivy-switch-buffer
  "Bk" 'kill-buffer
@@ -47,9 +39,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
  "pi" 'package-install
  "xc" 'save-buffers-kill-terminal
- "xe" 'eval-last-sexp)
+ "xe" 'eval-last-sexp
+ )
 
 (setq which-key-idle-delay 0.4)
+(which-key-mode)
 
 ;; togge shell using home button
 (global-set-key (kbd "<home>") 'eshell-toggle)
@@ -66,15 +60,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; esc quits
 
-;; (define-key evil-normal-state-map [escape] 'keyboard-quit)
-;; (define-key evil-visual-state-map [escape] 'keyboard-quit)
-;; (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(defun minibuffer-keyboard-quit ()
+  "Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark  t)
+    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+    (abort-recursive-edit)))
+
 (define-key ivy-mode-map [escape] 'minibuffer-keyboard-quit)
-;; (global-set-key [escape] 'evil-exit-emacs-state)
 
 ;; ivy settings
 (define-key ivy-minibuffer-map (kbd "s-j") 'ivy-next-line)

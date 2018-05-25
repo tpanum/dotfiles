@@ -1,9 +1,6 @@
 ;; change default font
-(set-face-attribute 'default nil :family "Source Code Pro" :height 130)
-
-;; additional line spacing
-(add-text-properties (point-min) (point-max)
-                     '(line-spacing 0.25 line-height 1.25))
+;; (set-face-attribute 'default nil :family "Source Code Pro" :height 130)
+(set-frame-font "Hack-12")
 
 ;; hide the menu bar
 (menu-bar-mode 0)
@@ -13,10 +10,9 @@
 
 ;; prefered theme of the month
 (load-theme 'spacemacs-dark)
-
-(setq evil-visual-state-cursor 'box
-                evil-insert-state-cursor 'bar
-                evil-emacs-state-cursor 'hbar)
+(setq evil-visual-state-cursor 'hbar
+      evil-insert-state-cursor 'bar
+      evil-emacs-state-cursor 'hbar)
 
 ;; scrollbar
 (toggle-scroll-bar -1)
@@ -38,6 +34,3 @@
 ;; Don't let Emacs hurt your ears
 (setq visible-bell t)
 (setq inhibit-startup-echo-area-message "panum")
-
-;; This is bound to f11 in Emacs 24.4
-(toggle-frame-fullscreen)

@@ -1,15 +1,14 @@
 { config, pkgs, ... }:
-
 {
   environment = {
     shells = [ pkgs.bash ];
 
     systemPackages = with pkgs; [
       git                  # version control
-      binutils-unwrapped   # basic cli utils
       exiftool             # reading image fileheaders
       file                 # file inspection
       curl                 # http interaction
+      wget
       tree                 # directory tree inspector
       ripgrep              # alternative to grep
       fzf                  # fuzzy matcher used for reverse bash search
@@ -29,21 +28,44 @@
       nfs-utils
       borgbackup
       docker_compose
+      parted               # needed for gnome3 disks util
+      winusb               # tool for creating bootable windows usbs
+      imagemagick
+      wmctrl
+      proselint
 
+      # password
+      pass
+      rofi-pass
 
       # development
       sqlite               # small file-oriented sql database
-      go_1_9               # golang programming language
-      dep                # depedency manager for golang
+      go_1_10              # golang programming language
+      dep                  # depedency manager for golang
       gotools              # helper cli for golang (auto importing and more)
-      python3              # python 3.X
-      nodejs
+      (python3.withPackages (ps: with ps; [
+      autopep8
+      importmagic
+      epc
+      django
+    ]))
+      gcc_multi
+      # elmPackages.elm
+      # elmPackages.elm-format
+      # nodejs
+      # nodePackages.gulp
 
       # extraction + compression
       unrar
       zip
       unzip
       dtrx
+      pv
+      p7zip
+
+      # file systems
+      ntfs3g
+      ncdu # figure out where disk space goes
 
       # typography
       texlive.combined.scheme-full

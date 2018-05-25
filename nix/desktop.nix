@@ -1,9 +1,5 @@
 # This file contain packages which are nessescary for making the desktop environment function
-{ config, pkgs, ... }:
-
-let 
-    firefox-overlay = import nixpkgs-mozilla/firefox-overlay.nix;
-in
+{ config, pkgs, stdenv, ... }:
 {
   nix.gc = {
     automatic = true;
@@ -18,57 +14,44 @@ in
     consoleKeyMap = "us";
   };
 
-  nixpkgs.overlays = [ firefox-overlay ];
   environment = {
     systemPackages = with pkgs; [
       # desktop
-      # autorandr             # tool for automatic loading saved xrandr configurations
-      # bspwm                 # tiled windowmanager
-      # sxhkd                 # keybindings
-      # dunst                 # notifications
-      # libnotify             # library for sending notifications
-      # polybar               # desktop bar
-      # rofi                  # program launcher
-      feh                   # simple tool for displaying images and desktop background
       moka-icon-theme
 
       # screenshotting
-      scrot                 # screenshot utility
-      nomacs                # manipulation tool for screenshots
-
-      # lockscreen
-      i3lock                # lockscreen
-      ffmpeg                # movie manipulation + very quick at adding blur to images!
-      imagemagick           # basic image manipulation
-
-      # music
-      playerctl             # controller for music
+      gnome3.gnome-screenshot
+      imagemagick
 
       # applications
       networkmanagerapplet  # gui networking manager
-      rxvt_unicode          # terminal
-      emacs                 # best text editor in the world!
-      latest.firefox-bin    # browser
+      firefox
+      chromium
       spotify               # stream music
       gimp                  # user-friendly image manipulation
+      pinta                 # user-friendly image manipulation
+      inkscape
       gnome3.evince         # pdf viewer
       poppler_utils         # pdf editing tools
       pdfpc                 # pdf presentation tool
-      virtualbox            # software for managing fundamental virtualization
+      corebird              # twitter client
+      remmina
+      vlc
+      simplescreenrecorder
+      kdenlive
+
+      libnotify             # notification dependency for emacs
+      vagrant               # orchestration of virtualbox
+      packer
       mendeley              # citation software used by everyone
       libreoffice-fresh     # needed for opening microsoft products!
       wireshark             # traffic analysis
-      dolphin               # alternative file browser
-      weka                  # machine learning tool
     ];
 
     gnome3.excludePackages = with pkgs; [
-      gnome3.evolution
       gnome3.baobab
-      gnome3.empathy
-      gnome3.eog
-      gnome3.gucharmap
       gnome3.totem
+      gnome3.gucharmap
       gnome3.vino
       gnome3.yelp
       gnome3.gnome-calculator
@@ -78,10 +61,11 @@ in
       gnome3.gnome-system-monitor
       gnome3.gnome_terminal
       gnome3.gnome-user-docs
-      gnome3.evolution
       gnome3.file-roller
       gnome3.gedit
       gnome3.gnome-music
+      gnome3.gnome-software
+      gnome3.gnome-packagekit
       gnome3.gnome-photos
       gnome3.nautilus-sendto
     ];
@@ -96,48 +80,57 @@ in
     hack-font
   ];
 
-  services.xserver = {
-    enable = true;
-    autorun = true;
-    layout = "us,dk";
-    xkbOptions = "caps:escape";
+  services = {
+    emacs = {
+      install = true;
+    };
 
-    displayManager.gdm = {
+    teamviewer = {
       enable = true;
-      wayland = true;
+    };
+    
+    xserver = {
+      enable = true;
+      autorun = true;
+      layout = "us,dk";
+      xkbOptions = "caps:escape";
 
-      autoLogin = {
-        user = "tpanum";
+      displayManager.gdm = {
         enable = true;
+        wayland = true;
+
+        autoLogin = {
+          user = "tpanum";
+          enable = true;
+        };
+      };
+
+      desktopManager = {
+        gnome3.enable = true;
+        default = "gnome3";
       };
     };
 
-    desktopManager = {
-      gnome3.enable = true;
-      default = "gnome3";
+    gnome3 = {
+      gnome-keyring.enable = true;
     };
 
-    libinput = {
+    printing = {
       enable = true;
-      disableWhileTyping = true;
-      tapping = true;
+      drivers = with pkgs; [
+        gutenprint
+        foomatic-filters
+      ];
     };
-
   };
 
-  services.gnome3 = {
-    gnome-keyring.enable = true;
-  };
 
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      gutenprint
-      foomatic-filters
-    ];
+  virtualisation = {
+    virtualbox = {
+      host.enable = true;
+    };
+    docker.enable = true;
   };
-
-  virtualisation.docker.enable = true;
 
   programs.ssh.startAgent = true;
   powerManagement.enable = true;

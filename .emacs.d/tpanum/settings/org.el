@@ -1,6 +1,6 @@
 (general-define-key :keymaps 'org-mode-map
                     :states '(normal)
-                    "C-c" 'org-latex-export-to-pdf
+                    "C-c C-c" 'org-latex-export-to-pdf
                     "RET" 'org-open-at-point)
 
 (general-define-key :keymaps 'doc-view-mode-map

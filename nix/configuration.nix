@@ -6,9 +6,10 @@
     ./commandline.nix
     ./desktop.nix
     ./network.nix
-    ./email.nix
     ./backup.nix
   ];
+
+  system.nixos.stateVersion = "18.03";
 
   nixpkgs.config = {
     allowUnfree = true;

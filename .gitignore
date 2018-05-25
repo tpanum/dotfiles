@@ -19,6 +19,10 @@ Icon
 .Trashes
 
 # --- EMACS ---
+.emacs.d/.emacs.desktop
+.emacs.d/.emacs.desktop.lock
+.emacs.d/session.*
+.emacs.d/elpa
 
 # --- JUPYTER ---
 .ipynb_checkpoints

@@ -3,9 +3,20 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "commands/alignment" "commands/alignment.el"
-;;;;;;  (23074 62854 134652 914000))
-;;; Generated autoloads from commands/alignment.el
+;;;### (autoloads nil "../../.dotfiles/.emacs.d/tpanum/commands/irc"
+;;;;;;  "commands/irc.el" "d7be95b301580bc8233cfeca0e3b7b61")
+;;; Generated autoloads from commands/irc.el
+
+(autoload 'tpanum/erc-connect "../../.dotfiles/.emacs.d/tpanum/commands/irc" "\
+Prompts for a channel, then connects to IRC.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil "commands/alignment" "../../../.emacs.d/tpanum/commands/alignment.el"
+;;;;;;  "a66d3b8076189ebb32efb37b39d89776")
+;;; Generated autoloads from ../../../.emacs.d/tpanum/commands/alignment.el
 
 (autoload 'tpanum/align= "commands/alignment" "\
 Aligns equal signs in the region or buffer.
@@ -14,9 +25,9 @@ Aligns equal signs in the region or buffer.
 
 ;;;***
 
-;;;### (autoloads nil "commands/comments" "commands/comments.el"
-;;;;;;  (23074 62854 134652 914000))
-;;; Generated autoloads from commands/comments.el
+;;;### (autoloads nil "commands/comments" "../../../.emacs.d/tpanum/commands/comments.el"
+;;;;;;  "c4868221e41b68ad4419c9fbd53c67f1")
+;;; Generated autoloads from ../../../.emacs.d/tpanum/commands/comments.el
 
 (autoload 'tpanum/insert-header-comment "commands/comments" "\
 Inserts a header wrapped in the appropriate comment characters.
@@ -25,9 +36,9 @@ Inserts a header wrapped in the appropriate comment characters.
 
 ;;;***
 
-;;;### (autoloads nil "commands/erb" "commands/erb.el" (23074 62854
-;;;;;;  135652 919000))
-;;; Generated autoloads from commands/erb.el
+;;;### (autoloads nil "commands/erb" "../../../.emacs.d/tpanum/commands/erb.el"
+;;;;;;  "f635b87d0b54d90f4e07f6f83501a884")
+;;; Generated autoloads from ../../../.emacs.d/tpanum/commands/erb.el
 
 (autoload 'tpanum/erb-insert-or-toggle-erb-tag "commands/erb" "\
 Insert an ERb tag if the point isn't currently in one, or toggle the type.
@@ -36,9 +47,31 @@ Insert an ERb tag if the point isn't currently in one, or toggle the type.
 
 ;;;***
 
-;;;### (autoloads nil "commands/eshell" "commands/eshell.el" (23074
-;;;;;;  62854 135652 919000))
-;;; Generated autoloads from commands/eshell.el
+;;;### (autoloads nil "commands/erc-nick-notify" "../../../.emacs.d/tpanum/commands/erc-nick-notify.el"
+;;;;;;  "45cc0fbc32e3748d4328677f94fabf97")
+;;; Generated autoloads from ../../../.emacs.d/tpanum/commands/erc-nick-notify.el
+
+(defvar erc-nick-notify-mode nil "\
+Non-nil if Erc-Nick-Notify mode is enabled.
+See the `erc-nick-notify-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `erc-nick-notify-mode'.")
+
+(custom-autoload 'erc-nick-notify-mode "commands/erc-nick-notify" nil)
+
+(autoload 'erc-nick-notify-mode "commands/erc-nick-notify" "\
+Minor mode that calls `erc-nick-notify-cmd' when your nick gets
+mentioned in an erc channel.
+
+\(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil "commands/eshell" "../../../.emacs.d/tpanum/commands/eshell.el"
+;;;;;;  "c6f0151a35667013c329972c92a7fe8b")
+;;; Generated autoloads from ../../../.emacs.d/tpanum/commands/eshell.el
 
 (autoload 'eshell-here "commands/eshell" "\
 Opens up a new shell in the directory associated with the
@@ -65,9 +98,9 @@ Toggles an eshell window
 
 ;;;***
 
-;;;### (autoloads nil "commands/html" "commands/html.el" (23074 62854
-;;;;;;  135652 919000))
-;;; Generated autoloads from commands/html.el
+;;;### (autoloads nil "commands/html" "../../../.emacs.d/tpanum/commands/html.el"
+;;;;;;  "90d963a2c63e472a346954f13ec52558")
+;;; Generated autoloads from ../../../.emacs.d/tpanum/commands/html.el
 
 (autoload 'tpanum/html-insert-open-and-close-tag "commands/html" "\
 Generates an open and close HTML snippet using the current word.
@@ -86,9 +119,9 @@ Converts the entire buffer in syntax highlighted HTML using a light theme.
 
 ;;;***
 
-;;;### (autoloads nil "commands/irc" "commands/irc.el" (23075 2760
-;;;;;;  859454 383000))
-;;; Generated autoloads from commands/irc.el
+;;;### (autoloads nil "commands/irc" "../../../.emacs.d/tpanum/commands/irc.el"
+;;;;;;  "d7be95b301580bc8233cfeca0e3b7b61")
+;;; Generated autoloads from ../../../.emacs.d/tpanum/commands/irc.el
 
 (autoload 'tpanum/erc-connect "commands/irc" "\
 Prompts for a channel, then connects to IRC.
@@ -374,8 +407,37 @@ Forces a string into CamelCase.
 
 ;;;***
 
-;;;### (autoloads nil nil ("commands/mail.el" "functions/fullscreen.el"
-;;;;;;  "functions/org-gantt.el") (23152 30044 617119 986000))
+;;;### (autoloads nil nil ("../../../.emacs.d/tpanum/commands/alignment.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/alignment.el" "../../../.emacs.d/tpanum/commands/alignment.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/alignment.el" "../../../.emacs.d/tpanum/commands/alignment.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/alignment.el" "../../../.emacs.d/tpanum/commands/comments.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/comments.el" "../../../.emacs.d/tpanum/commands/comments.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/comments.el" "../../../.emacs.d/tpanum/commands/comments.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/comments.el" "../../../.emacs.d/tpanum/commands/erb.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/erb.el" "../../../.emacs.d/tpanum/commands/erb.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/erb.el" "../../../.emacs.d/tpanum/commands/erb.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/erb.el" "../../../.emacs.d/tpanum/commands/erc-nick-notify.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/eshell.el" "../../../.emacs.d/tpanum/commands/eshell.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/eshell.el" "../../../.emacs.d/tpanum/commands/eshell.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/eshell.el" "../../../.emacs.d/tpanum/commands/eshell.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/html.el" "../../../.emacs.d/tpanum/commands/html.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/html.el" "../../../.emacs.d/tpanum/commands/html.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/html.el" "../../../.emacs.d/tpanum/commands/html.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/irc.el" "../../../.emacs.d/tpanum/commands/irc.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/irc.el" "../../../.emacs.d/tpanum/commands/irc.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/lines.el" "../../../.emacs.d/tpanum/commands/mail.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/markdown.el" "../../../.emacs.d/tpanum/commands/org.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/rails.el" "../../../.emacs.d/tpanum/commands/ruby.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/shell.el" "../../../.emacs.d/tpanum/commands/spelling.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/strings.el" "../../../.emacs.d/tpanum/commands/whitespace.el"
+;;;;;;  "../../../.emacs.d/tpanum/commands/wrap.el" "../../../.emacs.d/tpanum/functions/files.el"
+;;;;;;  "../../../.emacs.d/tpanum/functions/fullscreen.el" "../../../.emacs.d/tpanum/functions/jekyll.el"
+;;;;;;  "../../../.emacs.d/tpanum/functions/lists.el" "../../../.emacs.d/tpanum/functions/org-gantt.el"
+;;;;;;  "../../../.emacs.d/tpanum/functions/pbcopy.el" "../../../.emacs.d/tpanum/functions/rails.el"
+;;;;;;  "../../../.emacs.d/tpanum/functions/regexen.el" "../../../.emacs.d/tpanum/functions/strings.el"
+;;;;;;  "commands/irc.el" "commands/irc.el" "commands/irc.el" "commands/irc.el"
+;;;;;;  "commands/mail.el" "functions/fullscreen.el" "functions/org-gantt.el")
+;;;;;;  (23293 8012 988368 134000))
 
 ;;;***
 

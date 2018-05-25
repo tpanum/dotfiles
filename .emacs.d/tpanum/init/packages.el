@@ -64,27 +64,33 @@
  'company
  'counsel
  'dockerfile-mode
- 'dracula-theme
+ 'elm-mode
+ 'elpy
+ 'erc-hl-nicks
+ 'erc-scrolltoplace
  'evil
  'evil-nerd-commenter
  'feature-mode
  'fill-column-indicator
  'flycheck
+ 'flycheck-elm
  'flymake-cursor
  'general
  'gh
  'go-mode
+ 'importmagic
  'js2-mode
  'less-css-mode
  'magit
  'markdown-mode
  'material-theme
  'nix-mode
- 'notmuch
  'nord-theme
+ 'notmuch
  'org-ref
  'paredit
  'protobuf-mode
+ 'py-autopep8
  'rainbow-mode
  'smartparens
  'spacemacs-theme
@@ -92,9 +98,10 @@
  'tagedit
  'toml-mode
  'vue-mode
+ 'which-key
  'yaml-mode
  'yasnippet
- 'which-key
+ 'znc
  )
 
 (defvar user-vendor-directory (file-name-sans-extension

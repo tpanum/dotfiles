@@ -6,22 +6,23 @@
     systemPackages = with pkgs; [
       openconnect # vpn protocol
       heimdalFull # needed for AFS
+      knot-resolver
       cifs-utils
       davfs2
       pass
+      libressl
     ];
   };
 
-  krb5 = {
-    enable = true;
-    libdefaults.default_realm = "IES.AUC.DK";
-  };
+  # krb5 = {
+  #   enable = true;
+  #   libdefaults.default_realm = "IES.AUC.DK";
+  # };
 
-  services.openafsClient = {
-    enable = true;
-    cellName = "ies.auc.dk";
-    cacheSize = "500000";
-  };
+  # services.openafsClient = {
+  #   enable = true;
+  #   cellName = "ies.auc.dk";
+  # };
 
   fileSystems."/mnt/network/backup" = {
     device = "192.168.1.100:/thomas/backup";
@@ -43,14 +44,24 @@
     shell = pkgs.bash;
   };
 
+  # secure DNS
+  # services.kresd = {
+  #   enable = true;
+  #   extraConfig = ''
+  #     policy.add(policy.all(policy.TLS_FORWARD({
+  #       { '9.9.9.9', hostname = 'dns.quad9.net', ca_file = '/etc/ssl/certs/ca-bundle.crt' },
+  #     })))
+  #   '';
+  # };
+
   networking = {
-    networkmanager.enable = true;
-    nameservers = [
-      "89.233.43.71" # censurfridns.dk
-      "172.18.21.2" # aau 1
-      "172.18.21.34" # aau 2
-    ];
-    extraHosts = "172.25.76.182 mfc-print03.aau.dk";
+    # networkmanager.enable = true;
+    # nameservers = [
+    #   "127.0.0.1"
+    # ];
+    # extraHosts = ''
+    #   172.25.76.182 mfc-print03.aau.dk
+    #   172.25.14.30 priv.mail.aau.dk'';
 
     hostName = "t470s";
     firewall = {
