@@ -1,4 +1,6 @@
 (
- (:id "sha1:63bd43f7038bf7eee2411218cf1d434758cfaf05" :fingerprint "sha1:31:65:14:7e:3c:fc:ee:94:a1:48:03:4b:2d:71:6b:0d:3e:af:4c:2f" :host "bactr.com:7182" :conditions (:self-signed :no-host-match :unknown-ca :invalid))
+ (:id "sha1:c1d20fc79bfa06cebd9ac826a7ac67da3eb4a0d7" :fingerprint "sha1:10:b2:86:f0:b3:9e:91:5c:4e:eb:04:ad:a8:59:9d:27:b3:8d:9b:f6" :host "znc.panum.dk:5000" :conditions (:self-signed :no-host-match :unknown-ca :invalid))
+ (:id "sha1:74ed504de10a894a40d9545a0d4ca6d3885af8ed" :fingerprint "sha1:10:b2:86:f0:b3:9e:91:5c:4e:eb:04:ad:a8:59:9d:27:b3:8d:9b:f6" :host "localhost:5000" :conditions (:self-signed :no-host-match :unknown-ca :invalid))
+ (:id "sha1:63bd43f7038bf7eee2411218cf1d434758cfaf05" :fingerprint "sha1:31:65:14:7e:3c:fc:ee:94:a1:48:03:4b:2d:71:6b:0d:3e:af:4c:2f" :host "bactr.com:7182" :conditions (:self-signed :no-host-match :insecure :unknown-ca :invalid))
  (:id "sha1:85457c729378cc93c732b6a3941c8e4f9c2e60f3" :fingerprint "sha1:ab:a6:d7:6a:b3:d3:63:fa:19:0d:65:41:60:23:6e:ef:d3:2a:46:dc" :host "marmalade-repo.org:443" :conditions (:insecure :unknown-ca :invalid))
 )

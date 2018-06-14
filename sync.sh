@@ -113,10 +113,12 @@ link_files_in_dir_to_home () {
 
         f="$dir/$base"
 
-        echo "$f"
+        echo "Linking... $base"
+        ln -s $(realpath $f) "$HOME/$base"
     done
 }
 
 link_directory_to_home .emacs.d
+link_directory_to_home .scripts
 link_directory_to_home ".config/*"
 link_files_in_dir_to_home .

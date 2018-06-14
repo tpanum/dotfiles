@@ -1,0 +1,16 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ '(("dl.acm.org"
+  [url-cookie "__cflb" "703440012" "Fri, 15-Jun-18 07:02:05 GMT" "/" "dl.acm.org" nil])
+ (".acm.org"
+  [url-cookie "__cfduid" "db610000d17ed9914894d486865d3157e1528874501" "Thu, 13-Jun-19 07:21:41 GMT" "/" ".acm.org" nil]))
+)
+(setq url-cookie-secure-storage
+ 'nil)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; End:

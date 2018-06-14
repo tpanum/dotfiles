@@ -67,6 +67,7 @@
  'elm-mode
  'elpy
  'erc-hl-nicks
+ 'erc-nick-notify
  'erc-scrolltoplace
  'evil
  'evil-nerd-commenter
@@ -102,6 +103,7 @@
  'yaml-mode
  'yasnippet
  'znc
+ 'worf
  )
 
 (defvar user-vendor-directory (file-name-sans-extension

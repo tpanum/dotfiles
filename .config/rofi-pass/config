@@ -1,0 +1,50 @@
+# rofi command. Make sure to have "$@" as last argument
+_rofi () {
+    rofi -i -no-auto-select "$@"
+}
+
+# delay to be used for :delay keyword
+delay=0
+
+# rofi-pass needs to close itself before it can type passwords. Set delay here.
+wait=0.2
+
+## Misc settings
+default_do='autotype'
+auto_enter='false'
+notify='true'
+default_autotype='pass :enter'
+
+# color of the help messages
+# leave empty for autodetection
+help_color="#4872FF"
+
+# Clipboard settings
+# Possible options: primary, clipboard, both
+clip=primary
+
+# open new password entries in editor
+edit_new_pass="true"
+
+# default_user is also used for password files that have no user field.
+password_length=18
+
+# Custom Keybindings
+autotype="Alt+1"
+type_user="Alt+2"
+type_pass="Alt+3"
+open_url="Alt+4"
+copy_name="Alt+u"
+copy_url="Alt+l"
+copy_pass="Alt+p"
+show="Alt+o"
+copy_entry="Alt+2"
+type_entry="Alt+z"
+copy_menu="Alt+c"
+action_menu="Alt+a"
+type_menu="Alt+t"
+help="Alt+h"
+switch="Alt+x"
+insert_pass="Alt+n"
+
+

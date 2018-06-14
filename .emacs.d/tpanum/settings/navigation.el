@@ -7,6 +7,7 @@
 (evilnc-default-hotkeys)
 
 (general-evil-setup t)
+
 (general-define-key
  :states '(normal visual emacs)
  :prefix "SPC"
@@ -31,11 +32,19 @@
 
  "gs" 'magit-status
 
+ "oa" 'tpanum/org-agenda
+ "otw" 'tpanum/todo-work
+ "otr" 'tpanum/todo-research
+ "otp" 'tpanum/todo-personal
+
+ "ras" 'doi-utils-add-entry-from-crossref-query
+ "rad" 'doi-utils-add-bibtex-entry-from-doi
+ "rw" 'helm-bibtex
+ "rc" 'org-ref-helm-insert-cite-link
+
  "b" 'ivy-switch-buffer
  "Bk" 'kill-buffer
  "Btk" 'kill-this-buffer
-
- "mo" 'tpanum/notmuch-inbox
 
  "pi" 'package-install
  "xc" 'save-buffers-kill-terminal

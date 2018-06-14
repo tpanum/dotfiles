@@ -4,11 +4,11 @@
     shells = [ pkgs.bash ];
 
     systemPackages = with pkgs; [
+      gnupg                # encryption tool
       git                  # version control
       exiftool             # reading image fileheaders
       file                 # file inspection
       curl                 # http interaction
-      wget
       tree                 # directory tree inspector
       ripgrep              # alternative to grep
       fzf                  # fuzzy matcher used for reverse bash search
@@ -25,14 +25,17 @@
       gnome3.nautilus      # file explorer
       bind                 # needed for `nslookup`
       samba                # samba client
-      nfs-utils
-      borgbackup
-      docker_compose
+      mitmproxy            # http proxy for man-in-the-middle
+      nfs-utils            # accessing nfs
+      borgbackup           # backup solution
+      docker_compose       # easy and simple docker orchestration
       parted               # needed for gnome3 disks util
       winusb               # tool for creating bootable windows usbs
-      imagemagick
-      wmctrl
+      imagemagick          # image resizing and manipulation
+      wmctrl               # controlling windows (i.e. shutdown firefox on boot)
       proselint
+
+      hugo                 # website generator
 
       # password
       pass
@@ -69,12 +72,6 @@
 
       # typography
       texlive.combined.scheme-full
-
-      # email
-      mu
-      isync
-      gnupg
-      msmtp
     ];
   };
 }

@@ -1,5 +1,8 @@
 # This file contain packages which are nessescary for making the desktop environment function
 { config, pkgs, stdenv, ... }:
+let
+  evolutionEws = import ./pkgs/evolutionEws.nix pkgs;
+in
 {
   nix.gc = {
     automatic = true;
@@ -14,24 +17,63 @@
     consoleKeyMap = "us";
   };
 
+  nixpkgs.config = {
+    packageOverrides = pkgs: rec {
+      polybar = pkgs.polybar.override {
+        i3Support = true;
+      };
+    };
+  };
+
   environment = {
     systemPackages = with pkgs; [
       # desktop
-      moka-icon-theme
+      arc-theme
+      lxappearance
+      rxvt_unicode
+      rofi
+      wirelesstools
+      dunst
+      polybar
+      playerctl
+      arandr
 
+      unstable.emacs
+
+      xorg.xev
+      xlibs.xmodmap
+      feh
+      mitmproxy
+      scrot
+
+      # mail
+      gnome3.glib_networking
+
+      gnome3.gnome-disk-utility
+      gptfdisk
+      udiskie
+      gvfs # needed for nautilus (file manager to function)
+
+      # lockscreen
+      imagemagick
+      i3lock-fancy
+      
       # screenshotting
       gnome3.gnome-screenshot
-      imagemagick
+
+      # backlight
+      xorg.xbacklight
 
       # applications
       networkmanagerapplet  # gui networking manager
       firefox
       chromium
       spotify               # stream music
-      gimp                  # user-friendly image manipulation
       pinta                 # user-friendly image manipulation
       inkscape
       gnome3.evince         # pdf viewer
+      evolutionEws
+      gnome3.networkmanagerapplet
       poppler_utils         # pdf editing tools
       pdfpc                 # pdf presentation tool
       corebird              # twitter client
@@ -47,28 +89,6 @@
       libreoffice-fresh     # needed for opening microsoft products!
       wireshark             # traffic analysis
     ];
-
-    gnome3.excludePackages = with pkgs; [
-      gnome3.baobab
-      gnome3.totem
-      gnome3.gucharmap
-      gnome3.vino
-      gnome3.yelp
-      gnome3.gnome-calculator
-      gnome3.gnome-contacts
-      gnome3.gnome-screenshot
-      gnome3.gnome-system-log
-      gnome3.gnome-system-monitor
-      gnome3.gnome_terminal
-      gnome3.gnome-user-docs
-      gnome3.file-roller
-      gnome3.gedit
-      gnome3.gnome-music
-      gnome3.gnome-software
-      gnome3.gnome-packagekit
-      gnome3.gnome-photos
-      gnome3.nautilus-sendto
-    ];
   };
 
   fonts.fonts = with pkgs; [
@@ -77,42 +97,51 @@
     material-icons
     font-awesome-ttf
     mplus-outline-fonts
+    inconsolata
     hack-font
+    roboto
   ];
 
+
+  environment.variables.GIO_EXTRA_MODULES = [ "${pkgs.gvfs}/lib/gio/modules" ]; # needed for nautilus (file manager)
+  security.polkit.enable = true;
   services = {
-    emacs = {
-      install = true;
+    gnome3 = {
+      gnome-terminal-server.enable = true;
+      gnome-online-accounts.enable = true;
+      sushi.enable = true;
     };
 
-    teamviewer = {
+    compton = {
       enable = true;
+      vSync = "opengl-swc";
     };
     
     xserver = {
       enable = true;
-      autorun = true;
       layout = "us,dk";
       xkbOptions = "caps:escape";
 
-      displayManager.gdm = {
+      videoDrivers = [ "intel" ];
+      libinput = {
         enable = true;
-        wayland = true;
+      };
 
-        autoLogin = {
-          user = "tpanum";
+      displayManager = {
+        slim = {
           enable = true;
+          autoLogin = true;
+          defaultUser = "tpanum";
         };
+
+        sessionCommands = ''
+          ${pkgs.xlibs.xmodmap}/bin/xmodmap ~/.Xmodmap
+      '';
       };
 
-      desktopManager = {
-        gnome3.enable = true;
-        default = "gnome3";
-      };
-    };
-
-    gnome3 = {
-      gnome-keyring.enable = true;
+      desktopManager.xterm.enable = false;
+      windowManager.default = "i3";
+      windowManager.i3.enable = true;
     };
 
     printing = {
@@ -122,6 +151,8 @@
         foomatic-filters
       ];
     };
+
+    autorandr.enable = true;
   };
 
 
@@ -132,7 +163,18 @@
     docker.enable = true;
   };
 
-  programs.ssh.startAgent = true;
+  services.dbus.packages = [ pkgs.gnome3.dconf evolutionEws ];
+  systemd.packages = [ evolutionEws ];
+
+  programs = {
+    bash.enableCompletion = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      };
+  };
+
+
   powerManagement.enable = true;
 
   users.extraUsers.tpanum = {
@@ -140,6 +182,7 @@
     extraGroups = [
       "networkmanager"
       "audio"
+      "fuse"
       "pulse"
       "wheel"
       "wireshark"

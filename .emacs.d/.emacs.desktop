@@ -2,174 +2,594 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed May 23 17:16:01 2018
+;; Created Thu Jun 14 18:25:54 2018
 ;; Desktop file format version 208
-;; Emacs version 25.3.1
+;; Emacs version 26.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23301 34225 940073 893000) (desktop . "208") "tpanum@t470s" nil nil ((((font-backend xft x) (font . "-SRC-Hack-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1") (font-parameter . "Hack-12") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#b2b2b2") (background-color . "#292b2e") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (scroll-bar-foreground . "#D8DEE9") (scroll-bar-background . "#D8DEE9") (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (scroll-bar-height . 0) (alpha) (fullscreen) (display-type . color) (background-mode . dark) (cursor-color . "#e3dedd") (sticky) (environment) (frameset--id . "07F7-6877-C3F3-1CD6") (frameset--mini t . t) (height . 37) (width . 80) (modeline . t) (minibuffer . t) (unsplittable) (left . 81) (top . 83) (icon-name) (visibility . t) (display . ":0") (explicit-name)) ((min-height . 4) (min-width . 10) (min-height-ignore . 3) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 76) (min-pixel-width . 100) (min-pixel-height-ignore . 57) (min-pixel-width-ignore . 40) (min-pixel-height-safe . 19) (min-pixel-width-safe . 20)) leaf (pixel-width . 816) (pixel-height . 684) (total-width . 81) (total-height . 36) (normal-height . 1.0) (normal-width . 1.0) (buffer "tpanum" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 2445) (start . 1354))))])
+(setq desktop-saved-frameset [frameset 1 (23330 38674 255712 471000) (desktop . "208") "tpanum@t470s" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-SRC-Hack-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1") (font-parameter . "Hack-12") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#b2b2b2") (background-color . "#292b2e") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground . "#D8DEE9") (scroll-bar-background . "#D8DEE9") (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#e3dedd") (environment) (sticky) (frameset--id . "76E2-4320-88FA-77FE") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . ":0.0") (explicit-name) (frameset--text-pixel-width . 1904) (frameset--text-pixel-height . 1048) (height . 55) (width . 190) (left . 0) (top . 30)) ((min-height . 4) (min-width . 10) (min-height-ignore . 3) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 76) (min-pixel-width . 100) (min-pixel-height-ignore . 57) (min-pixel-width-ignore . 40) (min-pixel-height-safe . 19) (min-pixel-width-safe . 20)) leaf (pixel-width . 1920) (pixel-height . 1029) (total-width . 192) (total-height . 54) (normal-height . 1.0) (normal-width . 1.0) (buffer ".gitconfig" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 104) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring nil)
-(setq regexp-search-ring '("state" "test" "python" "do" "dom" "login" "flag2" "username__id" "urlsplit" "email" "parse" "webdriver" "print" "form" "domain" "link"))
-(setq register-alist '((48 . "apply: Wrong type argument: stringp, (error \"\\\"AttributeError(\\\\\\\"'Call' object has no attribute 'starargs'\\\\\\\",)\\\"\")\n")))
-(setq file-name-history '("/home/tpanum/.dotfiles/nix/configuration.nix" "/home/tpanum/research/letter-editor/letter.org" "/home/tpanum/test.py" "/home/tpanum/" "/home/tpanum/.dotfiles/nix/commandline.nix" "/home/tpanum/.emacs.d/tpanum/hooks/python-mode.el" "/home/tpanum/.emacs.d/tpanum/init/packages.el" "/home/tpanum/research/training-platform/exercises/cryptobanker_mail_client/Dockerfile" "/home/tpanum/research/training-platform/exercises/xss_client/Dockerfile" "/home/tpanum/go/src/github.com/tpanum/bank_server/main.go" "/home/tpanum/research/training-platform/exercises/xss_server/files/private/index.tmpl.html" "/home/tpanum/research/training-platform/exercises/xss_client/main.py" "/home/tpanum/research/training-platform/ova_configuration.md" "/home/tpanum/research/training-platform/exercises/cryptobanker_mail_client/main.py" "/home/tpanum/research/letter-editor/" "/home/tpanum/research/letter-editor/main.tex"))
+(setq search-ring '("helm-bibtex" "helm" "org-ref"))
+(setq regexp-search-ring '("high" "3-ye" "Arch" "ssh" "rss" "width: 1u" "img" "width" "110" "img" "logo" "content" "mar" "name" "static" "z"))
+(setq register-alist '((113) (48 . "<p align=\"center\">\n<img style=\"margin: 50px auto; display: block; width: 70%\" src=\"/img/t470s.jpg\">\n</p>\n")))
+(setq file-name-history '("/home/tpanum/.gitconfig" "/home/tpanum/Downloads/highlight/README.md" "/home/tpanum/personal/tpanum-hugo/config.toml" "/home/tpanum/personal/tpanum-hugo/content/blog/" "/home/tpanum/personal/tpanum-hugo/content/blog/hello-hugo.md" "/home/tpanum/personal/tpanum-hugo/content/blog/nixos-the-distribution-i-got-to-love.md" "/home/tpanum/research/training-platform/readme.md" "/home/tpanum/.scripts/backup.sh" "/home/tpanum/research/papers/old/notes.org" "/home/tpanum/research/papers/old/papers.org" "/home/tpanum/personal/tpanum-hugo/readme.md" "/home/tpanum/personal/tpanum-hugo/content/home.md" "/home/tpanum/personal/tpanum-hugo/deploy.sh" "/home/tpanum/personal/tpanum-hugo/themes/cocoa-eh/exampleSite/content/home.md" "/home/tpanum/personal/tpanum-hugo/themes/cocoa-eh/layouts/partials/css/main.css" "/home/tpanum/personal/tpanum-hugo/content/post/hello-hugo.md" "/home/tpanum/personal/tpanum-hugo/content/about.md" "/home/tpanum/personal/tpanum-hugo/layouts/index.html" "/home/tpanum/.dotfiles/nix/commandline.nix" "/home/tpanum/research/survey-phishing-detection/notes.org" "/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/org.el" "/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/navigation.el" "/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/" "/home/tpanum/.emacs.d/tpanum/settings/org.el" "/home/tpanum/.config/i3/config" "/home/tpanum/research/bibliography.bib" "/home/tpanum/org/papers.org" "/home/tpanum/.emacs.d/elpa/org-ref-20180608.1130/org-ref.el" "/home/tpanum/.dotfiles/.emacs.d/tpanum/commands/org.el" "/home/tpanum/.emacs.d/tpanum/settings/navigation.el" "/home/tpanum/todo/" "/home/tpanum/research/papers/" "/home/tpanum/.dotfiles/.emacs.d/elpa/" "/home/tpanum/.emacs.d/elpa/" "/home/tpanum/.dotfiles/.bash_profile" "/home/tpanum/.bashrc" "/home/tpanum/.dotfiles/nix/pkgs/evolutionEws.nix" "/home/tpanum/.dotfiles/nix/desktop.nix" "/home/tpanum/.emacs.d/elpa/helm-bibtex-20180611.935/helm-bibtex.el" "/home/tpanum/.dotfiles/.emacs.d/elpa/helm-bibtex-20180611.935/bibtex-completion.el" "/home/tpanum/research/papers/papers.org" "/home/tpanum/personal/org-ref/doi-utils.el" "/home/tpanum/.emacs.d/tpanum/system/minimal.el" "/home/tpanum/research/" "/home/tpanum/research/papers/p639-zhang.pdf" "/home/tpanum/research/papers/agg_analysis_mao_j.pdf" "/home/tpanum/research/papers/notes.bib" "/home/tpanum/research/biblograhy.bib" "/home/tpanum/research/papers/notes.aux" "/home/tpanum/research/papers/My Collection.bib" "/home/tpanum/research/papers/notes.org" "/home/tpanum/.emacs.d/tpanum/init/packages.el" "/home/tpanum/.dotfiles/.scripts/backup.sh" "/home/tpanum/.dotfiles/nix/pkgs/" "/home/tpanum/.dotfiles/nix/pkgs/autosshfs.nix"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
+  "/home/tpanum/.gitconfig"
+  ".gitconfig"
+  'conf-unix-mode
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  104
+  '(104 nil)
   nil
-  "tpanum"
-  'dired-mode
-  '(ivy-mode which-key-mode yas-minor-mode)
-  2445
-  '(2746 nil)
-  t
-  '("/home/tpanum/")
-  '((overwrite-mode))
-  '((mark-ring (7145 240))))
+  nil
+  '((buffer-display-time 23330 38622 96304 994000) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/home/tpanum/research/training-platform/.git/MERGE_MSG"
-  "MERGE_MSG"
+  "/home/tpanum/personal/tpanum-hugo/content/blog/nixos-the-distribution-i-got-to-love.md"
+  "nixos-the-distribution-i-got-to-love.md"
+  'markdown-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  2327
+  '(2397 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 23330 38611 115458 984000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring (775 856 6020 5890 5699 6272 6272 5728 5162 5617 5028 4723 4566 5331 5293 6272))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/config.toml"
+  "config.toml"
+  'toml-mode
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  990
+  '(990 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 23330 28769 92310 96000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (990 846 989 595 988 598 310 742 740 815 670 581 529 715 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/Downloads/highlight/README.md"
+  "README.md"
+  'markdown-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  546
+  '(546 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 23330 28527 941771 458000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/research/survey-phishing-detection/notes.org"
+  "notes.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode evil-org-mode TeX-PDF-mode)
+  1537
+  '(1537 nil)
+  nil
+  nil
+  '((buffer-display-time 23330 26103 502793 25000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (1537 637 1 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/content/blog/hello-hugo.md"
+  "hello-hugo.md"
+  'markdown-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  1286
+  '(1286 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 23330 19526 676694 542000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring (1383 1512))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/content/blog/#nixos-the-distribution-i-got-to-love.md#"
+  "#nixos-the-distribution-i-got-to-love.md#"
   'fundamental-mode
-  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode)
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
   1
   '(1 nil)
   nil
   nil
-  '((buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((buffer-display-time 23330 19238 387852 855000) (buffer-file-coding-system . utf-8-emacs-unix) (overwrite-mode))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  nil
+  "blog"
+  'dired-mode
+  '(ivy-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  300
+  '(nil nil)
+  t
+  '("/home/tpanum/personal/tpanum-hugo/content/blog/")
+  '((buffer-display-time 23330 19200 726432 744000) (overwrite-mode))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/research/training-platform/readme.md"
+  "readme.md"
+  'markdown-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  7742
+  '(7742 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 23330 11939 87794 702000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring (7614 6292 6047 5922 5771 5659 5422 5268 5130 4937 4288 4604 4959 5418 5655 5767))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.scripts/backup.sh"
+  "backup.sh"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode whitespace-mode TeX-PDF-mode)
+  5817
+  '(5811 nil)
+  nil
+  nil
+  '((buffer-display-time 23330 9436 931290 193000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (5812 5960 5873 5594 5564 5270 4986 4882 4853 4777 4752 4370 4344 4371 5271 5559))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/research/papers/old/notes.org"
+  "notes.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode evil-org-mode TeX-PDF-mode)
+  2051
+  '(2051 nil)
+  nil
+  nil
+  '((buffer-display-time 23329 476 977953 708000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (2051))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/research/papers/old/papers.org"
+  "papers.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode evil-org-mode TeX-PDF-mode)
+  2
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 23328 64581 298557 801000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/readme.md"
+  "readme.md"
+  'markdown-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  180
+  '(180 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 23328 64563 375942 858000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring (180 179 113 52 182))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/content/home.md"
+  "home.md"
+  'markdown-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  20
+  '(23 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 23328 59164 237140 351000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring (5 23))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/deploy.sh"
+  "deploy.sh"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode whitespace-mode TeX-PDF-mode)
+  109
+  '(227 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 59094 989948 636000) (buffer-file-coding-system . emacs-mule-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (72 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo.bak/themes/cocoa-eh/layouts/partials/footer.html"
+  "footer.html"
+  'mhtml-mode
+  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode smartparens-mode yas-minor-mode company-mode whitespace-mode TeX-PDF-mode tagedit-mode aggressive-indent-mode)
+  1990
+  '(1990 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 59000 112570 985000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/content/about.md"
+  "about.md"
+  'markdown-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  383
+  '(327 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 23328 57854 858324 196000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring (729 104 140 46 46 46 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/themes/cocoa-eh/exampleSite/content/home.md"
+  "home.md"
+  'markdown-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  1
+  '(120 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 23328 56376 850204 422000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/content/post/hello-hugo.md"
+  "hello-hugo.md"
+  'markdown-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  1289
+  '(1289 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 23328 54966 330598 436000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
+  '((mark-ring (1386 1210))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/themes/cocoa-eh/layouts/partials/css/main.css"
+  "main.css"
+  'css-mode
+  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode smartparens-mode yas-minor-mode company-mode whitespace-mode TeX-PDF-mode rainbow-mode)
+  14366
+  '(14366 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 54959 897720 963000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (14366 248 14347 10915 2364 1754 16690 14386 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/themes/cocoa-eh/layouts/partials/css/404.css"
+  "404.css"
+  'css-mode
+  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode smartparens-mode yas-minor-mode company-mode whitespace-mode TeX-PDF-mode rainbow-mode)
+  28
+  '(28 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 54956 954677 605000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/tpanum-hugo/themes/cocoa-eh/layouts/404.html"
+  "404.html"
+  'mhtml-mode
+  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode smartparens-mode yas-minor-mode company-mode whitespace-mode TeX-PDF-mode tagedit-mode aggressive-indent-mode)
+  266
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 23328 52663 170144 916000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/nix/commandline.nix"
+  "commandline.nix"
+  'nix-mode
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode company-mode TeX-PDF-mode)
+  1744
+  '(1746 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-display-time 23328 51580 152465 993000) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (72 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/nix/desktop.nix"
+  "desktop.nix"
+  'nix-mode
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode company-mode TeX-PDF-mode)
+  184
+  '(184 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-display-time 23328 51361 943344 190000) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (783 1771 2382 822 184 174 95 2884 2776 2690 2590 2517 2382 2215 2041 1712))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/navigation.el"
+  "navigation.el"
+  'emacs-lisp-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode TeX-PDF-mode)
+  978
+  '(978 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 49582 399728 700000) (buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (978 798 161 160 160 160 828 681 854 828 549 570 897 980 1030 1111))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/org.el"
+  "org.el"
+  'emacs-lisp-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode TeX-PDF-mode)
+  1249
+  '(1249 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 48704 521346 267000) (buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1246 1212 1248 1084 442 422 399 255 1 209 1037))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/todo.org"
+  "todo.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 23328 48291 364810 322000) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.config/i3/config"
+  "config"
+  'conf-space-mode
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  7526
+  '(7522 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 48128 58712 65000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (7522 7743 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/org-ref/doi-utils.el"
+  "doi-utils.el"
+  'emacs-lisp-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode TeX-PDF-mode)
+  22769
+  '(21109 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 46071 432592 484000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (21109 26967 26819 26820 22447 20050 20013 20351 19770 19742 19493 14478 14256 14163 12170 11962))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/org/work.org"
+  "work.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode evil-org-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 45682 792848 296000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/personal/org-ref/org-ref.el"
+  "org-ref.el"
+  'emacs-lisp-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 45583 302936 500000) (buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (79 1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/org/personal.org"
+  "personal.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode evil-org-mode TeX-PDF-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 23328 45063 253601 407000) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/org/research.org"
+  "research.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode evil-org-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 45046 754337 399000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/.emacs.d/tpanum/commands/org.el"
+  "org.el"
+  'emacs-lisp-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 44931 348275 52000) (buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  nil
+  "papers"
+  'dired-mode
+  '(ivy-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  134
+  '(134 nil)
+  t
+  '("/home/tpanum/research/papers/")
+  '((buffer-display-time 23328 44707 898005 896000) (overwrite-mode))
+  '((mark-ring (232))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/ssh.el"
+  "ssh.el"
+  'emacs-lisp-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 44327 772720 540000) (buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  nil
+  "elpa"
+  'dired-mode
+  '(ivy-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  138
+  '(138 nil)
+  t
+  '("/home/tpanum/.dotfiles/.emacs.d/elpa/")
+  '((buffer-display-time 23328 44276 920060 17000) (overwrite-mode))
+  '((mark-ring (138 4395 4249 237))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/snippets.elc"
+  "snippets.elc"
+  'elisp-byte-code-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 44221 450657 208000) (buffer-file-coding-system . utf-8-emacs-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/.bash_profile"
+  ".bash_profile"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode whitespace-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 44107 634268 335000) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (1 73 156 340 609 690 987 22))))
+
+(desktop-create-buffer 208
+  "/home/tpanum/.dotfiles/.bashrc"
+  ".bashrc"
+  'sh-mode
+  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode whitespace-mode TeX-PDF-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 23328 44007 179376 729000) (overwrite-mode) (truncate-lines . t))
   '((mark-ring nil)))
 
 (desktop-create-buffer 208
   "/home/tpanum/.dotfiles/nix/configuration.nix"
   "configuration.nix"
   'nix-mode
-  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode company-mode)
-  192
-  '(192 nil)
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode company-mode TeX-PDF-mode)
+  370
+  '(370 nil)
   nil
   nil
-  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
-  '((mark-ring (584 1))))
+  '((tab-width . 2) (indent-tabs-mode) (buffer-display-time 23328 44007 588006 833000) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (362 287 402 252 248))))
 
 (desktop-create-buffer 208
-  "/home/tpanum/test.py"
-  "test.py"
-  'python-mode
-  '(eldoc-mode ivy-mode undo-tree-mode which-key-mode yas-minor-mode company-mode elpy-mode highlight-indentation-mode flycheck-mode importmagic-mode)
-  10
-  '(10 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (10 1))))
-
-(desktop-create-buffer 208
-  "/home/tpanum/.emacs.d/tpanum/hooks/python-mode.el"
-  "python-mode.el"
-  'emacs-lisp-mode
-  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode)
-  78
-  '(78 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
-  '((mark-ring (78 59 34 33 30 12))))
-
-(desktop-create-buffer 208
-  "/home/tpanum/.dotfiles/nix/commandline.nix"
-  "commandline.nix"
+  "/home/tpanum/.dotfiles/nix/pkgs/evolutionEws.nix"
+  "evolutionEws.nix"
   'nix-mode
-  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode company-mode)
-  1606
-  '(1606 nil)
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode company-mode TeX-PDF-mode)
+  575
+  '(575 nil)
   nil
   nil
-  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
-  '((mark-ring (1606 1745 1))))
+  '((tab-width . 2) (indent-tabs-mode) (buffer-display-time 23328 44008 59151 740000) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (523 2604 1))))
 
 (desktop-create-buffer 208
-  "/home/tpanum/.dotfiles/.emacs.d/tpanum/init/packages.el"
-  "packages.el"
+  "/home/tpanum/.dotfiles/.emacs.d/tpanum/system/minimal.el"
+  "minimal.el"
   'emacs-lisp-mode
-  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode)
-  2974
-  '(2974 nil)
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode TeX-PDF-mode)
+  169
+  '(169 nil)
   nil
   nil
-  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
-  '((mark-ring (2396 1))))
+  '((buffer-display-time 23328 44008 693827 283000) (buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring (169 445))))
 
 (desktop-create-buffer 208
-  "/home/tpanum/research/training-platform/exercises/xss_client/main.py"
-  "main.py"
-  'python-mode
-  '(eldoc-mode ivy-mode undo-tree-mode which-key-mode yas-minor-mode company-mode elpy-mode highlight-indentation-mode flycheck-mode importmagic-mode)
-  25
-  '(25 nil)
+  "/home/tpanum/.emacs.d/elpa/org-ref-20180608.1130/org-ref-bibtex.el"
+  "org-ref-bibtex.el"
+  'emacs-lisp-mode
+  '(eldoc-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode company-mode paredit-mode whitespace-mode TeX-PDF-mode)
+  3094
+  '(3094 nil)
   nil
   nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
-  '((mark-ring (25 1 86 1665 1270 1627 1664 1699 1775 1815 1816 1440 1574 1552 215 297))))
+  '((buffer-display-time 23328 44009 424197 761000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
+  '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/home/tpanum/todo.org"
-  "todo.org"
-  'org-mode
-  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode)
-  1
-  '(1 nil)
   nil
-  nil
-  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  "settings"
+  'dired-mode
+  '(ivy-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  2573
+  '(2573 nil)
+  t
+  '("/home/tpanum/.dotfiles/.emacs.d/tpanum/settings/")
+  '((buffer-display-time 23328 48292 605173 896000) (overwrite-mode))
   '((mark-ring (1))))
 
 (desktop-create-buffer 208
-  "/home/tpanum/research/training-platform/exercises/xss_client/Dockerfile"
-  "Dockerfile"
-  'dockerfile-mode
-  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode company-mode)
+  "/home/tpanum/research/bibliography.bib"
+  "bibliography.bib"
+  'bibtex-mode
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
+  1420
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (TeX-master . t))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/tpanum/research/papers/zhang07_cantin.pdf"
+  "zhang07_cantin.pdf"
+  'doc-view-mode
+  '(ivy-mode undo-tree-mode which-key-mode yas-minor-mode TeX-PDF-mode)
   1
-  '(1 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . undecided-unix) (overwrite-mode))
-  '((mark-ring (1 292))))
+  '(nil nil)
+  t
+  '((page . 9) (slice))
+  '((buffer-display-time 23328 64092 307519 659000) (buffer-file-coding-system . no-conversion))
+  '((mark-ring nil)))
 
 (desktop-create-buffer 208
-  "/home/tpanum/go/src/github.com/tpanum/bank_server/main.go"
-  "main.go"
-  'go-mode
-  '(ivy-mode undo-tree-mode which-key-mode smartparens-mode yas-minor-mode company-mode flycheck-mode)
-  527
-  '(527 nil)
+  "/home/tpanum/org/papers.org"
+  "papers.org"
+  'org-mode
+  '(visual-line-mode ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode evil-org-mode TeX-PDF-mode)
+  273
+  '(nil nil)
   nil
   nil
-  '((indent-tabs-mode . t) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
-  '((mark-ring (527 483))))
-
-(desktop-create-buffer 208
-  "/home/tpanum/research/training-platform/exercises/xss_server/files/private/index.tmpl.html"
-  "index.tmpl.html"
-  'html-mode
-  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode smartparens-mode yas-minor-mode whitespace-mode tagedit-mode aggressive-indent-mode)
-  2360
-  '(2360 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t))
-  '((mark-ring (2360 1))))
-
-(desktop-create-buffer 208
-  "/home/tpanum/research/training-platform/ova_configuration.md"
-  "ova_configuration.md"
-  'markdown-mode
-  '(ivy-mode flyspell-mode undo-tree-mode which-key-mode yas-minor-mode)
-  2041
-  '(2041 nil)
-  nil
-  nil
-  '((tab-width . 4) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (fill-column . 50) (truncate-lines . t))
-  '((mark-ring (1971 107 2385 1194 776))))
+  '((buffer-display-time) (buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines))
+  '((mark-ring nil)))
 

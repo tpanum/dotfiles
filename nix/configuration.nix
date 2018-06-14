@@ -3,17 +3,24 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./lvm.nix
     ./commandline.nix
     ./desktop.nix
     ./network.nix
     ./backup.nix
   ];
 
-  system.nixos.stateVersion = "18.03";
+  system.stateVersion = "18.03";
 
   nixpkgs.config = {
     allowUnfree = true;
-    firefox.enableAdobeFlash = true;
+    # firefox.enableAdobeFlash = true;
+
+    packageOverrides = pkgs: {
+      unstable = import <nixos-unstable> {
+        config = config.nixpkgs.config;
+      };
+  };
   };
 
   boot = {
