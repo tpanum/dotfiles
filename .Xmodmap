@@ -1,2 +1,14 @@
+! turns right shift key into super key
 clear shift
 keycode 62 = Super_R
+! caps lock to ctrl
+clear Lock
+keycode 66 = Control_L
+! remap "a" inorder to generate "å"
+keycode 38 = a A aring Aring
+! remap "e" inorder to generate "æ"
+keycode 26 = e E ae AE
+! remap "o" inorder to generate "ø"
+keycode 32 = o O oslash Oslash
+! make altgr a mode_switch key
+keycode 108 = Mode_switch Mode_switch Mode_switch Mode_switch

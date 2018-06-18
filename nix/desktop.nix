@@ -37,6 +37,7 @@ in
       polybar
       playerctl
       arandr
+      xcape
 
       unstable.emacs
 
@@ -120,7 +121,7 @@ in
     xserver = {
       enable = true;
       layout = "us,dk";
-      xkbOptions = "caps:escape";
+      xkbVariant = "intl";
 
       videoDrivers = [ "intel" ];
       libinput = {
@@ -128,20 +129,25 @@ in
       };
 
       displayManager = {
-        slim = {
-          enable = true;
-          autoLogin = true;
-          defaultUser = "tpanum";
-        };
+        auto.enable = true;
+        auto.user = "tpanum";
 
         sessionCommands = ''
-          ${pkgs.xlibs.xmodmap}/bin/xmodmap ~/.Xmodmap
-      '';
+          ${pkgs.xlibs.xmodmap}/bin/xmodmap $HOME/.Xmodmap
+          ${pkgs.xcape}/bin/xcape -e 'Shift_L=Escape'
+        '';
       };
 
       desktopManager.xterm.enable = false;
-      windowManager.default = "i3";
-      windowManager.i3.enable = true;
+      windowManager = {
+        default = "i3";
+        i3.enable = true;
+      #   enable = true;
+      #   extraSessionCommands = ''
+      #     autorandr -c
+      #     udiskie &
+      # '';
+      };
     };
 
     printing = {
@@ -174,8 +180,10 @@ in
       };
   };
 
-
-  powerManagement.enable = true;
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
 
   users.extraUsers.tpanum = {
     isNormalUser = true;

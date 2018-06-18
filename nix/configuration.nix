@@ -14,7 +14,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    # firefox.enableAdobeFlash = true;
+    firefox.enableAdobeFlash = true;
 
     packageOverrides = pkgs: {
       unstable = import <nixos-unstable> {

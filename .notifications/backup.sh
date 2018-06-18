@@ -1,3 +1,4 @@
 #!/run/current-system/sw/bin/sh
+msg=$(/run/current-system/sw/bin/cat -)
 
-notify-send -t 15000 " Backup Completed" " Local Backup (6m, +1.2GiB)\n GDrive Backup (15m, +40 MiB)"
+/run/current-system/sw/bin/notify-send -t 15000 " Backup" "$msg"

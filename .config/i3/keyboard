@@ -9,6 +9,7 @@ get_kbdlayout() {
 set_kbdlayout() {
   setxkbmap "$1"
   pgrep i3status | xargs --no-run-if-empty kill -s USR1 # tell i3status to update
+  xmodmap ~/.Xmodmap
 }
 
 cycle() {

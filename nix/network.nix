@@ -94,7 +94,7 @@
 
     hostName = "t470s";
     firewall = {
-      enable = false;
+      enable = true;
       allowPing = false;
     };
   };

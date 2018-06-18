@@ -34,6 +34,9 @@
       imagemagick          # image resizing and manipulation
       wmctrl               # controlling windows (i.e. shutdown firefox on boot)
       proselint
+      gnumake
+      teensy-loader-cli
+      
 
       hugo                 # website generator
 
