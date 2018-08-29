@@ -19,9 +19,8 @@ Icon
 .Trashes
 
 # --- EMACS ---
-.emacs.d/.emacs.desktop
-.emacs.d/.emacs.desktop.lock
-.emacs.d/session.*
+.emacs.d/emacs.e*
+.emacs.d/emacs.:tangle*
 .emacs.d/elpa
 
 # --- JUPYTER ---

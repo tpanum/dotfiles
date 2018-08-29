@@ -3,6 +3,8 @@ _rofi () {
     rofi -i -no-auto-select "$@"
 }
 
+fix_layout=true
+
 # delay to be used for :delay keyword
 delay=0
 

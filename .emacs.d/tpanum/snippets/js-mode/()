@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-#name : anonymous function inline
-# --
-() => { $0 }

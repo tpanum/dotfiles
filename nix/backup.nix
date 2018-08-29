@@ -6,10 +6,13 @@
 
   systemd.user = {
     timers.backup = {
-      partOf = [ "backup.service" ];
       wantedBy = [ "timers.target" "multi-user.target" ];
-      timerConfig.OnCalendar = "hourly";
+      timerConfig = {
+        OnCalendar = "*-*-* 09,12,18,22:00:00";
+        Unit = "backup.service";
+      };
     };
+
     services.backup = {
       description = "Backup";
       serviceConfig = {

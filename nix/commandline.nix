@@ -3,6 +3,7 @@
   environment = {
     shells = [ pkgs.bash ];
 
+
     systemPackages = with pkgs; [
       gnupg                # encryption tool
       git                  # version control
@@ -12,9 +13,6 @@
       tree                 # directory tree inspector
       ripgrep              # alternative to grep
       fzf                  # fuzzy matcher used for reverse bash search
-      aspell               # spellchecking
-      aspellDicts.en       # ... for english
-      aspellDicts.da       # ... for danish
       htop                 # performance inspection
       powertop             # battery drain inspection
       psmisc               # needed for `pkill`
@@ -36,9 +34,18 @@
       proselint
       gnumake
       teensy-loader-cli
+      lsof
+      nmap
+      hugo                 # website generator
+      woeusb
       
 
-      hugo                 # website generator
+      # spellchecking
+      aspell               # spellchecking
+      aspellDicts.en       # ... for english
+      aspellDicts.da       # ... for danish
+      (hunspellWithDicts (with hunspellDicts; [en-us]))
+      enchant
 
       # password
       pass
@@ -46,10 +53,12 @@
 
       # development
       sqlite               # small file-oriented sql database
-      go_1_10              # golang programming language
+      go              # golang programming language
       dep                  # depedency manager for golang
       gotools              # helper cli for golang (auto importing and more)
       (python3.withPackages (ps: with ps; [
+      virtualenvwrapper
+      requests
       autopep8
       importmagic
       epc
@@ -58,8 +67,9 @@
       gcc_multi
       # elmPackages.elm
       # elmPackages.elm-format
-      # nodejs
-      # nodePackages.gulp
+      nodejs
+      nodePackages.gulp
+      nodePackages.vue-cli
 
       # extraction + compression
       unrar

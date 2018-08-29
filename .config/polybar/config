@@ -1,301 +1,201 @@
-;---------------------------------------
-;		COLORS
-;---------------------------------------
-
 [colors]
-nord0 = #2E3440
-nord1 = #3B4252
-nord2 = #434C5E
-nord3 = #4C566A
-nord4 = #D8DEE9
-nord5 = #E5E9F0
-nord6 = #ECEFF4
-nord7 = #8FBCBB
-nord8 = #88C0D0
-nord9 = #81A1C1
-nord10 = #5E81AC
-nord11 = #BF616A
-nord12 = #D08770
-nord13 = #EBCB8B
-nord14 = #A3BE8C
-nord15 = #B48EAD
-
-;---------------------------------------
-;		GLOBAL
-;---------------------------------------
-
-[bar/nord]
-monitor = ${env:MONITOR:eDP1}
-width = 98%
-height = 22
-bottom = true
-
-offset-x = 1%
-offset-y = 1%
-
-border-size = 0
-border-color = ${colors.nord10}
-
-background = ${colors.nord3}
-foreground = ${colors.nord5}
+background = #2f343f
+background-alt = #4f545f
+foreground = #d8dee8
+foreground-alt = #787e68
+accent = #81a1c1
+alert = #ebcb8b
 
 
-;---------------------------------------
-;		FONTS
-;---------------------------------------
-
-font-0 = Hack:size=10;3
-font-1 = FontAwesome:size=10;3
-font-2 = MaterialIcons:size=12;5
-
-;---------------------------------------
-;	     MODULES LAYOUT
-;---------------------------------------
-
-modules-left = bspwm RightArrow1 xwindow RightArrow2
-modules-center = mail
-modules-right = LeftArrow1 memory wired wifi battery LeftArrow2 date
-
-;---------------------------------------
-;	      BSPWM MODULE
-;---------------------------------------
+[bar/top]
+height = 30
+fixed-center = true
+background = 0
+foreground = ${colors.foreground}
+padding-left = 4
+padding-right = 4
+module-margin-left = 2
+module-margin-right = 2
+font-0 = Noto Sans:pixelsize=9;2
+font-1 = FontAwesome:pixelsize=10;2
+font-2 = FontAwesome:pixelsize=12;2
+font-3 = MaterialIcons:pixelsize=12;4
+modules-left = bspwm xwindow
+modules-right = eth wlan memory volume keyboard battery date
 
 [module/bspwm]
 type = internal/bspwm
-
 format = <label-state>
+pin-workspaces = true
+enable-click = true
+fuzzy-match = true
+ws-icon-0 = Code;
+ws-icon-1 = Web;
+ws-icon-2 = Editor;
+ws-icon-3 = Mail;
+ws-icon-4 = Music;
+ws-icon-5 = VirtualBox;
+ws-icon-6 = FileBrowser;
+ws-icon-7 = Chat;
 
-label-focused-occupied = 
-label-focused-occupied-foreground = ${colors.nord6}
-label-focused-occupied-background = ${colors.nord10}
-label-focused-occupied-padding = 1
-
-label-focused-urgent = 
-label-focused-urgent-foreground = ${colors.nord6}
-label-focused-urgent-background = ${colors.nord10}
-label-focused-urgent-padding = 1
-
-label-focused-empty = 
-label-focused-empty-foreground = ${colors.nord6}
-label-focused-empty-background = ${colors.nord10}
-label-focused-empty-padding = 1
-
-label-occupied = 
-label-occupied-foreground = ${colors.nord1}
-label-occupied-background = ${colors.nord10}
-label-occupied-padding = 1
-
-label-urgent = 
-label-urgent-foreground = ${colors.nord13}
-label-urgent-background = ${colors.nord10}
-label-urgent-padding = 1
-
-label-empty = 
-label-empty-foreground = ${colors.nord1}
-label-empty-background = ${colors.nord10}
-label-empty-padding = 1
-
-;---------------------------------------
-;	      TEXT MODULES
-;---------------------------------------
-
-[module/RightArrow1]
-type = custom/text
-content = " "
-content-foreground = ${colors.nord10}
-content-background = ${colors.nord1}
-
-[module/RightArrow2]
-type = custom/text
-content = ""
-content-foreground = ${colors.nord1}
-content-background = ${colors.nord3}
-
-[module/LeftArrow1]
-type = custom/text
-content = ""
-content-foreground = ${colors.nord1}
-content-background = ${colors.nord3}
+ws-icon-default = 
 
 
-[module/LeftArrow2]
-type = custom/text
-content = ""
-content-foreground = ${colors.nord10}
-content-background = ${colors.nord1}
+label-focused = %icon%
+label-focused-foreground=${colors.foreground}
+label-focused-padding = 4
 
-;---------------------------------------
-;	   XWINDOW MODULE
-;---------------------------------------
+label-dimmed = %icon%
+label-dimmed-padding = 4
+
+label-occupied = %icon%
+label-occupied-foreground=${colors.accent}
+label-occupied-padding = 4
+
+label-urgent = %icon%
+label-urgent-foreground = ${colors.alert}
+label-urgent-padding = 4
+label-empty =
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+enable-click = false
+enable-scroll = false
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+
+label-focused = %{T3}%name%%{T-}
+label-focused-foreground= ${colors.foreground}
+label-focused-padding = 4
+
+label-unfocused = %{T3}%name%%{T-}
+label-unfocused-foreground= ${colors.accent}
+label-unfocused-padding = 4
+
+label-occupied = %name%
+label-occupied-padding = 3
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-foreground = ${colors.background}
+label-urgent-padding = 3
+label-empty = %name%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 3
+
 
 [module/xwindow]
+
 type = internal/xwindow
+label = %title:0:100:...%
 
-format-foreground = ${colors.nord8}
-format-background = ${colors.nord1}
-format-padding = 1
+[module/keyboard]
 
-label =  %title%
-label-maxlen = 40
+type = internal/xkeyboard
 
-;---------------------------------------
-;	   XBACKLIGHT MODULE
-;---------------------------------------
+[module/memory]
 
-[module/xbacklight]
-type = internal/xbacklight
+type = internal/memory
+label = %{F#81a1c1}%{F-} %gb_used%
+label-foreground = ${colors.accent}
+interval = 10
 
-format = <label>
-format-foreground = ${colors.nord5}
-format-background = ${colors.nord1}
+[module/storage]
 
-label = " %percentage%"
+type = internal/fs
 
-;---------------------------------------
-;	   DATE MODULE
-;---------------------------------------
-
-[module/date]
-type = internal/date
-
+mount-0 = /
 interval = 60
+fixed-values = true
+format-mounted = <label-mounted>
+format-unmounted = <label-unmounted>
+label-mounted = %{F#81a1c1}%{F-} %used%
 
-date = %a %d
+[module/temperature]
 
-time = %H:%M
+type = internal/temperature
+interval = 10
+thermal-zone = 3
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input
+warn-temperature = 70
+label =  %temperature%
 
-label = %date%  %time%
 
-label-date-foreground = ${colors.nord0}
+[module/eth]
 
-format-foreground = ${colors.nord5}
-format-background = ${colors.nord10}
-format-padding = 1
+type = internal/network
+interface = enp0s31f6
+interval = 15
+label-connected = "  "
 
-;---------------------------------------
-;	   VOLUME MODULE
-;---------------------------------------
+[module/wlan]
+
+type = internal/network
+interface = wlp58s0
+interval = 15
+format-connected = <ramp-signal>  <label-connected>
+label-connected = %essid%
+format-disconnected = <label-disconnected>
+label-disconnected =   Disconnected
+label-disconnected-foreground = ${colors.foreground-alt}
+ramp-signal-0 = %{F#BF616A}%{F-} 
+ramp-signal-1 = %{F#D08770}%{F-}
+ramp-signal-2 = %{F#EBCB8B}%{F-}
+ramp-signal-3 = %{F#EBCB8B}%{F-}
+ramp-signal-4 = %{F#A3BE8C}%{F-}
+ramp-signal-5 = %{F#A3BE8C}%{F-}
+ramp-signal-foreground = ${colors.accent}
+click-left = nm-applet
+
 
 [module/volume]
+
 type = internal/volume
+format-volume = <label-volume> <bar-volume>
+label-volume = " "
+label-volume-foreground = ${colors.accent}
+format-muted-prefix = " "
+format-muted-foreground = ${colors.accent}
+label-muted = Muted
+label-muted-foreground= ${colors.foreground-alt}
+bar-volume-width = 6
+bar-volume-indicator = 
+bar-volume-fill = ─
+bar-volume-empty = ─
+bar-volume-empty-foreground = ${colors.foreground-alt}
 
-master-soundcard = default
-speaker-soundcard = default
-headphone-soundcard = default
-
-mapped = true
-
-format-volume = <ramp-volume><label-volume>
-format-volume-foreground = ${colors.nord5}
-format-volume-background = ${colors.nord1}
-
-label-volume = "%percentage% "
-label-volume-foreground = ${colors.nord5}
-label-volume-background = ${colors.nord1}
-label-muted = "  muted "
-label-muted-foreground = ${colors.nord5}
-label-muted-background = ${colors.nord1}
-
-ramp-volume-0 = "  "
-ramp-volume-0-foreground = ${colors.nord5}
-ramp-volume-0-background = ${colors.nord1}
-ramp-volume-1 = "  "
-ramp-volume-1-foreground = ${colors.nord5}
-ramp-volume-1-background = ${colors.nord1}
-ramp-volume-2 = "  "
-ramp-volume-2-foreground = ${colors.nord5}
-ramp-volume-2-background = ${colors.nord1}
-ramp-volume-3 = "  "
-ramp-volume-3-foreground = ${colors.nord5}
-ramp-volume-3-background = ${colors.nord1}
-
-;---------------------------------------
-;	   BATTERY MODULE
-;---------------------------------------
 
 [module/battery]
+
 type = internal/battery
-
+full-at = 98
 battery = BAT1
-adapter = AC
-
-full-at = 95
-
-time-format = "%Hh%Mm"
-
-format-charging = "  <label-charging>"
-format-charging-foreground = ${colors.nord13}
-format-charging-background = ${colors.nord1}
-
-format-full = "  <label-full>"
-format-full-foreground = ${colors.nord8}
-format-full-background = ${colors.nord1}
-
-format-discharging = "  <ramp-capacity> <label-discharging>"
-format-discharging-foreground = ${colors.nord8}
-format-discharging-background = ${colors.nord1}
-
-label-charging = " %percentage%% (%time%) "
-label-discharging = "%percentage%% (%time%) "
-label-discharging-foreground = ${colors.nord8}
-label-full = " 100% "
-
+adapter = ACAD
+poll-interval = 60
+format-charging = <ramp-capacity>  <label-charging>
+label-charging =  %percentage%%
+label-full = Full
+format-discharging = <ramp-capacity>  <label-discharging>
+label-discharging = %percentage%%
 ramp-capacity-0 = 
-ramp-capacity-0-foreground = ${colors.nord11}
 ramp-capacity-1 = 
-ramp-capacity-1-foreground = ${colors.nord11}
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.accent}
 
-;---------------------------------------
-;	   NETWORK MODULE
-;---------------------------------------
 
-[module/wired]
-type = internal/network
-interface = eth0
+[module/date]
 
-label-connected = " Wired"
-label-connected-background = ${colors.nord1}
-label-connected-foreground = ${colors.nord8}
-
-[module/wifi]
-type = internal/network
-interface = wlan0
-interval = 3.0
-ping-interval = 10
-
-format-connected = <ramp-signal><label-connected>
-label-connected = "  %essid% "
-label-connected-background = ${colors.nord1}
-label-connected-foreground = ${colors.nord8}
-label-disconnected = " "
-label-disconnected-background = ${colors.nord1}
-label-disconnected-foreground = ${colors.nord8}
-ramp-signal-background = ${colors.nord1}
-ramp-signal-foreground = ${colors.nord8}
-
-ramp-signal-0 =
-ramp-signal-1 =
-ramp-signal-2 =
-ramp-signal-3 =
-ramp-signal-4 =
-ramp-signal-5 =
-
-[module/mail]
-type = custom/script
-exec = notmuch count tag:unread
-exec-if = notmuch count tag:unread | grep [1-9]
-format-prefix = "  "
-format-suffix = " "
-format-foreground = ${colors.nord13}
-interval = 10
-
-[module/memory]
-type = internal/memory
-interval = 3
-
-label = "  %percentage_used%% "
-label-background = ${colors.nord1}
-label-foreground = ${colors.nord8}
+type = internal/date
+interval = 30
+label = " %date% %time%"
+date =
+date-alt = %a %d
+time = %H:%M
+time-alt = 
+format-prefix = 
+format-prefix-foreground = ${colors.accent}

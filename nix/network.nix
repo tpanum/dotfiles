@@ -26,31 +26,6 @@
   #   cellName = "ies.auc.dk";
   # };
 
-  fileSystems."/mnt/network/backup" = {
-    device = "192.168.1.100:/thomas/backup";
-    fsType = "nfs";
-    noCheck = true;
-    options = [
-      "proto=tcp"
-      "auto"
-      "soft"
-      "nofail"
-      "_netdev"
-      "x-systemd.automount"
-    ];
-  };
-
-  systemd.mounts = [
-    {
-      what = "root@bactr.com:/root/backup";
-      where = "/mnt/network/online_backup";
-      type = "fuse.sshfs";
-      options = "identityfile=/home/tpanum/.ssh/id_backup,allow_other";
-      after = [ "network-online.target" "gpg-agent.service" ];
-      wantedBy = [ "default.target" ];
-    }
-  ];
-
   # fileSystems."/mnt/network/online_backup" = {
   #  device = "${pkgs.sshfsFuse}/bin/sshfs#root@bactr.com:/root/backup";
   #   fsType = "fuse";

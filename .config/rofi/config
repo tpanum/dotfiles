@@ -3,25 +3,7 @@
 ! +++++++++++++++++++++++++++++++++++++++++
 
 rofi.color-enabled: true
-
-! Window:           'background',  'border', 'separator'
-rofi.color-window: argb:cc252936,  #9575cd, argb:ffffffff
-
-!   State:              'bg',       'fg',   'altbg',        'hlbg',         hlfg
-rofi.color-normal: argb:00252936, #ffffff, argb:00252936, argb:009575cd, #ff9575cd
-rofi.color-active: argb:00252936, #252936, argb:00252936, argb:009575cd, #ffc000
-rofi.color-urgent: argb:00252936, #ff0000, argb:00252936, argb:00252936, #ff0000
-
-rofi.width: 100
-rofi.padding: 440
-rofi.line-margin: 10
-rofi.lines: 3
-rofi.separator-style: none
-rofi.columns: 1
-rofi.font: Inconsolata Bold 22
-rofi.bw: 0
-rofi.eh: 2
-rofi.hide-scrollbar: true
-rofi.auto-select: true
-rofi.display-drun:app
-rofi.prompt:
+rofi.color-window: #2f343f, #2f343f, #2f343f
+rofi.color-normal: #2f343f, #d8dee8, #2f343f, #2f343f, #bf616a
+rofi.color-active: #2f343f, #b48ead, #2f343f, #2f343f, #93e5cc
+rofi.color-urgent: #2f343f, #ebcb8b, #2f343f, #2f343f, #ebcb8b 

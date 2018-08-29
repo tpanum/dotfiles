@@ -25,7 +25,7 @@
 
   boot = {
     tmpOnTmpfs = true;
-    kernelPackages = pkgs.linuxPackages_4_14;
+    kernelPackages = pkgs.linuxPackages_4_17;
 
     loader = {
       timeout = 0;

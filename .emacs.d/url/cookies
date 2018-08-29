@@ -2,10 +2,15 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '(("dl.acm.org"
-  [url-cookie "__cflb" "703440012" "Fri, 15-Jun-18 07:02:05 GMT" "/" "dl.acm.org" nil])
- (".acm.org"
-  [url-cookie "__cfduid" "db610000d17ed9914894d486865d3157e1528874501" "Thu, 13-Jun-19 07:21:41 GMT" "/" ".acm.org" nil]))
+ '(("onlinelibrary.wiley.com"
+  [url-cookie "I2KBRCK" "1" "Wed, 28-Aug-2019 06:36:39 GMT" "/" "onlinelibrary.wiley.com" nil]
+  [url-cookie "MAID" "pvMjZrEVH3yFxRNfjyijLA==" "Mon, 24-Jun-2019 06:36:42 GMT" "/" "onlinelibrary.wiley.com" nil]
+  [url-cookie "MACHINE_LAST_SEEN" "2018-08-27T23%3A36%3A41.175-07%3A00" "Mon, 24-Jun-2019 06:36:42 GMT" "/" "onlinelibrary.wiley.com" nil])
+ (".onlinelibrary.wiley.com"
+  [url-cookie "MAID" "pvMjZrEVH3yFxRNfjyijLA==" "Mon, 24-Jun-2019 06:36:42 GMT" "/" ".onlinelibrary.wiley.com" nil]
+  [url-cookie "MACHINE_LAST_SEEN" "2018-08-27T23%3A36%3A41.175-07%3A00" "Mon, 24-Jun-2019 06:36:42 GMT" "/" ".onlinelibrary.wiley.com" nil])
+ (".doi.org"
+  [url-cookie "__cfduid" "df38c683dc3ed63cc65085f26bf3bec841534228152" "Wed, 14-Aug-19 06:29:12 GMT" "/" ".doi.org" nil]))
 )
 (setq url-cookie-secure-storage
  'nil)

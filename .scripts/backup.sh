@@ -17,6 +17,7 @@ BORG_PASSPHRASE='b4ckupopenup'       \
 --exclude-caches                    \
 --exclude '/home/*/.cache/*'        \
 --exclude '*.ova'                   \
+--exclude 'VirtualBox VMs'          \
 $REPO::'{hostname}-{now:%Y-%m-%d.%H:%M:%S}' \
 $HOME | /home/tpanum/.scripts/backup_summary.py "Home Server" | /home/tpanum/.notifications/backup.sh
 

@@ -67,9 +67,6 @@ bindsym $mod+Shift+Right move right
 # split in horizontal orientation
 bindsym $mod+h split h
 
-# split in vertical orientation
-bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
@@ -148,7 +145,7 @@ set $filebrowser "Nautilus"
 assign [class=$filebrowser] $ws4
 for_window [class=$filebrowser] focus
 
-set $mail "Evolution"
+set $mail "Thunderbird"
 assign [class=$mail] $ws5
 for_window [class=$mail] focus
 
@@ -235,6 +232,18 @@ bindsym $mod+space exec rofi -show-icons -show drun
 # screenshot
 bindsym --release Print exec scrot
 
+# bindsym --release $mod+v exec --no-startup-id xdotool key --clearmodifiers ctrl+v
+# bindsym --release $mod+c exec --no-startup-id xdotool key --clearmodifiers ctrl+c
+# bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+x
+# bindsym --release $mod+z exec --no-startup-id xdotool key --clearmodifiers ctrl+z
+# bindsym --release $mod+a exec --no-startup-id xdotool key --clearmodifiers ctrl+a
+
+
+#smart_gaps on
+for_window [class="^.*"] border pixel 0
+gaps inner 15
+gaps outer 3
+
 # Remove borders
 new_window normal
 hide_edge_borders vertical
@@ -242,7 +251,8 @@ for_window [class="^.*"] border pixel 1
 
 exec --no-startup-id firefox
 exec --no-startup-id emacs
+exec --no-startup-id i3-msg 'workspace $ws1'
 
 exec_always --no-startup-id ~/.config/i3/start_bars.sh
 exec_always --no-startup-id xmodmap ~/.Xmodmap
-exec_always --no-startup-id feh --bg-center ~/.config/wallpaper/nixos-logo.png
+exec_always --no-startup-id ~/.scripts/wallpaper.sh

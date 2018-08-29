@@ -10,5 +10,6 @@ keycode 38 = a A aring Aring
 keycode 26 = e E ae AE
 ! remap "o" inorder to generate "ø"
 keycode 32 = o O oslash Oslash
-! make altgr a mode_switch key
-keycode 108 = Mode_switch Mode_switch Mode_switch Mode_switch
+! ctrl + alt = altgr
+keycode  37 = Control_L ISO_Level3_Latch
+keycode  64 = Alt_L ISO_Level3_Latch

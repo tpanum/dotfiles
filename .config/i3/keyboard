@@ -9,6 +9,13 @@ get_kbdlayout() {
 set_kbdlayout() {
   setxkbmap "$1"
   pgrep i3status | xargs --no-run-if-empty kill -s USR1 # tell i3status to update
+
+  if [ "$1" == "us" ]; then
+      xmodmap -e 'keycode 108 = Mode_switch Mode_switch Mode_switch Mode_switch'
+  else
+      xmodmap -e 'keycode 108 = ISO_Level3_Shift'
+  fi
+
   xmodmap ~/.Xmodmap
 }
 

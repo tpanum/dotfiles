@@ -1,0 +1,836 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Thomas Kobber Panum
+#+PROPERTY: header-args :tangle yes
+
+* Configuration
+  :PROPERTIES:
+  :VISIBILITY: children
+  :END:
+
+** Table of Contents :TOC_3_gh:
+- [[#configuration][Configuration]]
+  - [[#org-file-tweaks][Org File Tweaks]]
+    - [[#automatically-tangle][Automatically Tangle]]
+    - [[#visibility-settings][Visibility Settings]]
+    - [[#table-of-contents][Table of Contents]]
+  - [[#personal-information][Personal Information]]
+  - [[#emacs-initialization][Emacs Initialization]]
+    - [[#settings][Settings]]
+    - [[#package-management][Package Management]]
+    - [[#new-defaults][New Defaults]]
+  - [[#packages][Packages]]
+    - [[#doom-theme][Doom Theme]]
+    - [[#modeline][Modeline]]
+    - [[#evil][Evil]]
+    - [[#ivy][Ivy]]
+    - [[#counsel][Counsel]]
+    - [[#company][Company]]
+    - [[#swiper][Swiper]]
+    - [[#magit][Magit]]
+    - [[#org][Org]]
+    - [[#toc-org][Toc-org]]
+    - [[#which-key][Which Key]]
+    - [[#general-navigation][General (Navigation)]]
+    - [[#aggresive-indent][Aggresive Indent]]
+    - [[#yassnippets][Yassnippets]]
+    - [[#nlinum][Nlinum]]
+    - [[#circe-irc][Circe (IRC)]]
+    - [[#password-store][Password Store]]
+    - [[#smartparens][Smartparens]]
+    - [[#rainbow-mode][Rainbow Mode]]
+    - [[#rainbow-delimiters][Rainbow-Delimiters]]
+    - [[#flyspell-mode][Flyspell Mode]]
+    - [[#flycheck][Flycheck]]
+    - [[#ace-window][Ace Window]]
+    - [[#lang-tool][Lang Tool]]
+    - [[#synosaurus][Synosaurus]]
+    - [[#avy][Avy]]
+  - [[#additional-modes][Additional Modes]]
+    - [[#nix-mode][Nix Mode]]
+    - [[#markdown-mode][Markdown Mode]]
+    - [[#go-mode][Go Mode]]
+    - [[#docker-mode][Docker Mode]]
+    - [[#web-mode][Web Mode]]
+    - [[#json-mode][JSON Mode]]
+    - [[#yaml-mode][YAML Mode]]
+    - [[#tex-mode][Tex Mode]]
+  - [[#functions][Functions]]
+    - [[#open-config][Open Config]]
+  - [[#post-initialization][Post Initialization]]
+  - [[#startup][Startup]]
+
+** Org File Tweaks
+   There are a few tweaks included in this org file that make it a little easier to
+   work with.
+   
+*** Automatically Tangle
+    First there is a property defined on the file:
+
+    #+BEGIN_SRC :tangle no
+header-args :tangle yes
+    #+END_SRC
+
+    This tells emacs to automatically tangle (include) all code blocks in this file when
+    generating the code for the config, unless the code block explicitly includes
+    =:tangle no= as the above code block does.
+
+*** Visibility Settings
+    Next we have a property defined on the [[Configuration][Configuration]] heading that defines the visibility
+    that tells org to show it's direct children on startup. This way a clean outline of all
+    sub headings under Configuration is shown each time this file is opened in org-mode.
+
+*** Table of Contents
+    Finally, there is a [[Table of Contents][Table of Contents]] heading that includes the tag: =:TOC_3_gh:=. This
+    tells an org-mode package =toc-org= to generate a table of contents under this heading
+    that has a max depth of 3 and is created using Github-style hrefs. This table of contents
+    is updated everytime the file is saved and makes for a functional table of contents that
+    works property directly on github.
+
+** Personal Information
+   Let's set some variables with basic user information.
+
+   #+BEGIN_SRC emacs-lisp
+(setq user-full-name "Thomas Kobber Panum")
+   #+END_SRC
+
+** Emacs Initialization
+*** Settings
+    We're going to increase the gc-cons-threshold to a very high number to decrease the load and compile time.
+    We'll lower this value significantly after initialization has completed. We don't want to keep this value
+    too high or it will result in long GC pauses during normal usage.
+
+    #+BEGIN_SRC emacs-lisp
+(eval-and-compile
+  (setq gc-cons-threshold 402653184
+	gc-cons-percentage 0.6))
+    #+END_SRC
+
+    Disable certain byte compiler warnings to cut down on the noise. This is a personal choice and can be removed
+    if you would like to see any and all byte compiler warnings.
+
+    #+BEGIN_SRC emacs-lisp
+(setq byte-compile-warnings '(not free-vars unresolved noruntime lexical make-local))
+    #+END_SRC
+
+*** Package Management
+**** Package Settings
+     We're going to set the =load-path= ourselves and avoid calling =(package-initilize)= (for
+     performance reasons) so we need to set =package--init-file-ensured= to true to tell =package.el=
+     to not automatically call it on our behalf. Additionally we're setting
+     =package-enable-at-startup= to nil so that packages will not automatically be loaded for us since
+     =use-package= will be handling that.
+
+     #+BEGIN_SRC emacs-lisp
+  (eval-and-compile
+    (setq load-prefer-newer t
+	  package-user-dir "~/.emacs.d/elpa"
+	  package--init-file-ensured t
+	  package-enable-at-startup nil)
+
+    (unless (file-directory-p package-user-dir)
+      (make-directory package-user-dir t)))
+     #+END_SRC
+
+**** Use-Package Settings
+     Tell =use-package= to always defer loading packages unless explicitly told otherwise. This speeds up
+     initialization significantly as many packages are only loaded later when they are explicitly used.
+
+     #+BEGIN_SRC emacs-lisp
+  (setq use-package-always-defer t
+	use-package-verbose t)
+     #+END_SRC
+
+**** Manually Set Load Path
+     We're going to set the load path ourselves so that we don't have to call =package-initialize= at
+     runtime and incur a large performance hit. This load-path will actually be faster than the one
+     created by =package-initialize= because it appends the elpa packages to the end of the load path.
+     Otherwise any time a builtin package was required it would have to search all of third party paths
+     first.
+
+     #+BEGIN_SRC emacs-lisp
+  (eval-and-compile
+    (setq load-path (append load-path (directory-files package-user-dir t "^[^.]" t))))
+     #+END_SRC
+
+**** Initialize Package Management
+     Next we are going to require =package.el= and add our additional package archives, 'melpa' and 'org'.
+     Afterwards we need to initialize our packages and then ensure that =use-package= is installed, which
+     we promptly install if it's missing. Finally we load =use-package= and tell it to always install any
+     missing packages.
+
+     Note that this entire block is wrapped in =eval-when-compile=. The effect of this is to perform all
+     of the package initialization during compilation so that when byte compiled, all of this time consuming
+     code is skipped. This can be done because the result of byte compiling =use-package= statements results
+     in the macro being fully expanded at which point =use-package= isn't actually required any longer.
+
+     Since the code is automatically compiled during runtime, if the configuration hasn't already been
+     previously compiled manually then all of the package initialization will still take place at startup.
+
+     #+BEGIN_SRC emacs-lisp
+  (eval-when-compile
+    (require 'package)
+
+    (unless (assoc-default "melpa" package-archives)
+      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
+    (unless (assoc-default "org" package-archives)
+      (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
+
+    (package-initialize)
+    (package-refresh-contents)
+
+    (unless (package-installed-p 'use-package)
+      (package-install 'use-package))
+
+    (require 'use-package)
+    (setq use-package-always-ensure t))
+     #+END_SRC
+
+*** New Defaults
+**** Base
+     #+BEGIN_SRC emacs-lisp
+    (setq delete-old-versions -1 )		; delete excess backup versions silently
+    (setq version-control t )		; use version control
+    (setq vc-make-backup-files t )		; make backups file even when in version controlled dir
+    (setq backup-directory-alist `(("." . "~/.emacs.d/backups")) ) ; which directory to put backups file
+    (setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
+    (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
+    (setq inhibit-startup-screen t )	; inhibit useless and old-school startup screen
+    (setq ring-bell-function 'ignore )	; silent bell when you make a mistake
+    (setq coding-system-for-read 'utf-8 )	; use utf-8 by default
+    (setq coding-system-for-write 'utf-8 )
+    (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
+    (setq default-fill-column 80)		; toggle wrapping text at the 80th character
+    (setq initial-scratch-message "") ; print a default message in the empty scratch buffer opened at startup
+     #+END_SRC
+**** UI
+     #+BEGIN_SRC emacs-lisp
+     (menu-bar-mode 0)
+     (blink-cursor-mode -1)
+     (scroll-bar-mode -1)
+     (tool-bar-mode -1)
+     (tooltip-mode -1)
+     (setq mouse-highlight nil)
+     (setq column-number-mode t)
+     (setq-default cursor-in-non-selected-windows nil)
+     (setq x-underline-at-descent-line t)
+     (setq x-stretch-cursor t)
+     (setq frame-resize-pixelwise t)
+     (setq uniquify-buffer-name-style 'forward)
+     (show-paren-mode)
+     #+END_SRC
+
+** Packages
+*** Doom Theme
+    #+BEGIN_SRC emacs-lisp
+     (use-package doom-themes
+     :config
+     (progn
+     (load-theme 'doom-one t)
+     (doom-themes-neotree-config)
+     (doom-themes-org-config)))
+    #+END_SRC
+*** Modeline
+    #+BEGIN_SRC emacs-lisp
+(use-package doom-modeline
+      :ensure t
+      :defer t
+      :hook (after-init . doom-modeline-init))
+    #+END_SRC
+
+*** Evil
+    Install, automatically load, and enable evil. It's like vim, but better!
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil
+    :demand t
+    :config
+    (evil-mode 1))
+    #+END_SRC
+    
+    Handling code comments correctly with Evil :-)
+
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-nerd-commenter
+    :demand t
+    :config
+    (evilnc-default-hotkeys))
+    #+END_SRC
+
+*** Ivy
+    Generic completion frontend that's just awesome! Let's install and enable it.
+
+    #+BEGIN_SRC emacs-lisp
+    (use-package ivy
+    :demand t
+    :config
+    (ivy-mode 1))
+    #+END_SRC
+
+*** Counsel
+    Counsel allows us to utilize ivy by replacing many built-in and common functions
+    with richer versions. Let's install it!
+
+    #+BEGIN_SRC emacs-lisp
+(use-package counsel
+  :demand t)
+    #+END_SRC
+
+*** Company
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :hook (after-init . global-company-mode)
+  :config
+(setq company-tooltip-align-annotations t)
+(setq company-idle-delay 0.2)
+(setq company-minimum-prefix-length 2))
+#+END_SRC
+*** Swiper
+    Swiper is an awesome searching utility with a quick preview. Let's install it and
+    load it when =swiper= or =swiper-all= is called.
+
+    #+BEGIN_SRC emacs-lisp
+(use-package swiper
+  :commands (swiper swiper-all))
+    #+END_SRC
+
+*** Magit
+    The magical git client. Let's load magit only when one of the several entry pont
+    functions we invoke regularly outside of magit is called.
+
+    #+BEGIN_SRC emacs-lisp
+(use-package magit
+  :commands (magit-status magit-blame magit-log-buffer-file magit-log-all))
+    #+END_SRC
+
+*** Org
+    Let's include a newer version of org-mode than the one that is built in. We're going
+    to manually remove the org directories from the load path, to ensure the version we
+    want is prioritized instead.
+
+    #+BEGIN_SRC emacs-lisp
+(use-package org
+	     :ensure org-plus-contrib
+	     :pin org
+	     :after general
+	     :defer t
+	     :config
+	     (setq org-startup-indented t)
+	     (setq org-src-preserve-indentation t)
+	     (setq org-log-done t)
+	     (setq org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
+	     (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+	     (general-define-key :keymaps 'org-mode-map
+				 :states '(normal)
+				 "C-c C-c" 'org-latex-export-to-pdf
+				 "t" 'org-todo
+				 "s" 'org-schedule
+				 "RET" 'org-open-at-point
+				 "S-<right>" 'org-shiftmetaright
+				 "S-<left>" 'org-shiftmetaleft
+				 "S-<up>" 'org-shiftmetaup
+				 "S-<up>" 'org-shiftmetadown
+				 )
+
+	     (general-define-key :keymaps 'doc-view-mode-map
+				 :states '(emacs)
+				 "<escape>" 'kill-buffer-and-window)
+	     )
+
+;; Ensure ELPA org is prioritized above built-in org.
+(with-no-warnings
+   (require 'cl))
+(setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
+    #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-ref
+	     :after general
+	     :config
+	     (setq
+	      org-ref-default-bibliography '("~/research/bibliography.bib")
+	      org-ref-pdf-directory "~/research/papers/"
+	      org-ref-bibliography-notes "~/research/papers/papers.org"
+	      bibtex-completion-bibliography '("~/research/bibliography.bib")
+	      bibtex-completion-library-path "~/research/papers"
+	      bibtex-completion-notes-path "~/research/papers/papers.org"
+	      org-ref-completion-library 'org-ref-ivy-cite)
+
+	     (setq bibtex-completion-notes-template-one-file "
+,* ${title} (${year}) [${author-or-editor}]
+  :PROPERTIES:
+  :Custom_ID: ${=key=}
+  :END:
+
+")
+
+
+	     (general-define-key :keymaps 'bibtex-completion-notes-mode-map
+				 :states '(normal)
+				 "q" 'bibtex-completion-exit-notes-buffer)
+
+	     )
+#+END_SRC
+
+*** Toc-org
+    Let's install and load the =toc-org= package after org mode is loaded. This is the
+    package that automatically generates an up to date table of contents for us.
+
+    #+BEGIN_SRC emacs-lisp
+(use-package toc-org
+  :after org
+  :init (add-hook 'org-mode-hook #'toc-org-enable))
+    #+END_SRC
+
+*** Which Key
+    #+BEGIN_SRC emacs-lisp
+    (use-package which-key
+    :ensure t
+    :config
+    (setq which-key-idle-delay 0.4)
+    (which-key-mode))
+    #+END_SRC
+*** General (Navigation)
+I replaced evil's default `/` with `swiper`.
+#+BEGIN_SRC emacs-lisp
+(use-package general
+	     :ensure t
+	     :config
+	     (general-auto-unbind-keys)
+	     (general-define-key
+	      :states '(normal visual emacs)
+	      :prefix "SPC"
+	      
+	      "aa" 'apropos
+	      "b" 'ivy-switch-buffer
+        "co" 'tpanum/open-config
+	      "f" 'find-file
+	      "gs" 'magit-status
+	      "h"  '(:ignore t :which-key "Help")
+	      "hf" 'describe-function
+	      "hk" 'describe-key
+	      "hm" 'describe-mode
+	      "hr" 'info-emacs-manual
+	      "hv" 'describe-variable
+	      "irc" 'tpanum/irc
+        "j" 'avy-goto-word-or-subword-1
+	      "o"  '(:ignore t :which-key "Org")
+	      "oa" 'tpanum/org-agenda
+	      "otp" 'tpanum/todo-personal
+	      "otr" 'tpanum/todo-research
+	      "otw" 'tpanum/todo-work
+	      "pi" 'package-install
+	      "q" 'kill-this-buffer
+	      "r"  '(:ignore t :which-key "Research")
+	      "rad" 'doi-utils-add-bibtex-entry-from-doi
+	      "ras" 'doi-utils-add-entry-from-crossref-query
+	      "rc" 'org-ref-helm-insert-cite-link
+	      "rw" 'helm-bibtex
+	      "w" 'other-window
+	      "wd" 'delete-other-windows
+	      "wsh" 'split-window-right
+	      "wsv" 'split-window-below
+	      "xc" 'save-buffers-kill-terminal
+	      "xe" 'eval-last-sexp)
+
+	     (general-define-key
+	      :states '(normal)
+	      "/" 'swiper)
+	     )
+
+(define-key ivy-minibuffer-map [escape] 'minibuffer-keyboard-quit)
+(define-key ivy-minibuffer-map (kbd "s-j") 'ivy-next-line)
+(define-key ivy-minibuffer-map (kbd "s-k") 'ivy-previous-line)
+(define-key ivy-minibuffer-map (kbd "<RET>") 'ivy-alt-done)
+(define-key ivy-minibuffer-map (kbd "C-s") 'tpanum/ivy-rg-search)
+
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+    #+END_SRC
+
+**** ripgrep search from minibuffer
+Allow me to access ripgrep from find file.
+#+BEGIN_SRC emacs-lisp
+(defmacro minibuffer-quit-and-run (&rest body)
+  "Quit the minibuffer and run BODY afterwards."
+  `(progn
+     (run-at-time nil nil
+                  (lambda ()
+                    (put 'quit 'error-message "Quit")
+                    ,@body))
+     (minibuffer-keyboard-quit)))
+
+(defun tpanum/ivy-rg-search ()
+  (interactive)
+  (minibuffer-quit-and-run
+   (let ((selected-candidate (concat (file-name-as-directory ivy--directory) (ivy-state-current ivy-last))))
+     (if (file-directory-p selected-candidate) (counsel-rg "" selected-candidate) (counsel-rg "" ivy--directory)))))
+#+END_SRC
+
+*** Aggresive Indent
+    #+BEGIN_SRC emacs-lisp
+
+    (use-package aggressive-indent
+    :ensure t
+  :config
+  (global-aggressive-indent-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)
+(add-to-list 'aggressive-indent-excluded-modes 'web-mode))
+    #+END_SRC
+
+*** Yassnippets
+    #+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+	     :diminish yas-minor-mode
+	     :commands (yas-global-mode)
+	     :defer 2
+	     :init
+	     (with-eval-after-load 'yasnippet
+	       (progn
+		 (setq yas-snippet-dirs
+		       (append yas-snippet-dirs '("~/.emacs.d/snippets")))))
+	     :config
+	     (yas-global-mode)
+	     (setq yas-indent-line 'none))
+    #+END_SRC
+
+*** Nlinum
+    #+BEGIN_SRC emacs-lisp
+(use-package nlinum
+	     :ensure t
+	     :config (add-hook 'prog-mode-hook '(lambda () (nlinum-mode t)))
+	     (setq nlinum-highlight-current-line t))
+    #+END_SRC
+
+*** Circe (IRC)
+My IRC Configuration
+#+BEGIN_SRC emacs-lisp
+(use-package circe
+:config
+(defconst irc-left-padding 8 "Padding for nicks")
+(defconst irc-time-stamp-format "%H:%M")
+
+(require 'circe-color-nicks)
+(enable-circe-color-nicks)
+
+(require 'circe-lagmon)
+(circe-lagmon-mode)
+
+(setq
+ circe-reduce-lurker-spam t
+ circe-default-part-message "Bye"
+ circe-default-quit-message "Bye"
+ circe-color-nicks-everywhere t
+ circe-format-say (format "{nick:+%ss} │ {body}" irc-left-padding)
+ circe-format-self-say circe-format-say
+ circe-format-action (format "{nick:+%ss} * {body}" irc-left-padding)
+ circe-format-self-action circe-format-action
+ circe-network-options
+ `(("znc-freenode"
+    :host "znc.panum.dk"
+    :port 5000
+    :server-buffer-name "⇄ freenode"
+    :nick "tpanum"
+    :user "tpanum/freenode"
+    :pass my-znc-freenode-pass
+    :channels (:after-auth "#aau")
+    :tls t
+    )
+   ("znc-bitlbee"
+    :host "znc.panum.dk"
+    :port 5000
+    :server-buffer-name "⇄ bitlbee"
+    :user "tpanum/bitlbee"
+    :pass my-znc-bitlbee-pass
+    :channels (:after-auth "#slack-aau-general" "#slack-aau-ntp" "#slack-aau-backend" "#slack-aau-random" "#slack-aau-research")
+    :lagmon-disabled t
+    :tls t
+    )))
+
+
+
+(setq lui-fill-type nil)
+
+(add-hook 'circe-channel-mode-hook #'turn-on-visual-line-mode)
+
+(defvar irc-truncate-nick-char ?…
+  "Character to displayed when nick > `irc-left-padding' in length.")
+
+(defun irc-circe-truncate-nicks ()
+  "Truncate long nicknames in chat output non-destructively."
+  (when-let ((beg (text-property-any (point-min) (point-max) 'lui-format-argument 'nick)))
+    (goto-char beg)
+    (let ((end (next-single-property-change beg 'lui-format-argument))
+          (nick (plist-get (plist-get (text-properties-at beg) 'lui-keywords)
+                           :nick)))
+      (when (> (length nick) irc-left-padding)
+        (compose-region (+ beg irc-left-padding -1) end
+			irc-truncate-nick-char)))))
+
+(add-hook 'lui-pre-output-hook 'irc-circe-truncate-nicks)
+
+(defun irc-init-lui-margins ()
+  "Fix margins for irc"
+  (setq lui-time-stamp-position 'right-margin
+        lui-time-stamp-format irc-time-stamp-format
+        right-margin-width (length (format-time-string lui-time-stamp-format))))
+
+(defun irc-init-lui-wrapping ()
+  "Fix wrapping for irc"
+  (interactive)
+  (setq fringes-outside-margins t
+        word-wrap t
+        wrap-prefix (concat (make-string (+ irc-left-padding 1) ? ) "│ ")))
+
+(add-hook 'lui-mode-hook 'irc-init-lui-wrapping)
+(add-hook 'lui-mode-hook 'irc-init-lui-margins))
+#+END_SRC
+
+Enable notifications
+#+BEGIN_SRC emacs-lisp
+(use-package circe-notifications
+:ensure t
+:config
+(setq 
+circe-notifications-wait-for 2
+circe-notifications-JOIN nil
+circe-notifications-PART nil)
+(add-to-list 'circe-notifications-watch-strings "#slack-aau-general")
+(add-to-list 'circe-notifications-watch-strings "#slack-aau-ntp")
+(add-to-list 'circe-notifications-watch-strings "#slack-aau-backend")
+(add-to-list 'circe-notifications-watch-strings "#slack-aau-random")
+(add-to-list 'circe-notifications-watch-strings "#slack-aau-research")
+(add-hook 'circe-server-connected-hook 'tpanum/enable-circe-notifications))
+#+END_SRC
+**** Custom Notifications Function
+Delay the activation of notifications and create a custome display function which ignores znc playback
+#+BEGIN_SRC emacs-lisp
+(defun tpanum/enable-circe-notifications ()
+  "Turn on notifications."
+  (interactive)
+  (run-at-time "5sec" nil 'enable-circe-notifications))
+
+(defun circe-notifications-notify (nick body channel)
+  (if (not (string-match "^\[[0-9]+:[0-9]+\]" body)) ; make sure playback messages from znc are not displayed
+      (alert
+       body
+       :severity circe-notifications-alert-severity
+       :title (concat "  "  nick "  ~  " channel)
+       :icon ""
+       :style circe-notifications-alert-style)))
+#+END_SRC
+
+**** Password Functions
+#+BEGIN_SRC emacs-lisp
+(defun my-znc-freenode-pass (server)
+  "Return the password for the `SERVER'."
+  (password-store-get "znc/freenode"))
+
+(defun my-znc-bitlbee-pass (server)
+  "Return the password for the `SERVER'."
+  (password-store-get "znc/freenode"))
+#+END_SRC
+
+**** Start IRC Function
+#+BEGIN_SRC emacs-lisp
+(defun tpanum/irc ()
+  "Connect to IRC"
+  (interactive)
+  (circe "znc-freenode")
+  (circe "znc-bitlbee"))
+#+END_SRC
+*** Password Store
+#+BEGIN_SRC emacs-lisp
+(use-package password-store
+:ensure t)
+#+END_SRC
+*** Smartparens
+#+BEGIN_SRC emacs-lisp
+(use-package smartparens
+  :ensure t
+  :config
+  (progn
+    (require 'smartparens-config)
+(smartparens-global-mode 1)))
+#+END_SRC
+*** Rainbow Mode
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-mode
+:config
+(add-hook 'prog-mode-hook #'rainbow-mode))
+#+END_SRC
+*** Rainbow-Delimiters
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-delimiters
+:hook (emacs-lisp-mode . rainbow-delimiters-mode))
+#+END_SRC
+*** Flyspell Mode
+#+BEGIN_SRC emacs-lisp
+(use-package ispell
+  :defer 15
+  :config
+  (progn
+    (cond
+     ((executable-find "aspell")
+      (setq ispell-program-name "aspell")
+      (setq ispell-extra-args   '("--sug-mode=ultra"
+                                  "--lang=en_US")))
+     ((executable-find "hunspell")
+      (setq ispell-program-name "hunspell")
+      (setq ispell-extra-args   '("-d en_US"))))
+
+    ;; Save a new word to personal dictionary without asking
+    (setq ispell-silently-savep t)
+
+    (use-package flyspell
+      :init
+      (setq flyspell-use-meta-tab nil)
+      :config
+      (progn
+        (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+        (with-eval-after-load 'auto-complete
+          (ac-flyspell-workaround))
+        ;; https://github.com/larstvei/dot-emacs#flyspell
+        (add-hook 'text-mode-hook #'turn-on-flyspell)
+        (add-hook 'org-mode-hook  #'turn-on-flyspell)
+
+        ;; https://github.com/d12frosted/flyspell-correct
+        (use-package flyspell-correct-ivy
+          :after flyspell-correct
+          :bind (:map modi-mode-map
+                 ("<f12>" . flyspell-correct-word-generic)))
+        ))))
+#+END_SRC
+*** Flycheck
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :config
+(add-hook 'after-init-hook #'global-flycheck-mode))
+#+END_SRC
+*** Ace Window
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :config
+  (global-set-key (kbd "s-w") 'ace-window)
+(global-set-key [remap other-window] 'ace-window))
+#+END_SRC
+*** Lang Tool
+#+BEGIN_SRC emacs-lisp
+(use-package langtool
+	     :after general
+	     :init
+	     (general-define-key
+	      :states '(normal visual emacs)
+	      :prefix "SPC"
+	      "l"  '(:ignore t :which-key "Language")
+	      "lcw" 'langtool-check
+	      "lcW" 'langtool-check-done
+	      "lsw" 'langtool-switch-default-language
+	      "lcb" 'langtool-correct-buffer
+	      )
+	     :config
+	     (setq langtool-language-tool-jar "/run/current-system/sw/bin/languagetool" 
+		   langtool-default-language "en-US"))
+#+END_SRC
+*** Synosaurus
+#+BEGIN_SRC emacs-lisp
+(use-package synosaurus
+:init
+	     (general-define-key
+	      :states '(normal visual emacs)
+	      :prefix "SPC"
+	      "ls" 'synosaurus-lookup)
+:config (setq synosaurus-backend 'synosaurus-backend-wordnet))
+#+END_SRC
+*** Avy
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :config
+(setq avy-background t))
+#+END_SRC
+** Additional Modes
+*** Nix Mode
+#+BEGIN_SRC emacs-lisp
+(use-package nix-mode
+:ensure t
+:mode ("\\.nix" . nix-mode))
+#+END_SRC
+
+*** Markdown Mode
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
+  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode)))
+#+END_SRC
+*** Go Mode
+#+BEGIN_SRC emacs-lisp
+(use-package go-mode
+  :init
+  (progn
+  (if (executable-find "goimports") (setq gofmt-command "goimports"))
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  :config
+  (add-hook 'go-mode-hook 'electric-pair-mode)
+  (use-package company-go
+  :config
+  (add-to-list 'company-backends 'company-go))
+  (add-to-list 'exec-path "/home/tpanum/go/bin")
+  :mode "\\.go\\'" ))
+#+END_SRC
+*** Docker Mode
+#+BEGIN_SRC emacs-lisp
+(use-package dockerfile-mode
+:mode "Dockerfile\\'")
+#+END_SRC
+*** Web Mode
+#+BEGIN_SRC emacs-lisp
+(use-package web-mode
+  :mode (("\\.html?\\'" . web-mode)
+	 ("\\.xhtml$"   . web-mode)
+	 ("\\.vue\\'"   . web-mode))
+  :config
+  (setq web-mode-enable-engine-detection t))
+#+END_SRC
+*** JSON Mode
+#+BEGIN_SRC emacs-lisp
+(use-package json-mode
+  :mode (("\\.json\\'" . json-mode)))
+#+END_SRC
+*** YAML Mode
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+  :mode (("\\.yml\\'" . yaml-mode)))
+#+END_SRC
+*** Tex Mode
+#+BEGIN_SRC emacs-lisp
+(use-package tex
+  :defer t
+  :ensure auctex
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-save-query nil)
+  (setq TeX-PDF-mode t)
+  (setq TeX-parse-self t)
+  (setq TeX-master nil))
+#+END_SRC
+** Functions
+*** Open Config
+#+BEGIN_SRC emacs-lisp
+(defun tpanum/open-config ()
+(interactive)
+(find-file "~/.emacs.d/emacs.org"))
+#+END_SRC
+** Post Initialization
+   Let's lower our GC thresholds back down to a sane level.
+   
+   #+Begin_SRC emacs-lisp
+   (setq gc-cons-threshold 16777216
+      gc-cons-percentage 0.1)
+   #+END_SRC
+
+** Startup
+Start IRC
+#+BEGIN_SRC emacs-lisp
+(tpanum/irc)
+#+END_SRC
