@@ -29,7 +29,6 @@
       # desktop
       arc-theme
       lxappearance
-      rxvt_unicode
       rofi
       wirelesstools
       dunst
@@ -39,7 +38,10 @@
       xcape
       sxhkd
       ranger
-      slack
+
+      papirus-icon-theme
+      xfce.thunar
+
 
       # emacs
       unstable.emacs
@@ -51,6 +53,8 @@
       mitmproxy
       scrot
       xdotool
+
+      termite 
 
       # mail
       thunderbird
@@ -66,7 +70,7 @@
       xss-lock
       
       # screenshotting
-      gnome3.gnome-screenshot
+      nomacs
 
       # backlight
       xorg.xbacklight
