@@ -6,7 +6,7 @@ get_selection() {
 }
 
 if selection=$( get_selection ); then
-    nohup thunar "$selection" >/dev/null 2>&1 &
+    nohup mimeo "$selection" >/dev/null 2>&1 &
     sleep 0.05
 fi
 

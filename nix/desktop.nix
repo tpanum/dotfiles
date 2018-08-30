@@ -41,6 +41,7 @@
 
       papirus-icon-theme
       xfce.thunar
+      mimeo
 
 
       # emacs

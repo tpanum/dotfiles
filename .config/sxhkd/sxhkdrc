@@ -178,5 +178,5 @@ super + @l
     xdotool key --delay 0 --clearmodifiers ctrl+l
 
 super + d
-      termite --class "fzf-menu" --geometry 640x480 -e ~/.scripts/find_directory.sh
+      termite --class "fzf-menu" --geometry 640x480 -e ~/.scripts/find.sh
     
