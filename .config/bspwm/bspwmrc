@@ -29,13 +29,14 @@ bspc rule -a Thunderbird desktop='^5' follow=on
 bspc rule -a VirtualBox desktop='^8' follow=on
 bspc rule -a Slack desktop='^7' follow=on
 bspc rule -a fzf-menu sticky=on state=floating center
+bspc rule -a Peek state=floating sticky=on center
 # bspc rule -a Gimp state=floating follow=on
 # bspc rule -a Nautilus state=floating follow=on
 
 xcape -e 'Shift_L=Escape' &
 xmodmap $HOME/.Xmodmap &
 udiskie &
-xss-lock -- $HOME/scripts/lock.sh &
+xss-lock -- $HOME/.scripts/lock.sh &
 emacs &
 firefox &
 

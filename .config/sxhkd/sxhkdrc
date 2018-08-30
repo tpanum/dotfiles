@@ -91,8 +91,8 @@ super + ctrl + {l,s,p}
 
 # focus the node in the given direction
 
-super  + {Left,Down,Up,Right}
-	bspc node -f {west,south,north,east}
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
 # super + {p,b,comma,period}
@@ -169,7 +169,7 @@ super + @c
     xdotool key --delay 0 --clearmodifiers ctrl+c
 
 super + @v
-    xdotool key --delay 0 --clearmodifiers ctrl+v
+    xdotol key --delay 0 --clearmodifiers ctrl+v
 
 super + @a
     xdotool key --delay 0 --clearmodifiers ctrl+a
@@ -179,4 +179,7 @@ super + @l
 
 super + d
       termite --class "fzf-menu" --geometry 640x480 -e ~/.scripts/find.sh
+
+super + shift + s
+      peek
     

@@ -49,13 +49,13 @@ link_directory_to_home () {
                     rm $target
                 fi
             else
-                echo "$dir is linked."
+                echo -e "\e[32m✓\e[39m $dir"
                 continue
             fi
         fi
 
+	echo "$target"
 
-        echo "Linking $dir"
         ln -s $(realpath $dir) $target
     done
 }
@@ -113,8 +113,12 @@ link_files_in_dir_to_home () {
 
         f="$dir/$base"
 
-        echo "Linking... $base"
-        ln -s $(realpath $f) "$HOME/$base"
+
+        echo -e "\e[32m✓\e[39m $base"
+
+	if ! [ -L "$HOME/$base" ]; then
+	    ln -s $(realpath $f) "$HOME/$base" 2>&1 > /dev/null
+	fi
     done
 }
 

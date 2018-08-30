@@ -37,7 +37,9 @@
       lsof
       nmap
       hugo                 # website generator
-      woeusb
+      woeusb               # making windows bootables
+
+      peek                 # screen recording
       
 
       # spellchecking

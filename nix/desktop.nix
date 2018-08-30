@@ -107,6 +107,7 @@
     fira-code
     fira-code-symbols
     nerdfonts
+    noto-fonts-cjk
     source-code-pro
     material-icons
     font-awesome-ttf
