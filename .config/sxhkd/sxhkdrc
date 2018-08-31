@@ -183,3 +183,5 @@ super + d
 super + shift + s
       peek
     
+super + b
+       ~/.scripts/backup.sh

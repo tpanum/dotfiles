@@ -255,6 +255,14 @@ header-args :tangle yes
     (evilnc-default-hotkeys))
     #+END_SRC
 
+    Mode for handling alignment
+
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-lion
+    :config
+    (evil-lion-mode))
+    #+END_SRC
+
 *** Ivy
     Generic completion frontend that's just awesome! Let's install and enable it.
 

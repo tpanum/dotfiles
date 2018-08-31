@@ -36,7 +36,9 @@ bspc rule -a Peek state=floating sticky=on center
 xcape -e 'Shift_L=Escape' &
 xmodmap $HOME/.Xmodmap &
 udiskie &
-xss-lock -- $HOME/.scripts/lock.sh &
+compton --config $HOME/.config/compton/compton.conf &
+xset 60 60
+xss-lock -n $HOME/.scripts/dim-screen.sh -l -- $HOME/.scripts/lock.sh &
 emacs &
 firefox &
 

@@ -17,12 +17,15 @@ i3lock-color -n -i $HOME/.wallpaper/.cache/current \
 	     --insidecolor=373445ff --ringcolor=ffffffff --line-uses-inside \
 	     --keyhlcolor=d23c3dff --bshlcolor=d23c3dff --separatorcolor=00000000 \
 	     --insidevercolor=fecf4dff --insidewrongcolor=d23c3dff \
-	     --ringvercolor=ffffffff --ringwrongcolor=ffffffff --indpos="x+86:y+1350" \
-	     --radius=20 --veriftext="" --wrongtext=""
+	     --ringvercolor=ffffffff --ringwrongcolor=ffffffff --indpos="x+160:y+h-140" \
+	     --radius=20 --veriftext="" --wrongtext="" \
+	     --timepos="x+(w/2)-260:y+(h/2)-100" -k --timecolor=ffffffff --timestr="%H:%M" \
+	     --timefont="Roboto" --timesize=72  \
+	     --datecolor=ffffffff 
 pkill -u $USER -USR2 dunst
 
 # Revert compton's config changes.
 # dbus-send --print-reply --dest=com.github.chjj.compton.${DISPLAY/:/_} / \
     #     com.github.chjj.compton.opts_set string:no_fading_openclose boolean:true
 # dbus-send --print-reply --dest=com.github.chjj.compton.${DISPLAY/:/_} / \
-#     com.github.chjj.compton.opts_set string:unredir_if_possible boolean:true
+    #     com.github.chjj.compton.opts_set string:unredir_if_possible boolean:true

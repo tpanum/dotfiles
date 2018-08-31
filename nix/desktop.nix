@@ -26,79 +26,79 @@
 
   environment = {
     systemPackages = with pkgs; [
-      # desktop
+      # align comments with: 1gl# (in emacs)
+
+      # appearance
       arc-theme
-      lxappearance
-      rofi
-      wirelesstools
-      dunst
-      polybar
-      playerctl
-      arandr
-      xcape
-      sxhkd
-      ranger
+      papirus-icon-theme        # icon theme
+      compton                   # compositor (shadows, transparency, etc.)
+      dunst                     # notfication daemon
+      polybar                   # visual bar at desktop
 
-      papirus-icon-theme
-      xfce.thunar
-      mimeo
 
+      # file managers
+      xfce.thunar               # file manager
+      ranger                    # file manager
+      gvfs                      # needed for nautilus and thunar(?) to function
 
       # emacs
-      unstable.emacs
-      languagetool
-
-      xorg.xev
-      xlibs.xmodmap
-      hsetroot
-      mitmproxy
-      scrot
-      xdotool
-
-      termite 
+      unstable.emacs            # best editor in the world
+      languagetool              # advanced grammar tool
+      libnotify                 # notification dependency for emacs
 
       # mail
       thunderbird
 
-      gnome3.gnome-disk-utility
-      gptfdisk
-      udiskie
-      gvfs # needed for nautilus (file manager to function)
+      # disks
+      gnome3.gnome-disk-utility # lovely simple tool for formatting and partioning drives
+      gptfdisk                  # disk partitioner 
+      udiskie                   # auto
 
       # lockscreen
-      imagemagick
-      i3lock-color
-      xss-lock
+      imagemagick               # image manipulation from cli
+      i3lock-color              # lock screen
+      xss-lock                  # daemon to handle dimming and lock screen
       
       # screenshotting
-      nomacs
+      scrot                     # take screenshots
+      nomacs                    # yet another image manipulation app
 
       # backlight
-      xorg.xbacklight
-      blueman               # bluetooth manager
+      xorg.xbacklight           # interact with backlighting
 
       # applications
-      networkmanagerapplet  # gui networking manager
-      firefox
-      chromium
-      spotify               # stream music
-      pinta                 # user-friendly image manipulation
-      inkscape
-      gnome3.evince         # pdf viewer
+      rofi                      # replacement for dmenu (smart application opener)
+      wirelesstools             # basic wireless tools
+      playerctl                 # tool for start/stop/skip music
+      arandr                    # UI for xrandr (display controlling)
+      xcape                     # make shift behave like esc
+      sxhkd                     # handle all the keyboard presses
       gnome3.networkmanagerapplet
-      poppler_utils         # pdf editing tools
-      pdfpc                 # pdf presentation tool
-      corebird              # twitter client
-      remmina
-      vlc
-      simplescreenrecorder
-      kdenlive
-
-      libnotify             # notification dependency for emacs
-      vagrant               # orchestration of virtualbox
-      packer
-      libreoffice-fresh     # needed for opening microsoft products!
-      wireshark             # traffic analysis
+      networkmanagerapplet      # gui networking manager
+      blueman                   # bluetooth manager
+      firefox                   # web browsing
+      chromium                  # web browser alternative
+      spotify                   # stream music
+      pinta                     # user-friendly image manipulation
+      inkscape                  # vector graphics manipulation
+      gnome3.evince             # pdf viewer
+      poppler_utils             # pdf editing tools
+      pdfpc                     # pdf presentation tool
+      corebird                  # twitter client
+      remmina                   # rdp, vnc client
+      vlc                       # video player
+      simplescreenrecorder      # screen recording
+      kdenlive                  # video manipulation
+      vagrant                   # orchestration of virtualbox
+      libreoffice-fresh         # needed for opening microsoft products!
+      wireshark                 # traffic analysis
+      mimeo                     # program for open files wisely
+      xorg.xev                  # app for figuring out which button a keypress refers to
+      xlibs.xmodmap             # swap buttons on the keyboard around
+      hsetroot                  # set some tint color on background
+      mitmproxy                 # man-in-the-middle proxy
+      xdotool                   # program for emulating keypresses and more (e.g. swap copy/paste to super+{c,v})
+      termite                   # my current terminal
     ];
   };
 
@@ -127,33 +127,6 @@
       sushi.enable = true;
     };
 
-    compton = {
-      enable = true;
-      shadow = true;
-      backend = "xrender";
-
-      extraOptions = ''
-        no-dock-shadow = true;
-        clear-shadow = true;
-        xrender-sync = true;
-        xrender-sync-fence = true;
-        unredir-if-possible = true;
-        paint-on-overlay = true;
-        respect-prop-shadow = true;
-        xinerama-shadow-crop = true;
-
-        shadow-exclude = [
-        "class_g = 'URxvt'"
-        ];
-
-        fading = true;			 
-        fade-delta = 5;		  
-        fade-in-step = 0.03;
-        fade-out-step = 0.03;
-      '';
-      vSync = "opengl-swc";
-    };
-
     unclutter.enable = true;
     
     xserver = {
@@ -169,13 +142,6 @@
       displayManager = {
         auto.enable = true;
         auto.user = "tpanum";
-
-        # sessionCommands = ''
-        #   ${pkgs.xlibs.xmodmap}/bin/xmodmap $HOME/.Xmodmap
-        #   ${pkgs.xcape}/bin/xcape -e 'Shift_L=Escape'
-        #   ${pkgs.autorandr}/bin/autorandr -c
-        #   ${pkgs.udiskie}/bin/udiskie &
-        # '';
       };
 
       desktopManager.xterm.enable = false;
@@ -184,10 +150,6 @@
         bspwm.enable = true;
         bspwm.sxhkd.configFile = "/home/tpanum/.config/sxhkd/sxhkdrc";
         default = "bspwm";
-        # i3 = {
-        #   enable = true;
-        #   package = pkgs.i3-gaps;
-        # };
       };
     };
 
@@ -209,8 +171,6 @@
     };
     docker.enable = true;
   };
-
-  services.dbus.packages = [ pkgs.gnome3.dconf ];
 
   programs = {
     bash.enableCompletion = true;
