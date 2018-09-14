@@ -10,7 +10,7 @@ WALLPAPER_CURRENT="/home/tpanum/.wallpaper/.cache/current"
 if [ ! -f "$WALLPAPER_CACHE_FILE" ]; then
     mkdir -p ~/.wallpaper/.cache
     hsetroot -fill "$WALLPAPER_ABS" -tint '#3c6f86' -write "$WALLPAPER_CACHE_FILE"
-    convert $WALLPAPER_CACHE_FILE -gravity center -extent "${SCREEN_SIZE}" $WALLPAPER_CACHE_FILE
+    convert $WALLPAPER_CACHE_FILE -geometry "${SCREEN_SIZE}^" -gravity center -crop "${SCREEN_SIZE}+0+0" $WALLPAPER_CACHE_FILE
     convert $WALLPAPER_CACHE_FILE ~/.wallpaper/logo/nixos-logo.png -gravity SouthEast -geometry 200x200+100+70 -composite $WALLPAPER_CACHE_FILE
 fi
 

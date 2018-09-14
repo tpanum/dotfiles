@@ -166,10 +166,10 @@ XF86AudioPrev
     playerctl previous
 
 super + @c
-    xdotool key --delay 0 --clearmodifiers ctrl+c
+      ~/.scripts/osx_copy.sh
 
 super + @v
-    xdotol key --delay 0 --clearmodifiers ctrl+v
+      ~/.scripts/osx_paste.sh
 
 super + @a
     xdotool key --delay 0 --clearmodifiers ctrl+a
