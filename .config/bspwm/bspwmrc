@@ -30,54 +30,67 @@ bspc rule -a VirtualBox desktop='^8' follow=on
 bspc rule -a Slack desktop='^7' follow=on
 bspc rule -a fzf-menu sticky=on state=floating center
 bspc rule -a Peek state=floating sticky=on center
+
 # bspc rule -a Gimp state=floating follow=on
 # bspc rule -a Nautilus state=floating follow=on
 
 xcape -e 'Shift_L=Escape' &
 xmodmap $HOME/.Xmodmap &
 udiskie &
-compton --config $HOME/.config/compton/compton.conf &
-xset 60 60
+xset 60 20
 xss-lock -n $HOME/.scripts/dim-screen.sh -l -- $HOME/.scripts/lock.sh &
 emacs &
 firefox &
 
 main_workspaces() {
     MAIN_MONITOR=$(xrandr --query | grep -E "connected primary" | cut -d " " -f1)
-    bspc monitor $MAIN_MONITOR -d {Code,Web,Editor,FileBrowser,Mail,Music,Chat,VirtualBox,9}
+    bspc monitor $MAIN_MONITOR -d {Code,Web,Editor,FileBrowser,Mail,Music,Chat,VirtualBox}
 }
 
 setup_monitors() {
     DETECTED_KNOWN_MONITOR=$(autorandr 2>&1 | grep "\(detected\)\f*" | cut -d " " -f1)
+    # is known setup
     if [ ! -z ${DETECTED_KNOWN_MONITOR=} ]; then
         (pkill polybar)&
         autorandr --change
+	# is unknown setup
+    else
+	EXTERNAL_MONITOR=$(xrandr --query | grep -E "HDMI-?[0-9]+ connected" | cut -d " " -f1)
+        xrandr --output $EXTERNAL_MONITOR --auto --right-of $MAIN_MONITOR
     fi
 
     MAIN_MONITOR=$(xrandr --query | grep -E "connected primary" | cut -d " " -f1)
-    EXTERNAL_MONITOR=$(xrandr --query | grep -E "HDMI-?[0-9]+ connected" | cut -d " " -f1)
 
+    pkill compton
+    compton --config $HOME/.config/compton/compton.conf &
     (MONITOR=$MAIN_MONITOR polybar --reload top) &
-    if [ ! -z ${EXTERNAL_MONITOR} ]; then
-        xrandr --output $EXTERNAL_MONITOR --auto --right-of $MAIN_MONITOR
 
-        main_workspaces
-        bspc monitor $EXTERNAL_MONITOR -d 7
-    else
-        main_workspaces
+    main_workspaces
+
+    if [ -z ${DETECTED_KNOWN_MONITOR=} ]; then
+	EXTERNAL_MONITOR=$(xrandr --query | grep -E "HDMI-?[0-9]+ connected" | cut -d " " -f1)
+        bspc monitor $EXTERNAL_MONITOR -d 9
     fi
 
     ~/.scripts/wallpaper.sh
+
+    if [ "$DETECTED_KNOWN_MONITOR" == "home" ]; then
+	# 96: 100%, 120: 125%, 144: 150%, 168: 175%, 192: 200%
+	xrandr --dpi 144
+	sleep 1
+    else
+	xrandr --dpi 96
+    fi
 }
 
 setup_monitors
 
 bspc subscribe monitor | while read -r line; do
-  case $line in
-      monitor_add*|monitor_geometry*|monitor_remove*)
-          setup_monitors
-      ;;
-      *)
-      ;;
-  esac
+    case $line in
+	monitor_add*|monitor_geometry*|monitor_remove*)
+            setup_monitors
+	    ;;
+	*)
+	    ;;
+    esac
 done

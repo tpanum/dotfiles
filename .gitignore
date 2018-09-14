@@ -23,6 +23,7 @@ Icon
 .emacs.d/emacs.:tangle*
 .emacs.d/elpa
 .emacs.d/url
+.emacs.d/smex-items
 
 # --- JUPYTER ---
 .ipynb_checkpoints

@@ -1,0 +1,145 @@
+/*******************************************************************************
+ * Nord
+ * User: @tpanum (Inspired by Ghazanfar Naqvi's base16-ashes)
+ *******************************************************************************/
+
+* {
+    base00: #2E3440FA;
+    base01: #3B4252;
+    base02: #434C5E;
+    base03: #4C566A;
+    base04: #D8DEE9;
+    base05: #E5E9F0;
+    base06: #ECEFF4;
+    base07: #8FBCBB;
+    base08: #88C0D0;
+    base09: #81A1C1;
+    base0A: #5E81AC;
+    base0B: #BF616A;
+    base0C: #D08770;
+    base0D: #EBCB8B;
+    base0E: #A3BE8C;
+    base0F: #B48EAD;
+
+
+    transparent:      #FFFFFF00;
+    background-color: @transparent;
+    separatorcolor:   @transparent;
+
+    font:             "Fira Sans 16";
+}
+
+#window {
+    background-color: @base00;
+    border:           0;
+    padding:          300 0 300 265;
+}
+
+#mainbox {
+    border:  0;
+    padding: 0;
+}
+
+#message {
+    border:       0;
+    border-color: @transparent;
+    padding:      0px;
+}
+
+#textbox {
+    text-color: @base05;
+}
+
+#listview {
+    fixed-height: 0;
+    border:       2px 0px 0px ;
+    border-color: @transparent;
+    spacing:      2px;
+    scrollbar:    true;
+    padding:      2px 0px 0px ;
+}
+
+#element {
+    border:  0;
+    padding: 1px;
+}
+
+#element.normal.normal {
+    background-color: @transparent;
+    text-color:       @base03;
+}
+
+#element.normal.urgent {
+    background-color: @transparent;
+    text-color:       @base03;
+}
+
+#element.normal.active {
+    background-color: @transparent;
+    text-color:       @base03;
+}
+
+#element.selected.normal {
+    text-color:       @base06;
+}
+
+#element.selected.urgent {
+    text-color:       @base06;
+}
+
+#element.selected.active {
+    text-color:       @base06;
+}
+
+#element.alternate.normal {
+    background-color: @transparent;
+    text-color:       @base03;
+}
+
+#element.alternate.urgent {
+    background-color: @transparent;
+    text-color:       @base03;
+}
+
+#element.alternate.active {
+    background-color: @transparent;
+    text-color:       @base03;
+}
+
+#scrollbar {
+    width:        4px ;
+    border:       0;
+    handle-width: 8px ;
+    padding:      0;
+}
+
+#sidebar {
+    border:       2px 0px 0px ;
+    border-color: @transparent;
+}
+
+#button.selected {
+    background-color: @transparent;
+    text-color:       @base05;
+}
+
+#inputbar {
+    spacing:    0;
+    text-color: @base05;
+    padding:    1px ;
+}
+
+#case-indicator {
+    spacing:    0;
+    text-color: @base05;
+}
+
+#entry {
+    spacing:    0;
+    text-color: @base05;
+}
+
+#prompt {
+    spacing:    0;
+    text-color: @base05;
+}

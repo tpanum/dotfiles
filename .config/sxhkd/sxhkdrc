@@ -23,7 +23,7 @@ super + Return
 
 # program launcher
 super + space
-	rofi -show drun -show-icons -display-run 'Run' -display-drun 'Programs'
+	rofi -show drun -show-icons
 
 super + w
         rofi -show window -display-run 'Window' -show-icons

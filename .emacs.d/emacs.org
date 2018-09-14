@@ -172,6 +172,7 @@ header-args :tangle yes
 
     (unless (assoc-default "melpa" package-archives)
       (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
+
     (unless (assoc-default "org" package-archives)
       (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
 
@@ -255,6 +256,15 @@ header-args :tangle yes
     (evilnc-default-hotkeys))
     #+END_SRC
 
+    Manage surronding objects
+
+    #+BEGIN_SRC emacs-lisp
+    (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode 1))
+    #+END_SRC
+
     Mode for handling alignment
 
     #+BEGIN_SRC emacs-lisp
@@ -270,7 +280,12 @@ header-args :tangle yes
     (use-package ivy
     :demand t
     :config
-    (ivy-mode 1))
+    (ivy-mode 1)
+
+    (use-package smex) ; needed so that commands are ordered by usage
+    (global-set-key [remap execute-extended-command] #'counsel-M-x)
+    (global-set-key [remap find-file] #'counsel-find-file)
+)
     #+END_SRC
 
 *** Counsel
@@ -341,12 +356,24 @@ header-args :tangle yes
 	     (general-define-key :keymaps 'doc-view-mode-map
 				 :states '(emacs)
 				 "<escape>" 'kill-buffer-and-window)
-	     )
+
+
+       (require 'ox-extra)
+       (ox-extras-activate '(ignore-headlines))
+       (add-to-list 'org-latex-classes
+             '("IEEEtran"
+               "\\documentclass{IEEEtran}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+             )
 
 ;; Ensure ELPA org is prioritized above built-in org.
 (with-no-warnings
    (require 'cl))
-(setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
+   (setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
     #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -549,7 +576,7 @@ My IRC Configuration
     :server-buffer-name "⇄ bitlbee"
     :user "tpanum/bitlbee"
     :pass my-znc-bitlbee-pass
-    :channels (:after-auth "#slack-aau-general" "#slack-aau-ntp" "#slack-aau-backend" "#slack-aau-random" "#slack-aau-research")
+    :channels ("#slack-aau-general" "#slack-aau-ntp" "#slack-aau-backend" "#slack-aau-random" "#slack-aau-research")
     :lagmon-disabled t
     :tls t
     )))
@@ -618,7 +645,9 @@ Delay the activation of notifications and create a custome display function whic
   (run-at-time "5sec" nil 'enable-circe-notifications))
 
 (defun circe-notifications-notify (nick body channel)
-  (if (not (string-match "^\[[0-9]+:[0-9]+\]" body)) ; make sure playback messages from znc are not displayed
+  (if (and (not (string-match "^\[[0-9]+:[0-9]+\]" body)) ; make sure playback messages from znc are not displayed
+  (not (string-match "^\\\*\\\*\\\*$" nick))
+  (not (string-match "^/\\(PART\\|JOIN\\)" body))) 
       (alert
        body
        :severity circe-notifications-alert-severity

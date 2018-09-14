@@ -16,14 +16,6 @@
     consoleKeyMap = "us";
   };
 
-  # nixpkgs.config = {
-  #   packageOverrides = pkgs: rec {
-  #     polybar = pkgs.polybar.override {
-  #       i3Support = true;
-  #     };
-  #   };
-  # };
-
   environment = {
     systemPackages = with pkgs; [
       # align comments with: 1gl# (in emacs)
@@ -34,7 +26,6 @@
       compton                   # compositor (shadows, transparency, etc.)
       dunst                     # notfication daemon
       polybar                   # visual bar at desktop
-
 
       # file managers
       xfce.thunar               # file manager
@@ -80,6 +71,7 @@
       chromium                  # web browser alternative
       spotify                   # stream music
       pinta                     # user-friendly image manipulation
+      gimp                      # user-friendly image manipulation
       inkscape                  # vector graphics manipulation
       gnome3.evince             # pdf viewer
       poppler_utils             # pdf editing tools
@@ -99,10 +91,12 @@
       mitmproxy                 # man-in-the-middle proxy
       xdotool                   # program for emulating keypresses and more (e.g. swap copy/paste to super+{c,v})
       termite                   # my current terminal
+      alacritty
     ];
   };
 
   fonts.fonts = with pkgs; [
+    fira
     fira-mono
     fira-code
     fira-code-symbols
@@ -127,21 +121,22 @@
       sushi.enable = true;
     };
 
-    unclutter.enable = true;
+    unclutter-xfixes.enable = true;
     
     xserver = {
       enable = true;
       layout = "us,dk";
       xkbVariant = "intl";
 
-      videoDrivers = [ "intel" ];
+      # videoDrivers = [ "intel" ];
       libinput = {
         enable = true;
       };
 
-      displayManager = {
-        auto.enable = true;
-        auto.user = "tpanum";
+      displayManager.slim = {
+        enable = true;
+        defaultUser = "tpanum";
+        autoLogin = true;
       };
 
       desktopManager.xterm.enable = false;
@@ -149,6 +144,7 @@
       windowManager = {
         bspwm.enable = true;
         bspwm.sxhkd.configFile = "/home/tpanum/.config/sxhkd/sxhkdrc";
+        bspwm.package = pkgs.unstable.bspwm;
         default = "bspwm";
       };
     };
@@ -164,7 +160,6 @@
     autorandr.enable = true;
   };
 
-  nixpkgs.config.virtualbox.enableExtensionPack = true;
   virtualisation = {
     virtualbox = {
       host.enable = true;

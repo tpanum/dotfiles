@@ -38,6 +38,7 @@
       nmap
       hugo                 # website generator
       woeusb               # making windows bootables
+      jq                   # json handler
 
       peek                 # screen recording
       

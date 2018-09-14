@@ -1,0 +1,16 @@
+configuration {
+	modi: "drun";
+	width: 200;
+	lines: 10;
+	columns: 4;
+	font: "Fira Sans 16";
+	show-icons: true;
+	terminal: "alacritty";
+	drun-icon-theme: "la-capitaine-icon-theme";
+	eh: 2;
+	fullscreen: true;
+	show-match: false;
+	theme: "nord";
+	display-run: "";
+	display-drun: "";
+}
