@@ -19,7 +19,7 @@ super + i
 
 # terminal emulator
 super + Return
-	termite
+	alacritty 
 
 # program launcher
 super + space
@@ -178,7 +178,7 @@ super + @l
     xdotool key --delay 0 --clearmodifiers ctrl+l
 
 super + d
-      termite --class "fzf-menu" --geometry 640x480 -e ~/.scripts/find.sh
+      alacritty --title "fzf-menu" --dimensions 140 40 -e ~/.scripts/find.sh
 
 super + shift + s
       peek
