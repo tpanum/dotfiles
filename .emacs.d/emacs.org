@@ -54,6 +54,7 @@
     - [[#json-mode][JSON Mode]]
     - [[#yaml-mode][YAML Mode]]
     - [[#tex-mode][Tex Mode]]
+    - [[#protobuf-mode][Protobuf Mode]]
   - [[#functions][Functions]]
     - [[#open-config][Open Config]]
   - [[#post-initialization][Post Initialization]]
@@ -459,7 +460,7 @@ I replaced evil's default `/` with `swiper`.
 	      "ras" 'doi-utils-add-entry-from-crossref-query
 	      "rc" 'org-ref-helm-insert-cite-link
 	      "rw" 'helm-bibtex
-	      "w" 'other-window
+	      "wo" 'other-window
 	      "wd" 'delete-other-windows
 	      "wsh" 'split-window-right
 	      "wsv" 'split-window-below
@@ -686,8 +687,11 @@ Delay the activation of notifications and create a custome display function whic
   :ensure t
   :config
   (progn
-    (require 'smartparens-config)
-(smartparens-global-mode 1)))
+  (require 'smartparens-config)
+  (add-to-list 'sp-ignore-modes-list 'circe-channel-mode)
+  (add-to-list 'sp-ignore-modes-list 'circe-server-mode)
+  (add-to-list 'sp-ignore-modes-list 'circe-query-mode)
+  (smartparens-global-mode 1)))
 #+END_SRC
 *** Rainbow Mode
 #+BEGIN_SRC emacs-lisp
@@ -850,6 +854,12 @@ Delay the activation of notifications and create a custome display function whic
   (setq TeX-PDF-mode t)
   (setq TeX-parse-self t)
   (setq TeX-master nil))
+#+END_SRC
+*** Protobuf Mode
+#+BEGIN_SRC emacs-lisp
+(use-package protobuf-mode
+  :ensure t
+:mode ("\\.proto\\'" . protobuf-mode))
 #+END_SRC
 ** Functions
 *** Open Config

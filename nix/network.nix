@@ -62,7 +62,6 @@
     # extraHosts = ''
     #   172.25.76.182 mfc-print03.aau.dk
     #   172.25.14.30 priv.mail.aau.dk'';
-
     networkmanager = {
       enable = true;
     };

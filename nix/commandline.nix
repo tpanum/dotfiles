@@ -34,6 +34,8 @@
       proselint
       gnumake
       teensy-loader-cli
+      tcpdump
+      altcoins.aeon
       lsof
       nmap
       hugo                 # website generator
