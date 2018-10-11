@@ -2,6 +2,7 @@ export GOPATH="/home/tpanum/go"
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 export HISTSIZE=3500
+export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
 # speed up bash reverse search
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
