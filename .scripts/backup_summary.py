@@ -29,11 +29,11 @@ import json
 
 srv = ' '.join(sys.argv[1:])
 try:
-    output = sys.stdin.read()
+    input = sys.stdin.read()
 
-    j = json.loads(output)
+    j = json.loads(input)
     s = humanize_bytes(j['archive']['stats']['deduplicated_size'])
     t = secToTime(j['archive']['duration'])
-    print('  {} ({}, +{})'.format(srv, t, s))
+    print('{} ({}, +{})'.format(srv, t, s))
 except Exception:
-    print('  {}'.format(srv))
+    print('{}'.format(srv))

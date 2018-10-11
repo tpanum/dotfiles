@@ -53,7 +53,7 @@ super + alt + Escape
 	bspc quit
 
 # lock
-super + shift + l
+super + shift + y
       	xset s activate
 	
 
@@ -91,7 +91,7 @@ super + ctrl + {l,s,p}
 
 # focus the node in the given direction
 
-super + {_,shift + }{Left,Down,Up,Right}
+super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
@@ -178,7 +178,10 @@ super + @l
     xdotool key --delay 0 --clearmodifiers ctrl+l
 
 super + d
-      alacritty --title "fzf-menu" --dimensions 140 40 -e ~/.scripts/find.sh
+      alacritty --title "Open file or folder" --class "fzf-menu" --dimensions 180 40 -e ~/.scripts/find.sh
+
+XF86Display
+      urxvt -title "Find file or folder" -name fzf-menu --geometry 140x40 -e ~/.scripts/find.sh
 
 super + shift + s
       peek

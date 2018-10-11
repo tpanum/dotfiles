@@ -45,6 +45,7 @@
     - [[#lang-tool][Lang Tool]]
     - [[#synosaurus][Synosaurus]]
     - [[#avy][Avy]]
+    - [[#tramp][Tramp]]
   - [[#additional-modes][Additional Modes]]
     - [[#nix-mode][Nix Mode]]
     - [[#markdown-mode][Markdown Mode]]
@@ -55,6 +56,7 @@
     - [[#yaml-mode][YAML Mode]]
     - [[#tex-mode][Tex Mode]]
     - [[#protobuf-mode][Protobuf Mode]]
+    - [[#git-gutter-mode][Git Gutter Mode]]
   - [[#functions][Functions]]
     - [[#open-config][Open Config]]
   - [[#post-initialization][Post Initialization]]
@@ -358,7 +360,6 @@ header-args :tangle yes
 				 :states '(emacs)
 				 "<escape>" 'kill-buffer-and-window)
 
-
        (require 'ox-extra)
        (ox-extras-activate '(ignore-headlines))
        (add-to-list 'org-latex-classes
@@ -406,6 +407,30 @@ header-args :tangle yes
 	     )
 #+END_SRC
 
+Agenda functions
+#+BEGIN_SRC emacs-lisp
+(defun tpanum/org-agenda ()
+  "Opens org agenda with personal directory"
+  (interactive)
+  (setq org-agenda-files (directory-files "~/org" t "^[a-zA-Z0-9_-.]+\\.org"))
+  (org-agenda-list))
+
+(defun tpanum/todo-work ()
+  "Opens work todo"
+  (interactive)
+  (find-file "~/org/work.org"))
+
+(defun tpanum/todo-research ()
+  "Opens research todo"
+  (interactive)
+  (find-file "~/org/research.org"))
+
+(defun tpanum/todo-personal ()
+  "Opens personal todo"
+  (interactive)
+(find-file "~/org/personal.org"))
+#+END_SRC
+
 *** Toc-org
     Let's install and load the =toc-org= package after org mode is loaded. This is the
     package that automatically generates an up to date table of contents for us.
@@ -448,12 +473,16 @@ I replaced evil's default `/` with `swiper`.
 	      "hv" 'describe-variable
 	      "irc" 'tpanum/irc
         "j" 'avy-goto-word-or-subword-1
+
 	      "o"  '(:ignore t :which-key "Org")
 	      "oa" 'tpanum/org-agenda
 	      "otp" 'tpanum/todo-personal
 	      "otr" 'tpanum/todo-research
 	      "otw" 'tpanum/todo-work
-	      "pi" 'package-install
+
+	      "p"  '(:ignore t :which-key "Programming")
+	      "pe" 'next-error
+
 	      "q" 'kill-this-buffer
 	      "r"  '(:ignore t :which-key "Research")
 	      "rad" 'doi-utils-add-bibtex-entry-from-doi
@@ -560,6 +589,7 @@ My IRC Configuration
  circe-format-self-say circe-format-say
  circe-format-action (format "{nick:+%ss} * {body}" irc-left-padding)
  circe-format-self-action circe-format-action
+ circe-network-defaults ()
  circe-network-options
  `(("znc-freenode"
     :host "znc.panum.dk"
@@ -568,20 +598,64 @@ My IRC Configuration
     :nick "tpanum"
     :user "tpanum/freenode"
     :pass my-znc-freenode-pass
-    :channels (:after-auth "#aau")
+    :channels ("#aau")
     :tls t
     )
    ("znc-bitlbee"
     :host "znc.panum.dk"
     :port 5000
     :server-buffer-name "⇄ bitlbee"
+    :nick "root"
     :user "tpanum/bitlbee"
     :pass my-znc-bitlbee-pass
     :channels ("#slack-aau-general" "#slack-aau-ntp" "#slack-aau-backend" "#slack-aau-random" "#slack-aau-research")
-    :lagmon-disabled t
+    ;; :lagmon-disabled t
     :tls t
     )))
 
+(defun circe-lagmon--ctcp-lagmon-handler (conn event sender target argument)
+  (when (or (irc-current-nick-p conn (irc-userstring-nick sender))
+	    (equal "root" (irc-userstring-nick sender)))
+    (with-current-buffer (irc-connection-get conn :server-buffer)
+      (let* ((now (float-time))
+	     (lag (/ (- now (string-to-number argument))
+		     2)))
+	(setq circe-lagmon-server-lag lag
+	      circe-lagmon-last-receive-time now)
+	(circe-lagmon-force-mode-line-update)))))
+
+;;;###autoload
+(define-minor-mode circe-lagmon-mode
+  "Circe-lagmon-mode monitors the amount of lag on your
+connection to each server, and displays the lag time in seconds
+in the mode-line."
+  :global t
+  (let ((mode-line-entry '(:eval (circe-lagmon-format-mode-line-entry))))
+    (remove-hook 'mode-line-modes mode-line-entry)
+    (let ((table (circe-irc-handler-table)))
+      (irc-handler-remove table "001" 'circe-lagmon--rpl-welcome-handler)
+      (irc-handler-remove table "irc.ctcpreply.PING"
+                          'circe-lagmon--ctcp-lagmon-handler)
+      (irc-handler-remove table "NICK" 'circe-lagmon--nick-handler))
+    (circe-set-display-handler "irc.ctcpreply.PING" nil)
+    (when circe-lagmon-timer
+      (cancel-timer circe-lagmon-timer)
+      (setq circe-lagmon-timer nil))
+    (when circe-lagmon-mode
+      (add-hook 'mode-line-modes mode-line-entry)
+      (let ((table (circe-irc-handler-table)))
+        (irc-handler-add table "001" 'circe-lagmon--rpl-welcome-handler)
+        (irc-handler-add table "irc.ctcpreply.PING"
+                         'circe-lagmon--ctcp-lagmon-handler)
+        (irc-handler-add table "NICK" 'circe-lagmon--nick-handler))
+      (circe-set-display-handler "irc.ctcpreply.PING" 'circe-display-ignore)
+      (dolist (buffer (circe-server-buffers))
+        (with-current-buffer buffer
+          (setq circe-lagmon-server-lag nil)
+          (when (and circe-server-process
+                     (eq (irc-connection-state circe-server-process)
+                         'registered))
+            (circe-lagmon-init)))))))
 
 
 (setq lui-fill-type nil)
@@ -650,10 +724,10 @@ Delay the activation of notifications and create a custome display function whic
   (not (string-match "^\\\*\\\*\\\*$" nick))
   (not (string-match "^/\\(PART\\|JOIN\\)" body))) 
       (alert
-       body
+       (concat "<b>" nick "</b>: " body)
        :severity circe-notifications-alert-severity
-       :title (concat "  "  nick "  ~  " channel)
-       :icon ""
+       :title channel
+       :category "chat"
        :style circe-notifications-alert-style)))
 #+END_SRC
 
@@ -745,7 +819,40 @@ Delay the activation of notifications and create a custome display function whic
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
   :config
-(add-hook 'after-init-hook #'global-flycheck-mode))
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(define-fringe-bitmap 'flycheck-fringe-bitmap-ball
+    (vector #b00000000
+            #b00000000
+            #b00000000
+            #b00000000
+            #b00000000
+            #b00111000
+            #b01111100
+            #b11111110
+            #b11111110
+            #b01111100
+            #b00111000
+            #b00000000
+            #b00000000
+            #b00000000
+            #b00000000
+            #b00000000
+            #b00000000))
+
+(flycheck-define-error-level 'error
+  :severity 100
+  :compilation-level 2
+  :overlay-category 'flycheck-error-overlay
+  :fringe-bitmap 'flycheck-fringe-bitmap-ball
+  :fringe-face 'flycheck-fringe-error
+  :error-list-face 'flycheck-error-list-error)
+(flycheck-define-error-level 'warning
+  :severity 10
+  :compilation-level 1
+  :overlay-category 'flycheck-warning-overlay
+  :fringe-bitmap 'flycheck-fringe-bitmap-ball
+  :fringe-face 'flycheck-fringe-warning
+  :error-list-face 'flycheck-error-list-warning))
 #+END_SRC
 *** Ace Window
 #+BEGIN_SRC emacs-lisp
@@ -787,6 +894,14 @@ Delay the activation of notifications and create a custome display function whic
 (use-package avy
   :config
 (setq avy-background t))
+#+END_SRC
+*** Tramp
+#+BEGIN_SRC emacs-lisp
+(use-package tramp
+  :defer t
+  :config
+  (setf tramp-persistency-file-name
+        (concat temporary-file-directory "tramp-" (user-login-name))))
 #+END_SRC
 ** Additional Modes
 *** Nix Mode
@@ -860,6 +975,22 @@ Delay the activation of notifications and create a custome display function whic
 (use-package protobuf-mode
   :ensure t
 :mode ("\\.proto\\'" . protobuf-mode))
+#+END_SRC
+*** Git Gutter Mode
+#+BEGIN_SRC emacs-lisp
+(use-package git-gutter-fringe
+  :diminish git-gutter-mode
+  :config
+  (global-git-gutter-mode t)
+(define-fringe-bitmap 'git-gutter-fr:added
+  [224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224]
+  nil nil 'center)
+(define-fringe-bitmap 'git-gutter-fr:modified
+  [224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224 224]
+  nil nil 'center)
+(define-fringe-bitmap 'git-gutter-fr:deleted
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+nil nil 'center))
 #+END_SRC
 ** Functions
 *** Open Config

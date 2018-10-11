@@ -10,7 +10,7 @@
     ./backup.nix
   ];
 
-  system.stateVersion = "18.03";
+  system.stateVersion = "18.09";
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -19,8 +19,8 @@
     packageOverrides = pkgs: {
       unstable = import <nixos-unstable> {
         config = config.nixpkgs.config;
+        };
       };
-  };
   };
 
   boot = {

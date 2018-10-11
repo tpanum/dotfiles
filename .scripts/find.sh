@@ -6,7 +6,6 @@ get_selection() {
 }
 
 if selection=$( get_selection ); then
-    echo "Meow"
     nohup mimeo "$selection" >/dev/null 2>&1 &
     sleep 0.05
 fi

@@ -35,15 +35,15 @@
       gnumake
       teensy-loader-cli
       tcpdump
-      altcoins.aeon
+      traceroute
+      # altcoins.aeon
       lsof
       nmap
       hugo                 # website generator
       woeusb               # making windows bootables
       jq                   # json handler
-
       peek                 # screen recording
-      
+      protobuf
 
       # spellchecking
       aspell               # spellchecking
@@ -62,6 +62,7 @@
       dep                  # depedency manager for golang
       gotools              # helper cli for golang (auto importing and more)
       (python3.withPackages (ps: with ps; [
+      selenium
       virtualenvwrapper
       requests
       autopep8
@@ -69,6 +70,7 @@
       epc
       django
     ]))
+    geckodriver
       gcc_multi
       # elmPackages.elm
       # elmPackages.elm-format

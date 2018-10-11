@@ -3,6 +3,7 @@ xsetroot -cursor_name left_ptr &
 
 bspc config remove_disabled_monitors true
 bspc config remove_unplugged_monitors true
+bspc config merge_overlapping_monitors true
 
 bspc config border_width         4
 bspc config window_gap          15
@@ -28,7 +29,7 @@ bspc rule -a Nautilus desktop='^4' follow=on
 bspc rule -a Thunderbird desktop='^5' follow=on
 bspc rule -a VirtualBox desktop='^8' follow=on
 bspc rule -a Slack desktop='^7' follow=on
-bspc rule -a fzf-menu sticky=on state=floating center
+bspc rule -a Alacritty:fzf-menu sticky=on state=floating center
 bspc rule -a Peek state=floating sticky=on center
 
 # bspc rule -a Gimp state=floating follow=on
@@ -43,20 +44,21 @@ emacs &
 firefox &
 
 main_workspaces() {
-    MAIN_MONITOR=$(xrandr --query | grep -E "connected primary" | cut -d " " -f1)
-    bspc monitor $MAIN_MONITOR -d {Code,Web,Editor,FileBrowser,Mail,Music,Chat,VirtualBox}
+    MONITOR="$1"
+    bspc monitor $MONITOR -d {Code,Web,Editor,FileBrowser,Mail,Music,Chat,VirtualBox}
 }
 
 setup_monitors() {
     DETECTED_KNOWN_MONITOR=$(autorandr 2>&1 | grep "\(detected\)\f*" | cut -d " " -f1)
     # is known setup
-    if [ ! -z ${DETECTED_KNOWN_MONITOR=} ]; then
+    if [ ! -z ${DETECTED_KNOWN_MONITOR} ]; then
         (pkill polybar)&
         autorandr --change
 	# is unknown setup
     else
+        (pkill polybar)&
 	EXTERNAL_MONITOR=$(xrandr --query | grep -E "HDMI-?[0-9]+ connected" | cut -d " " -f1)
-        xrandr --output $EXTERNAL_MONITOR --auto --right-of $MAIN_MONITOR
+	xrandr --output $EXTERNAL_MONITOR --auto --scale-from 1920x1080 --output $MAIN_MONITOR
     fi
 
     MAIN_MONITOR=$(xrandr --query | grep -E "connected primary" | cut -d " " -f1)
@@ -65,11 +67,12 @@ setup_monitors() {
     compton --config $HOME/.config/compton/compton.conf &
     (MONITOR=$MAIN_MONITOR polybar --reload top) &
 
-    main_workspaces
-
-    if [ -z ${DETECTED_KNOWN_MONITOR=} ]; then
+    if [ -z ${DETECTED_KNOWN_MONITOR} ]; then
 	EXTERNAL_MONITOR=$(xrandr --query | grep -E "HDMI-?[0-9]+ connected" | cut -d " " -f1)
-        bspc monitor $EXTERNAL_MONITOR -d 9
+	main_workspaces $EXTERNAL_MONITOR
+        # bspc monitor $EXTERNAL_MONITOR -d 9
+    else
+	main_workspaces $MAIN_MONITOR
     fi
 
     ~/.scripts/wallpaper.sh

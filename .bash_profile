@@ -25,3 +25,10 @@ alias shutdown='wmctrl -c "firefox" && sleep 0.5 && /run/current-system/sw/bin/s
 alias reboot='wmctrl -c "firefox" && sleep 0.5 && /run/current-system/sw/bin/reboot'
 alias fixshebangs="find . -type f -print0 | xargs -0 sed -i 's=#!/bin=#!/run/current-system/sw/bin=g'"
 alias killcontainers="docker rm -f $(docker ps -a -q)"
+
+for f in /home/tpanum/.exec/*.sh
+do
+    base=$(basename $f)
+    cmd="${base%.*}"
+    alias $cmd=$f
+done

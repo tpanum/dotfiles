@@ -36,6 +36,7 @@
       unstable.emacs            # best editor in the world
       languagetool              # advanced grammar tool
       libnotify                 # notification dependency for emacs
+      pygmentex
 
       # mail
       thunderbird
@@ -68,6 +69,7 @@
       networkmanagerapplet      # gui networking manager
       blueman                   # bluetooth manager
       firefox                   # web browsing
+      # torbrowser
       chromium                  # web browser alternative
       spotify                   # stream music
       pinta                     # user-friendly image manipulation
@@ -91,7 +93,8 @@
       mitmproxy                 # man-in-the-middle proxy
       xdotool                   # program for emulating keypresses and more (e.g. swap copy/paste to super+{c,v})
       termite                   # my current terminal
-      alacritty
+      unstable.alacritty
+      rxvt_unicode
     ];
   };
 
@@ -100,7 +103,7 @@
     fira-mono
     fira-code
     fira-code-symbols
-    nerdfonts
+    # nerdfonts
     noto-fonts-cjk
     source-code-pro
     material-icons
