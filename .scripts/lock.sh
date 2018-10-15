@@ -19,8 +19,8 @@ i3lock-color -n -i $HOME/.wallpaper/.cache/current \
 	     --insidevercolor=fecf4dff --insidewrongcolor=d23c3dff \
 	     --ringvercolor=ffffffff --ringwrongcolor=ffffffff --indpos="x+160:y+h-140" \
 	     --radius=20 --veriftext="" --wrongtext="" \
-	     --timepos="x+(w/2)-260:y+(h/2)-100" -k --timecolor=ffffffff --timestr="%H:%M" \
-	     --timefont="Roboto" --timesize=72  \
+	     --timepos="x+(w/2):y+(h/2)" -k --timecolor=ffffffff --timestr="%H:%M" \
+	     --time-font="Roboto Medium" --timesize=62\
 	     --datecolor=ffffffff 
 pkill -u $USER -USR2 dunst
 

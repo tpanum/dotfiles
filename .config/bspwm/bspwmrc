@@ -90,7 +90,7 @@ setup_monitors
 
 bspc subscribe monitor | while read -r line; do
     case $line in
-	monitor_add*|monitor_geometry*|monitor_remove*)
+	monitor_add*|monitor_remove*)
             setup_monitors
 	    ;;
 	*)

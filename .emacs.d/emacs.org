@@ -268,6 +268,18 @@ header-args :tangle yes
     (global-evil-surround-mode 1))
     #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(use-package evil-snipe
+:after general
+  :config
+  (setq  evil-snipe-scope 'whole-visible)
+  (general-define-key 
+  :states '(normal operator motion)
+  "f" 'evil-snipe-s
+  "F" 'evil-snipe-S)
+  (evil-snipe-override-mode 1))
+#+END_SRC
+
     Mode for handling alignment
 
     #+BEGIN_SRC emacs-lisp
@@ -347,8 +359,8 @@ header-args :tangle yes
 	     (general-define-key :keymaps 'org-mode-map
 				 :states '(normal)
 				 "C-c C-c" 'org-latex-export-to-pdf
-				 "t" 'org-todo
-				 "s" 'org-schedule
+				 "T" 'org-todo
+				 "S" 'org-schedule
 				 "RET" 'org-open-at-point
 				 "S-<right>" 'org-shiftmetaright
 				 "S-<left>" 'org-shiftmetaleft
@@ -507,7 +519,7 @@ I replaced evil's default `/` with `swiper`.
 (define-key ivy-minibuffer-map (kbd "<RET>") 'ivy-alt-done)
 (define-key ivy-minibuffer-map (kbd "C-s") 'tpanum/ivy-rg-search)
 
-(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
     #+END_SRC
 
@@ -892,8 +904,13 @@ Delay the activation of notifications and create a custome display function whic
 *** Avy
 #+BEGIN_SRC emacs-lisp
 (use-package avy
+  :after (:all general evil-snipe)
+  :defer
   :config
-(setq avy-background t))
+(setq avy-background t)
+  (general-define-key 
+  :states '(normal operator motion)
+  "s" 'evil-avy-goto-char-timer))
 #+END_SRC
 *** Tramp
 #+BEGIN_SRC emacs-lisp

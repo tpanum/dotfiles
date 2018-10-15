@@ -6,7 +6,7 @@ if /run/current-system/sw/bin/pidof -x borg > /dev/null; then
     exit
 fi
 
-JSON_OUTPUT=$(./make_backup.sh "$REPO" "$BORG_PASSPHRASE")
+JSON_OUTPUT=$($HOME/.scripts/make_backup.sh "$REPO" "$BORG_PASSPHRASE")
 rc=$?; if [[ $rc -gt 1 ]]; then echo "" | $HOME/.notifications/backup.sh "failed"; exit $rc; fi
 
 
@@ -15,9 +15,9 @@ BORG_PASSPHRASE='b4ckupopenup'\
 	       --list                                               \
 	       --prefix '{hostname}-'                               \
 	       --show-rc                                            \
-	       --keep-daily    2                                    \
-	       --keep-weekly   5                                    \
-	       --keep-monthly  4                                    \
+	       --keep-daily    4                                    \
+	       --keep-weekly   7                                    \
+	       --keep-monthly  8                                    \
 	       $REPO
 
 
