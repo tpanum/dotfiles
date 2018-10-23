@@ -125,7 +125,6 @@ link_files_in_dir_to_home () {
 link_directory_to_home .emacs.d
 link_directory_to_home .scripts
 link_directory_to_home .exec
-link_directory_to_home .urxvt
 link_directory_to_home .notifications
 link_directory_to_home ".config/*"
 link_files_in_dir_to_home .

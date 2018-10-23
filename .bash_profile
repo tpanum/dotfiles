@@ -5,6 +5,7 @@ export HISTSIZE=3500
 export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 export PASSWORD_STORE_GENERATED_LENGTH="42"
 export GPG_TTY=$(tty)
+export FZF_DEFAULT_OPTS=' --color pointer:3,info:14,bg+:-1'
 
 # speed up bash reverse search
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

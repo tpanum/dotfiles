@@ -58,10 +58,11 @@
       rofi-pass
 
       # development
-      sqlite               # small file-oriented sql database
-      go              # golang programming language
-      dep                  # depedency manager for golang
-      gotools              # helper cli for golang (auto importing and more)
+      sqlite  # small file-oriented sql database
+      go      # golang programming language
+      dep     # depedency manager for golang
+      gotools # helper cli for golang (auto importing and more)
+      golangci-lint
       (python3.withPackages (ps: with ps; [
       selenium
       virtualenvwrapper

@@ -221,6 +221,7 @@ header-args :tangle yes
      (setq frame-resize-pixelwise t)
      (setq uniquify-buffer-name-style 'forward)
      (show-paren-mode)
+     (fset 'yes-or-no-p 'y-or-n-p)
      #+END_SRC
 
 ** Packages
@@ -949,11 +950,24 @@ Delay the activation of notifications and create a custome display function whic
   (add-hook 'before-save-hook 'gofmt-before-save)
   :config
   (add-hook 'go-mode-hook 'electric-pair-mode)
-  (use-package company-go
-  :config
-  (add-to-list 'company-backends 'company-go))
   (add-to-list 'exec-path "/home/tpanum/go/bin")
   :mode "\\.go\\'" ))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package company-go
+:config
+(add-to-list 'company-backends 'company-go))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package go-eldoc)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck-golangci-lint
+:after flycheck
+  :hook (go-mode . flycheck-golangci-lint-setup))
 #+END_SRC
 *** Docker Mode
 #+BEGIN_SRC emacs-lisp
