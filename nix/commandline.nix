@@ -5,6 +5,7 @@
 
 
     systemPackages = with pkgs; [
+      pinentry_gnome
       gnupg                # encryption tool
       git                  # version control
       exiftool             # reading image fileheaders

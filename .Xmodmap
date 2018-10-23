@@ -5,11 +5,11 @@ keycode 62 = Super_R
 clear Lock
 keycode 66 = Control_L
 ! remap "a" inorder to generate "å"
-keycode 38 = a A aring Aring
+! keycode 38 = a A aring Aring
 ! remap "e" inorder to generate "æ"
-keycode 26 = e E ae AE
+! keycode 26 = e E ae AE
 ! remap "o" inorder to generate "ø"
-keycode 32 = o O oslash Oslash
+! keycode 32 = o O oslash Oslash
 ! ctrl + alt = altgr
 keycode  37 = Control_L ISO_Level3_Latch
 keycode  64 = Alt_L ISO_Level3_Latch

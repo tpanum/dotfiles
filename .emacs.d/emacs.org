@@ -247,7 +247,8 @@ header-args :tangle yes
     (use-package evil
     :demand t
     :config
-    (evil-mode 1))
+    (evil-mode 1)
+(define-key key-translation-map (kbd "ESC") (kbd "C-g")))
     #+END_SRC
     
     Handling code comments correctly with Evil :-)
@@ -269,14 +270,17 @@ header-args :tangle yes
     #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
+    (use-package evil-indent-plus
+    :ensure t
+    :config
+    (evil-indent-plus-default-bindings))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
 (use-package evil-snipe
 :after general
   :config
   (setq  evil-snipe-scope 'whole-visible)
-  (general-define-key 
-  :states '(normal operator motion)
-  "f" 'evil-snipe-s
-  "F" 'evil-snipe-S)
   (evil-snipe-override-mode 1))
 #+END_SRC
 
@@ -424,7 +428,7 @@ Agenda functions
 (defun tpanum/org-agenda ()
   "Opens org agenda with personal directory"
   (interactive)
-  (setq org-agenda-files (directory-files "~/org" t "^[a-zA-Z0-9_-.]+\\.org"))
+  (setq org-agenda-files (directory-files "~/gtd" t "^[a-zA-Z0-9_-.]+\\.org"))
   (org-agenda-list))
 
 (defun tpanum/todo-work ()

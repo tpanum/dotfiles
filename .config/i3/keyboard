@@ -7,13 +7,15 @@ get_kbdlayout() {
 }
 
 set_kbdlayout() {
-  setxkbmap "$1"
+    if [ "$1" == "us" ]; then
+	setxkbmap "$1" -variant "altgr-intl"
+	xmodmap -e 'keycode 110 = ISO_Level3_Shift ISO_Level3_Shift ISO_Level3_Shift ISO_Level3_Shift'
 
-  if [ "$1" == "us" ]; then
-      xmodmap -e 'keycode 110 = Mode_switch Mode_switch Mode_switch Mode_switch'
-  fi
+    else
+	setxkbmap "$1"
+    fi
 
-  xmodmap ~/.Xmodmap
+    xmodmap ~/.Xmodmap
 }
 
 cycle() {

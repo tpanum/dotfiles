@@ -129,7 +129,7 @@
     xserver = {
       enable = true;
       layout = "us,dk";
-      xkbVariant = "intl";
+      xkbVariant = "altgr-intl";
 
       # videoDrivers = [ "intel" ];
       libinput = {

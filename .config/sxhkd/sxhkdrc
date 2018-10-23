@@ -153,7 +153,7 @@ super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 super + shift + p
-    scrot 'screenshot_%Y-%m-%d-%S.png' -e 'mv $f ~/Pictures ; nomacs ~/Pictures/$f'
+    scrot 'screenshot_%Y-%m-%d-%S.png' -e 'mv $f ~/Pictures ; pinta ~/Pictures/$f'
 
 # music player controls
 XF86AudioPlay
