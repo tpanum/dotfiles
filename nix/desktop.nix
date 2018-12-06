@@ -13,7 +13,7 @@
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    consoleKeyMap = "us";
+    consoleUseXkbConfig = true;
   };
 
   environment = {
@@ -27,10 +27,20 @@
       dunst                     # notfication daemon
       polybar                   # visual bar at desktop
 
+      tint2
+      cbatticon
+      volumeicon
+      xxkb
+      lxappearance-gtk3
+
       # file managers
-      xfce.thunar               # file manager
       ranger                    # file manager
+      feh
       gvfs                      # needed for nautilus and thunar(?) to function
+      xfce4-13.thunar
+      dockbarx
+      latte-dock
+      plank
 
       # emacs
       unstable.emacs            # best editor in the world
@@ -58,6 +68,9 @@
       # backlight
       xorg.xbacklight           # interact with backlighting
 
+      # xfce plugins
+      xfce.xfce4-settings
+
       # applications
       rofi                      # replacement for dmenu (smart application opener)
       wirelesstools             # basic wireless tools
@@ -66,10 +79,10 @@
       xcape                     # make shift behave like esc
       sxhkd                     # handle all the keyboard presses
       gnome3.networkmanagerapplet
+      ffmpeg
       networkmanagerapplet      # gui networking manager
       blueman                   # bluetooth manager
       firefox                   # web browsing
-      # torbrowser
       chromium                  # web browser alternative
       spotify                   # stream music
       pinta                     # user-friendly image manipulation
@@ -92,9 +105,10 @@
       hsetroot                  # set some tint color on background
       mitmproxy                 # man-in-the-middle proxy
       xdotool                   # program for emulating keypresses and more (e.g. swap copy/paste to super+{c,v})
-      termite                   # my current terminal
       unstable.alacritty
-      rxvt_unicode
+      mendeley
+      qbittorrent
+      handbrake
     ];
   };
 
@@ -113,25 +127,20 @@
     roboto
   ];
 
-
-  environment.variables.GIO_EXTRA_MODULES = [ "${pkgs.gvfs}/lib/gio/modules" ]; # needed for nautilus (file manager)
   security.polkit.enable = true;
   services = {
-    gnome3 = {
-      gnome-terminal-server.enable = true;
-      gnome-online-accounts.enable = true;
-      gnome-keyring.enable = true;
-      sushi.enable = true;
-    };
-
     unclutter-xfixes.enable = true;
+
+    # needed for plank
+    dbus.packages = with pkgs; [ gnome3.dconf ];
+    bamf.enable = true;
     
     xserver = {
       enable = true;
       layout = "us,dk";
       xkbVariant = "altgr-intl";
 
-      # videoDrivers = [ "intel" ];
+      videoDrivers = [ "intel" ];
       libinput = {
         enable = true;
       };
@@ -142,7 +151,9 @@
         autoLogin = true;
       };
 
-      desktopManager.xterm.enable = false;
+      desktopManager = {
+        xterm.enable = false;
+      };
 
       windowManager = {
         bspwm.enable = true;
@@ -167,11 +178,15 @@
     virtualbox = {
       host.enable = true;
     };
-    docker.enable = true;
+    docker = {
+      enable = true;
+    };
+
   };
 
   programs = {
     bash.enableCompletion = true;
+    dconf.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;

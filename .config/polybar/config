@@ -22,6 +22,9 @@ font-2 = FontAwesome:pixelsize=12;2
 font-3 = MaterialIcons:pixelsize=12;4
 modules-left = bspwm xwindow
 modules-right = eth wlan memory volume keyboard battery date
+override-redirect = false
+wm-restack = bspwm
+cursor-click = pointer
 
 [module/bspwm]
 type = internal/bspwm
@@ -37,12 +40,11 @@ ws-icon-4 = Music;
 ws-icon-5 = VirtualBox;
 ws-icon-6 = FileBrowser;
 ws-icon-7 = Chat;
-
 ws-icon-default = 
-
 
 label-focused = %icon%
 label-focused-foreground=${colors.foreground}
+label-focused-underline=${colors.foreground}
 label-focused-padding = 4
 
 label-dimmed = %icon%
@@ -153,7 +155,7 @@ click-left = nm-applet
 
 [module/volume]
 
-type = internal/volume
+type = internal/alsa
 format-volume = <label-volume> <bar-volume>
 label-volume = " "
 label-volume-foreground = ${colors.accent}

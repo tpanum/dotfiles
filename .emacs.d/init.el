@@ -23,7 +23,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("b4c13d25b1f9f66eb769e05889ee000f89d64b089f96851b6da643cee4fdab08" "fd2cf9ad9895d93138dd67215702280e0db56e796ee62dea92043eed4b23177c" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" default)))
+    ("f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "b4c13d25b1f9f66eb769e05889ee000f89d64b089f96851b6da643cee4fdab08" "fd2cf9ad9895d93138dd67215702280e0db56e796ee62dea92043eed4b23177c" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" default)))
  '(package-selected-packages
    (quote
     (## use-package toc-org org-plus-contrib magit evil doom-modeline counsel-projectile)))

@@ -1,6 +1,6 @@
 #!/run/current-system/sw/bin/bash
 
-WALLPAPER_ABS=$(shuf -n1 -e ~/.wallpaper/*)
+WALLPAPER_ABS=$(shuf -n1 -e ~/.wallpaper/*.{jpg,png})
 WALLPAPER_FILE=${WALLPAPER_ABS##*/}
 WALLPAPER_BASE=${WALLPAPER_FILE%.*}
 SCREEN_SIZE=$(xrandr | grep primary -A 5 | grep --color -e '[0-9]\+\.[0-9]\+\*' | awk '{ print $1 }')

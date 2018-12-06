@@ -20,6 +20,7 @@
     - [[#new-defaults][New Defaults]]
   - [[#packages][Packages]]
     - [[#doom-theme][Doom Theme]]
+    - [[#dashboard][Dashboard]]
     - [[#modeline][Modeline]]
     - [[#evil][Evil]]
     - [[#ivy][Ivy]]
@@ -222,6 +223,7 @@ header-args :tangle yes
      (setq uniquify-buffer-name-style 'forward)
      (show-paren-mode)
      (fset 'yes-or-no-p 'y-or-n-p)
+     (set-mouse-color "#ffffff") 
      #+END_SRC
 
 ** Packages
@@ -234,6 +236,22 @@ header-args :tangle yes
      (doom-themes-neotree-config)
      (doom-themes-org-config)))
     #+END_SRC
+*** Dashboard
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-startup-banner 'logo)
+  :custom
+  (initial-buffer-choice '(lambda ()
+                            (setq initial-buffer-choice nil)
+                            (get-buffer "*dashboard*")))
+  (dashboard-items '((recents  . 5)
+                     (bookmarks . 5)
+                     (projects . 5)
+                     ;; (agenda . 5)
+                     (registers . 5))))
+#+END_SRC
 *** Modeline
     #+BEGIN_SRC emacs-lisp
 (use-package doom-modeline
@@ -326,6 +344,12 @@ header-args :tangle yes
 (setq company-idle-delay 0.2)
 (setq company-minimum-prefix-length 2))
 #+END_SRC
+
+Add icons to company
+#+BEGIN_SRC emacs-lisp
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+#+END_SRC
 *** Swiper
     Swiper is an awesome searching utility with a quick preview. Let's install it and
     load it when =swiper= or =swiper-all= is called.
@@ -363,7 +387,7 @@ header-args :tangle yes
 	     (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 	     (general-define-key :keymaps 'org-mode-map
 				 :states '(normal)
-				 "C-c C-c" 'org-latex-export-to-pdf
+				 "C-c C-c" 'tpanum/org-to-pdf
 				 "T" 'org-todo
 				 "S" 'org-schedule
 				 "RET" 'org-open-at-point
@@ -446,6 +470,15 @@ Agenda functions
   "Opens personal todo"
   (interactive)
 (find-file "~/org/personal.org"))
+#+END_SRC
+
+Make latexpdf and beamer-pdf be one function
+#+BEGIN_SRC emacs-lisp
+(defun tpanum/org-to-pdf ()
+  (interactive)
+  (if (string-match "latex_class:[ ]*beamer" (buffer-string)) ; current buffer contains beamer class
+      (org-beamer-export-to-pdf)
+    (org-latex-export-to-pdf)))
 #+END_SRC
 
 *** Toc-org
@@ -721,7 +754,6 @@ Enable notifications
 circe-notifications-wait-for 2
 circe-notifications-JOIN nil
 circe-notifications-PART nil)
-(add-to-list 'circe-notifications-watch-strings "#slack-aau-general")
 (add-to-list 'circe-notifications-watch-strings "#slack-aau-ntp")
 (add-to-list 'circe-notifications-watch-strings "#slack-aau-backend")
 (add-to-list 'circe-notifications-watch-strings "#slack-aau-random")
@@ -764,7 +796,7 @@ Delay the activation of notifications and create a custome display function whic
 (defun tpanum/irc ()
   "Connect to IRC"
   (interactive)
-  (circe "znc-freenode")
+  ;; (circe "znc-freenode")
   (circe "znc-bitlbee"))
 #+END_SRC
 *** Password Store
@@ -967,7 +999,8 @@ Delay the activation of notifications and create a custome display function whic
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck-golangci-lint
 :after flycheck
-  :hook (go-mode . flycheck-golangci-lint-setup))
+:config (setq flycheck-golangci-lint-executable "golangci-lint run --disable-all --enable typecheck ineffassign golint dupl goconst gocyclo gofmt goimports misspell lll nakedret prealloc")
+:hook (go-mode . flycheck-golangci-lint-setup))
 #+END_SRC
 *** Docker Mode
 #+BEGIN_SRC emacs-lisp
@@ -996,13 +1029,13 @@ Delay the activation of notifications and create a custome display function whic
 *** Tex Mode
 #+BEGIN_SRC emacs-lisp
 (use-package tex
-  :defer t
   :ensure auctex
   :config
   (setq TeX-auto-save t)
   (setq TeX-save-query nil)
   (setq TeX-PDF-mode t)
   (setq TeX-parse-self t)
+  (setq TeX-show-compilation nil)
   (setq TeX-master nil))
 #+END_SRC
 *** Protobuf Mode

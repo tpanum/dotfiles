@@ -3,7 +3,7 @@
     monitor = 0
 
     follow = none
-    geometry = "=250x50-15+45"
+    geometry = "=250x10-15+45"
 
     indicate_hidden = yes
 
@@ -169,16 +169,6 @@
     # layout changes.
     force_xinerama = false
 
-# Experimental features that may or may not work correctly. Do not expect them
-# to have a consistent behaviour across releases.
-[experimental]
-    # Calculate the dpi to use on a per-monitor basis.
-    # If this setting is enabled the Xft.dpi value will be ignored and instead
-    # dunst will attempt to calculate an appropriate dpi value for each monitor
-    # using the resolution and physical size. This might be useful in setups
-    # where there are multiple screens with very different dpi values.
-    per_monitor_dpi = false
-
 [shortcuts]
 
     # Shortcuts are specified as [modifier+][modifier+]...key
@@ -226,6 +216,9 @@
 
 [fullscreen_delay_everything]
     fullscreen = pushback
+
+[experimental]
+    per_monitor_dpi = false
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

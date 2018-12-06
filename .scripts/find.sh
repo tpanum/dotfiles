@@ -2,7 +2,7 @@
 IFS=':'
 
 get_selection() {
-    find ~ -type d ! -readable -prune -o -print | fzf --reverse
+    find ~ -type d ! -readable -prune -o -print | fzf --reverse --color pointer:3,info:14,bg+:-1
 }
 
 if selection=$( get_selection ); then

@@ -59,9 +59,8 @@
     #   "1.1.1.1"
     #   "1.0.0.1"
     # ];
-    # extraHosts = ''
-    #   172.25.76.182 mfc-print03.aau.dk
-    #   172.25.14.30 priv.mail.aau.dk'';
+    extraHosts = ''
+      127.0.0.1 demo.localhost'';
     networkmanager = {
       enable = true;
     };

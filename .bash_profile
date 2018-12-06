@@ -3,9 +3,10 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 export HISTSIZE=3500
 export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
+/run/current-system/sw/bin/gpg-connect-agent updatestartuptty /bye > /dev/null
 export PASSWORD_STORE_GENERATED_LENGTH="42"
 export GPG_TTY=$(tty)
-export FZF_DEFAULT_OPTS=' --color pointer:3,info:14,bg+:-1'
+export FZF_DEFAULT_OPTS='--color pointer:3,info:14,bg+:-1'
 
 # speed up bash reverse search
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -26,6 +27,7 @@ alias shutdown='wmctrl -c "firefox" && sleep 0.5 && /run/current-system/sw/bin/s
 alias reboot='wmctrl -c "firefox" && sleep 0.5 && /run/current-system/sw/bin/reboot'
 alias fixshebangs="find . -type f -print0 | xargs -0 sed -i 's=#!/bin=#!/run/current-system/sw/bin=g'"
 alias killcontainers="docker rm -f $(docker ps -a -q)"
+alias ntp="$HOME/.ntp/ntp-client"
 
 for f in /home/tpanum/.exec/*.sh
 do

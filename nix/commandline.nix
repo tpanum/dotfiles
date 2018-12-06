@@ -5,7 +5,6 @@
 
 
     systemPackages = with pkgs; [
-      pinentry_gnome
       gnupg                # encryption tool
       git                  # version control
       exiftool             # reading image fileheaders
@@ -21,7 +20,6 @@
       sshfs                # mount fileshares through ssh
       pandoc               # document converter
       usbutils             # `lsusb` tool used for displaying usb information
-      gnome3.nautilus      # file explorer
       bind                 # needed for `nslookup`
       samba                # samba client
       mitmproxy            # http proxy for man-in-the-middle
@@ -44,6 +42,7 @@
       woeusb               # making windows bootables
       jq                   # json handler
       peek                 # screen recording
+      screenkey            # show keys pressed on screen
       protobuf
 
       # spellchecking

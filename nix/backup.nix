@@ -2,6 +2,8 @@
 {
   environment.systemPackages = with pkgs; [
     borgbackup
+    hfsprogs # apple time capsule
+    fuse
   ];
 
   systemd.user = {

@@ -178,8 +178,7 @@ super + @l
     xdotool key --delay 0 --clearmodifiers ctrl+l
 
 super + d
-      alacritty --title "Open file or folder" --class "fzf-menu" --dimensions 180 40 -e ~/.scripts/find.sh
-
+      ~/.scripts/open_file_or_folder.sh
 XF86Display
       urxvt -title "Find file or folder" -name fzf-menu --geometry 140x40 -e ~/.scripts/find.sh
 

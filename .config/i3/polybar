@@ -6,7 +6,6 @@ foreground-alt = #787e68
 accent = #81a1c1
 alert = #ebcb8b
 
-
 [bar/top]
 height = 30
 fixed-center = true
@@ -142,7 +141,7 @@ battery = BAT1
 adapter = ACAD
 poll-interval = 60
 format-charging = <ramp-capacity>  <label-charging>
-label-charging =  %percentage%%
+label-charging = %{F#EBCB8B}%{F-} %percentage%%
 label-full = Full
 format-discharging = <ramp-capacity>  <label-discharging>
 label-discharging = %percentage%%
