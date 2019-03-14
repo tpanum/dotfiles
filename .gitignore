@@ -25,6 +25,8 @@ Icon
 .emacs.d/url
 .emacs.d/recentf
 .emacs.d/projectile*
+.emacs.d/network*
+.emacs.d/bookmarks*
 .emacs.d/smex-items
 
 # --- JUPYTER ---

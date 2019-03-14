@@ -240,8 +240,8 @@
 # to find fitting options for rules.
 
 [emacs]
-    appname = Emacs
-    category = chat
+    appname = weechat
+    category = im.received
     timeout = 10
     new_icon = chat
 

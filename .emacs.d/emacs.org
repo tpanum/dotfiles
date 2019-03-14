@@ -36,6 +36,8 @@
     - [[#yassnippets][Yassnippets]]
     - [[#nlinum][Nlinum]]
     - [[#circe-irc][Circe (IRC)]]
+    - [[#erc-irc][ERC (IRC)]]
+    - [[#weechat][WeeChat]]
     - [[#password-store][Password Store]]
     - [[#smartparens][Smartparens]]
     - [[#rainbow-mode][Rainbow Mode]]
@@ -61,7 +63,6 @@
   - [[#functions][Functions]]
     - [[#open-config][Open Config]]
   - [[#post-initialization][Post Initialization]]
-  - [[#startup][Startup]]
 
 ** Org File Tweaks
    There are a few tweaks included in this org file that make it a little easier to
@@ -89,7 +90,6 @@ header-args :tangle yes
     that has a max depth of 3 and is created using Github-style hrefs. This table of contents
     is updated everytime the file is saved and makes for a functional table of contents that
     works property directly on github.
-
 ** Personal Information
    Let's set some variables with basic user information.
 
@@ -193,19 +193,20 @@ header-args :tangle yes
 *** New Defaults
 **** Base
      #+BEGIN_SRC emacs-lisp
-    (setq delete-old-versions -1 )		; delete excess backup versions silently
-    (setq version-control t )		; use version control
-    (setq vc-make-backup-files t )		; make backups file even when in version controlled dir
-    (setq backup-directory-alist `(("." . "~/.emacs.d/backups")) ) ; which directory to put backups file
-    (setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
-    (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
-    (setq inhibit-startup-screen t )	; inhibit useless and old-school startup screen
-    (setq ring-bell-function 'ignore )	; silent bell when you make a mistake
-    (setq coding-system-for-read 'utf-8 )	; use utf-8 by default
-    (setq coding-system-for-write 'utf-8 )
-    (setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
-    (setq default-fill-column 80)		; toggle wrapping text at the 80th character
-    (setq initial-scratch-message "") ; print a default message in the empty scratch buffer opened at startup
+(setq delete-old-versions -1 )		; delete excess backup versions silently
+(setq version-control t )		; use version control
+(setq vc-make-backup-files t )		; make backups file even when in version controlled dir
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups")) ) ; which directory to put backups file
+(setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
+(setq inhibit-startup-screen t )	; inhibit useless and old-school startup screen
+(setq ring-bell-function 'ignore )	; silent bell when you make a mistake
+(setq coding-system-for-read 'utf-8 )	; use utf-8 by default
+(setq coding-system-for-write 'utf-8 )
+(setq sentence-end-double-space nil)	; sentence SHOULD end with only a point.
+(setq default-fill-column 80)		; toggle wrapping text at the 80th character
+(setq initial-scratch-message "") ; print a default message in the empty scratch buffer opened at startup
+(setq calendar-date-style "european")
      #+END_SRC
 **** UI
      #+BEGIN_SRC emacs-lisp
@@ -224,8 +225,72 @@ header-args :tangle yes
      (show-paren-mode)
      (fset 'yes-or-no-p 'y-or-n-p)
      (set-mouse-color "#ffffff") 
+     (set-frame-font "Fira Mono")
      #+END_SRC
 
+**** Ligatures
+#+BEGIN_SRC emacs-lisp
+(defun fira-code-mode--make-alist (list)
+  "Generate prettify-symbols alist from LIST."
+  (let ((idx -1))
+    (mapcar
+     (lambda (s)
+       (setq idx (1+ idx))
+       (let* ((code (+ #Xe100 idx))
+              (width (string-width s))
+              (prefix ())
+              (suffix '(?\s (Br . Br)))
+              (n 1))
+	 (while (< n width)
+	   (setq prefix (append prefix '(?\s (Br . Bl))))
+	   (setq n (1+ n)))
+	 (cons s (append prefix suffix (list (decode-char 'ucs code))))))
+     list)))
+
+(defconst fira-code-mode--ligatures
+  '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\"
+    "{-" "[]" "::" ":::" ":=" "!!" "!=" "!==" "-}"
+    "--" "---" "-->" "->" "->>" "-<" "-<<" "-~"
+    "#{" "#[" "##" "###" "####" "#(" "#?" "#_" "#_("
+    ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*"
+    "/**" "/=" "/==" "/>" "//" "///" "&&" "||" "||="
+    "|=" "|>" "^=" "$>" "++" "+++" "+>" "=:=" "=="
+    "===" "==>" "=>" "=>>" "<=" "=<<" "=/=" ">-" ">="
+    ">=>" ">>" ">>-" ">>=" ">>>" "<*" "<*>" "<|" "<|>"
+    "<$" "<$>" "<!--" "<-" "<--" "<->" "<+" "<+>" "<="
+    "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<" "<~"
+    "<~~" "</" "</>" "~@" "~-" "~=" "~>" "~~" "~~>" "%%"
+    "x" ":" "+" "+" "*"))
+
+(defvar fira-code-mode--old-prettify-alist)
+
+(defun fira-code-mode--enable ()
+  "Enable Fira Code ligatures in current buffer."
+  (setq-local fira-code-mode--old-prettify-alist prettify-symbols-alist)
+  (setq-local prettify-symbols-alist (append (fira-code-mode--make-alist fira-code-mode--ligatures) fira-code-mode--old-prettify-alist))
+  (prettify-symbols-mode t))
+
+(defun fira-code-mode--disable ()
+  "Disable Fira Code ligatures in current buffer."
+  (setq-local prettify-symbols-alist fira-code-mode--old-prettify-alist)
+  (prettify-symbols-mode -1))
+
+(define-minor-mode fira-code-mode
+  "Fira Code ligatures minor mode"
+  :lighter " Fira Code"
+  (setq-local prettify-symbols-unprettify-at-point 'right-edge)
+  (if fira-code-mode
+      (fira-code-mode--enable)
+    (fira-code-mode--disable)))
+
+(defun fira-code-mode--setup ()
+  "Setup Fira Code Symbols"
+  (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol"))
+
+(provide 'fira-code-mode)
+
+(add-hook 'prog-mode-hook #'fira-code-mode)
+#+END_SRC
 ** Packages
 *** Doom Theme
     #+BEGIN_SRC emacs-lisp
@@ -246,18 +311,41 @@ header-args :tangle yes
   (initial-buffer-choice '(lambda ()
                             (setq initial-buffer-choice nil)
                             (get-buffer "*dashboard*")))
-  (dashboard-items '((recents  . 5)
-                     (bookmarks . 5)
-                     (projects . 5)
-                     ;; (agenda . 5)
-                     (registers . 5))))
+  (dashboard-items '((agenda . 10))))
 #+END_SRC
 *** Modeline
     #+BEGIN_SRC emacs-lisp
-(use-package doom-modeline
-      :ensure t
-      :defer t
-      :hook (after-init . doom-modeline-init))
+(use-package all-the-icons)
+
+(use-package moody
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
+
+(setq-default mode-line-modified
+	      '(:eval
+		(if (buffer-file-name)
+		    (if (file-exists-p (buffer-file-name)) (if (buffer-modified-p)
+							       (all-the-icons-faicon "plus-circle" :face 'all-the-icons-lorange)
+							     " ")
+		      (all-the-icons-faicon "plus-circle" :face 'all-the-icons-lblue))
+		  " ")))
+
+(setq-default mode-line-format '(
+				 "%e"
+				 mode-line-front-space
+				 mode-line-modified
+				 mode-line-frame-identification
+				 all-the-icons-icon-for-buffer
+				 moody-mode-line-buffer-identification
+				 "   "
+				 (vc-mode moody-vc-mode)
+				 "  "
+				 tracking-mode-line-buffers
+				 mode-line-modes
+				 mode-line-end-spaces))
+
     #+END_SRC
 
 *** Evil
@@ -383,13 +471,27 @@ Add icons to company
 	     (setq org-startup-indented t)
 	     (setq org-src-preserve-indentation t)
 	     (setq org-log-done t)
+	     (setq org-agenda-files '("~/org/todo.org"))
+	     (setq org-todo-keywords
+		   '((sequence "TODO(t)" "|" "DONE(d)" "|" "IDEA(i)")))
 	     (setq org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
 	     (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
+	     (setq org-capture-templates
+		   '(("p" "Personal (Todo)" entry (file+headline "~/org/todo.org" "Personal")
+		      "* TODO %? :personal: \n %i\n %a")
+		     ("r" "Research (Todo)" entry (file+headline "~/org/todo.org" "Research")
+		      "* TODO %? :research: \n %i\n %a")
+                     ("i" "Idea" entry (file+headline "~/org/todo.org" "Tasks")
+		      "* IDEA %? :idea:\nCaptured %U\n %i\n %a")))
+	     (add-hook 'org-capture-mode-hook 'evil-insert-state)
+
+	     (setq org-latex-listings 'minted
+		   org-latex-packages-alist '(("" "minted"))
+		   org-latex-pdf-process
+		   '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+		     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 	     (general-define-key :keymaps 'org-mode-map
 				 :states '(normal)
-				 "C-c C-c" 'tpanum/org-to-pdf
-				 "T" 'org-todo
-				 "S" 'org-schedule
 				 "RET" 'org-open-at-point
 				 "S-<right>" 'org-shiftmetaright
 				 "S-<left>" 'org-shiftmetaleft
@@ -401,22 +503,24 @@ Add icons to company
 				 :states '(emacs)
 				 "<escape>" 'kill-buffer-and-window)
 
-       (require 'ox-extra)
-       (ox-extras-activate '(ignore-headlines))
-       (add-to-list 'org-latex-classes
-             '("IEEEtran"
-               "\\documentclass{IEEEtran}"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-             )
+	     (require 'ox-extra)
+	     (ox-extras-activate '(ignore-headlines))
+	     (add-to-list 'org-latex-classes
+			  '("IEEEtran"
+			    "\\documentclass{IEEEtran}"
+			    ("\\section{%s}" . "\\section*{%s}")
+			    ("\\subsection{%s}" . "\\subsection*{%s}")
+			    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+			    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+			    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+	     (general-define-key :keymaps 'org-capture-mode-map
+				 :states '(normal)
+				 "q" 'org-capture-finalize))
 
 ;; Ensure ELPA org is prioritized above built-in org.
 (with-no-warnings
-   (require 'cl))
-   (setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
+  (require 'cl))
+(setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
     #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -438,38 +542,7 @@ Add icons to company
   :Custom_ID: ${=key=}
   :END:
 
-")
-
-
-	     (general-define-key :keymaps 'bibtex-completion-notes-mode-map
-				 :states '(normal)
-				 "q" 'bibtex-completion-exit-notes-buffer)
-
-	     )
-#+END_SRC
-
-Agenda functions
-#+BEGIN_SRC emacs-lisp
-(defun tpanum/org-agenda ()
-  "Opens org agenda with personal directory"
-  (interactive)
-  (setq org-agenda-files (directory-files "~/gtd" t "^[a-zA-Z0-9_-.]+\\.org"))
-  (org-agenda-list))
-
-(defun tpanum/todo-work ()
-  "Opens work todo"
-  (interactive)
-  (find-file "~/org/work.org"))
-
-(defun tpanum/todo-research ()
-  "Opens research todo"
-  (interactive)
-  (find-file "~/org/research.org"))
-
-(defun tpanum/todo-personal ()
-  "Opens personal todo"
-  (interactive)
-(find-file "~/org/personal.org"))
+"))
 #+END_SRC
 
 Make latexpdf and beamer-pdf be one function
@@ -525,10 +598,8 @@ I replaced evil's default `/` with `swiper`.
         "j" 'avy-goto-word-or-subword-1
 
 	      "o"  '(:ignore t :which-key "Org")
+	      "oc" 'tpanum/org-capture-todo
 	      "oa" 'tpanum/org-agenda
-	      "otp" 'tpanum/todo-personal
-	      "otr" 'tpanum/todo-research
-	      "otw" 'tpanum/todo-work
 
 	      "p"  '(:ignore t :which-key "Programming")
 	      "pe" 'next-error
@@ -557,7 +628,7 @@ I replaced evil's default `/` with `swiper`.
 (define-key ivy-minibuffer-map (kbd "<RET>") 'ivy-alt-done)
 (define-key ivy-minibuffer-map (kbd "C-s") 'tpanum/ivy-rg-search)
 
-(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
     #+END_SRC
 
@@ -589,6 +660,7 @@ Allow me to access ripgrep from find file.
   (global-aggressive-indent-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
 (add-to-list 'aggressive-indent-excluded-modes 'web-mode))
     #+END_SRC
 
@@ -641,15 +713,14 @@ My IRC Configuration
  circe-format-self-action circe-format-action
  circe-network-defaults ()
  circe-network-options
- `(("znc-freenode"
-    :host "znc.panum.dk"
-    :port 5000
+ `(("freenode"
+    :host "weechat.panum.dk"
+    :port 8000
     :server-buffer-name "⇄ freenode"
     :nick "tpanum"
-    :user "tpanum/freenode"
-    :pass my-znc-freenode-pass
-    :channels ("#aau")
-    :tls t
+    :user "tpanum"
+    :pass weechat-relay-freenode-pass
+    :use-tls t
     )
    ("znc-bitlbee"
     :host "znc.panum.dk"
@@ -662,52 +733,7 @@ My IRC Configuration
     ;; :lagmon-disabled t
     :tls t
     )))
-
-(defun circe-lagmon--ctcp-lagmon-handler (conn event sender target argument)
-  (when (or (irc-current-nick-p conn (irc-userstring-nick sender))
-	    (equal "root" (irc-userstring-nick sender)))
-    (with-current-buffer (irc-connection-get conn :server-buffer)
-      (let* ((now (float-time))
-	     (lag (/ (- now (string-to-number argument))
-		     2)))
-	(setq circe-lagmon-server-lag lag
-	      circe-lagmon-last-receive-time now)
-	(circe-lagmon-force-mode-line-update)))))
-
-;;;###autoload
-(define-minor-mode circe-lagmon-mode
-  "Circe-lagmon-mode monitors the amount of lag on your
-connection to each server, and displays the lag time in seconds
-in the mode-line."
-  :global t
-  (let ((mode-line-entry '(:eval (circe-lagmon-format-mode-line-entry))))
-    (remove-hook 'mode-line-modes mode-line-entry)
-    (let ((table (circe-irc-handler-table)))
-      (irc-handler-remove table "001" 'circe-lagmon--rpl-welcome-handler)
-      (irc-handler-remove table "irc.ctcpreply.PING"
-                          'circe-lagmon--ctcp-lagmon-handler)
-      (irc-handler-remove table "NICK" 'circe-lagmon--nick-handler))
-    (circe-set-display-handler "irc.ctcpreply.PING" nil)
-    (when circe-lagmon-timer
-      (cancel-timer circe-lagmon-timer)
-      (setq circe-lagmon-timer nil))
-    (when circe-lagmon-mode
-      (add-hook 'mode-line-modes mode-line-entry)
-      (let ((table (circe-irc-handler-table)))
-        (irc-handler-add table "001" 'circe-lagmon--rpl-welcome-handler)
-        (irc-handler-add table "irc.ctcpreply.PING"
-                         'circe-lagmon--ctcp-lagmon-handler)
-        (irc-handler-add table "NICK" 'circe-lagmon--nick-handler))
-      (circe-set-display-handler "irc.ctcpreply.PING" 'circe-display-ignore)
-      (dolist (buffer (circe-server-buffers))
-        (with-current-buffer buffer
-          (setq circe-lagmon-server-lag nil)
-          (when (and circe-server-process
-                     (eq (irc-connection-state circe-server-process)
-                         'registered))
-            (circe-lagmon-init)))))))
-
-
+ 
 (setq lui-fill-type nil)
 
 (add-hook 'circe-channel-mode-hook #'turn-on-visual-line-mode)
@@ -782,13 +808,9 @@ Delay the activation of notifications and create a custome display function whic
 
 **** Password Functions
 #+BEGIN_SRC emacs-lisp
-(defun my-znc-freenode-pass (server)
+(defun weechat-relay-freenode-pass (server)
   "Return the password for the `SERVER'."
-  (password-store-get "znc/freenode"))
-
-(defun my-znc-bitlbee-pass (server)
-  "Return the password for the `SERVER'."
-  (password-store-get "znc/freenode"))
+  (concat "freenode" ":" (password-store-get "personal/weechat-relay")))
 #+END_SRC
 
 **** Start IRC Function
@@ -798,6 +820,112 @@ Delay the activation of notifications and create a custome display function whic
   (interactive)
   ;; (circe "znc-freenode")
   (circe "znc-bitlbee"))
+#+END_SRC
+*** ERC (IRC)
+#+BEGIN_SRC emacs-lisp
+(use-package erc
+:after password-store
+  :custom
+  (erc-autojoin-timing 'ident)
+  (erc-fill-function 'erc-fill-static)
+  (erc-fill-static-center 14)
+  (erc-hide-list '("JOIN" "PART" "QUIT"))
+  (erc-lurker-hide-list '("JOIN" "PART" "QUIT"))
+  (erc-lurker-threshold-time 43200)
+  (erc-prompt-for-nickserv-password nil)
+  (erc-server-reconnect-attempts 20)
+  (erc-server-reconnect-timeout 5)
+  (erc-prompt "   >")
+(erc-notifications-icon "~/.icons/hashtag-solid.svg")
+  (erc-track-exclude-types '("JOIN" "MODE" "NICK" "PART" "QUIT"
+                             "324" "329" "332" "333" "353" "477"))
+
+  :config
+  (add-to-list 'erc-modules 'notifications)
+  (add-to-list 'erc-modules 'spelling)
+  (erc-services-mode 1)
+  (erc-truncate-mode 1)
+  (erc-update-modules)
+  )
+
+
+  (defun erc-notifications-notify-on-match (match-type nickuserhost msg)
+  (when (eq match-type 'current-nick)
+    (let ((nick (nth 0 (erc-parse-user nickuserhost))))
+      (unless (or (string-match-p "^Server:" nick)
+                  (string-match-p "^\[[0-9]+:[0-9]+\]" msg)
+                  (when (boundp 'erc-track-exclude)
+                    (member nick erc-track-exclude)))
+        (erc-notifications-notify nick msg)))))
+
+(use-package erc-hl-nicks
+  :after erc
+  :config
+  (setq erc-hl-nicks-maximum-luminence 80))
+
+(use-package erc-image
+  :after erc)
+#+END_SRC
+*** WeeChat
+#+BEGIN_SRC emacs-lisp
+(use-package weechat
+:after general
+  :config
+  (setq weechat-auto-monitor-buffers t
+        weechat-auto-close-buffers t
+        weechat-auto-monitor-new-buffers 'silent)
+(setq weechat-time-format "[%H:%M]"
+weechat-complete-nick-postfix "")
+(general-define-key :keymaps 'weechat-mode-map
+:states '(normal)
+"/" 'evil-search-forward)
+(face-remap-add-relative 'weechat-nick-self-face 'my-irc-nick-face)
+(set-face-attribute 'weechat-nick-self-face nil :foreground "#5E81AC")
+(set-face-attribute 'weechat-highlight-face nil :foreground "#EBCB8B" :weight 'bold)
+(set-face-attribute 'weechat-time-face nil :foreground "#4C566A")
+
+
+(setq weechat-color-list '(unspecified "#FFFFFF" "#A5A5A5" "#EBCB8B" "#CC4552"
+                                       "#008C58" "#A3BE8C" "#BF616A"
+                                       "#D08770" "#81A1C1" "#88C0D0"
+                                       "#8A5196" "#B48EAD" "#8FBCBB"
+                                       "#778FAA" "#DB8EAD" "#B1D185"))
+                                       (require 'weechat-notifications)
+
+(require 'weechat-tracking)
+(setq tracking-shorten-buffer-names-p nil)
+
+(defun weechat-notifications-handler (type &optional sender text _date buffer-ptr)
+  "Notification handler using notifications.el."
+  (let ((notifications-id
+         (notifications-notify
+          :title (xml-escape-string
+                  (or (cl-case type
+                        (:highlight
+                            (weechat-strip-formatting sender))
+                        (:query
+                         (concat "Weechat.el: Query from <"
+                                 (weechat-strip-formatting sender)
+                                 ">"))
+                        (:disconnect "Disconnected from WeeChat"))
+                      ""))
+          :body (when text (xml-escape-string text))
+          :category "im.received"
+          :app-icon (cl-typecase weechat-notifications-icon
+                      (string weechat-notifications-icon)
+                      (function (funcall weechat-notifications-icon
+                                         sender buffer-ptr)))
+          :app-name "weechat"
+          )))))
+)
+
+(defun tpanum/irc-connect ()
+  (interactive)
+        (weechat-connect
+"weechat.panum.dk"
+5000
+(password-store-get "personal/weechat-relay")
+'ssl))
 #+END_SRC
 *** Password Store
 #+BEGIN_SRC emacs-lisp
@@ -830,39 +958,54 @@ Delay the activation of notifications and create a custome display function whic
 *** Flyspell Mode
 #+BEGIN_SRC emacs-lisp
 (use-package ispell
-  :defer 15
-  :config
-  (progn
-    (cond
-     ((executable-find "aspell")
-      (setq ispell-program-name "aspell")
-      (setq ispell-extra-args   '("--sug-mode=ultra"
-                                  "--lang=en_US")))
-     ((executable-find "hunspell")
-      (setq ispell-program-name "hunspell")
-      (setq ispell-extra-args   '("-d en_US"))))
+	     :defer 15
+	     :config
+	     (progn
+	       (cond
+		((executable-find "aspell")
+		 (setq ispell-program-name "aspell")
+		 (setq ispell-extra-args   '("--sug-mode=ultra"
+					     "--lang=en_US")))
+		((executable-find "hunspell")
+		 (setq ispell-program-name "hunspell")
+		 (setq ispell-extra-args   '("-d en_US"))))
 
-    ;; Save a new word to personal dictionary without asking
-    (setq ispell-silently-savep t)
+	       ;; Save a new word to personal dictionary without asking
+	       (setq ispell-silently-savep t)
 
-    (use-package flyspell
-      :init
-      (setq flyspell-use-meta-tab nil)
-      :config
-      (progn
-        (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-        (with-eval-after-load 'auto-complete
-          (ac-flyspell-workaround))
-        ;; https://github.com/larstvei/dot-emacs#flyspell
-        (add-hook 'text-mode-hook #'turn-on-flyspell)
-        (add-hook 'org-mode-hook  #'turn-on-flyspell)
+	       (use-package flyspell
+			    :init
+			    (setq flyspell-use-meta-tab nil)
+			    :config
+			    (progn
+			      (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+			      (with-eval-after-load 'auto-complete
+				(ac-flyspell-workaround))
+			      ;; https://github.com/larstvei/dot-emacs#flyspell
+			      (add-hook 'text-mode-hook #'turn-on-flyspell)
+			      (add-hook 'org-mode-hook  #'turn-on-flyspell)
 
-        ;; https://github.com/d12frosted/flyspell-correct
-        (use-package flyspell-correct-ivy
-          :after flyspell-correct
-          :bind (:map modi-mode-map
-                 ("<f12>" . flyspell-correct-word-generic)))
-        ))))
+			      ;; https://github.com/d12frosted/flyspell-correct
+			      (use-package flyspell-correct-ivy
+					   :after flyspell-correct
+					   :bind (:map modi-mode-map
+						       ("<f12>" . flyspell-correct-word-generic)))
+			      )))
+	     (defun cycle-languages ()
+	       "Changes the ispell dictionary to the first element in
+ISPELL-LANGUAGES, and returns an interactive function that cycles
+the languages in ISPELL-LANGUAGES when invoked."
+	       (lexical-let ((ispell-languages '#1=("american" "dansk" . #1#)))
+		 (ispell-change-dictionary (car ispell-languages))
+		 (lambda ()
+		   (interactive)
+		   ;; Rotates the languages cycle and changes the ispell dictionary.
+		   (ispell-change-dictionary
+		    (car (setq ispell-languages (cdr ispell-languages)))))))
+	     (defadvice turn-on-flyspell (before check nil activate)
+	       "Turns on flyspell only if a spell-checking tool is installed."
+	       (when (executable-find ispell-program-name)
+		 (local-set-key (kbd "C-c l") (cycle-languages)))))
 #+END_SRC
 *** Flycheck
 #+BEGIN_SRC emacs-lisp
@@ -962,7 +1105,9 @@ Delay the activation of notifications and create a custome display function whic
 #+BEGIN_SRC emacs-lisp
 (use-package nix-mode
 :ensure t
-:mode ("\\.nix" . nix-mode))
+:mode ("\\.nix" . nix-mode)
+:config
+(setq nix-indent-function 'nix-indent-line))
 #+END_SRC
 
 *** Markdown Mode
@@ -1075,8 +1220,3 @@ nil nil 'center))
       gc-cons-percentage 0.1)
    #+END_SRC
 
-** Startup
-Start IRC
-#+BEGIN_SRC emacs-lisp
-(tpanum/irc)
-#+END_SRC

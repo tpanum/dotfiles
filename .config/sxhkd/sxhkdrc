@@ -11,15 +11,15 @@ super + shift + r
 #
 
 # layout switcher
-super + k
-    ~/.config/i3/keyboard cycle dk us
-
 super + i
     rofi-pass
 
+super + k
+    ~/.scripts/keyboard.sh cycle dk us
+
 # terminal emulator
 super + Return
-	WINIT_HIDPI_FACTOR=1 alacritty
+	st
 
 # program launcher
 super + space

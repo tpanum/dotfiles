@@ -3,13 +3,13 @@
   environment = {
     shells = [ pkgs.bash ];
 
-
     systemPackages = with pkgs; [
       gnupg                # encryption tool
       git                  # version control
       exiftool             # reading image fileheaders
       file                 # file inspection
       curl                 # http interaction
+      proxychains          # proxy that is easily managed by curl
       tree                 # directory tree inspector
       ripgrep              # alternative to grep
       fzf                  # fuzzy matcher used for reverse bash search
@@ -22,7 +22,6 @@
       usbutils             # `lsusb` tool used for displaying usb information
       bind                 # needed for `nslookup`
       samba                # samba client
-      mitmproxy            # http proxy for man-in-the-middle
       nfs-utils            # accessing nfs
       borgbackup           # backup solution
       docker_compose       # easy and simple docker orchestration
@@ -35,6 +34,10 @@
       teensy-loader-cli
       tcpdump
       traceroute
+
+      getmail
+
+
       # altcoins.aeon
       lsof
       nmap
@@ -44,6 +47,8 @@
       peek                 # screen recording
       screenkey            # show keys pressed on screen
       protobuf
+      wireguard
+      xournal
 
       # spellchecking
       aspell               # spellchecking
@@ -70,6 +75,7 @@
       importmagic
       epc
       django
+      pygments
     ]))
     geckodriver
       gcc_multi

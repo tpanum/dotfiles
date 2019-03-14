@@ -1,0 +1,82 @@
+diff --git a/config.def.h b/config.def.h
+index 823e79f..aa5b0ae 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -82,35 +82,57 @@ char *termname = "st-256color";
+  */
+ unsigned int tabspaces = 8;
+ 
++/*
++ * = Nord Theme =
++ *
++ * I also included the original palete as defined by the project
++ * in case you want to switch up or modify the color arrangement.
++ */
++#define nord0 "#2E3440"
++#define nord1 "#3B4252"
++#define nord2 "#434C5E"
++#define nord3 "#4C566A"
++#define nord4 "#D8DEE9"
++#define nord5 "#E5E9F0"
++#define nord6 "#ECEFF4"
++#define nord7 "#8FBCBB"
++#define nord8 "#88C0D0"
++#define nord9 "#81A1C1"
++#define nord10 "#5E81AC"
++#define nord11 "#BF616A"
++#define nord12 "#D08770"
++#define nord13 "#EBCB8B"
++#define nord14 "#A3BE8C"
++#define nord15 "#B48EAD"
++
+ /* Terminal colors (16 first used in escape sequence) */
+ static const char *colorname[] = {
+ 	/* 8 normal colors */
+-	"black",
+-	"red3",
+-	"green3",
+-	"yellow3",
+-	"blue2",
+-	"magenta3",
+-	"cyan3",
+-	"gray90",
++	nord0,
++	nord11,
++	nord14,
++	nord13,
++	nord9,
++	nord15,
++	nord8,
++	nord5,
+ 
+ 	/* 8 bright colors */
+-	"gray50",
+-	"red",
+-	"green",
+-	"yellow",
+-	"#5c5cff",
+-	"magenta",
+-	"cyan",
+-	"white",
++	nord3,
++	nord11,
++	nord14,
++	nord13,
++	nord9,
++	nord15,
++	nord7,
++	nord6,
+ 
+ 	[255] = 0,
+ 
+ 	/* more colors can be added after 255 to use with DefaultXX */
+-	"#cccccc",
+-	"#555555",
++	nord4,
++	nord8,
+ };
+ 
+-
+ /*
+  * Default colors (colorname index)
+  * foreground, background, cursor, reverse cursor

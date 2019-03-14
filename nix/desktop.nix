@@ -21,16 +21,19 @@
       # align comments with: 1gl# (in emacs)
 
       # appearance
+      acpi
       arc-theme
+      xfce.xfce4-icon-theme
       papirus-icon-theme        # icon theme
       compton                   # compositor (shadows, transparency, etc.)
       dunst                     # notfication daemon
       polybar                   # visual bar at desktop
+      slstatus
+      xbindkeys
+      
 
       tint2
-      cbatticon
       volumeicon
-      xxkb
       lxappearance-gtk3
 
       # file managers
@@ -38,8 +41,6 @@
       feh
       gvfs                      # needed for nautilus and thunar(?) to function
       xfce4-13.thunar
-      dockbarx
-      latte-dock
       plank
 
       # emacs
@@ -68,11 +69,15 @@
       # backlight
       xorg.xbacklight           # interact with backlighting
 
-      # xfce plugins
-      xfce.xfce4-settings
+      # photos
+      digikam
+      darktable
+      libjpeg
+      dcraw
 
       # applications
       rofi                      # replacement for dmenu (smart application opener)
+      dmenu
       wirelesstools             # basic wireless tools
       playerctl                 # tool for start/stop/skip music
       arandr                    # UI for xrandr (display controlling)
@@ -88,6 +93,9 @@
       pinta                     # user-friendly image manipulation
       gimp                      # user-friendly image manipulation
       inkscape                  # vector graphics manipulation
+      gnome3.defaultIconTheme
+      hicolor_icon_theme
+      xsettingsd
       gnome3.evince             # pdf viewer
       poppler_utils             # pdf editing tools
       pdfpc                     # pdf presentation tool
@@ -103,9 +111,11 @@
       xorg.xev                  # app for figuring out which button a keypress refers to
       xlibs.xmodmap             # swap buttons on the keyboard around
       hsetroot                  # set some tint color on background
-      mitmproxy                 # man-in-the-middle proxy
       xdotool                   # program for emulating keypresses and more (e.g. swap copy/paste to super+{c,v})
+      xvkbd                   # program for emulating keypresses and more (e.g. swap copy/paste to super+{c,v})
+      weechat
       unstable.alacritty
+      st
       mendeley
       qbittorrent
       handbrake
@@ -117,10 +127,10 @@
     fira-mono
     fira-code
     fira-code-symbols
-    # nerdfonts
     noto-fonts-cjk
     source-code-pro
     material-icons
+    hasklig
     font-awesome-ttf
     inconsolata
     hack-font
@@ -130,11 +140,11 @@
   security.polkit.enable = true;
   services = {
     unclutter-xfixes.enable = true;
+    physlock = {
+      enable = true;
+      allowAnyUser = true;
+    };
 
-    # needed for plank
-    dbus.packages = with pkgs; [ gnome3.dconf ];
-    bamf.enable = true;
-    
     xserver = {
       enable = true;
       layout = "us,dk";
@@ -145,10 +155,21 @@
         enable = true;
       };
 
-      displayManager.slim = {
-        enable = true;
-        defaultUser = "tpanum";
-        autoLogin = true;
+      displayManager = {
+        slim = {
+          enable = true;
+          defaultUser = "tpanum";
+          autoLogin = true;
+        };
+
+        sessionCommands = ''
+          ${pkgs.xorg.xset}/bin/xset 120 20 &
+          slstatus &
+          xcape -e 'Shift_L=Escape' &
+          udiskie &
+          xmodmap $HOME/.Xmodmap &
+          $HOME/.scripts/wallpaper.sh &
+        '';
       };
 
       desktopManager = {
@@ -156,22 +177,27 @@
       };
 
       windowManager = {
-        bspwm.enable = true;
-        bspwm.sxhkd.configFile = "/home/tpanum/.config/sxhkd/sxhkdrc";
-        bspwm.package = pkgs.unstable.bspwm;
-        default = "bspwm";
+        dwm.enable = true;
+        default = "dwm";
       };
     };
 
     printing = {
-    enable = true;
-    drivers = with pkgs; [
+      enable = true;
+      drivers = with pkgs; [
         gutenprint
         foomatic-filters
       ];
     };
 
     autorandr.enable = true;
+
+    udev = {
+      extraRules = ''
+        SUBSYSTEM=="usb", ACTION=="add", ENV{ID_MODEL}=="ErgoDox_EZ", RUN+="${pkgs.bash}/bin/bash /home/tpanum/.scripts/keyboard.sh set us"
+        SUBSYSTEM=="usb", ACTION=="remove", ENV{ID_MODEL}=="ErgoDox_EZ", RUN+="${pkgs.bash}/bin/bash /home/tpanum/.scripts/keyboard.sh set dk"
+      '';
+    };  
   };
 
   virtualisation = {
@@ -184,14 +210,11 @@
 
   };
 
-  programs = {
-    bash.enableCompletion = true;
-    dconf.enable = true;
-    gnupg.agent = {
+    programs.bash.enableCompletion = true;
+    programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
-  };
 
   powerManagement = {
     enable = true;
@@ -208,7 +231,6 @@
       "wheel"
       "wireshark"
       "docker"
-      "davfs2"
     ];
     shell = pkgs.bash;
     uid = 1000;

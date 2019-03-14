@@ -1,0 +1,125 @@
+diff --git a/config.def.h b/config.def.h
+index 1c0b587..25e3dfd 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -1,17 +1,36 @@
+ /* See LICENSE file for copyright and license details. */
+ 
++#include <X11/XF86keysym.h>
++
+ /* appearance */
++#define NORD0 "#2E3440"
++#define NORD1 "#3B4252"
++#define NORD2 "#434C5E"
++#define NORD3 "#4C566A"
++#define NORD4 "#D8DEE9"
++#define NORD5 "#E5E9F0"
++#define NORD6 "#ECEFF4"
++#define NORD7 "#8FBCBB"
++#define NORD8 "#88C0D0"
++#define NORD9 "#81A1C1"
++#define NORD10 "#5E81AC"
++#define NORD11 "#BF616A"
++#define NORD12 "#D08770"
++#define NORD13 "#EBCB8B"
++#define NORD14 "#A3BE8C"
++#define NORD15 "#B48EAD"
++
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
+ static const int showbar            = 1;        /* 0 means no bar */
+ static const int topbar             = 1;        /* 0 means bottom bar */
+-static const char *fonts[]          = { "monospace:size=10" };
+-static const char dmenufont[]       = "monospace:size=10";
+-static const char col_gray1[]       = "#222222";
+-static const char col_gray2[]       = "#444444";
+-static const char col_gray3[]       = "#bbbbbb";
+-static const char col_gray4[]       = "#eeeeee";
+-static const char col_cyan[]        = "#005577";
++static const char *fonts[]          = { "roboto:size=10" };
++static const char dmenufont[]       = "roboto:size=10";
++static const char col_gray1[]       = NORD0;
++static const char col_gray2[]       = NORD2;
++static const char col_gray3[]       = NORD9;
++static const char col_gray4[]       = NORD6;
++static const char col_cyan[]        = NORD0;
+ static const char *colors[][3]      = {
+ 	/*               fg         bg         border   */
+ 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+@@ -27,8 +46,12 @@ static const Rule rules[] = {
+ 	 *	WM_NAME(STRING) = title
+ 	 */
+ 	/* class      instance    title       tags mask     isfloating   monitor */
+-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
++
++	{ "st-256color",   NULL,       NULL,       1 << 0,       0,           -1 },
++	{ "Firefox",       NULL,       NULL,       1 << 1,       0,           -1 },
++	{ "Emacs",         NULL,       NULL,       1 << 2,       0,           -1 },
++	{ "Thunar",        NULL,       NULL,       1 << 3,       0,           -1 },
++	{ "Thunderbird",   NULL,       NULL,       1 << 4,       0,           -1 },
+ };
+ 
+ /* layout(s) */
+@@ -44,7 +67,7 @@ static const Layout layouts[] = {
+ };
+ 
+ /* key definitions */
+-#define MODKEY Mod1Mask
++#define MODKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+@@ -59,6 +82,22 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn()
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+ static const char *termcmd[]  = { "st", NULL };
+ 
++static const char *upvol[]   = { "pactl", "set-sink-volume", "0", "+5%",     NULL };
++static const char *downvol[] = { "pactl", "set-sink-volume", "0", "-5%",     NULL };
++static const char *mutevol[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
++static const char *nextsong[] = { "playerctl", "next", NULL };
++static const char *prevsong[] = { "playerctl", "previous", NULL };
++static const char *playpause[] = { "playerctl", "play-pause", NULL };
++
++static const char *downbright[] = { "xbacklight", "-dec", "5", "-steps", "1",     NULL };
++static const char *upbright[] = { "xbacklight", "-inc", "5", "-steps", "1",     NULL };
++
++static const char *swapkb[] = { "/home/tpanum/.scripts/keyboard.sh", "cycle", "dk", "us",     NULL };
++static const char *lockscreen[] = { "xsecurelock", NULL };
++static const char *findfile[] = { "/home/tpanum/.scripts/open_file_or_folder.sh", NULL };
++static const char *osxcopy[] = { "/home/tpanum/.scripts/osx_copy.sh", NULL };
++static const char *osxpaste[] = { "/home/tpanum/.scripts/osx_paste.sh", NULL };
++
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -72,7 +111,7 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+ 	{ MODKEY,                       XK_Return, zoom,           {0} },
+ 	{ MODKEY,                       XK_Tab,    view,           {0} },
+-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
++	{ MODKEY,                       XK_q,      killclient,     {0} },
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+@@ -94,6 +133,20 @@ static Key keys[] = {
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++
++	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
++	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
++	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol } },
++	{ 0,                            XF86XK_AudioPlay, spawn, {.v = playpause } },
++	{ 0,                            XF86XK_AudioNext, spawn, {.v = nextsong } },
++	{ 0,                            XF86XK_AudioPrev, spawn, {.v = prevsong } },
++	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = downbright } },
++	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = upbright } },
++	{ MODKEY|ShiftMask,             XK_y, spawn, {.v = lockscreen } },
++	{ MODKEY|ShiftMask,             XK_k, spawn, {.v = swapkb} },
++	{ MODKEY,                       XK_o, spawn, {.v = findfile } },
++	{ MODKEY,                       XK_c, spawn, {.v = osxcopy } },
++	{ MODKEY,                       XK_v, spawn, {.v = osxpaste } },
+ };
+ 
+ /* button definitions */

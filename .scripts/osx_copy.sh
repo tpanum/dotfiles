@@ -1,7 +1,7 @@
 #!/run/current-system/sw/bin/bash
 CURRENT_WINDOW=$(xprop -id $(xdotool getwindowfocus) WM_CLASS | awk '{ print $3 }' | cut -d '"' -f2)
-if [ "$CURRENT_WINDOW" = "Alacritty" ]; then
-    xdotool key --delay 0 --clearmodifiers ctrl+shift+c
+if [ "$CURRENT_WINDOW" = "st-256color" ]; then
+    xvkbd -no-jump-pointer -xsendevent -text '\CC'
 else
-    xdotool key --delay 0 --clearmodifiers ctrl+c
+    xvkbd -no-jump-pointer -xsendevent -text '\Cc'
 fi

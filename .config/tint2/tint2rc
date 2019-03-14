@@ -86,12 +86,12 @@ border_color_pressed = #303030 85
 #-------------------------------------
 # Panel
 panel_items = FSEBC
-panel_size = 140 45
+panel_size = 200 45
 panel_margin = 15 15
 panel_padding = 0 0 0
 panel_background_id = 1
 wm_menu = 0
-panel_dock = 0
+panel_dock = 1
 panel_position = bottom left vertical
 panel_layer = top
 panel_monitor = 1
@@ -238,6 +238,7 @@ tooltip_font = Roboto 10
 
 #-------------------------------------
 # Memory
+
 execp = new
 execp_font = Roboto 8
 execp_background_id = 1

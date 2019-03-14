@@ -14,5 +14,6 @@ BORG_PASSPHRASE="$2" \
 	       --exclude '/home/*/.cache/*'        \
 	       --exclude '*.ova'                   \
 	       --exclude 'VirtualBox VMs'          \
+	       -p \
 	       "$REPO"::'{hostname}-{now:%Y-%m-%d.%H:%M:%S}' \
 	       $HOME
