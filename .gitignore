@@ -19,18 +19,11 @@ Icon
 .Trashes
 
 # --- EMACS ---
-.emacs.d/emacs.e*
-.emacs.d/emacs.:tangle*
-.emacs.d/elpa
-.emacs.d/url
-.emacs.d/recentf
-.emacs.d/projectile*
-.emacs.d/network*
-.emacs.d/bookmarks*
-.emacs.d/smex-items
-.emacs.d/session*
-.emacs.d/lisp*
-.emacs.d/.lsp*
+.emacs.d/*
+!.emacs.d/emacs.org
+!.emacs.d/snippets
+!.emacs.d/Makefile
+!.emacs.d/init.el
 
 # --- JUPYTER ---
 .ipynb_checkpoints
