@@ -28,6 +28,9 @@ Icon
 .emacs.d/network*
 .emacs.d/bookmarks*
 .emacs.d/smex-items
+.emacs.d/session*
+.emacs.d/lisp*
+.emacs.d/.lsp*
 
 # --- JUPYTER ---
 .ipynb_checkpoints

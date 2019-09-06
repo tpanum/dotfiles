@@ -17,6 +17,7 @@
 
     services.backup = {
       description = "Backup";
+      path = [ pkgs.borgbackup pkgs.openssh ];
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "/run/current-system/sw/bin/sh /home/tpanum/.scripts/backup.sh";

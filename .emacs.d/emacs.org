@@ -37,8 +37,8 @@
     - [[#nlinum][Nlinum]]
     - [[#circe-irc][Circe (IRC)]]
     - [[#erc-irc][ERC (IRC)]]
-    - [[#weechat][WeeChat]]
     - [[#password-store][Password Store]]
+    - [[#language-servers][Language Servers]]
     - [[#smartparens][Smartparens]]
     - [[#rainbow-mode][Rainbow Mode]]
     - [[#rainbow-delimiters][Rainbow-Delimiters]]
@@ -55,6 +55,8 @@
     - [[#go-mode][Go Mode]]
     - [[#docker-mode][Docker Mode]]
     - [[#web-mode][Web Mode]]
+    - [[#python-mode][Python Mode]]
+    - [[#vue-mode][Vue Mode]]
     - [[#json-mode][JSON Mode]]
     - [[#yaml-mode][YAML Mode]]
     - [[#tex-mode][Tex Mode]]
@@ -174,11 +176,13 @@ header-args :tangle yes
   (eval-when-compile
     (require 'package)
 
-    (unless (assoc-default "melpa" package-archives)
-      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
+    (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
     (unless (assoc-default "org" package-archives)
-      (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
+      (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t))
+
+    (unless (assoc-default "melpa" package-archives)
+      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
 
     (package-initialize)
     (package-refresh-contents)
@@ -388,6 +392,7 @@ header-args :tangle yes
 :after general
   :config
   (setq  evil-snipe-scope 'whole-visible)
+  (evil-snipe-mode 1)
   (evil-snipe-override-mode 1))
 #+END_SRC
 
@@ -471,25 +476,30 @@ Add icons to company
 	     (setq org-startup-indented t)
 	     (setq org-src-preserve-indentation t)
 	     (setq org-log-done t)
-	     (setq org-agenda-files '("~/org/todo.org"))
-	     (setq org-todo-keywords
-		   '((sequence "TODO(t)" "|" "DONE(d)" "|" "IDEA(i)")))
 	     (setq org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
-	     (setq org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
-	     (setq org-capture-templates
-		   '(("p" "Personal (Todo)" entry (file+headline "~/org/todo.org" "Personal")
-		      "* TODO %? :personal: \n %i\n %a")
-		     ("r" "Research (Todo)" entry (file+headline "~/org/todo.org" "Research")
-		      "* TODO %? :research: \n %i\n %a")
-                     ("i" "Idea" entry (file+headline "~/org/todo.org" "Tasks")
-		      "* IDEA %? :idea:\nCaptured %U\n %i\n %a")))
 	     (add-hook 'org-capture-mode-hook 'evil-insert-state)
 
 	     (setq org-latex-listings 'minted
 		   org-latex-packages-alist '(("" "minted"))
 		   org-latex-pdf-process
 		   '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+		     "bibtex %b"
+		     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 		     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+	     (setq org-agenda-files '("~/Dropbox/org/"))
+	     (setq org-agenda-custom-commands
+		   '(("c" "Simple agenda view"
+		      ((tags "PRIORITY=\"A\""
+			     ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+			      (org-agenda-overriding-header "High-priority unfinished tasks:")))
+		       (agenda "")
+		       (alltodo "")))))
+
+
+	     ;; org-latex-pdf-process
+	     ;; '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	     ;;   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 	     (general-define-key :keymaps 'org-mode-map
 				 :states '(normal)
 				 "RET" 'org-open-at-point
@@ -552,6 +562,55 @@ Make latexpdf and beamer-pdf be one function
   (if (string-match "latex_class:[ ]*beamer" (buffer-string)) ; current buffer contains beamer class
       (org-beamer-export-to-pdf)
     (org-latex-export-to-pdf)))
+#+END_SRC
+
+Export to reveal.js
+#+BEGIN_SRC emacs-lisp
+(use-package org-re-reveal
+  :after org
+  :config
+  (setq org-re-reveal--href-fragment-prefix org-re-reveal--slide-id-prefix)
+)
+#+END_SRC
+
+Export to spectacle
+#+BEGIN_SRC emacs-lisp
+(use-package ox-spectacle
+  :ensure t
+  :after org)
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+(use-package worf
+	     :ensure t
+	     :after general
+	     :config
+	     (defun bjm/worf-insert-internal-link ()
+	       "Use ivy to insert a link to a heading in the current `org-mode' document. Code is based on `worf-goto'."
+	       (interactive)
+	       (let ((cands (worf--goto-candidates)))
+		 (ivy-read "Heading: " cands
+			   :action 'bjm/worf-insert-internal-link-action)))
+
+(use-package with-simulated-input
+:ensure t
+:config
+(defun bjm/worf-insert-internal-link-action (x)
+  "Insert link for `bjm/worf-insert-internal-link'"
+  ;; go to heading
+  (save-excursion
+    (goto-char (cdr x))
+    ;; store link
+    (call-interactively 'org-store-link))
+  ;; return to original point and insert link
+  (with-simulated-input "RET" (call-interactively 'org-insert-last-stored-link))
+  ;; org-insert-last-stored-link adds a newline so delete this
+  (delete-char -1))
+
+             (general-define-key :keymaps 'org-mode-map
+                                 :states '(normal)
+                                 "C-c v" 'bjm/worf-insert-internal-link)))
 #+END_SRC
 
 *** Toc-org
@@ -661,7 +720,8 @@ Allow me to access ripgrep from find file.
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'nix-mode)
-(add-to-list 'aggressive-indent-excluded-modes 'web-mode))
+  (add-to-list 'aggressive-indent-excluded-modes 'vue-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'web-mode))
     #+END_SRC
 
 *** Yassnippets
@@ -725,11 +785,10 @@ My IRC Configuration
    ("znc-bitlbee"
     :host "znc.panum.dk"
     :port 5000
-    :server-buffer-name "⇄ bitlbee"
-    :nick "root"
-    :user "tpanum/bitlbee"
-    :pass my-znc-bitlbee-pass
-    :channels ("#slack-aau-general" "#slack-aau-ntp" "#slack-aau-backend" "#slack-aau-random" "#slack-aau-research")
+    :server-buffer-name "⇄ freenode"
+    :nick "tpanum"
+    :user "znc/freenode"
+    :pass personal-znc-pass
     ;; :lagmon-disabled t
     :tls t
     )))
@@ -811,6 +870,10 @@ Delay the activation of notifications and create a custome display function whic
 (defun weechat-relay-freenode-pass (server)
   "Return the password for the `SERVER'."
   (concat "freenode" ":" (password-store-get "personal/weechat-relay")))
+
+(defun personal-znc-pass (server)
+  "Return the password for the `SERVER'."
+  (concat "freenode" ":" (password-store-get "personal/znc")))
 #+END_SRC
 
 **** Start IRC Function
@@ -866,71 +929,32 @@ Delay the activation of notifications and create a custome display function whic
 (use-package erc-image
   :after erc)
 #+END_SRC
-*** WeeChat
-#+BEGIN_SRC emacs-lisp
-(use-package weechat
-:after general
-  :config
-  (setq weechat-auto-monitor-buffers t
-        weechat-auto-close-buffers t
-        weechat-auto-monitor-new-buffers 'silent)
-(setq weechat-time-format "[%H:%M]"
-weechat-complete-nick-postfix "")
-(general-define-key :keymaps 'weechat-mode-map
-:states '(normal)
-"/" 'evil-search-forward)
-(face-remap-add-relative 'weechat-nick-self-face 'my-irc-nick-face)
-(set-face-attribute 'weechat-nick-self-face nil :foreground "#5E81AC")
-(set-face-attribute 'weechat-highlight-face nil :foreground "#EBCB8B" :weight 'bold)
-(set-face-attribute 'weechat-time-face nil :foreground "#4C566A")
-
-
-(setq weechat-color-list '(unspecified "#FFFFFF" "#A5A5A5" "#EBCB8B" "#CC4552"
-                                       "#008C58" "#A3BE8C" "#BF616A"
-                                       "#D08770" "#81A1C1" "#88C0D0"
-                                       "#8A5196" "#B48EAD" "#8FBCBB"
-                                       "#778FAA" "#DB8EAD" "#B1D185"))
-                                       (require 'weechat-notifications)
-
-(require 'weechat-tracking)
-(setq tracking-shorten-buffer-names-p nil)
-
-(defun weechat-notifications-handler (type &optional sender text _date buffer-ptr)
-  "Notification handler using notifications.el."
-  (let ((notifications-id
-         (notifications-notify
-          :title (xml-escape-string
-                  (or (cl-case type
-                        (:highlight
-                            (weechat-strip-formatting sender))
-                        (:query
-                         (concat "Weechat.el: Query from <"
-                                 (weechat-strip-formatting sender)
-                                 ">"))
-                        (:disconnect "Disconnected from WeeChat"))
-                      ""))
-          :body (when text (xml-escape-string text))
-          :category "im.received"
-          :app-icon (cl-typecase weechat-notifications-icon
-                      (string weechat-notifications-icon)
-                      (function (funcall weechat-notifications-icon
-                                         sender buffer-ptr)))
-          :app-name "weechat"
-          )))))
-)
-
-(defun tpanum/irc-connect ()
-  (interactive)
-        (weechat-connect
-"weechat.panum.dk"
-5000
-(password-store-get "personal/weechat-relay")
-'ssl))
-#+END_SRC
 *** Password Store
 #+BEGIN_SRC emacs-lisp
 (use-package password-store
 :ensure t)
+#+END_SRC
+*** Language Servers
+#+BEGIN_SRC emacs-lisp
+(use-package lsp-mode
+  :commands lsp
+  :init
+  (setq lsp-auto-guess-root t)
+  (setq lsp-prefer-flymake nil)
+  :config
+  (require 'lsp-clients)
+  (add-hook 'prog-mode-hook (lambda () (flymake-mode -1)))
+  (define-key lsp-mode-map (kbd "S-<f6>") 'lsp-rename)
+  (defun tpanum/activate-lsp () (lsp))
+  :hook ((python-mode) . tpanum/activate-lsp))
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
 #+END_SRC
 *** Smartparens
 #+BEGIN_SRC emacs-lisp
@@ -959,6 +983,7 @@ weechat-complete-nick-postfix "")
 #+BEGIN_SRC emacs-lisp
 (use-package ispell
 	     :defer 15
+	     :after general
 	     :config
 	     (progn
 	       (cond
@@ -976,6 +1001,11 @@ weechat-complete-nick-postfix "")
 	       (use-package flyspell
 			    :init
 			    (setq flyspell-use-meta-tab nil)
+			    (general-define-key
+			     :states '(normal visual emacs)
+			     :prefix "SPC"
+			     "lc" 'cycle-languages
+			     )
 			    :config
 			    (progn
 			      (add-hook 'prog-mode-hook #'flyspell-prog-mode)
@@ -1155,11 +1185,33 @@ the languages in ISPELL-LANGUAGES when invoked."
 *** Web Mode
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
-  :mode (("\\.html?\\'" . web-mode)
-	 ("\\.xhtml$"   . web-mode)
-	 ("\\.vue\\'"   . web-mode))
-  :config
-  (setq web-mode-enable-engine-detection t))
+	     :mode (("\\.html?\\'" . web-mode)
+		    ("\\.xhtml$"   . web-mode))
+	     :config
+	     (setq web-mode-enable-engine-detection t))
+#+END_SRC
+*** Python Mode
+#+BEGIN_SRC emacs-lisp
+(use-package python
+	     :after general
+	     :config
+	     (defun tpanum/python-console-eval-buffer ()
+	       "restart python console and evaluate buffer"
+	       (interactive)
+	       (if (get-buffer "*Python*")
+		   (let ((kill-buffer-query-functions nil)) (switch-to-buffer "*Python*") (kill-buffer-and-window)))
+	       (call-interactively 'run-python)
+	       (sleep-for 0.05)
+	       (call-interactively 'python-shell-send-buffer))
+	     (general-define-key :keymaps 'python-mode-map
+				 :states '(normal)
+				 "C-c C-c" 'tpanum/python-console-eval-buffer))
+#+END_SRC
+*** Vue Mode
+#+BEGIN_SRC emacs-lisp
+(use-package vue-mode
+:config (setq js-indent-level 2)
+:mode (("\\.vue\\'" . vue-mode)))
 #+END_SRC
 *** JSON Mode
 #+BEGIN_SRC emacs-lisp
@@ -1173,15 +1225,24 @@ the languages in ISPELL-LANGUAGES when invoked."
 #+END_SRC
 *** Tex Mode
 #+BEGIN_SRC emacs-lisp
-(use-package tex
-  :ensure auctex
-  :config
-  (setq TeX-auto-save t)
-  (setq TeX-save-query nil)
-  (setq TeX-PDF-mode t)
-  (setq TeX-parse-self t)
-  (setq TeX-show-compilation nil)
-  (setq TeX-master nil))
+(use-package auctex-latexmk
+	     :config
+	     (auctex-latexmk-setup))
+
+(use-package cdlatex
+	     :hook (LaTeX-mode . turn-on-cdlatex))
+
+(use-package company-auctex
+	     :config
+	     (company-auctex-init))
+
+(use-package latex
+	     :ensure auctex
+	     :mode ("\\.tex\\'" . LaTeX-mode)
+	     :init
+	     (setq TeX-auto-save t)
+	     (setq TeX-parse-self t)
+	     (setq-default TeX-master "main"))
 #+END_SRC
 *** Protobuf Mode
 #+BEGIN_SRC emacs-lisp

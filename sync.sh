@@ -30,14 +30,12 @@ link_directory_to_home () {
         dir=${f#"./"}
         target=$(echo "$HOME/$dir")
 
-
         if [[ -L "$target" ]]
         then
             # target exist
             if ! [ "$target" -ef "$dir" ]
             then
                 # target is not expected
-
                 action=$(overwrite_prompt $target)
                 if [ -z $action ]
                 then
@@ -128,3 +126,7 @@ link_directory_to_home .exec
 link_directory_to_home .notifications
 link_directory_to_home ".config/*"
 link_files_in_dir_to_home .
+
+if [ ! -L "$HOME/.config/mimeapps.list" ]; then
+    ls -s "$HOME/.dotfiles/.config/mimeapps.list" "$HOME/.config/mimeapps.list"
+fi

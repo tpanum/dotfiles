@@ -1,3 +1,7 @@
+# if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+#     exec dwm
+# fi
+
 export GOPATH="/home/tpanum/go"
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
@@ -27,7 +31,8 @@ alias shutdown='wmctrl -c "firefox" && sleep 0.5 && /run/current-system/sw/bin/s
 alias reboot='wmctrl -c "firefox" && sleep 0.5 && /run/current-system/sw/bin/reboot'
 alias fixshebangs="find . -type f -print0 | xargs -0 sed -i 's=#!/bin=#!/run/current-system/sw/bin=g'"
 alias killcontainers="docker rm -f $(docker ps -a -q)"
-alias ntp="$HOME/.ntp/ntp-client"
+alias pbcopy="xclip -selection clipboard"
+alias hkn="$HOME/.haaukins/hkn-linux-amd64"
 
 for f in /home/tpanum/.exec/*.sh
 do

@@ -1,0 +1,15 @@
+diff --git a/symbols/altwin b/symbols/altwin
+index 7240ab8..812c001 100644
+--- a/symbols/altwin
++++ b/symbols/altwin
+@@ -114,3 +114,10 @@ xkb_symbols "prtsc_rwin" {
+     replace key <PRSC> { [ Super_R, Super_R ] };
+     modifier_map Mod4 { <PRSC>, <RWIN> };
+ };
++
++// Win is mapped to the Rshift key (and the usual Win key).
++partial modifier_keys
++xkb_symbols "rshift_rwin" {
++    replace key <RTSH> { [ Super_R, Super_R ] };
++    modifier_map Mod4 { <RTSH>, <RWIN> };
++};

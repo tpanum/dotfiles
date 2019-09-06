@@ -15,12 +15,13 @@ env:
   TERM: xterm-256color
 
 window:
-  # Window dimensions in character columns and lines
-  # Falls back to size specified by window manager if set to 0x0.
-  # (changes require restart)
+  # Window dimensions (changes require restart)
+  #
+  # Specified in number of columns/lines, not pixels.
+  # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 80
-    lines: 20
+    columns: 100
+    lines: 8
 
   # Adds this many blank pixels of padding around the window
   # Units are physical pixels; this is not DPI aware.
@@ -31,7 +32,9 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: true
+  decorations: full
+
+  startup_mode: Windowed
 
 scrolling:
   # How many lines of scrollback to keep,
@@ -101,7 +104,7 @@ font:
     style: Italic
 
   # Point size of the font
-  size: 16.0
+  size: 8.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -116,13 +119,9 @@ font:
     x: 0
     y: 0
 
-# Should display the render timer
-render_timer: false
-
-# Use custom cursor colors. If true, display the cursor in the cursor.foreground
-# and cursor.background colors, otherwise invert the colors of the cursor.
-custom_cursor_colors: false
-
+debug:
+  # Should display the render timer
+  render_timer: false
 
 # Copyright (c) 2017-present Arctic Ice Studio <development@arcticicestudio.com>
 # Copyright (c) 2017-present Sven Greb <code@svengreb.de>
@@ -187,7 +186,7 @@ visual_bell:
   duration: 0
 
 # Background opacity
-background_opacity: 0.9
+background_opacity: 1
 
 # Mouse bindings
 #
@@ -231,15 +230,7 @@ selection:
 
 dynamic_title: false
 
-hide_cursor_when_typing: false
-
-# Style of the cursor
-#
-# Values for 'cursor_style':
-# - Block
-# - Underline
-# - Beam
-cursor_style: Block
+mouse.hide_cursor_when_typing: false
 
 # Live config reload (changes require restart)
 live_config_reload: true

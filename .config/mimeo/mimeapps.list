@@ -1,0 +1,36 @@
+[Default Applications]
+application/x-extension-htm=firefox.desktop;
+application/x-extension-html=firefox.desktop;
+application/x-extension-shtml=firefox.desktop;
+application/x-extension-xht=firefox.desktop;
+application/x-extension-xhtml=firefox.desktop;
+application/xhtml+xml=firefox.desktop;
+message/rfc822=thunderbird.desktop;
+text/html=firefox.desktop;
+x-scheme-handler/chrome=firefox.desktop;
+x-scheme-handler/ftp=firefox.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/mailto=thunderbird.desktop;
+
+[Added Associations]
+application/pdf=evince.desktop;
+application/vnd.openxmlformats-officedocument.presentationml.presentation=impress.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=writer.desktop;
+application/x-extension-htm=firefox.desktop;
+application/x-extension-html=firefox.desktop;
+application/x-extension-shtml=firefox.desktop;
+application/x-extension-xht=firefox.desktop;
+application/x-extension-xhtml=firefox.desktop;
+application/x-tar=org.gnome.Nautilus.desktop;
+application/xhtml+xml=firefox.desktop;
+image/jpeg=pinta.desktop;feh.desktop;
+image/png=pinta.desktop;feh.desktop;
+inode/directory=Thunar-folder-handler.desktop;thunar.desktop;
+message/rfc822=thunderbird.desktop;
+text/html=firefox.desktop;
+x-scheme-handler/chrome=firefox.desktop;
+x-scheme-handler/ftp=firefox.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/mailto=userapp-Evolution-ODHNJZ.desktop;thunderbird.desktop;

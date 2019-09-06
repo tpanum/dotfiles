@@ -6,7 +6,6 @@ configuration {
 	font: "Fira Sans 16";
 	show-icons: true;
 	terminal: "alacritty";
-	drun-icon-theme: "la-capitaine-icon-theme";
 	eh: 2;
 	fullscreen: true;
 	show-match: false;
