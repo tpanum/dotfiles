@@ -12,15 +12,18 @@
     consoleUseXkbConfig = true;
   };
 
-  time.timeZone = "Europe/Copenhagen";
+
+  time.timeZone = "America/Chicago";
+  # time.timeZone = "Europe/Copenhagen";
 
   boot = {
     tmpOnTmpfs = true;
     kernelPackages = pkgs.linuxPackages_hardened;
 
     loader = {
-      timeout = 0;
+      timeout = 5;
       systemd-boot.enable = true;
+      systemd-boot.memtest86.enable = true;
       efi.canTouchEfiVariables = true;
     };
   };

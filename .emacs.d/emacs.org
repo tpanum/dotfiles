@@ -49,6 +49,8 @@
     - [[#synosaurus][Synosaurus]]
     - [[#avy][Avy]]
     - [[#tramp][Tramp]]
+    - [[#org-babel][Org Babel]]
+  - [[#dired][Dired]]
   - [[#additional-modes][Additional Modes]]
     - [[#nix-mode][Nix Mode]]
     - [[#markdown-mode][Markdown Mode]]
@@ -487,19 +489,24 @@ Add icons to company
 		     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 		     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
-	     (setq org-agenda-files '("~/Dropbox/org/"))
-	     (setq org-agenda-custom-commands
-		   '(("c" "Simple agenda view"
-		      ((tags "PRIORITY=\"A\""
-			     ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-			      (org-agenda-overriding-header "High-priority unfinished tasks:")))
-		       (agenda "")
-		       (alltodo "")))))
+	     (setq tpanum/org-exporters
+		   '(("latex" . org-latex-export-to-pdf)
+		     ("beamer" . org-beamer-export-to-pdf)))
+
+	     (defun tpanum/org-get-default-exporter ()
+	     (downcase (car (org-element-map
+			(org-element-parse-buffer)
+			'keyword (lambda (el)
+				   (when (string-equal (org-element-property :key el) "DEFAULT_EXPORTER")
+				     (org-element-property :value el)))))))
+
+	     (defun tpanum/org-default-export ()
+	       "Look for the property `DEFAULT_EXPORTER' within an org file, and select exporter based on `tpanum/org-exporters'"
+	       (interactive)
+	       (let ((exporter (cdr (assoc (tpanum/org-get-default-exporter) tpanum/org-exporters))))
+		 (call-interactively exporter)))
 
 
-	     ;; org-latex-pdf-process
-	     ;; '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-	     ;;   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 	     (general-define-key :keymaps 'org-mode-map
 				 :states '(normal)
 				 "RET" 'org-open-at-point
@@ -507,6 +514,7 @@ Add icons to company
 				 "S-<left>" 'org-shiftmetaleft
 				 "S-<up>" 'org-shiftmetaup
 				 "S-<up>" 'org-shiftmetadown
+				 "C-e" 'tpanum/org-default-export
 				 )
 
 	     (general-define-key :keymaps 'doc-view-mode-map
@@ -1129,6 +1137,27 @@ the languages in ISPELL-LANGUAGES when invoked."
   :config
   (setf tramp-persistency-file-name
         (concat temporary-file-directory "tramp-" (user-login-name))))
+#+END_SRC
+*** Org Babel
+#+BEGIN_SRC emacs-lisp
+(use-package ob
+	     :after org
+	     :functions (org-babel-do-load-languages)
+	     :config
+	     (setq org-confirm-babel-evaluate nil)
+	     (org-babel-do-load-languages 'org-babel-load-languages
+					  '((emacs-lisp . t)
+					    (python . t)
+					    (ipython . t))))
+
+(use-package ob-ipython)
+#+END_SRC
+
+** Dired
+#+BEGIN_SRC emacs-lisp
+(use-package dired
+	     :config
+	     (add-hook 'dired-mode-hook 'auto-revert-mode))
 #+END_SRC
 ** Additional Modes
 *** Nix Mode

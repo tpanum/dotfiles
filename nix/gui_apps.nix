@@ -1,5 +1,9 @@
 # This file contain packages which are nessescary for making the desktop environment function
 { config, lib, pkgs, stdenv, ... }:
+let
+  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
+  nixpkgs = import <nixpkgs> { overlays = [ moz_overlay ]; };
+in
 {
   nixpkgs.config.packageOverrides = pkgs: {
     unstable = import <nixos-unstable> {
@@ -20,7 +24,7 @@
       gvfs                      # needed for nautilus and thunar(?) to function
       xfce.xfce4-icon-theme     # required by thunar
       elementary-xfce-icon-theme
-      xfce4-13.thunar
+      xfce.thunar
       lxappearance
 
       # emacs
@@ -41,7 +45,7 @@
       wirelesstools             # basic wireless tools
       playerctl                 # tool for start/stop/skip music
       ffmpeg
-      firefox-beta-bin          # web browsing
+      firefox-bin               # web browsing
       chromium                  # web browser alternative
       spotify                   # stream music
       pinta                     # user-friendly image manipulation
@@ -61,9 +65,11 @@
       xorg.xev                  # app for figuring out which button a keypress refers to
       xournal                   # annotate pdfs
       unstable.alacritty        # preferred terminal
+      unstable.kitty
       wire-desktop
       slack
       skypeforlinux
+      pavucontrol               # audio control
     ];
   };
 }

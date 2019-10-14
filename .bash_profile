@@ -4,7 +4,8 @@
 
 export GOPATH="/home/tpanum/go"
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
+export CONDABIN=$HOME/.conda/bin
+export PATH=$PATH:$GOBIN:$CONDABIN
 export HISTSIZE=3500
 export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 /run/current-system/sw/bin/gpg-connect-agent updatestartuptty /bye > /dev/null
@@ -33,6 +34,7 @@ alias fixshebangs="find . -type f -print0 | xargs -0 sed -i 's=#!/bin=#!/run/cur
 alias killcontainers="docker rm -f $(docker ps -a -q)"
 alias pbcopy="xclip -selection clipboard"
 alias hkn="$HOME/.haaukins/hkn-linux-amd64"
+alias uwvpn="sudo openconnect dept-ra-cssc.vpn.wisc.edu"
 
 for f in /home/tpanum/.exec/*.sh
 do

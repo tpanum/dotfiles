@@ -12,6 +12,9 @@
       openvpn
       networkmanager-openvpn
       iptables
+
+      networkmanager-openconnect # university of wisconsin
+      openconnect
     ];
   };
 

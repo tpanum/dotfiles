@@ -11,6 +11,13 @@
       };
     };
 
+    st.patches = [
+      ./st/keyboard-select.diff
+      ./st/scrollback-custom.diff
+      ./st/personal-customization.diff
+      ./st/nord-theme.diff
+    ];
+
     dwm.patches = [
       ./dwm/attachaside.diff
       ./dwm/personal.diff
@@ -58,7 +65,9 @@
       xdotool                  # needed for copy/paste
       xorg.xdpyinfo
       gnome3.networkmanagerapplet 
-      xfce4-13.xfce4-power-manager
+      xfce.xfce4-power-manager
+
+      st
 
       compton
     ];

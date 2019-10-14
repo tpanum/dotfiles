@@ -1,5 +1,4 @@
-# --- OSX ---
-
+# OSX
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -9,7 +8,6 @@ Icon
 
 # Git
 .gitconfig
-
 
 # Thumbnails
 ._*
@@ -25,7 +23,7 @@ Icon
 !.emacs.d/Makefile
 !.emacs.d/init.el
 
-# --- JUPYTER ---
+# Jupyter
 .ipynb_checkpoints
 
 # -*- mode: gitignore; -*-

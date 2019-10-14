@@ -13,6 +13,7 @@
       proxychains        # proxy that is easily managed by curl
       tree               # directory tree inspector
       ripgrep            # alternative to grep
+      pdfgrep
       fzf                # fuzzy matcher used for reverse bash search
       htop               # performance inspection
       psmisc             # needed for `pkill`
@@ -50,6 +51,7 @@
       ws                 # websocket tool
       rclone
 
+
       # networking
       whois
       wavemon
@@ -86,12 +88,14 @@
         pytest
         pytorch
         torchvision
+        tensorflow
         epc
         pygments
+        jupyter
+        ipython
+        pandas
+        matplotlib
       ]))
-
-      conda
-      python37Packages.conda
 
       gcc_multi
       # elmPackages.elm

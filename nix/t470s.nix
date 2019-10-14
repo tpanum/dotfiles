@@ -47,6 +47,10 @@
     };
 
     bluetooth.enable = true;
+    bluetooth.extraConfig = "
+    [General]
+    Enable=Source,Sink,Media,Socket
+    ";
   };
 
   powerManagement = {
@@ -98,11 +102,13 @@
     '';
   };
 
+  fonts.enableFontDir = true;
   fonts.fonts = with pkgs; [
     fira
     fira-mono
     fira-code
     fira-code-symbols
+    twemoji-color-font
     roboto
   ];
 
