@@ -1,2 +1,2 @@
-#!/run/current-system/sw/bin/bash
-alacritty -t "Open file or folder" --class "fzf-menu" -e ~/.scripts/find.sh
+#!/bin/sh
+urxvtc -name "fzf-menu" -e ~/.scripts/find.sh

@@ -9,16 +9,18 @@
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    consoleUseXkbConfig = true;
   };
 
+  console.useXkbConfig = true;
 
-  time.timeZone = "America/Chicago";
-  # time.timeZone = "Europe/Copenhagen";
+  environment.binsh = "${pkgs.dash}/bin/dash";
+
+  # time.timeZone = "America/Chicago";
+  time.timeZone = "Europe/Copenhagen";
 
   boot = {
     tmpOnTmpfs = true;
-    kernelPackages = pkgs.linuxPackages_hardened;
+    # kernelPackages = pkgs.linuxPackages_latest_hardened;
 
     loader = {
       timeout = 5;
@@ -29,6 +31,15 @@
   };
 
   programs.bash.enableCompletion = true;
+
+  systemd.extraConfig = ''
+    DefaultTimeoutStartSec=10s
+    DefaultTimeoutStopSec=10s
+  '';
+
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   system.stateVersion = "19.03";
 }

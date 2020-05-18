@@ -239,11 +239,29 @@
 # NOTE: It might be helpful to run dunst -print in a terminal in order
 # to find fitting options for rules.
 
-[emacs]
-    appname = weechat
-    category = im.received
+[wifi-on]
+    appname = wifi
+    category = on
     timeout = 10
-    new_icon = chat
+    new_icon = wifi-on
+
+[wifi-off]
+    appname = wifi
+    category = off
+    timeout = 10
+    new_icon = wifi-off
+
+[bluetooth-on]
+    appname = bluetooth
+    category = on
+    timeout = 10
+    new_icon = bluetooth-on
+
+[bluetooth-off]
+    appname = bluetooth
+    category = off
+    timeout = 10
+    new_icon = bluetooth-off
 
 [backup]
     appname = Backup

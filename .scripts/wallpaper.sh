@@ -1,4 +1,4 @@
-WALLPAPER_ABS=$(shuf -n1 -e ~/.wallpaper/mountain.jpg)
+WALLPAPER_ABS=$(shuf -n1 -e ~/.wallpaper/*.jpg)
 WALLPAPER_FILE=${WALLPAPER_ABS##*/}
 WALLPAPER_BASE=${WALLPAPER_FILE%.*}
 SCREEN_SIZE="3840x2160"
@@ -12,7 +12,7 @@ if [ ! -f "$WALLPAPER_CACHE_FILE" ]; then
     convert $WALLPAPER_CACHE_FILE ~/.wallpaper/logo/nixos-logo.png -gravity Center -geometry 400x400+0+0 -composite $WALLPAPER_CACHE_FILE
 fi
 
-rm "$WALLPAPER_CURRENT"
+rm -f "$WALLPAPER_CURRENT"
 ln -s "$WALLPAPER_CACHE_FILE" "$WALLPAPER_CURRENT"
 
 hsetroot -fill "$WALLPAPER_CACHE_FILE"

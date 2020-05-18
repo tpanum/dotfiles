@@ -3,7 +3,7 @@ bind -x '"\C-x1": __fzf_history';
 
 __fzf_history ()
 {
-__ehc $(history | fzf --tac --tiebreak=index | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
+    __ehc $(history | fzf --tac --tiebreak=index | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
 }
 
 __ehc()

@@ -49,3 +49,6 @@ tramp
 
 # elpa packages
 /elpa/
+
+# nix
+nix/secrets.nix

@@ -5,6 +5,10 @@ _rofi () {
 
 fix_layout=true
 
+layout_cmd () {
+  setxkbmap us
+}
+
 # delay to be used for :delay keyword
 delay=0
 
@@ -48,5 +52,3 @@ type_menu="Alt+t"
 help="Alt+h"
 switch="Alt+x"
 insert_pass="Alt+n"
-
-

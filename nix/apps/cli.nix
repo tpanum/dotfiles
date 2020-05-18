@@ -1,4 +1,9 @@
 { config, pkgs, ... }:
+let
+  mspyls = pkgs.callPackage ../nixpkgs/ms-python.nix {};
+  #   extractNuGet = pkgs.callPackage ./nixpkgs/extract-nuget.nix {};
+  # };
+in
 {
   environment = {
     shells = [ pkgs.bash ];
@@ -10,6 +15,7 @@
       exiftool           # reading image fileheaders
       file               # file inspection
       curl               # http interaction
+      wget
       proxychains        # proxy that is easily managed by curl
       tree               # directory tree inspector
       ripgrep            # alternative to grep
@@ -41,24 +47,29 @@
       fd                 # alternative to find
       lsof
       nmap               # port scanner
-      hugo               # website generator
+      mitmproxy
+      unstable.hugo      # website generator
       woeusb             # making windows bootables
       jq                 # json handler
       peek               # screen recording
       screenkey          # show keys pressed on screen
       protobuf           # dealing with Google's Protobuf format
-      wireguard          # network sniffing
+      wireguard          # vpn
+      libqrencode        # encode wireguard configs to qr
       ws                 # websocket tool
       rclone
-
+      inotifyTools
+      powerstat
+      dotnet-sdk
+      mspyls
 
       # networking
       whois
       wavemon
       iperf
+      mosh               # ssh alternative
 
       # photos
-      dcraw
       libjpeg
 
       # spellchecking
@@ -69,26 +80,33 @@
       enchant
 
       # password
-      pass
+      (pass.withExtensions (ext: [
+        ext.pass-otp
+        ext.pass-genphrase
+      ]))
+      zbar
       rofi-pass
 
       # development
       exercism
       sqlite  # small file-oriented sql database
-      go_1_12      # golang programming language
+      go_1_13 # golang programming language
       dep     # depedency manager for golang
       gotools # helper cli for golang (auto importing and more)
       golangci-lint
 
+      conda
+      pre-commit
       (python3.withPackages (ps: with ps; [
-        python-language-server
-        requests
+        pyflakes
         autopep8
-        importmagic
-        pytest
-        pytorch
-        torchvision
-        tensorflow
+        pylint
+        black
+        isort
+
+        requests
+        # pytorch
+        # torchvision
         epc
         pygments
         jupyter
@@ -106,6 +124,7 @@
       leiningen  # clojure management
       clojure
       sass
+      rustup
 
       # extraction + compression
       unrar
@@ -127,6 +146,12 @@
 
       # virtualization
       unstable.packer
+
+      gsmartcontrol
+      glxinfo
+
+      udiskie
+      stress-ng
     ];
   };
 }

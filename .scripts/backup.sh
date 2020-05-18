@@ -68,26 +68,28 @@ function notification_ok() {
 }
 
 function perform_backup() {
-    REPO=ssh://borgsrv/~/backup/tpanum/home2
+    REPO=/storage/backup/tpanum
     HOME=/home/tpanum
     export BORG_PASSPHRASE=$(cat /home/tpanum/.secret/borg_pass.txt)
     BORG_RELOCATED_REPO_ACCESS_IS_OK=yes
 
     coutput=$(borg create   \
-		   --verbose \
-		   --filter AME                        \
-		   --stats                             \
-		   --json                              \
-		   --show-rc                           \
-		   --progress                          \
-		   --compression lz4                   \
-		   --exclude-caches                    \
-		   --exclude '/home/*/.cache/*'        \
-		   --exclude '*.ova'                   \
-		   --exclude 'VirtualBox VMs'          \
-		   -p \
-		   "$REPO"::'{hostname}-{now:%Y-%m-%d.%H:%M:%S}' \
-		   $HOME)
+	    --verbose \
+	    --filter AME                        \
+	    --stats                             \
+	    --json                              \
+	    --show-rc                           \
+	    --progress                          \
+	    --compression lz4                   \
+	    --exclude-caches                    \
+	    --exclude '/home/*/.local/*'        \
+	    --exclude '/home/*/.*'              \
+	    --exclude '*.ova'                   \
+	    --exclude '*VirtualBox VMs*'        \
+	    --exclude '/home/*/.cache/*'        \
+	    -p \
+	    "$REPO"::'{hostname}-{now:%Y-%m-%d.%H:%M:%S}' \
+	    $HOME)
 
     rc=$?; if [[ $rc -gt 1 ]]; then exit $rc; fi
 

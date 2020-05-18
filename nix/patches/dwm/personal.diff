@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index 1c0b587..20c3f5c 100644
+index 1c0b587..0a5a1b8 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -1,17 +1,36 @@
@@ -46,7 +46,7 @@ index 1c0b587..20c3f5c 100644
  static const char *colors[][3]      = {
  	/*               fg         bg         border   */
  	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-@@ -26,9 +45,15 @@ static const Rule rules[] = {
+@@ -26,15 +45,22 @@ static const Rule rules[] = {
  	 *	WM_CLASS(STRING) = instance, class
  	 *	WM_NAME(STRING) = title
  	 */
@@ -54,18 +54,26 @@ index 1c0b587..20c3f5c 100644
 -	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 -	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 +	/* class         instance     title       tags mask    iscentered  isfloating   monitor */
-+        { "Alacritty",   "Alacritty", NULL,       1 << 0,      0,          0,           -1 },
-+	{ "Alacritty",   "fzf-menu",  NULL,       NULL,        1,          1,           -1 },
++        { "termite",     "Termite",   NULL,       1 << 0,      0,          0,           -1 },
++	{ NULL,          "fzf-menu",  NULL,       NULL,        1,          1,           -1 },
 +	{ "Firefox",     NULL,        NULL,       1 << 1,      0,          0,           -1 },
 +	{ "Emacs",       NULL,        NULL,       1 << 2,      0,          0,           -1 },
 +	{ "Thunar",      NULL,        NULL,       1 << 3,      0,          0,           -1 },
 +	{ "Mail",        NULL,        NULL,       1 << 4,      0,          0,           -1 },
 +	{ "Spotify",     NULL,        NULL,       1 << 5,      0,          0,           -1 },
 +	{ "Slack",       NULL,        NULL,       1 << 6,      0,          0,           -1 },
++	{ "Signal",      NULL,        NULL,       1 << 7,      0,          0,           -1 },
  };
  
  /* layout(s) */
-@@ -44,7 +69,7 @@ static const Layout layouts[] = {
+ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+ static const int nmaster     = 1;    /* number of clients in master area */
+-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
++static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+ 
+ static const Layout layouts[] = {
+ 	/* symbol     arrange function */
+@@ -44,7 +70,7 @@ static const Layout layouts[] = {
  };
  
  /* key definitions */
@@ -74,22 +82,26 @@ index 1c0b587..20c3f5c 100644
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -57,7 +82,24 @@ static const Layout layouts[] = {
+@@ -56,8 +82,34 @@ static const Layout layouts[] = {
+ 
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
- static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 -static const char *termcmd[]  = { "st", NULL };
-+static const char *termcmd[]  = { "alacritty", NULL };
++/* static const char *dmenucmd[] = { "/home/tpanum/.scripts/dmenu.sh", NULL }; */
++static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray3, "-sf", col_gray1, "-l", "12", NULL };
++static const char *launchercmd[]  = { "/home/tpanum/.scripts/demnu.sh", NULL };
++static const char *termcmd[]  = { "urxvtc", NULL };
 +
-+static const char *upvol[]   = { "pactl", "set-sink-volume", "0", "+5%",     NULL };
-+static const char *downvol[] = { "pactl", "set-sink-volume", "0", "-5%",     NULL };
-+static const char *mutevol[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
++static const char *upvol[]   = { "/home/tpanum/.scripts/volume.sh", "up", NULL };
++static const char *downvol[] = { "/home/tpanum/.scripts/volume.sh", "down", NULL };
++static const char *mutevol[] = { "/home/tpanum/.scripts/volume.sh", "mute", NULL };
 +static const char *nextsong[] = { "playerctl", "next", NULL };
 +static const char *prevsong[] = { "playerctl", "previous", NULL };
 +static const char *playpause[] = { "playerctl", "play-pause", NULL };
 +
-+static const char *downbright[] = { "xbacklight", "-dec", "5", "-steps", "1",     NULL };
-+static const char *upbright[] = { "xbacklight", "-inc", "5", "-steps", "1",     NULL };
++static const char *downbright[] = { "brightnessctl", "set", "5%-", NULL };
++static const char *upbright[] = { "brightnessctl", "set", "+5%", NULL };
 +
 +static const char *swapkb[] = { "/home/tpanum/.scripts/keyboard.sh", "cycle", "dk", "us",     NULL };
 +static const char *lockscreen[] = { "xsecurelock", NULL };
@@ -97,10 +109,17 @@ index 1c0b587..20c3f5c 100644
 +static const char *osxcopy[] = { "/home/tpanum/.scripts/osx_copy.sh", NULL };
 +static const char *osxpaste[] = { "/home/tpanum/.scripts/osx_paste.sh", NULL };
 +static const char *passwdmanager[] = { "rofi-pass", NULL };
++
++static const char *toggle_wifi[] = { "/home/tpanum/.scripts/toggle_wifi.sh", NULL };
++static const char *toggle_bluetooth[] = { "/home/tpanum/.scripts/toggle_bluetooth.sh", NULL };
++
++static const char *screenshotter_selected[] = { "/home/tpanum/.scripts/screenshot.sh", "selected", NULL };
++static const char *screenshotter_full[] = { "/home/tpanum/.scripts/screenshot.sh", "full", NULL };
++static const char *screenshotter_clip[] = { "/home/tpanum/.scripts/screenshot.sh", "clipboard", NULL };
  
  static Key keys[] = {
  	/* modifier                     key        function        argument */
-@@ -72,7 +114,7 @@ static Key keys[] = {
+@@ -72,7 +124,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
  	{ MODKEY,                       XK_Return, zoom,           {0} },
  	{ MODKEY,                       XK_Tab,    view,           {0} },
@@ -109,11 +128,10 @@ index 1c0b587..20c3f5c 100644
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-@@ -94,6 +136,21 @@ static Key keys[] = {
+@@ -94,6 +146,26 @@ static Key keys[] = {
  	TAGKEYS(                        XK_8,                      7)
  	TAGKEYS(                        XK_9,                      8)
  	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-+
 +	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
 +	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
 +	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol } },
@@ -122,7 +140,13 @@ index 1c0b587..20c3f5c 100644
 +	{ 0,                            XF86XK_AudioPrev, spawn, {.v = prevsong } },
 +	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = downbright } },
 +	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = upbright } },
-+	{ MODKEY|ShiftMask,             XK_y, spawn, {.v = lockscreen } },
++	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = upbright } },
++	{ 0,                            XF86XK_WLAN, spawn, {.v = toggle_wifi } },
++	{ 0,                            XF86XK_Bluetooth, spawn, {.v = toggle_bluetooth } },
++	{ MODKEY,                       XK_y, spawn, {.v = screenshotter_selected } },
++	{ MODKEY|ShiftMask,             XK_y, spawn, {.v = screenshotter_full } },
++	{ MODKEY|ControlMask|ShiftMask, XK_y, spawn, {.v = screenshotter_clip } },
++	{ MODKEY|ShiftMask,             XK_l, spawn, {.v = lockscreen } },
 +	{ MODKEY|ShiftMask,             XK_k, spawn, {.v = swapkb} },
 +	{ MODKEY,                       XK_o, spawn, {.v = findfile } },
 +	{ MODKEY,                       XK_c, spawn, {.v = osxcopy } },
@@ -131,8 +155,13 @@ index 1c0b587..20c3f5c 100644
  };
  
  /* button definitions */
+@@ -112,4 +184,3 @@ static Button buttons[] = {
+ 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
+ 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+ };
+-
 diff --git a/dwm.c b/dwm.c
-index 4465af1..7ce4bf1 100644
+index 4465af1..c7b3649 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -92,7 +92,7 @@ struct Client {
@@ -152,6 +181,15 @@ index 4465af1..7ce4bf1 100644
  	int isfloating;
  	int monitor;
  } Rule;
+@@ -249,7 +250,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
+ 	[ConfigureRequest] = configurerequest,
+ 	[ConfigureNotify] = configurenotify,
+ 	[DestroyNotify] = destroynotify,
+-	[EnterNotify] = enternotify,
++	/* [EnterNotify] = enternotify, */
+ 	[Expose] = expose,
+ 	[FocusIn] = focusin,
+ 	[KeyPress] = keypress,
 @@ -297,6 +298,7 @@ applyrules(Client *c)
  		&& (!r->class || strstr(class, r->class))
  		&& (!r->instance || strstr(instance, r->instance)))

@@ -21,6 +21,7 @@
       serviceConfig = {
         Type = "oneshot";
         ExecStart = "/run/current-system/sw/bin/sh /home/tpanum/.scripts/backup.sh";
+        CPUQuota = "35%";
       };
 
       after = [ "network-online.target" "gpg-agent.service" ];

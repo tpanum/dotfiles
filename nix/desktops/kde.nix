@@ -4,9 +4,9 @@
     ./x11.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    adapta-kde-theme
-    papirus-icon-theme
+  environment.systemPackages = let themes = pkgs.callPackage ./nixpkgs/kde/redrock-sddm-theme.nix {}; in [
+    pkgs.sddm-kcm
+    themes.sddm-redrock-theme
   ];
 
   services.xserver = {
@@ -15,13 +15,10 @@
       default = "plasma5";
     };
 
-    windowManager = {
-      i3.enable = true;
-      default = "i3";
-    };
-
     displayManager.sddm = {
       enable = true;
+      enableHidpi = true;
+      theme = "redrock";
       autoLogin = {
         enable = true;
         user = "tpanum";

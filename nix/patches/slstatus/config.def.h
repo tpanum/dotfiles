@@ -62,9 +62,8 @@ static const char unknown_str[] = "n/a";
 static const struct arg args[] = {
 				  /* function format          argument */
 				  /* { battery_perc,  "BAT: %s | ", "BAT1"}, */
-				  { run_command, "%s ", "bash /home/tpanum/.scripts/get_song_spotify.sh"    },
 				  { ram_used, "%.3s GB  •  ", NULL    },
 				  { wifi_essid, "  %s  •  ", "wlp58s0" },
-				  { run_command, "%s ", "bash /home/tpanum/.scripts/battery.sh"    },
+				  { run_command, "%s ", "/bin/sh /home/tpanum/.scripts/status/_main.sh"    },
 				  { datetime, "%s", "%b %e %a  •  %H:%M" },
 };
