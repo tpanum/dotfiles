@@ -27,6 +27,7 @@
     - [[#counsel][Counsel]]
     - [[#company][Company]]
     - [[#swiper][Swiper]]
+    - [[#wgrep][Wgrep]]
     - [[#magit][Magit]]
     - [[#org][Org]]
     - [[#toc-org][Toc-org]]
@@ -38,15 +39,12 @@
     - [[#circe-irc][Circe (IRC)]]
     - [[#erc-irc][ERC (IRC)]]
     - [[#password-store][Password Store]]
-    - [[#language-servers][Language Servers]]
     - [[#smartparens][Smartparens]]
     - [[#rainbow-mode][Rainbow Mode]]
     - [[#rainbow-delimiters][Rainbow-Delimiters]]
     - [[#flyspell-mode][Flyspell Mode]]
     - [[#flycheck][Flycheck]]
     - [[#ace-window][Ace Window]]
-    - [[#lang-tool][Lang Tool]]
-    - [[#synosaurus][Synosaurus]]
     - [[#avy][Avy]]
     - [[#tramp][Tramp]]
     - [[#org-babel][Org Babel]]
@@ -57,9 +55,11 @@
     - [[#markdown-mode][Markdown Mode]]
     - [[#go-mode][Go Mode]]
     - [[#docker-mode][Docker Mode]]
+    - [[#svelte-mode][Svelte Mode]]
     - [[#web-mode][Web Mode]]
     - [[#anaconda-mode][Anaconda Mode]]
     - [[#python-mode][Python Mode]]
+    - [[#haskell-mode][Haskell Mode]]
     - [[#vue-mode][Vue Mode]]
     - [[#json-mode][JSON Mode]]
     - [[#yaml-mode][YAML Mode]]
@@ -238,7 +238,7 @@ header-args :tangle yes
 (show-paren-mode)
 (fset 'yes-or-no-p 'y-or-n-p)
 (set-mouse-color "#ffffff")
-(set-frame-font "Hasklig")
+(set-frame-font "Hasklig-13")
 
 (use-package hasklig-mode
 	     :hook (prog-mode))
@@ -310,12 +310,11 @@ header-args :tangle yes
 ** Packages
 *** Theme
 #+BEGIN_SRC emacs-lisp
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'vscode-dark-plus t)
-
-(use-package doom-themes
-	     :config
-	     (load-theme 'doom-dark+ t))
+(use-package modus-operandi-theme
+  :config
+  (load-theme 'modus-operandi t)
+  (setq modus-operandi-theme-slanted-constructs t)
+  (setq modus-operandi-theme-bold-constructs t))
 #+END_SRC
 *** Dashboard
 #+BEGIN_SRC emacs-lisp
@@ -464,6 +463,12 @@ load it when =swiper= or =swiper-all= is called.
 #+BEGIN_SRC emacs-lisp
 (use-package swiper
   :commands (swiper swiper-all))
+#+END_SRC
+
+*** Wgrep
+
+#+BEGIN_SRC emacs-lisp
+(use-package wgrep)
 #+END_SRC
 
 *** Magit
@@ -965,32 +970,6 @@ Delay the activation of notifications and create a custome display function whic
 (use-package password-store
 :ensure t)
 #+END_SRC
-*** Language Servers
-#+BEGIN_SRC emacs-lisp
-(use-package lsp-mode
-  :commands lsp
-  :init
-  (setq lsp-auto-guess-root t)
-  :config
-  (require 'lsp-clients)
-  (add-hook 'prog-mode-hook (lambda () (flymake-mode -1)))
-  (setq lsp-pyls-plugins-pylint-enabled nil)
-  :hook ((python-mode) . #'lsp))
-
-(use-package lsp-ui
-	     :commands lsp-ui-mode)
-
-(use-package company-lsp
-	     :commands company-lsp)
-
-(use-package lsp-python-ms
-	     :hook (python-mode . (lambda ()
-				    (require 'lsp-python-ms)
-				    (lsp)))
-	     :config
-	     (setq lsp-python-ms-executable
-		   "/run/current-system/sw/bin/mspyls"))
-#+END_SRC
 *** Smartparens
 #+BEGIN_SRC emacs-lisp
 (use-package smartparens
@@ -1123,34 +1102,6 @@ the languages in ISPELL-LANGUAGES when invoked."
   (global-set-key (kbd "s-w") 'ace-window)
 (global-set-key [remap other-window] 'ace-window))
 #+END_SRC
-*** Lang Tool
-#+BEGIN_SRC emacs-lisp
-(use-package langtool
-             :after general
-             :init
-             (general-define-key
-              :states '(normal visual emacs)
-              :prefix "SPC"
-              "l"  '(:ignore t :which-key "Language")
-              "lcw" 'langtool-check
-              "lcW" 'langtool-check-done
-              "lsw" 'langtool-switch-default-language
-              "lcb" 'langtool-correct-buffer
-              )
-             :config
-             (setq langtool-language-tool-jar "/run/current-system/sw/bin/languagetool"
-                   langtool-default-language "en-US"))
-#+END_SRC
-*** Synosaurus
-#+BEGIN_SRC emacs-lisp
-(use-package synosaurus
-:init
-             (general-define-key
-              :states '(normal visual emacs)
-              :prefix "SPC"
-              "ls" 'synosaurus-lookup)
-:config (setq synosaurus-backend 'synosaurus-backend-wordnet))
-#+END_SRC
 *** Avy
 #+BEGIN_SRC emacs-lisp
 (use-package avy
@@ -1272,6 +1223,12 @@ the languages in ISPELL-LANGUAGES when invoked."
 (use-package dockerfile-mode
 :mode "Dockerfile\\'")
 #+END_SRC
+
+*** Svelte Mode
+#+BEGIN_SRC emacs-lisp
+(use-package svelte-mode
+  :mode ("\\.svelte$" . svelte-mode))
+#+END_SRC
 *** Web Mode
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
@@ -1282,27 +1239,27 @@ the languages in ISPELL-LANGUAGES when invoked."
 #+END_SRC
 *** Anaconda Mode
 #+BEGIN_SRC emacs-lisp
-;; (use-package anaconda-mode
-;;   :hook ((python-mode . anaconda-mode)
-;;          (python-mode . anaconda-eldoc-mode)))
+(use-package anaconda-mode
+  :hook ((python-mode . anaconda-mode)
+         (python-mode . anaconda-eldoc-mode)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-;; (use-package eldoc
-;;   :config
-;;   (setq eldoc-idle-delay 1))
+(use-package eldoc
+  :config
+  (setq eldoc-idle-delay 1))
 #+END_SRC
 
 Add backend for company mode
 #+BEGIN_SRC emacs-lisp
-;; (use-package company-anaconda
-;; 	     :after (:all company anaconda-mode)
-;; 	     :hook ((anaconda-mode . tpanum/anaconda-company-hook-function))
-;; 	     :config
-;; 	     (add-to-list 'company-backends 'company-anaconda)
-;; 	     (defun tpanum/anaconda-company-hook-function ()
-;;              (set (make-local-variable 'company-backends)
-;;              '((company-anaconda)))))
+(use-package company-anaconda
+	     :after (:all company anaconda-mode)
+	     :hook ((anaconda-mode . tpanum/anaconda-company-hook-function))
+	     :config
+	     (add-to-list 'company-backends 'company-anaconda)
+	     (defun tpanum/anaconda-company-hook-function ()
+             (set (make-local-variable 'company-backends)
+             '((company-anaconda)))))
 #+END_SRC
 
 *** Python Mode
@@ -1320,6 +1277,21 @@ Format Python on save.
              :init
              (setq python-black-extra-args '("-l" "79"))
              (add-hook 'python-mode-hook 'python-black-on-save-mode))
+#+END_SRC
+
+Enable mypy checking
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck-mypy
+	     :after flycheck
+	     :config
+	     (setq flycheck-python-mypy-args "--ignore-missing-imports")
+	     (add-to-list 'flycheck-disabled-checkers 'python-flake8)
+	     (flycheck-add-next-checker 'python-pylint 'python-mypy t))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package python-docstring
+    :hook (python-mode . python-docstring-mode))
 #+END_SRC
 
 Import helpers
@@ -1351,6 +1323,13 @@ Import helpers
 	     (org-babel-jupyter-override-src-block "python"))
 #+END_SRC
 
+*** Haskell Mode
+#+BEGIN_SRC emacs-lisp
+(use-package haskell-mode
+	     :mode (("\\.hs\\'"    . haskell-mode)
+		    ("\\.cabal\\'" . haskell-cabal-mode)
+		    ("\\.hcr\\'"   . haskell-core-mode)))
+#+END_SRC
 
 *** Vue Mode
 #+BEGIN_SRC emacs-lisp
@@ -1389,6 +1368,12 @@ Import helpers
              (setq TeX-parse-self t)
              (setq-default TeX-master "main")
              (add-hook 'before-save-hook 'delete-trailing-whitespace))
+
+(use-package flycheck-vale
+  :after flycheck
+  :config
+  (flycheck-vale-setup)
+  (flycheck-add-next-checker 'vale 'proselint))
 #+END_SRC
 *** Protobuf Mode
 #+BEGIN_SRC emacs-lisp
