@@ -1,8 +1,33 @@
 { config, pkgs, ... }:
 let
-  mspyls = pkgs.callPackage ../nixpkgs/ms-python.nix {};
-  #   extractNuGet = pkgs.callPackage ./nixpkgs/extract-nuget.nix {};
-  # };
+  minionpro = pkgs.callPackage ../nixpkgs/fonts/minionpro.nix {};
+  texlive = pkgs.lib.overrideDerivation (pkgs.texlive.combine {
+    inherit (pkgs.texlive)
+    scheme-full;
+       minionpro.pkgs = [minionpro];
+     }) (oldAttrs: {
+     postBuild = ''
+       # Save the udpmap.cfg because texlive.combine removes it.
+       cat $out/share/texmf/web2c/updmap.cfg > $out/share/texmf/web2c/updmap.cfg.1
+       '' + oldAttrs.postBuild + ''
+       # Move updmap.cfg into its original place and rerun mktexlsr, so that kpsewhich finds it
+       rm $out/share/texmf/web2c/updmap.cfg || true
+       cat $out/share/texmf/web2c/updmap.cfg.1 > $out/share/texmf/web2c/updmap.cfg
+       rm $out/share/texmf/web2c/updmap.cfg.1
+       perl `type -P mktexlsr.pl` $out/share/texmf
+
+       yes | perl `type -P updmap.pl` --sys --syncwithtrees --force || true
+       perl `type -P updmap.pl` --sys --enable Map=MinionPro.map --enable Map=MyriadPro.map
+
+       # Add minionpro/myriad
+       #echo "Map MinionPro.map" >> $out/share/texmf/web2c/updmap.cfg
+       #echo "Map MyriadPro.map" >> $out/share/texmf/web2c/updmap.cfg
+
+       # Regenerate .map files.
+       perl `type -P updmap.pl` --sys
+     '';
+     });
+
 in
 {
   environment = {
@@ -12,6 +37,7 @@ in
       gnupg              # encryption tool
 
       git                # version control
+      git-lfs            # extension for larger files
       exiftool           # reading image fileheaders
       file               # file inspection
       curl               # http interaction
@@ -22,6 +48,7 @@ in
       pdfgrep
       fzf                # fuzzy matcher used for reverse bash search
       htop               # performance inspection
+      atop               # performance inspection
       psmisc             # needed for `pkill`
       cdrkit             # `genisofolder` tool for creating iso images
       sshfs              # mount fileshares through ssh
@@ -31,6 +58,7 @@ in
       samba              # samba client
       nfs-utils          # accessing nfs
       borgbackup         # backup solution
+      duplicacy
       docker_compose     # easy and simple docker orchestration
       parted             # needed for gnome3 disks util
       winusb             # tool for creating bootable windows usbs
@@ -47,21 +75,20 @@ in
       fd                 # alternative to find
       lsof
       nmap               # port scanner
-      mitmproxy
+      # mitmproxy
       unstable.hugo      # website generator
       woeusb             # making windows bootables
       jq                 # json handler
       peek               # screen recording
+      mpv                # show webcam on screen
       screenkey          # show keys pressed on screen
       protobuf           # dealing with Google's Protobuf format
       wireguard          # vpn
       libqrencode        # encode wireguard configs to qr
       ws                 # websocket tool
-      rclone
+      unstable.rclone
       inotifyTools
       powerstat
-      dotnet-sdk
-      mspyls
 
       # networking
       whois
@@ -90,7 +117,7 @@ in
       # development
       exercism
       sqlite  # small file-oriented sql database
-      go_1_13 # golang programming language
+      go_1_14 # golang programming language
       dep     # depedency manager for golang
       gotools # helper cli for golang (auto importing and more)
       golangci-lint
@@ -99,10 +126,12 @@ in
       pre-commit
       (python3.withPackages (ps: with ps; [
         pyflakes
+        pytest
         autopep8
         pylint
         black
         isort
+        mypy
 
         requests
         # pytorch
@@ -114,6 +143,7 @@ in
         pandas
         matplotlib
       ]))
+      unstable.nodePackages.pyright
 
       gcc_multi
       # elmPackages.elm
@@ -139,10 +169,9 @@ in
       ncdu # figure out where disk space goes
 
       # typography
-      texlive.combined.scheme-full
-
-      travis
-      weechat
+      # texlive.combined.scheme-full
+      texlive
+      vale
 
       # virtualization
       unstable.packer
@@ -152,6 +181,7 @@ in
 
       udiskie
       stress-ng
+      apktool
     ];
   };
 }

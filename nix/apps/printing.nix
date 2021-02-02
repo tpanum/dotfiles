@@ -3,6 +3,7 @@
 {
   services.printing = {
     enable = true;
+    logLevel = "debug";
     drivers = with pkgs; [
       gutenprint
       gutenprintBin

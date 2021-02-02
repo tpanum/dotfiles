@@ -1,10 +1,10 @@
 # This file contain packages which are nessescary for making the desktop environment function
 { config, lib, pkgs, stdenv, ... }:
-let
-  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
-  nixpkgs = import <nixpkgs> { overlays = [ moz_overlay ]; };
-in
 {
+  environment.sessionVariables = {
+        BROWSER = "brave";
+  };
+
   # for steam
   hardware.opengl = {
     enable = true;
@@ -35,8 +35,27 @@ in
     };
   };
 
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url =
+        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+    }))
+  ];
+
+
+  # browser extension
+  programs.browserpass.enable = true;
+
   services.urxvtd.enable = true;
-  services.emacs.enable = true;
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacsUnstable;
+  };
+
+
+  # for evolution
+  services.gnome3.evolution-data-server.enable = true;
+  programs.dconf.enable = true;
 
   environment = {
     systemPackages = with pkgs; [
@@ -56,13 +75,14 @@ in
       lxappearance
 
       # emacs
-      emacs                     # best editor in the world
+      emacsUnstable
       languagetool              # advanced grammar tool
       libnotify                 # notification dependency for emacs
       pygmentex
 
       # mail
       thunderbird
+      unstable.evolution-ews
 
       # disks
       gnome3.gnome-disk-utility # lovely simple tool for formatting and partioning drives
@@ -74,13 +94,13 @@ in
       playerctl                 # tool for start/stop/skip music
       ffmpeg
 
-      firefox
-      (writeScriptBin "spotify" ''
+      brave
+      google-chrome
+      (writeScriptBin "youtube-music" ''
         #!${pkgs.stdenv.shell}
-        ${pkgs.google-chrome}/bin/google-chrome-stable  --user-data-dir=$HOME/.chrome/spotify --class=Spotify -app=http://localhost:6680/iris/
+        ${pkgs.google-chrome}/bin/google-chrome-stable  --user-data-dir=$HOME/.chrome/music --class=music-player -app=https://music.youtube.com
       '')
 
-      chromium                  # web browser alternative
       pinta                     # user-friendly image manipulation
       gimp                      # user-friendly image manipulation
       unstable.inkscape         # vector graphics manipulation
@@ -92,19 +112,22 @@ in
       vlc                       # video player
       simplescreenrecorder      # screen recording
       kdenlive                  # video manipulation
-      vagrant                   # orchestration of virtualbox
+      teams
       libreoffice-fresh         # needed for opening microsoft products!
       wireshark                 # traffic analysis
       mimeo                     # program for open files wisely
       xorg.xev                  # app for figuring out which button a keypress refers to
       xournal                   # annotate pdfs
-      unstable.alacritty        # preferred terminal
       xclip
       xsel   # for urxvt
 
       pavucontrol               # audio control
       qbittorrent
       steam
+      unstable.lutris
+      mame
+
+      qtpass
 
       # messaging
       signal-desktop

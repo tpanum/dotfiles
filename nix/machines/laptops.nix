@@ -18,10 +18,6 @@ in
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   };
 
-  nixpkgs.config = {
-    firefox.enableAdobeFlash = true;
-  };
-
   xdg.autostart.enable = true;
 
   hardware = {
@@ -30,11 +26,6 @@ in
       support32Bit = true;
       package = pkgs.pulseaudioFull;
       extraModules = [ pkgs.pulseaudio-modules-bt ];
-      tcp = {
-        # for mopidy
-        enable = true;
-        anonymousClients.allowedIpRanges = [ "127.0.0.1" ];
-      };
     };
 
     bluetooth.enable = true;
@@ -89,32 +80,10 @@ in
     '';
   };
 
-  # Don't conflict with mopdiy
-  services.mpd.enable = false;
-  services.mopidy = {
-    enable = true;
-    extensionPackages = with pkgs; [
-      mopidy-spotify
-      mopidy-iris
-    ];
-    configuration = ''
-      [spotify]
-      username = ${secrets.spotify.username}
-      password = ${secrets.spotify.password}
-      client_id = ${secrets.spotify.client_id}
-      client_secret = ${secrets.spotify.client_secret}
-      bitrate = 320
-
-      [audio]
-      output = pulsesink server=127.0.0.1
-
-      [iris]
-      country = dk
-      locale = en_US
-    '';
-  };
-
+  users.mutableUsers = false;
+  users.users.root.hashedPassword = secrets.tpanum.hashedPassword;
   users.extraUsers.tpanum = {
+    hashedPassword = secrets.tpanum.hashedPassword;
     isNormalUser = true;
     extraGroups = [
       "networkmanager"

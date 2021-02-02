@@ -3,8 +3,14 @@
   imports = [
     ./machines/laptops.nix
     ./hardware-configuration.nix
-    ./desktops/dwm.nix
+    ./desktops/xmonad/xmonad.nix
   ];
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
 
   boot = {
     kernelParams = [
@@ -35,7 +41,13 @@
     };
   };
 
-  services.tlp = {
+  services.hardware.bolt.enable = true;
+  services.undervolt = {
+    enable = true;
+    coreOffset = -80;  # undervolt the CPU in mV
+  };
+
+  services.tlp.settings = {
     extraConfig = ''
       DISK_DEVICES="nvme0n1"
       CPU_SCALING_GOVERNOR_ON_BAT=powersave

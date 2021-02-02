@@ -1,12 +1,38 @@
 //! [events]
-//! keys = ['ESC']
+//! keys = ['ESC', 'LEFTCTRL', 'C', 'V']
+
+fn xcape_seq_sequence(mut state: bool, evt: object, watch_mod_key: f64, watch_key: f64, emit_key_chord_sequence: []) ~ uinput {
+    if evt.kind == EV_KEY() {
+        if (evt.code == watch_key) && (evt.value == 0) {
+            state = true
+        } else if (evt.code == watch_mod_key) && (evt.value == 0) {
+            if state {
+                for i len(emit_key_chord_sequence) {
+                    click_key_chord(emit_key_chord_sequence[i])
+                    sleep(0.001)
+                }
+            }
+            state = false
+        } else { // Pressed something else while holding, cancel
+            state = false
+        }
+    }
+}
+
 fn main() ~ evdevs, uinput {
     should_lshift := false
+    should_rshift := false
+    should_copy := false
+    should_paste := false
+
     loop {
         evts := next_events(evdevs)
         for i {
             evt := evts[i]
             xcape(mut should_lshift, evt, KEY_LEFTSHIFT(), [KEY_ESC()])
+            xcape(mut should_rshift, evt, KEY_RIGHTSHIFT(), [KEY_ESC()])
+	    xcape_seq_sequence(mut should_copy, evt, KEY_LEFTMETA(), KEY_C(), [[KEY_LEFTCTRL(), KEY_C()]])
+	    xcape_seq_sequence(mut should_paste, evt, KEY_LEFTMETA(), KEY_V(), [[KEY_LEFTCTRL(), KEY_V()]])
         }
     }
 }

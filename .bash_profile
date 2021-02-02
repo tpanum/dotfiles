@@ -1,7 +1,4 @@
-# if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-#     exec dwm
-# fi
-
+export TERM='xterm-256color'
 export GOPATH="/home/tpanum/go"
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN:$CONDABIN

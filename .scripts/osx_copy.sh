@@ -8,10 +8,16 @@ case $CURRENT_WINDOW in
     termite)
 	xdotool key --delay 80 --clearmodifiers ctrl+shift+c
 	;;
+    gnome-terminal-server)
+	xdotool keyup --delay 0 super
+	xdotool key --delay 0 ctrl+shift+c &
+	;;
     urxvt)
 	xvkbd -no-jump-pointer -xsendevent -text '\Ac'
 	;;
     *)
 	xvkbd -no-jump-pointer -xsendevent -text '\Cc'
+	# xdotool keyup --delay 0 super
+	# xdotool key --delay 0 ctrl+c &
 	;;
 esac

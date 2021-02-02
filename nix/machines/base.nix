@@ -12,10 +12,8 @@
   };
 
   console.useXkbConfig = true;
-
   environment.binsh = "${pkgs.dash}/bin/dash";
 
-  # time.timeZone = "America/Chicago";
   time.timeZone = "Europe/Copenhagen";
 
   boot = {
@@ -41,5 +39,5 @@
     allowUnfree = true;
   };
 
-  system.stateVersion = "19.03";
+  system.stateVersion = "20.03";
 }

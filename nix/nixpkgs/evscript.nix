@@ -11,7 +11,7 @@ rustPlatform.buildRustPackage rec {
     sha256 = "04sal72shn4vi7x4qzip0rmn14lzbk6fczzf6glvdhjjlia743q7";
   };
 
-  cargoSha256 = "14lvfpnzka05mckmvy6qqgz2binksl50qmk5jqmxzx7r7y656wqq";
+  cargoSha256 = "0160ns9ffnnx2bspz5gcvn8ia4pa94np7zv8xf45iqcbk3zlg6gj";
 
   meta = with lib; {
     description = "Dyon scripting environment for evdev input devices";
