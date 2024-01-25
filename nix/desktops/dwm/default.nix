@@ -16,6 +16,18 @@ let
       }
     ];
   };
+  dwm = pkgs.dwm.overrideAttrs (old: {
+    patches = [ ./patches/dwm/personal.diff ] ++ builtins.map builtins.fetchurl [
+      {
+        url = "https://dwm.suckless.org/patches/attachaside/dwm-attachaside-6.1.diff";
+        sha256 = "18f7wqn8y70l7d7ygibgg0mqf91j802rzb5vdw69p3qg3hlv9gc6";
+      }
+      {
+          url = "https://dwm.suckless.org/patches/tilegap/dwm-tilegap-6.2.diff";
+          sha256 = "0r0c9n3jqh190m3258v4bpkmiai3xdgrp3nkh5432hl6fpgi1niy";
+      }
+    ];
+  });
   xmodmaprc = pkgs.writeText "xmodmaprc" ''
     ! turns right shift key into super key
     clear shift
@@ -30,40 +42,23 @@ in
 {
 
   imports = [
-    ./x11.nix
+    ../x11.nix
+    ../../apps/battery.nix
+    <home-manager/nixos>
   ];
-
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      unstable = import <nixos-unstable> {
-        config = config.nixpkgs.config;
-      };
-
-      slstatus = pkgs.slstatus.override {
-        conf = builtins.readFile ../patches/slstatus/config.def.h;
-      };
-    };
-
-    dwm.patches = [
-      ../patches/slstatus/status2d.diff
-      ../patches/dwm/attachaside.diff
-      ../patches/dwm/personal.diff
-      ../patches/dwm/tilegap.diff
-    ];
-  };
 
   services.blueman.enable = true;
 
   environment = {
     systemPackages = with pkgs; [
       # align comments with: 1gl# (in emacs)
+      dwm
 
       # locking
       xsecurelock
 
       # appearance
       dunst                     # notfication daemon
-      slstatus
       xbindkeys
 
       # screenshotting
@@ -73,9 +68,8 @@ in
       # applications
       dmenu
       arandr                    # UI for xrandr (display controlling)
-      xcape                     # make shift behave like esc
       xsettingsd
-      xlibs.xmodmap            # swap buttons on the keyboard around
+      xorg.xmodmap            # swap buttons on the keyboard around
       hsetroot                 # set some tint color on background
       xvkbd                    # program for emulating keypresses and more (e.g. swap copy/paste to super+{c,v})
       acpilight                # provides xbacklight
@@ -87,15 +81,15 @@ in
       xorg.xdpyinfo
       gnome3.networkmanagerapplet
 
-      qtpass
-      polybar
-      st
+        qtpass
+        polybar
+        st
     ];
   };
 
   services = {
     unclutter-xfixes.enable = true;
-    udisks2.enable = true;
+    udisks2.enable = false;
     compton = {
       enable = true;
       backend = "glx";
@@ -121,13 +115,10 @@ in
 
         defaultSession = "none+dwm";
         sessionCommands = ''
-          ${pkgs.xcape}/bin/xcape -e 'Shift_L=Escape' &
           ${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmaprc} &
           ${pkgs.xorg.xset}/bin/xset 120 4 &
-          /home/tpanum/.scripts/status/_main.sh &
           (sleep 0.5 && $HOME/.scripts/wallpaper.sh) &
           (sleep 0.5 && ${pkgs.autorandr}/bin/autorandr --change) &
-          (sleep 1 && firefox) &
           (sleep 1 && emacseditor) &
         '';
       };
@@ -163,22 +154,9 @@ in
       ];
   };
 
-  systemd.services.battery_check = {
-    description = "Send notification if battery is low";
-    serviceConfig = {
-      Type = "oneshot";
-      User = "tpanum";
-      ExecStart = pkgs.writeScript "battery_check" ''
-        #!${pkgs.bash}/bin/bash --login
-        . <(paste /sys/class/power_supply/BAT0/uevent /sys/class/power_supply/BAT1/uevent | awk '{split($0,a,"="); split(a[2],b," "); (a[3] == "Charging" || b[1] == "Charging") ? $5 = "Charging" : $5 = (a[3] + b[1])/2; print a[1] "=" $5}' | grep -E 'POWER_SUPPLY_(CAPACITY|STATUS)=')
-        if [[ $POWER_SUPPLY_STATUS = 0 && $POWER_SUPPLY_CAPACITY -lt 12 ]];
-        then notify-send -u critical "Battery is running low";
-        fi
-      '';
-    };
-    environment = { DISPLAY = ":0"; };
-    after = [ "display-manager.service" ];
-    startAt = "*:00/5";
+  home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+    users.tpanum = import ./home.nix;
   };
-
 }

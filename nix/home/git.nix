@@ -18,14 +18,30 @@ in
     };
     lfs.enable = true;
     extraConfig = {
-      core = {
-        autocrlf = "true";
-        whitespace = "cr-at-eol";
+      init = {
+        defaultBranch = "main";
+      };
+      push = {
+        followTags = true;
+        autoSetupRemote = true;
       };
       pull = { rebase = true; };
       rebase = { autoStash = true; };
       hub = { protocol = "ssh"; };
-      # url = { "git@github.com:".insteadOf = "https://github.com/"; };
+      credential.helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
     };
+  };
+
+  xdg = {
+    configFile."pass-git-helper/git-pass-mapping.ini".text = ''
+      [DEFAULT]
+      skip_password=6
+      regex_username=^user: (.*)$
+      username_extractor=regex_search
+      regex_password=^pass: (.*)$
+
+      [git.overleaf.com]
+      target=overleaf/account
+      '';
   };
 }

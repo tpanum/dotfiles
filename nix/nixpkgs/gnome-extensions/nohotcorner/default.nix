@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub }:
+{ stdenv, fetchFromGitHub, lib }:
 
 stdenv.mkDerivation rec {
   pname = "gnome-shell-extension-nohotcorner";
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
     cp metadata.json $out/share/gnome-shell/extensions/${uuid}
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Disables the top left hot corner";
     license = licenses.gpl2;
     maintainers = with maintainers; [ jonafato ];

@@ -50,6 +50,7 @@
     - [[#org-babel][Org Babel]]
   - [[#dired][Dired]]
   - [[#additional-modes][Additional Modes]]
+    - [[#lsp-mode][LSP Mode]]
     - [[#rust-mode][Rust Mode]]
     - [[#nix-mode][Nix Mode]]
     - [[#markdown-mode][Markdown Mode]]
@@ -58,6 +59,9 @@
     - [[#svelte-mode][Svelte Mode]]
     - [[#web-mode][Web Mode]]
     - [[#anaconda-mode][Anaconda Mode]]
+    - [[#elm-mode][Elm Mode]]
+    - [[#sql-mode][SQL Mode]]
+    - [[#csharp][Csharp]]
     - [[#python-mode][Python Mode]]
     - [[#haskell-mode][Haskell Mode]]
     - [[#vue-mode][Vue Mode]]
@@ -310,7 +314,7 @@ header-args :tangle yes
 ** Packages
 *** Theme
 #+BEGIN_SRC emacs-lisp
-(use-package modus-operandi-theme
+(use-package modus-themes
   :config
   (load-theme 'modus-operandi t)
   (setq modus-operandi-theme-slanted-constructs t)
@@ -491,72 +495,77 @@ want is prioritized instead.
 (setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
 
 (use-package org
-	     :ensure org-plus-contrib
-	     :pin org
-	     :after general
-	     :defer t
-	     :config
-	     (setq org-startup-indented t)
-	     (setq org-src-preserve-indentation t)
-	     (setq org-log-done t)
-       (setq org-latex-caption-above nil)
-	     (setq org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
-	     (add-hook 'org-capture-mode-hook 'evil-insert-state)
+  :ensure org-plus-contrib
+  :pin org
+  :defer t
+  :config
+  (setq org-startup-indented t)
+  (setq org-src-preserve-indentation t)
+  (setq org-log-done t)
+  (setq org-latex-caption-above nil)
+  (setq org-latex-logfiles-extensions (quote ("lof" "lot" "tex~" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl")))
+  (add-hook 'org-capture-mode-hook 'evil-insert-state)
 
-	     (setq org-latex-listings 'minted
-		   org-latex-packages-alist '(("" "minted"))
-		   org-latex-pdf-process
-		   '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-		     "bibtex %b"
-		     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-		     "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  (setq org-latex-listings 'minted
+	org-latex-packages-alist '(("" "minted"))
+	org-latex-pdf-process
+	'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	  "bibtex %b"
+	  "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	  "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
-	     (setq tpanum/org-exporters
-		   '(("latex" . org-latex-export-to-pdf)
-		     ("beamer" . org-beamer-export-to-pdf)
-		     ("hugo" . (org-hugo-export-wim-to-md :all-subtrees))))
+  (defun my-beamer-bold (contents backend info)
+    (when (eq backend 'beamer)
+      (replace-regexp-in-string "\\`\\\\[A-Za-z0-9]+" "\\\\textbf" contents)))
 
-	     (defun tpanum/org-get-default-exporter ()
-	       (downcase (car (org-element-map
-				  (org-element-parse-buffer)
-				  'keyword (lambda (el)
-					     (when (string-equal (org-element-property :key el) "DEFAULT_EXPORTER")
-					       (org-element-property :value el)))))))
+  (setq tpanum/org-exporters
+	'(("latex" . org-latex-export-to-pdf)
+	  ("beamer" . org-beamer-export-to-pdf)
+	  ("hugo" . (org-hugo-export-wim-to-md :all-subtrees))))
 
-	     (defun tpanum/org-default-export ()
-	       "Look for the property `DEFAULT_EXPORTER' within an org file, and select exporter based on `tpanum/org-exporters'"
-	       (interactive)
-	       (let ((exporter (cdr (assoc (tpanum/org-get-default-exporter) tpanum/org-exporters))))
-		 (call-interactively exporter)))
+  (defun tpanum/org-get-default-exporter ()
+    (downcase (car (org-element-map
+		       (org-element-parse-buffer)
+		       'keyword (lambda (el)
+				  (when (string-equal (org-element-property :key el) "DEFAULT_EXPORTER")
+				    (org-element-property :value el)))))))
+
+  (defun tpanum/org-default-export ()
+    "Look for the property `DEFAULT_EXPORTER' within an org file, and select exporter based on `tpanum/org-exporters'"
+    (interactive)
+    (let ((exporter (cdr (assoc (tpanum/org-get-default-exporter) tpanum/org-exporters))))
+      (call-interactively exporter)))
 
 
-	     (general-define-key :keymaps 'org-mode-map
-				 :states '(normal)
-				 "RET" 'org-open-at-point
-				 "S-<right>" 'org-shiftmetaright
-				 "S-<left>" 'org-shiftmetaleft
-				 "S-<up>" 'org-shiftmetaup
-				 "S-<up>" 'org-shiftmetadown
-				 "C-e" 'tpanum/org-default-export
-				 )
+  (general-define-key :keymaps 'org-mode-map
+		      :states '(normal)
+		      "RET" 'org-open-at-point
+		      "S-<right>" 'org-shiftmetaright
+		      "S-<left>" 'org-shiftmetaleft
+		      "S-<up>" 'org-shiftmetaup
+		      "S-<up>" 'org-shiftmetadown
+		      "C-e" 'tpanum/org-default-export
+		      )
 
-	     (general-define-key :keymaps 'doc-view-mode-map
-				 :states '(emacs)
-				 "<escape>" 'kill-buffer-and-window)
+  (general-define-key :keymaps 'doc-view-mode-map
+		      :states '(emacs)
+		      "<escape>" 'kill-buffer-and-window)
 
-	     (require 'ox-extra)
-	     (ox-extras-activate '(ignore-headlines))
-	     (add-to-list 'org-latex-classes
-			  '("IEEEtran"
-			    "\\documentclass{IEEEtran}"
-			    ("\\section{%s}" . "\\section*{%s}")
-			    ("\\subsection{%s}" . "\\subsection*{%s}")
-			    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-			    ("\\paragraph{%s}" . "\\paragraph*{%s}")
-			    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-	     (general-define-key :keymaps 'org-capture-mode-map
-				 :states '(normal)
-				 "q" 'org-capture-finalize))
+  (require 'ox-extra)
+  (ox-extras-activate '(ignore-headlines))
+  (add-to-list 'org-latex-classes
+	       '("IEEEtran"
+		 "\\documentclass{IEEEtran}"
+		 ("\\section{%s}" . "\\section*{%s}")
+		 ("\\subsection{%s}" . "\\subsection*{%s}")
+		 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+		 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+		 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+  (add-to-list 'org-export-filter-bold-functions 'my-beamer-bold)
+  (general-define-key :keymaps 'org-capture-mode-map
+		      :states '(normal)
+		      "q" 'org-capture-finalize))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -597,38 +606,6 @@ Export to reveal.js
   :config
   (setq org-re-reveal--href-fragment-prefix org-re-reveal--slide-id-prefix)
 )
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(use-package worf
-             :ensure t
-             :after general
-             :config
-             (defun bjm/worf-insert-internal-link ()
-               "Use ivy to insert a link to a heading in the current `org-mode' document. Code is based on `worf-goto'."
-               (interactive)
-               (let ((cands (worf--goto-candidates)))
-                 (ivy-read "Heading: " cands
-                           :action 'bjm/worf-insert-internal-link-action)))
-
-(use-package with-simulated-input
-:ensure t
-:config
-(defun bjm/worf-insert-internal-link-action (x)
-  "Insert link for `bjm/worf-insert-internal-link'"
-  ;; go to heading
-  (save-excursion
-    (goto-char (cdr x))
-    ;; store link
-    (call-interactively 'org-store-link))
-  ;; return to original point and insert link
-  (with-simulated-input "RET" (call-interactively 'org-insert-last-stored-link))
-  ;; org-insert-last-stored-link adds a newline so delete this
-  (delete-char -1))
-
-             (general-define-key :keymaps 'org-mode-map
-                                 :states '(normal)
-                                 "C-c v" 'bjm/worf-insert-internal-link)))
 #+END_SRC
 
 Use ox-hugo for blogging
@@ -1124,25 +1101,26 @@ the languages in ISPELL-LANGUAGES when invoked."
 *** Org Babel
 #+BEGIN_SRC emacs-lisp
 (use-package ob
-	     :ensure nil
-	     :after org
-	     :functions (org-babel-do-load-languages)
-	     :config
-	     (general-define-key
-	      :states '(normal emacs)
-	      "C-n" 'org-babel-next-src-block
-	      "C-p" 'org-babel-previous-src-block
-	      "C-<return>" 'org-babel-execute-src-block)
+  :ensure nil
+  :after org
+  :functions (org-babel-do-load-languages)
+  :config
+  (general-define-key
+   :states '(normal emacs)
+   "C-n" 'org-babel-next-src-block
+   "C-p" 'org-babel-previous-src-block
+   "C-<return>" 'org-babel-execute-src-block)
 
-	     (general-define-key
-	      :states '(normal visual emacs)
-	      :prefix "SPC"
-	      "obra" 'org-babel-execute-buffer)
-	     (setq org-src-fontify-natively t)
-	     (setq org-confirm-babel-evaluate nil)
-	     (org-babel-do-load-languages 'org-babel-load-languages
-					  '((emacs-lisp . t)))
-	     (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
+  (general-define-key
+   :states '(normal visual emacs)
+   :prefix "SPC"
+   "obra" 'org-babel-execute-buffer)
+  (setq org-src-fontify-natively t)
+  (setq org-confirm-babel-evaluate nil)
+  (org-babel-do-load-languages 'org-babel-load-languages
+			       '((emacs-lisp . t)
+                                 (sql . t)))
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
 
 (use-package ob-python
 	     :after ob
@@ -1164,6 +1142,13 @@ the languages in ISPELL-LANGUAGES when invoked."
 	     (add-hook 'dired-mode-hook 'auto-revert-mode))
 #+END_SRC
 ** Additional Modes
+*** LSP Mode
+#+BEGIN_SRC emacs-lisp
+(use-package lsp-mode
+  :commands (lsp-deferred)
+  :config
+  (setq read-process-output-max (* 1024 1024)))
+#+END_SRC
 *** Rust Mode
 #+BEGIN_SRC emacs-lisp
 (use-package rust-mode
@@ -1190,16 +1175,22 @@ the languages in ISPELL-LANGUAGES when invoked."
 #+END_SRC
 *** Go Mode
 #+BEGIN_SRC emacs-lisp
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
 (use-package go-mode
-  :init
-  (progn
-  (if (executable-find "goimports") (setq gofmt-command "goimports"))
-  (setq gofmt-command "goimports")
-  (add-hook 'before-save-hook 'gofmt-before-save)
+  ;; :init
+  ;; (progn
+  ;;   (if (executable-find "goimports") (setq gofmt-command "goimports"))
+  ;;   (setq gofmt-command "goimports")
+  ;;   (add-hook 'before-save-hook 'gofmt-before-save))
   :config
-  (add-hook 'go-mode-hook 'electric-pair-mode)
   (add-to-list 'exec-path "/home/tpanum/go/bin")
-  :mode "\\.go\\'" ))
+  (add-hook 'go-mode-hook 'electric-pair-mode)
+  (add-hook 'go-mode-hook 'lsp-deferred)
+  (add-hook 'go-mode-hook 'lsp-go-install-save-hooks)
+  :mode "\\.go\\'")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -1240,8 +1231,25 @@ the languages in ISPELL-LANGUAGES when invoked."
 *** Anaconda Mode
 #+BEGIN_SRC emacs-lisp
 (use-package anaconda-mode
+  :after flycheck
   :hook ((python-mode . anaconda-mode)
-         (python-mode . anaconda-eldoc-mode)))
+         (python-mode . anaconda-eldoc-mode)
+         (python-mode . (lambda () (set (make-local-variable 'compile-command) (concat "python " buffer-file-name)))))
+  :general (:keymaps 'python-mode-map
+		     :prefix "C-c"
+		     "C-c" 'recompile)
+  :config
+  (add-to-list 'flycheck-disabled-checkers 'python-pylint)
+  (flycheck-add-next-checker 'python-pycompile 'python-pyright))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(if (executable-find "autopep8")
+    (use-package py-autopep8
+      :commands (py-autopep8-before-save py-autopep8-enable-on-save)
+      :hook
+      (python-mode . py-autopep8-enable-on-save)
+      ))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -1253,13 +1261,76 @@ the languages in ISPELL-LANGUAGES when invoked."
 Add backend for company mode
 #+BEGIN_SRC emacs-lisp
 (use-package company-anaconda
-	     :after (:all company anaconda-mode)
-	     :hook ((anaconda-mode . tpanum/anaconda-company-hook-function))
-	     :config
-	     (add-to-list 'company-backends 'company-anaconda)
-	     (defun tpanum/anaconda-company-hook-function ()
-             (set (make-local-variable 'company-backends)
-             '((company-anaconda)))))
+  :after (:all company anaconda-mode)
+  :hook ((anaconda-mode . tpanum/anaconda-company-hook-function))
+  :config
+  (add-to-list 'company-backends 'company-anaconda)
+  (defun tpanum/anaconda-company-hook-function ()
+    (set (make-local-variable 'company-backends)
+         '((company-anaconda)))))
+#+END_SRC
+
+*** Elm Mode
+#+BEGIN_SRC emacs-lisp
+(use-package elm-mode
+  :ensure t
+  :mode ("\\.elm\\'" . elm-mode)
+  :after company
+  :diminish elm-format-on-save-mode
+  :diminish elm-indent-mode
+  :config
+  (when (executable-find "elm-format")
+    (setq-default elm-format-on-save t))
+  (add-hook 'elm-mode-hook (lambda ()
+							 (set (make-local-variable 'company-backends)
+								  '(company-elm
+									company-yasnippet
+									company-files))))
+  (add-hook 'elm-mode-hook (lambda ()
+							 (setq-default indent-tabs-mode nil))))
+
+(use-package flycheck-elm
+  :ensure t
+  :after elm-mode flycheck
+  :config
+  (eval-after-load 'flycheck
+    '(add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
+  )
+#+END_SRC
+*** SQL Mode
+#+BEGIN_SRC emacs-lisp
+(use-package sqlup-mode
+  :diminish sqlup-mode
+  :config
+  (add-hook 'sql-mode-hook 'sqlup-mode))
+
+(use-package sql-indent
+  :diminish sql-indent
+  :hook (sql-mode . sqlind-minor-mode))
+
+(use-package sql
+  :config
+  (add-hook 'sql-mode-hook
+	    '(lambda ()
+	       (flycheck-select-checker 'sql-sqlint)
+	       )))
+#+END_SRC
+
+*** Csharp
+#+BEGIN_SRC emacs-lisp
+(use-package csharp-mode
+  :mode "\\.cs\\'")
+(use-package omnisharp
+  :after (:all company flycheck)
+  :config
+  (add-hook 'csharp-mode-hook 'omnisharp-mode)
+  ;; Company integration
+  (eval-after-load
+   'company
+   '(add-to-list 'company-backends 'company-omnisharp))
+  (add-hook 'csharp-mode-hook #'company-mode)
+  ;; Flycheck integration
+  (add-hook 'csharp-mode-hook #'flycheck-mode))
 #+END_SRC
 
 *** Python Mode
@@ -1272,55 +1343,16 @@ Run `isort` on save.
 
 Format Python on save.
 #+BEGIN_SRC emacs-lisp
-(use-package python-black
-             :after python
-             :init
-             (setq python-black-extra-args '("-l" "79"))
-             (add-hook 'python-mode-hook 'python-black-on-save-mode))
-#+END_SRC
-
-Enable mypy checking
-#+BEGIN_SRC emacs-lisp
-(use-package flycheck-mypy
-	     :after flycheck
-	     :config
-	     (setq flycheck-python-mypy-args "--ignore-missing-imports")
-	     (add-to-list 'flycheck-disabled-checkers 'python-flake8)
-	     (flycheck-add-next-checker 'python-pylint 'python-mypy t))
+;; (use-package python-black
+;;              :after python
+;;              :init
+;;              (setq python-black-extra-args '("-l" "79"))
+;;              (add-hook 'python-mode-hook 'python-black-on-save-mode))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 (use-package python-docstring
     :hook (python-mode . python-docstring-mode))
-#+END_SRC
-
-Import helpers
-#+BEGIN_SRC emacs-lisp
-;; (use-package pyimport
-;; 	     :after general
-;; 	     :config
-;; 	     (general-define-key :keymaps 'python-mode-map
-;; 				 :states '(normal)
-;; 				 "C-c C-i" 'pyimport-insert-missing
-;; 				 "C-c C-q" 'pyimport-remove-unused)
-;; 	     (add-hook 'before-save-hook 'pyimport-remove-unused))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(use-package jupyter
-	     :after (:all org python)
-	     :config
-	     (add-to-list 'org-babel-load-languages '(jupyter . t) t)
-	     (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
-
-	     (setq org-babel-default-header-args:jupyter-python
-		   '((:session . "py")
-		     (:async . "yes")
-		     (:exports . "results")
-		     (:kernel . "python3")))
-	     (require 'jupyter-tramp)
-	     (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
-	     (org-babel-jupyter-override-src-block "python"))
 #+END_SRC
 
 *** Haskell Mode
@@ -1354,11 +1386,14 @@ Import helpers
              (auctex-latexmk-setup))
 
 (use-package cdlatex
-             :hook (LaTeX-mode . turn-on-cdlatex))
+  :hook (LaTeX-mode . turn-on-cdlatex)
+  :config
+  (setq cdlatex-paired-parens "$[{("
+	cdlatex-sub-super-scripts-outside-math-mode nil))
 
 (use-package company-auctex
-             :config
-             (company-auctex-init))
+  :config
+  (company-auctex-init))
 
 (use-package latex
              :ensure auctex
@@ -1408,6 +1443,6 @@ nil nil 'center))
 Let's lower our GC thresholds back down to a sane level.
 
 #+Begin_SRC emacs-lisp
-   (setq gc-cons-threshold 16777216
+   (setq gc-cons-threshold 100000000
       gc-cons-percentage 0.1)
 #+END_SRC

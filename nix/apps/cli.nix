@@ -1,33 +1,34 @@
 { config, pkgs, ... }:
 let
+  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
   minionpro = pkgs.callPackage ../nixpkgs/fonts/minionpro.nix {};
-  texlive = pkgs.lib.overrideDerivation (pkgs.texlive.combine {
-    inherit (pkgs.texlive)
-    scheme-full;
-       minionpro.pkgs = [minionpro];
-     }) (oldAttrs: {
-     postBuild = ''
-       # Save the udpmap.cfg because texlive.combine removes it.
-       cat $out/share/texmf/web2c/updmap.cfg > $out/share/texmf/web2c/updmap.cfg.1
-       '' + oldAttrs.postBuild + ''
-       # Move updmap.cfg into its original place and rerun mktexlsr, so that kpsewhich finds it
-       rm $out/share/texmf/web2c/updmap.cfg || true
-       cat $out/share/texmf/web2c/updmap.cfg.1 > $out/share/texmf/web2c/updmap.cfg
-       rm $out/share/texmf/web2c/updmap.cfg.1
-       perl `type -P mktexlsr.pl` $out/share/texmf
+  # texlive = pkgs.lib.overrideDerivation (pkgs.texlive.combine {
+  #   inherit (pkgs.texlive)
+  #   scheme-full;
+  #      minionpro.pkgs = [minionpro];
+  #    }) (oldAttrs: {
+  #    postBuild = ''
+  #      # Save the udpmap.cfg because texlive.combine removes it.
+  #      cat $out/share/texmf/web2c/updmap.cfg > $out/share/texmf/web2c/updmap.cfg.1
+  #      '' + oldAttrs.postBuild + ''
+  #      # Move updmap.cfg into its original place and rerun mktexlsr, so that kpsewhich finds it
+  #      rm $out/share/texmf/web2c/updmap.cfg || true
+  #      cat $out/share/texmf/web2c/updmap.cfg.1 > $out/share/texmf/web2c/updmap.cfg
+  #      rm $out/share/texmf/web2c/updmap.cfg.1
+  #      perl `type -P mktexlsr.pl` $out/share/texmf
 
-       yes | perl `type -P updmap.pl` --sys --syncwithtrees --force || true
-       perl `type -P updmap.pl` --sys --enable Map=MinionPro.map --enable Map=MyriadPro.map
+  #      yes | perl `type -P updmap.pl` --sys --syncwithtrees --force || true
+  #      perl `type -P updmap.pl` --sys --enable Map=MinionPro.map --enable Map=MyriadPro.map
 
-       # Add minionpro/myriad
-       #echo "Map MinionPro.map" >> $out/share/texmf/web2c/updmap.cfg
-       #echo "Map MyriadPro.map" >> $out/share/texmf/web2c/updmap.cfg
+  #      # Add minionpro/myriad
+  #      #echo "Map MinionPro.map" >> $out/share/texmf/web2c/updmap.cfg
+  #      #echo "Map MyriadPro.map" >> $out/share/texmf/web2c/updmap.cfg
 
-       # Regenerate .map files.
-       perl `type -P updmap.pl` --sys
-     '';
-     });
-
+  #      # Regenerate .map files.
+  #      perl `type -P updmap.pl` --sys
+  #    '';
+  #    });
+  mozPkgs = import <nixpkgs> { overlays = [ moz_overlay ]; };
 in
 {
   environment = {
@@ -59,9 +60,9 @@ in
       nfs-utils          # accessing nfs
       borgbackup         # backup solution
       duplicacy
-      docker_compose     # easy and simple docker orchestration
+      docker-compose     # easy and simple docker orchestration
       parted             # needed for gnome3 disks util
-      winusb             # tool for creating bootable windows usbs
+      woeusb-ng          # tool for creating bootable windows usbs
       imagemagick        # image resizing and manipulation
       wmctrl             # controlling windows (i.e. shutdown firefox on boot)
       imagemagick        # image manipulation from cli
@@ -77,18 +78,21 @@ in
       nmap               # port scanner
       # mitmproxy
       unstable.hugo      # website generator
-      woeusb             # making windows bootables
       jq                 # json handler
       peek               # screen recording
       mpv                # show webcam on screen
       screenkey          # show keys pressed on screen
       protobuf           # dealing with Google's Protobuf format
-      wireguard          # vpn
-      libqrencode        # encode wireguard configs to qr
-      ws                 # websocket tool
+      wireguard-tools          # vpn
+      qrencode        # encode wireguard configs to qr
       unstable.rclone
       inotifyTools
       powerstat
+
+
+      # rust
+      mozPkgs.latest.rustChannels.stable.rust
+      rust-analyzer
 
       # networking
       whois
@@ -117,44 +121,60 @@ in
       # development
       exercism
       sqlite  # small file-oriented sql database
-      go_1_14 # golang programming language
+      libspatialite
+      go # golang programming language
       dep     # depedency manager for golang
       gotools # helper cli for golang (auto importing and more)
       golangci-lint
+      sqlint
 
       conda
+      micromamba
+      pipenv
+      unstable.ruff
       pre-commit
       (python3.withPackages (ps: with ps; [
-        pyflakes
-        pytest
         autopep8
-        pylint
         black
-        isort
-        mypy
-
-        requests
-        # pytorch
-        # torchvision
         epc
-        pygments
-        jupyter
         ipython
-        pandas
+        isort
+        jupyter
         matplotlib
+        pandas
+        pyflakes
+        pygments
+        pylint
+        python-lsp-server
+        pytest
+        requests
+        mypy
+        pydantic
       ]))
-      unstable.nodePackages.pyright
+      pyright
+
+      postgresql
+      dbeaver
+      throttled
+      argo
+      kubectl
+      envsubst
+      kubeseal
+      kubernetes-helm
+      k9s
+      yq-go
+
+      bazel_6
 
       gcc_multi
-      # elmPackages.elm
-      # elmPackages.elm-format
+      elmPackages.elm
+      elmPackages.elm-live
+      elmPackages.elm-format
+      elmPackages.create-elm-app
+
       nodejs
       nodePackages.gulp
-      nodePackages."@vue/cli"
-      leiningen  # clojure management
-      clojure
       sass
-      rustup
 
       # extraction + compression
       unrar
@@ -170,11 +190,8 @@ in
 
       # typography
       # texlive.combined.scheme-full
-      texlive
+      # texlive
       vale
-
-      # virtualization
-      unstable.packer
 
       gsmartcontrol
       glxinfo

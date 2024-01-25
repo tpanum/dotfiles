@@ -2,19 +2,21 @@
 
 {
   programs = {
+    browserpass = {
+      enable = true;
+      browsers = ["firefox"];
+    };
+
     firefox = {
       enable = true;
-      package = pkgs.firefox;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        # todo: these are not enabled by default
-        browserpass
-        https-everywhere
-        ublock-origin
-        reddit-enhancement-suite
-      ];
       profiles.primary = {
         name = "primary";
         isDefault = true;
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+            browserpass
+            ublock-origin
+            reddit-enhancement-suite
+        ];
         settings = {
           "browser.uidensity" = 1;
           "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";

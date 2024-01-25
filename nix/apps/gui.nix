@@ -2,7 +2,7 @@
 { config, lib, pkgs, stdenv, ... }:
 {
   environment.sessionVariables = {
-        BROWSER = "brave";
+        BROWSER = "firefox";
   };
 
   # for steam
@@ -35,26 +35,22 @@
     };
   };
 
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url =
-        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-    }))
-  ];
-
-
-  # browser extension
-  programs.browserpass.enable = true;
+  # nixpkgs.overlays = [
+  #   (import (builtins.fetchTarball {
+  #     url =
+  #       "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+  #   }))
+  # ];
 
   services.urxvtd.enable = true;
   services.emacs = {
     enable = true;
-    package = pkgs.emacsUnstable;
+    package = pkgs.emacs29;
   };
 
 
   # for evolution
-  services.gnome3.evolution-data-server.enable = true;
+  services.gnome.evolution-data-server.enable = true;
   programs.dconf.enable = true;
 
   environment = {
@@ -75,10 +71,9 @@
       lxappearance
 
       # emacs
-      emacsUnstable
+      emacs29
       languagetool              # advanced grammar tool
       libnotify                 # notification dependency for emacs
-      pygmentex
 
       # mail
       thunderbird
@@ -94,7 +89,7 @@
       playerctl                 # tool for start/stop/skip music
       ffmpeg
 
-      brave
+      # tor-browser-bundle-bin
       google-chrome
       (writeScriptBin "youtube-music" ''
         #!${pkgs.stdenv.shell}
@@ -112,7 +107,6 @@
       vlc                       # video player
       simplescreenrecorder      # screen recording
       kdenlive                  # video manipulation
-      teams
       libreoffice-fresh         # needed for opening microsoft products!
       wireshark                 # traffic analysis
       mimeo                     # program for open files wisely
@@ -121,20 +115,26 @@
       xclip
       xsel   # for urxvt
 
+      blender
       pavucontrol               # audio control
       qbittorrent
       steam
-      unstable.lutris
       mame
 
       qtpass
+      filezilla
+      mitmproxy
+
+      wine64
 
       # messaging
       signal-desktop
       skypeforlinux
       slack
       zoom-us
-      audacity
+
+      # sql
+      beekeeper-studio
     ];
   };
 }

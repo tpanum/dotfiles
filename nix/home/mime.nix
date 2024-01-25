@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
+let
+  browser = "brave-browser.desktop";
+in
 {
+  xdg.configFile."mimeapps.list".force = true;
   xdg.mimeApps = {
     enable = true;
     associations = {
@@ -9,20 +13,20 @@
       removed = {};
     };
     defaultApplications = {
-      "x-scheme-handler/http" = "brave-browser.desktop";
-      "x-scheme-handler/https" = "brave-browser.desktop";
-      "x-scheme-handler/ftp" = "brave-browser.desktop";
-      "x-scheme-handler/chrome" = "brave-browser.desktop";
-      "text/html" = "brave-browser.desktop";
-      "application/x-extension-htm" = "brave-browser.desktop";
-      "application/x-extension-html" = "brave-browser.desktop";
-      "application/x-extension-shtml" = "brave-browser.desktop";
-      "application/xhtml+xml" = "brave-browser.desktop";
-      "application/x-extension-xhtml" = "brave-browser.desktop";
-      "application/x-extension-xht" = "brave-browser.desktop";
-      "x-scheme-handler/about" = "brave-browser.desktop";
-      "x-scheme-handler/unknown" = "brave-browser.desktop";
-      "default-web-browser" = "brave-browser.desktop";
+      "x-scheme-handler/http" = browser;
+      "x-scheme-handler/https" = browser;
+      "x-scheme-handler/ftp" = browser;
+      "x-scheme-handler/chrome" = browser;
+      "text/html" = browser;
+      "application/x-extension-htm" = browser;
+      "application/x-extension-html" = browser;
+      "application/x-extension-shtml" = browser;
+      "application/xhtml+xml" = browser;
+      "application/x-extension-xhtml" = browser;
+      "application/x-extension-xht" = browser;
+      "x-scheme-handler/about" = browser;
+      "x-scheme-handler/unknown" = browser;
+      "default-web-browser" = browser;
     };
   };
 }

@@ -3,8 +3,8 @@ let
   sfmono = pkgs.callPackage ../nixpkgs/fonts/sfmono.nix {};
 in
 {
-  fonts.enableFontDir = true;
-  fonts.fonts = with pkgs; [
+  fonts.fontDir.enable = true;
+  fonts.packages = with pkgs; [
     fira
     fira-mono
     fira-code

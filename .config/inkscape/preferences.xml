@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <inkscape
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   version="1"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1">
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
   <group
      id="window">
     <group
@@ -34,7 +34,7 @@
        state="1" />
     <group
        id="scrollbars"
-       state="1" />
+       state="0" />
   </group>
   <group
      id="fullscreen">
@@ -110,11 +110,14 @@
     <sodipodi:namedview
        id="base"
        pagecolor="#ffffff"
+       pageopacity="0.0"
+       pagecheckerboard="0"
        bordercolor="#666666"
        borderopacity="1.0"
        objecttolerance="10.0"
        gridtolerance="10.0"
        guidetolerance="10.0"
+       pageshadow="2"
        inkscape:pageopacity="0.0"
        inkscape:pageshadow="2"
        inkscape:window-width="640"
@@ -132,8 +135,8 @@
          id="rect"
          style="fill:blue;"
          usecurrent="1"
-         width="520520"
-         height="210290"
+         width="1120.62"
+         height="737.621"
          rx="0"
          ry="0" />
       <eventcontext
@@ -172,8 +175,8 @@
          end="0"
          start="0"
          usecurrent="1"
-         rx="22.0525"
-         ry="22.0525" />
+         rx="16.7269"
+         ry="16.7269" />
       <eventcontext
          id="star"
          magnitude="3"
@@ -196,7 +199,7 @@
        style="fill:none;stroke:black;stroke-opacity:1;stroke-linejoin:miter;stroke-linecap:butt;">
       <eventcontext
          id="pencil"
-         tolerance="31.5"
+         tolerance="6"
          selcue="1"
          style="stroke-width:1px;"
          usecurrent="0"
@@ -223,6 +226,8 @@
        usepressure="1"
        usetilt="0"
        keep_selected="1"
+       abs_width="1"
+       unit="mm"
        tremor="0"
        wiggle="0">
       <group
@@ -329,7 +334,7 @@
        id="lpetool"
        mode="drag"
        style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;"
-       unit="px"
+       unit="mm"
        show_bbox="1" />
     <eventcontext
        id="text"
@@ -339,7 +344,8 @@
        show_sample_in_list="1"
        use_svg2="1"
        style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"
-       selcue="1">
+       selcue="1"
+       align_mode="1">
       <group
          display_unit="0"
          id="lineheight" />
@@ -359,8 +365,8 @@
        live_outline="1"
        live_objects="1"
        show_helperpath="0"
-       x="342.609"
-       y="441.023"
+       x="-46.0465"
+       y="417.55"
        edit_clipping_paths="1"
        edit_masks="0"
        highlight_color="4278190335" />
@@ -436,7 +442,23 @@
        scale="100"
        precision="2"
        fontsize="10"
-       id="measure" />
+       id="measure">
+      <group
+         id="measure-start"
+         x="0"
+         y="0" />
+      <group
+         id="measure-end"
+         x="0"
+         y="0" />
+    </group>
+    <eventcontext
+       id="marker"
+       selcue="1"
+       gradientdrag="1" />
+    <group
+       id="geometric"
+       mode="drag" />
   </group>
   <group
      id="palette">
@@ -557,7 +579,8 @@
   </group>
   <group
      id="colorselector"
-     page="0" />
+     page="1"
+     switcher="1" />
   <group
      id="embedded">
     <group
@@ -570,7 +593,8 @@
        panel_border="0" />
   </group>
   <group
-     id="dialogs">
+     id="dialogs"
+     traceliveUpdate="1">
     <group
        id="toolbox" />
     <group
@@ -580,11 +604,11 @@
        panel_mode="1"
        panel_wrap="0"
        panel_border="0"
-       page="0"
+       page="1"
        x="0"
        y="0"
        w="638"
-       h="712"
+       h="578"
        visible="1"
        state="2"
        placement="5" />
@@ -600,7 +624,7 @@
        x="0"
        y="0"
        w="638"
-       h="712"
+       h="578"
        visible="1"
        state="2"
        placement="5" />
@@ -617,13 +641,21 @@
        x="0"
        y="0"
        w="638"
-       h="712"
+       h="578"
        visible="1"
        state="2"
        placement="5"
-       align-to="4" />
+       align-to="6" />
     <group
-       id="xml" />
+       id="xml"
+       h="260"
+       w="638"
+       panedpos="144"
+       x="0"
+       y="0"
+       visible="1"
+       state="2"
+       placement="1" />
     <group
        id="find" />
     <group
@@ -643,7 +675,7 @@
        x="0"
        y="0"
        w="638"
-       h="712"
+       h="578"
        visible="1"
        placement="5" />
     <group
@@ -666,7 +698,7 @@
        x="0"
        y="0"
        w="638"
-       h="712"
+       h="578"
        visible="1"
        state="2"
        placement="5">
@@ -682,21 +714,21 @@
     </group>
     <group
        id="save_as"
-       default="org.inkscape.output.pdf.cairorenderer"
+       default="org.inkscape.output.svg.plain"
        append_extension="1"
        enable_preview="1"
-       path="/home/tpanum/research/aml-presentation"
+       path="/home/tpanum/personal/aau-beamer-template/assets"
        use_current_dir="1" />
     <group
        id="save_copy"
-       default=""
+       default="org.inkscape.output.pdf.cairorenderer"
        append_extension="1"
        enable_preview="1"
-       path="" />
+       path="/home/tpanum/research/phd/defence/img" />
     <group
        id="open"
        enable_preview="1"
-       path="/home/tpanum/research/adv-metric-learning-paper/figs/" />
+       path="/home/tpanum/personal/aau-beamer-template/assets/" />
     <group
        id="import"
        enable_preview="1"
@@ -711,7 +743,8 @@
        id="debug"
        redirect="0" />
     <group
-       id="clonetiler" />
+       id="clonetiler"
+       dotrace="0" />
     <group
        id="gridtiler" />
     <group
@@ -732,6 +765,8 @@
     <group
        id="layers"
        maxDepth="20"
+       w="638"
+       h="578"
        panel_size="1"
        panel_ratio="100"
        panel_mode="1"
@@ -739,8 +774,6 @@
        panel_border="0"
        x="0"
        y="0"
-       w="638"
-       h="712"
        visible="1"
        state="2"
        placement="5" />
@@ -762,6 +795,9 @@
        on-focus="1.0"
        on-blur="0.50"
        animate-time="100" />
+    <group
+       id="printing"
+       asbitmap="0" />
   </group>
   <group
      id="printing">
@@ -772,7 +808,8 @@
        add-label-comments="0" />
   </group>
   <group
-     id="options">
+     id="options"
+     rotationlock="1">
     <group
        id="renderingcache"
        size="64" />
@@ -945,7 +982,8 @@
     <group
        id="maskobject"
        topmost="1"
-       remove="1" />
+       remove="1"
+       grouping="0" />
     <group
        id="blurquality"
        value="0" />
@@ -1054,26 +1092,41 @@
        id="dash"
        scale="1" />
     <group
+       id="font"
        unitType="2"
-       id="font" />
+       scaleLineHeightFromFontSIze="1" />
+    <group
+       id="middlemousezoom"
+       value="1" />
+    <group
+       id="boot"
+       theme="colorful">
+      <group
+         id="shown"
+         ver1.1="1"
+         ver1.2.2="1" />
+    </group>
   </group>
   <group
      id="extensions"
+     org.inkscape.output.png.inkscape.png_bitdepth="99"
+     org.inkscape.output.png.inkscape.png_compression="6"
+     org.inkscape.output.png.inkscape.png_antialias="2"
      org.inkscape.output.pdf.cairorenderer.PDFversion="PDF-1.5"
      org.inkscape.output.pdf.cairorenderer.resolution="96"
      org.inkscape.output.pdf.cairorenderer.bleed="0"
      org.inkscape.output.pdf.cairorenderer.area="page" />
   <group
      id="desktop"
-     style="line-height:1.25;fill:none;stroke:#000000;stroke-width:0.99999869;-inkscape-font-specification:'sans-serif, Bold';font-family:sans-serif;font-weight:bold;font-size:19.12400055px;writing-mode:lr;paint-order:stroke fill markers;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:0.99999869,3.99999475">
+     style="line-height:1.25;fill:#ccaaff;-inkscape-font-specification:'sans-serif, Normal';font-family:sans-serif;font-size:17.27350044px;writing-mode:lr;stop-color:#000000;stroke-width:1.37952756;text-anchor:middle;text-align:center;stroke:#8d5fd3;stroke-linecap:round">
     <group
-       width="946"
-       height="1066"
-       x="1925"
-       y="65"
+       width="1266"
+       height="1400"
+       x="5"
+       y="31"
+       maximized="1"
        fullscreen="0"
-       id="geometry"
-       maximized="1" />
+       id="geometry" />
     <group
        id="XYfront" />
     <group
@@ -1093,11 +1146,20 @@
      id="toolbox"
      icononly="1"
      secondary="1"
+     simplesnap="1"
      small="1">
     <group
        id="tools"
        icononly="1"
-       small="0" />
+       small="0"
+       iconsize="16"
+       width="32">
+      <group
+         id="buttons" />
+    </group>
+    <group
+       id="controlbars"
+       iconsize="16" />
   </group>
   <group
      id="iconpreview"
@@ -1171,12 +1233,35 @@
      id="ui"
      language="" />
   <group
+     id="theme"
+     defaultPreferDarkTheme="0"
+     defaultIconTheme="elementary-xfce-darkest"
+     defaultGtkTheme="Arc-Dark"
+     narrowSpinButton="1"
+     preferDarkTheme="1"
+     darkTheme="1"
+     symbolicIcons="1"
+     symbolicDefaultBaseColors="0"
+     symbolicDefaultHighColors="0"
      menuIcons_objects="0"
      menuIcons_layers="0"
      menuIcons_canvas="0"
-     iconTheme="elementary-xfce-darkest"
-     gtkTheme="Arc-Dark"
-     defaultIconTheme="elementary-xfce-darkest"
+     gtkTheme="Adwaita"
      defaultTheme="Arc-Dark"
-     id="theme" />
+     iconTheme="multicolor">
+    <group
+       id="multicolor"
+       symbolicBaseColor="3958107135"
+       symbolicSuccessColor="10029823"
+       symbolicWarningColor="4279865599"
+       symbolicErrorColor="10086143" />
+  </group>
+  <group
+     id="live_effects"
+     flattening="0" />
+  <group
+     id="statusbar">
+    <group
+       id="visibility" />
+  </group>
 </inkscape>

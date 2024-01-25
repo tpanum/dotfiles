@@ -3,20 +3,16 @@ let
   dmenu = pkgs.dmenu.override {
     patches = builtins.map builtins.fetchurl [
       {
-        url = "https://tools.suckless.org/dmenu/patches/fuzzymatch/dmenu-fuzzymatch-4.9.diff";
-        sha256 = "0yababzi655mhpgixzgbca2hjckj16ykzj626zy4i0sirmcyg8fr";
+        url = "https://tools.suckless.org/dmenu/patches/center/dmenu-center-5.2.diff";
+        sha256 = "1jck88ypx83b73i0ys7f6mqikswgd2ab5q0dfvs327gsz11jqyws";
       }
       {
-        url = "https://tools.suckless.org/dmenu/patches/center/dmenu-center-4.8.diff";
-        sha256 = "0z21l82y11rx0kd74abpyh925rq29dl34y7p4868dl3ffknc7ifz";
+        url = "https://tools.suckless.org/dmenu/patches/border/dmenu-border-5.2.diff";
+        sha256 = "0kyi50z6c1y81gbq4kp9cnmg7gqpc9j17r7x227v6px68a8nj7p5";
       }
       {
-        url = "https://tools.suckless.org/dmenu/patches/border/dmenu-border-4.9.diff";
-        sha256 = "09j9z2mx16wii3xz1cfmin42ms7ci3dig64c8sgvv7yd9nc0nv1b";
-      }
-      {
-        url = "https://tools.suckless.org/dmenu/patches/line-height/dmenu-lineheight-4.9.diff";
-        sha256 = "4f7f6f46b23cbc3f38bcc7eff24a0cb74b8bc8651c2de29aa3adc4f16b4dc06c";
+        url = "https://tools.suckless.org/dmenu/patches/line-height/dmenu-lineheight-5.2.diff";
+        sha256 = "0jabb2ycfn3xw0k2d2rv7nyas5cwjr6zvwaffdn9jawh62c50qy5";
       }
     ];
   };
@@ -66,9 +62,8 @@ in
       # applications
       dmenu
       arandr                    # UI for xrandr (display controlling)
-      xcape                     # make shift behave like esc
       xsettingsd
-      xlibs.xmodmap            # swap buttons on the keyboard around
+      xorg.xmodmap             # swap buttons on the keyboard around
       hsetroot                 # set some tint color on background
       xvkbd                    # program for emulating keypresses and more (e.g. swap copy/paste to super+{c,v})
       acpilight                # provides xbacklight
@@ -100,14 +95,12 @@ in
 
         defaultSession = "none+xmonad";
         sessionCommands = ''
-          ${pkgs.xcape}/bin/xcape -e 'Shift_L=Escape' &
           ${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmaprc} &
           ${pkgs.xorg.xset}/bin/xset 120 4 &
           /home/tpanum/.scripts/status/_main.sh &
           xsetroot -cursor_name left_ptr
           (sleep 0.5 && $HOME/.scripts/wallpaper.sh) &
           (sleep 0.5 && ${pkgs.autorandr}/bin/autorandr --change) &
-          (sleep 1 && brave) &
           (sleep 1 && emacseditor) &
         '';
       };
@@ -120,9 +113,9 @@ in
         xmonad.enable = true;
         xmonad.enableContribAndExtras = true;
         xmonad.extraPackages = hpkgs: [
-        hpkgs.xmonad-contrib
-        hpkgs.xmonad-extras
-        hpkgs.xmonad
+          hpkgs.xmonad-contrib
+          hpkgs.xmonad-extras
+          hpkgs.xmonad
         ];
       };
     };
@@ -143,15 +136,28 @@ in
         "    XSECURELOCK_DIM_ALPHA=1"
         "${pkgs.xsecurelock}/bin/xsecurelock"
       ];
-      extraOptions = [
-        "--notifier=${pkgs.xsecurelock}/libexec/xsecurelock/dimmer"
-        "--transfer-sleep-lock"
-      ];
+    extraOptions = [
+      "--notifier=${pkgs.xsecurelock}/libexec/xsecurelock/dimmer"
+      "--transfer-sleep-lock"
+    ];
   };
 
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
     users.tpanum = import ./home.nix;
+  };
+
+  security.sudo = {
+    enable = true;
+    extraRules = [{
+      groups = [ "wheel" ];
+      runAs = "root";
+      commands = map (v: { command = v; options = [ "NOPASSWD" ]; }) [
+        "/run/current-system/sw/bin/reboot"
+        "/run/current-system/sw/bin/shutdown"
+        "/run/current-system/sw/bin/poweroff"
+      ];
+    }];
   };
 }

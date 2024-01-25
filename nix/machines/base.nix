@@ -17,8 +17,7 @@
   time.timeZone = "Europe/Copenhagen";
 
   boot = {
-    tmpOnTmpfs = true;
-    # kernelPackages = pkgs.linuxPackages_latest_hardened;
+    tmp.useTmpfs = true;
 
     loader = {
       timeout = 5;
@@ -27,6 +26,8 @@
       efi.canTouchEfiVariables = true;
     };
   };
+
+  zramSwap.enable = true;
 
   programs.bash.enableCompletion = true;
 
@@ -39,5 +40,5 @@
     allowUnfree = true;
   };
 
-  system.stateVersion = "20.03";
+  system.stateVersion = "23.05";
 }

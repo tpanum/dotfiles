@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  evscript = pkgs.callPackage ../nixpkgs/evscript.nix {};
+  evscript = pkgs.callPackage ../../nixpkgs/evscript.nix {};
   osx-copy-paste = (pkgs.writeScriptBin "osx-copy-paste" ''
       #!${pkgs.bash}/bin/bash
        case $1 in
@@ -35,6 +35,7 @@ in
 {
   imports = [
     ./gnome.nix
+    ../options/evscript.nix
   ];
 
   environment.systemPackages = with pkgs; [

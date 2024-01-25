@@ -73,8 +73,13 @@
           dpi = 0; # auto dpi
           height = 24;
           font-0 = "roboto:size=10;2";
-          modules-right =
-            "temperature cpu memory battery eth wlan date";
+          # modules-right = "temperature cpu memory battery eth wlan date";
+          modules-right = "wlan";
+        };
+
+        "module/wlan" = {
+          type = "internal/network";
+          interface = "wlp3s0";
         };
     };
 
@@ -90,13 +95,13 @@
     '';
   };
 
-  # services.picom = {
-  #   enable = true;
-  #   backend = "xr_glx_hybrid";
-  #   blur = true;
-  #   fade = true;
-  #   fadeExclude = [
-  #     "class_g != 'Dunst'"
-  #   ];
-  # };
+  services.picom = {
+    enable = true;
+    backend = "xr_glx_hybrid";
+    blur = true;
+    fade = true;
+    fadeExclude = [
+      "class_g != 'Dunst'"
+    ];
+  };
 }

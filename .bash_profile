@@ -57,3 +57,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+export PATH=~/.npm-packages/bin:$PATH.
+export PATH=~/.bin:$PATH.

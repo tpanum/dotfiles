@@ -14,46 +14,32 @@ let
   unstable = import <nixos-unstable> {};
 in
 {
-  # imports = [
-  #   ../nixpkgs/mullvad.nix
-  # ];
-  # workaround for https://github.com/NixOS/nixpkgs/issues/91923
-  networking.iproute2.enable = true;
-  services.mullvad-vpn.enable = true;
-
   environment = {
     systemPackages = with pkgs; [
       openconnect # vpn protocol
-      heimdalFull # needed for AFS
+      heimdal # needed for AFS
       networkmanagerapplet
-      sshfsFuse
+      sshfs-fuse
       openssh
       cifs-utils
       libressl
       openvpn
       iptables
-      dhcp
       openconnect
-      mullvad-vpn
     ];
   };
 
   fileSystems = {
-    "/storage/backup" = {
-      device = "nas.panum.dk:/backup";
-      fsType = "nfs";
-      # device = "//nas.panum.dk/backup";
-      # fsType = "cifs";
-      # noCheck = true;
-      # options = smbOptions;
-    };
-
-    "/storage/video" = {
-      device = "//nas.panum.dk/video";
-      fsType = "cifs";
-      noCheck = true;
-      options = smbOptions;
-    };
+    # "/storage/ludomanio" = {
+    #   device = "100.110.230.60:/business-data";
+    #   fsType = "nfs";
+    # };
+    # "/storage/video" = {
+    #   device = "//nas.panum.dk/video";
+    #   fsType = "cifs";
+    #   noCheck = true;
+    #   options = smbOptions;
+    # };
   };
 
   programs.nm-applet.enable = true;
@@ -91,42 +77,8 @@ in
       172.19.8.14 ai-pilot.srv.aau.dk
     '';
 
-    # wg-quick.interfaces = {
-    #   wg-mv = {
-    #     address = [ "10.66.1.10/32" ];
-    #     privateKeyFile = "/home/tpanum/.secret/wg-mv-dk1-private";
-    #     peers = [
-    #       {
-    #         publicKey = "ny9u5anjMGsoe2Yrf3wqZMvSifNtTknVMz3KfblWpi0=";
-    #         allowedIPs = [
-    #           "0.0.0.0/0"
-    #           "::0/0"
-    #         ];
-
-    #         endpoint = "185.245.84.122:8123";
-    #       }
-    #     ];
-    #     postUp = [
-    #       "ip route add 172.24.0.0/14 via 172.26.24.253 || true"
-    #     ];
-    #     postDown = [
-    #       "ip route del 172.24.0.0/14 via 172.26.24.253 || true"
-    #     ];
-    #   };
-    # };
-
-    wireguard.interfaces = {
-      wg-home = {
-        ips = [ "10.101.1.1/32" ];
-        privateKeyFile = "/home/tpanum/.secret/wireguard-private";
-        peers = [
-          {
-            publicKey = "wB/tWHkVjNYTppoS8SorxrEcotQpYuJIVDGENnNfgxg=";
-            allowedIPs = [ "10.101.0.0/24" ];
-            endpoint = "195.201.20.164:871";
-          }
-        ];
-      };
-    };
   };
+
+  services.mullvad-vpn.enable = false;
+  services.tailscale.enable = true;
 }

@@ -7,8 +7,7 @@
   ];
 
   services.autorandr.enable = true;
-  services.udisks2.enable = true;
-  services.devmon.enable = true;
+  services.devmon.enable = false;
   services.redshift.enable = true;
   location = {
     latitude = 57.04;
@@ -17,20 +16,24 @@
 
   services.xserver = {
     enable = true;
-    layout = "us";
+    layout = "dk";
     xkbVariant = "";
 
     inputClassSections = [''
-      Identifier "Built-in Keyboard"
+      Identifier      "Built-in Keyboard"
+
       MatchIsKeyboard "on"
-      MatchProduct "AT Translated Set 2 keyboard"
-      Option "XkbLayout" "dk"
-      Option "XkbVariant" ""
+      MatchProduct    "AT Translated Set 2 keyboard"
+
+      Option          "XkbLayout" "dk"
+      Option          "XkbVariant" ""
     ''
     ''
       Identifier "Kinesis"
+
       MatchIsKeyboard "on"
-      MatchProduct "You Kinesis Advantage/Contoured"
+      MatchProduct "QMK Kinesis Classic/Advantage/Contoured"
+
       Option "XkbLayout" "us"
       Option "XkbVariant" "altgr-intl"
     ''

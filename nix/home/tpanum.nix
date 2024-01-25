@@ -7,4 +7,6 @@
     ./autostart/mullvad.nix
     ./autostart/signal.nix
   ];
+
+  home.stateVersion = "23.05";
 }

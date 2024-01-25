@@ -2,23 +2,25 @@ Extension "Export to TikZ path" failed to load because a dependency was not met.
 Dependency:
 	type: file
 	location: extensions
-	string: tikz_export.py
-Extension "Export to TikZ path" failed to load because a dependency was not met.
-Dependency:
-	type: file
-	location: extensions
-	string: tikz_export.py
+	string: inkex.py
 
 Extension "Export as TikZ code for use with LaTeX" failed to load because a dependency was not met.
 Dependency:
 	type: file
 	location: extensions
-	string: tikz_export.py
-Extension "Export as TikZ code for use with LaTeX" failed to load because a dependency was not met.
+	string: inkex.py
+
+Extension "PostScript Input" failed to load because a dependency was not met.
 Dependency:
-	type: file
-	location: extensions
-	string: tikz_export.py
+	type: executable
+	location: path
+	string: /nix/store/63wa96v23j67f1l4pfn0v81bpdsx1q02-ghostscript-with-X-10.02.1/bin/ps2pdf
+
+Extension "Optimized PNG" failed to load because a dependency was not met.
+Dependency:
+	type: executable
+	location: path
+	string: optipng
 
 Extension "Export to PDF via Scribus" failed to load because a dependency was not met.
 Dependency:
@@ -26,9 +28,21 @@ Dependency:
 	location: path
 	string: scribus
 
+Extension "EPS Input" failed to load because a dependency was not met.
+Dependency:
+	type: executable
+	location: path
+	string: /nix/store/63wa96v23j67f1l4pfn0v81bpdsx1q02-ghostscript-with-X-10.02.1/bin/ps2pdf
+
 Extension "XFIG Input" failed to load because a dependency was not met.
 Dependency:
 	type: executable
 	location: path
 	string: fig2dev
+
+Extension "Formula (pdflatex)" failed to load because a dependency was not met.
+Dependency:
+	type: executable
+	location: path
+	string: pdflatex
 

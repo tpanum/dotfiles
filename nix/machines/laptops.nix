@@ -14,8 +14,10 @@ in
   ];
 
   boot = {
+    # kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     kernelModules = [ "acpi_call" ];
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    supportedFilesystems = [ "ntfs" ];
   };
 
   xdg.autostart.enable = true;
@@ -25,11 +27,22 @@ in
       enable = true;
       support32Bit = true;
       package = pkgs.pulseaudioFull;
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
+      daemon.config = {
+        # requried for ES100
+        default-sample-format = "s16le";
+        default-sample-rate = "48000";
+        alternate-sample-rate = "44100";
+      };
+      configFile = pkgs.runCommand "default.pa" { } ''
+      sed '
+        s/module-udev-detect$/module-udev-detect tsched=0/
+      ' \
+      ${pkgs.pulseaudio}/etc/pulse/default.pa > $out
+      '';
     };
 
     bluetooth.enable = true;
-    bluetooth.config = {
+    bluetooth.settings = {
       General = {
         Enable = "Source,Sink,Media,Socket";
         AutoConnect = "true";
@@ -44,7 +57,7 @@ in
 
   virtualisation = {
     libvirtd = {
-      qemuPackage = pkgs.qemu_kvm;
+      qemu.package = pkgs.qemu_kvm;
       enable = true;
     };
     docker = {
