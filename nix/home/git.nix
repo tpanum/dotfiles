@@ -9,15 +9,25 @@ in
 {
   programs.git = {
     enable = true;
-    userName = private.name;
-    userEmail = private.email;
     ignores = [".gitignore"];
     signing = {
-      key = private.signingKey;
+      key = "${config.home.homeDirectory}/.ssh/id_ed25519";
       signByDefault = true;
     };
     lfs.enable = true;
-    extraConfig = {
+    settings = {
+      user = {
+        name = private.name;
+        email = private.email;
+      };
+      gpg = {
+        format = "ssh";
+      };
+
+      rerere = {
+        enable = true;
+      };
+
       init = {
         defaultBranch = "main";
       };

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
-  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
   minionpro = pkgs.callPackage ../nixpkgs/fonts/minionpro.nix {};
+  latest-ruff = pkgs.callPackage ../nixpkgs/ruff.nix {};
   # texlive = pkgs.lib.overrideDerivation (pkgs.texlive.combine {
   #   inherit (pkgs.texlive)
   #   scheme-full;
@@ -28,7 +28,7 @@ let
   #      perl `type -P updmap.pl` --sys
   #    '';
   #    });
-  mozPkgs = import <nixpkgs> { overlays = [ moz_overlay ]; };
+  nixpkgs_unstable = import <nixpkgs-unstable> {};
 in
 {
   environment = {
@@ -86,12 +86,12 @@ in
       wireguard-tools          # vpn
       qrencode        # encode wireguard configs to qr
       unstable.rclone
-      inotifyTools
+      inotify-tools
       powerstat
 
 
       # rust
-      mozPkgs.latest.rustChannels.stable.rust
+      rustup
       rust-analyzer
 
       # networking
@@ -107,7 +107,7 @@ in
       aspell               # spellchecking
       aspellDicts.en       # ... for english
       aspellDicts.da       # ... for danish
-      (hunspellWithDicts (with hunspellDicts; [en-us]))
+      (hunspell.withDicts (dicts: with dicts; [en-us]))
       enchant
 
       # password
@@ -123,7 +123,6 @@ in
       sqlite  # small file-oriented sql database
       libspatialite
       go # golang programming language
-      dep     # depedency manager for golang
       gotools # helper cli for golang (auto importing and more)
       golangci-lint
       sqlint
@@ -131,7 +130,7 @@ in
       conda
       micromamba
       pipenv
-      unstable.ruff
+      nixpkgs_unstable.ruff
       pre-commit
       (python3.withPackages (ps: with ps; [
         autopep8
@@ -154,23 +153,21 @@ in
       pyright
 
       postgresql
-      dbeaver
+      dbeaver-bin
       throttled
-      argo
+      argo-workflows
       kubectl
       envsubst
       kubeseal
       kubernetes-helm
       k9s
       yq-go
-
-      bazel_6
+      minio-client
 
       gcc_multi
       elmPackages.elm
       elmPackages.elm-live
       elmPackages.elm-format
-      elmPackages.create-elm-app
 
       nodejs
       nodePackages.gulp
@@ -193,8 +190,10 @@ in
       # texlive
       vale
 
+      lsh # for sftp-server (used by ssh remote mount)
+
       gsmartcontrol
-      glxinfo
+      mesa-demos
 
       udiskie
       stress-ng

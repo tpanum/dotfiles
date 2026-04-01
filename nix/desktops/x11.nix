@@ -7,6 +7,7 @@
   ];
 
   services.autorandr.enable = true;
+  services.libinput.enable = true;
   services.devmon.enable = false;
   services.redshift.enable = true;
   location = {
@@ -16,8 +17,8 @@
 
   services.xserver = {
     enable = true;
-    layout = "dk";
-    xkbVariant = "";
+    xkb.layout = "dk";
+    xkb.variant = "";
 
     inputClassSections = [''
       Identifier      "Built-in Keyboard"
@@ -47,7 +48,6 @@
     ];
 
 
-    libinput.enable = true;
 
     displayManager = {
         sessionCommands = ''

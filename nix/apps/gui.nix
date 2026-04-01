@@ -6,25 +6,24 @@
   };
 
   # for steam
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     extraPackages32 = with pkgs.pkgsi686Linux; [
       libva
-      vaapiIntel
+      intel-vaapi-driver
       libvdpau-va-gl
-      vaapiVdpau
+      libva-vdpau-driver
     ];
 
     extraPackages = with pkgs; [
       libva
-      vaapiIntel
+      intel-vaapi-driver
       libvdpau-va-gl
-      vaapiVdpau
+      libva-vdpau-driver
     ];
   };
-  hardware.pulseaudio.support32Bit = true;
+  services.pulseaudio.support32Bit = true;
   nixpkgs.config.packageOverrides = pkgs: {
     unstable = import <nixos-unstable> {
       config = config.nixpkgs.config;
@@ -45,13 +44,14 @@
   services.urxvtd.enable = true;
   services.emacs = {
     enable = true;
-    package = pkgs.emacs29;
+    package = pkgs.emacs30;
   };
 
 
   # for evolution
   services.gnome.evolution-data-server.enable = true;
   programs.dconf.enable = true;
+  programs.steam.enable = true;
 
   environment = {
     systemPackages = with pkgs; [
@@ -71,7 +71,7 @@
       lxappearance
 
       # emacs
-      emacs29
+      emacs30
       languagetool              # advanced grammar tool
       libnotify                 # notification dependency for emacs
 
@@ -80,7 +80,7 @@
       unstable.evolution-ews
 
       # disks
-      gnome3.gnome-disk-utility # lovely simple tool for formatting and partioning drives
+      gnome-disk-utility # lovely simple tool for formatting and partioning drives
       gparted                   # dependency for disk-utility
       gptfdisk                  # disk partitioner
 
@@ -99,19 +99,19 @@
       pinta                     # user-friendly image manipulation
       gimp                      # user-friendly image manipulation
       unstable.inkscape         # vector graphics manipulation
-      gnome3.evince             # pdf viewer
-      gnome3.eog                # image viewer
-      poppler_utils             # pdf editing tools
+      evince             # pdf viewer
+      eog                # image viewer
+      poppler-utils             # pdf editing tools
       pdfpc                     # pdf presentation tool
       remmina                   # rdp, vnc client
       vlc                       # video player
       simplescreenrecorder      # screen recording
-      kdenlive                  # video manipulation
+      kdePackages.kdenlive      # video manipulation
       libreoffice-fresh         # needed for opening microsoft products!
       wireshark                 # traffic analysis
       mimeo                     # program for open files wisely
       xorg.xev                  # app for figuring out which button a keypress refers to
-      xournal                   # annotate pdfs
+      xournalpp                 # annotate pdfs
       xclip
       xsel   # for urxvt
 
@@ -129,7 +129,6 @@
 
       # messaging
       signal-desktop
-      skypeforlinux
       slack
       zoom-us
 

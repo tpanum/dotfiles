@@ -11,6 +11,7 @@ in
     ../apps/gui.nix
     ../apps/network.nix
     ../apps/backup.nix
+    ../apps/keyboard.nix
   ];
 
   boot = {
@@ -22,24 +23,25 @@ in
 
   xdg.autostart.enable = true;
 
-  hardware = {
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-      package = pkgs.pulseaudioFull;
-      daemon.config = {
-        # requried for ES100
-        default-sample-format = "s16le";
-        default-sample-rate = "48000";
-        alternate-sample-rate = "44100";
-      };
-      configFile = pkgs.runCommand "default.pa" { } ''
-      sed '
-        s/module-udev-detect$/module-udev-detect tsched=0/
-      ' \
-      ${pkgs.pulseaudio}/etc/pulse/default.pa > $out
-      '';
+  services.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+    package = pkgs.pulseaudioFull;
+    daemon.config = {
+      # requried for ES100
+      default-sample-format = "s16le";
+      default-sample-rate = "48000";
+      alternate-sample-rate = "44100";
     };
+    configFile = pkgs.runCommand "default.pa" { } ''
+    sed '
+      s/module-udev-detect$/module-udev-detect tsched=0/
+    ' \
+    ${pkgs.pulseaudio}/etc/pulse/default.pa > $out
+    '';
+  };
+
+  hardware = {
 
     bluetooth.enable = true;
     bluetooth.settings = {
@@ -71,10 +73,8 @@ in
   };
 
   services.logind = {
-    lidSwitchExternalPower = "ignore";
-    extraConfig = ''
-      HandlePowerKey=suspend
-    '';
+    settings.Login.HandleLidSwitchExternalPower = "ignore";
+    settings.Login.HandlePowerKey = "suspend";
   };
 
   services.acpid = {

@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -29,15 +31,20 @@
 
   zramSwap.enable = true;
 
-  programs.bash.enableCompletion = true;
+  programs.bash.completion.enable = true;
 
-  systemd.extraConfig = ''
-    DefaultTimeoutStartSec=10s
-    DefaultTimeoutStopSec=10s
-  '';
+  services.pipewire.enable = false;
+
+  systemd.settings.Manager = {
+    DefaultTimeoutStartSec = "10s";
+    DefaultTimeoutStopSec = "10s";
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
+    permittedInsecurePackages = [
+      "beekeeper-studio-5.3.4"
+    ];
   };
 
   system.stateVersion = "23.05";

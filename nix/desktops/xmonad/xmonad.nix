@@ -1,21 +1,6 @@
 { config, lib, pkgs, stdenv, ... }:
 let
-  dmenu = pkgs.dmenu.override {
-    patches = builtins.map builtins.fetchurl [
-      {
-        url = "https://tools.suckless.org/dmenu/patches/center/dmenu-center-5.2.diff";
-        sha256 = "1jck88ypx83b73i0ys7f6mqikswgd2ab5q0dfvs327gsz11jqyws";
-      }
-      {
-        url = "https://tools.suckless.org/dmenu/patches/border/dmenu-border-5.2.diff";
-        sha256 = "0kyi50z6c1y81gbq4kp9cnmg7gqpc9j17r7x227v6px68a8nj7p5";
-      }
-      {
-        url = "https://tools.suckless.org/dmenu/patches/line-height/dmenu-lineheight-5.2.diff";
-        sha256 = "0jabb2ycfn3xw0k2d2rv7nyas5cwjr6zvwaffdn9jawh62c50qy5";
-      }
-    ];
-  };
+  dmenu = pkgs.dmenu;
 
   my-xmobar = with pkgs; haskell.lib.overrideCabal haskellPackages.xmobar (
     oldAttrs: {
@@ -80,20 +65,19 @@ in
   services = {
     unclutter-xfixes.enable = true;
 
+    displayManager = {
+      defaultSession = "none+xmonad";
+      autoLogin = {
+        enable = true;
+        user = "tpanum";
+      };
+    };
+
     xserver = {
       videoDrivers = [ "intel" ];
-      libinput = {
-        enable = true;
-      };
 
       displayManager = {
         lightdm.enable = true;
-        autoLogin = {
-          enable = true;
-          user = "tpanum";
-        };
-
-        defaultSession = "none+xmonad";
         sessionCommands = ''
           ${pkgs.xorg.xmodmap}/bin/xmodmap ${xmodmaprc} &
           ${pkgs.xorg.xset}/bin/xset 120 4 &
