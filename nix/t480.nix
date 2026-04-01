@@ -41,7 +41,9 @@
       ENERGY_PERF_POLICY_ON_BAT = "powersave";
       START_CHARGE_THRESH_BAT0 = 70;
       STOP_CHARGE_THRESH_BAT0 = 80;
-      USB_AUTOSUSPEND = 0;
+      USB_AUTOSUSPEND = 1;
+      # If ES100 has audio issues when connected via USB, find its ID with
+      # lsusb and add it here: USB_DENYLIST = "xxxx:xxxx";
     };
 
 
