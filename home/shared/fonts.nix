@@ -4,6 +4,6 @@
 
   home.packages = with pkgs; [
     hasklig
-    (callPackage ../../pkgs/pragmasevka.nix { })
+    pragmasevka # from pkgs/
   ];
 }

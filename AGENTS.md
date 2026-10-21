@@ -25,6 +25,7 @@ archive/           # retired files; not used by the flake
 - One file per program or topic (e.g. `home/shared/git.nix`). Each folder has a
   `default.nix` that imports its files.
 - Host files hold only system-level config (boot, hardware, services, users).
+- `home.stateVersion` is set per host (never in `home/`); don't change existing values.
 - Both hosts use the same nixpkgs input and load home-manager as a system module.
 - No secrets in the repo (it is public); read them from files at runtime.
 

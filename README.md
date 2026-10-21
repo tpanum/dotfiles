@@ -9,7 +9,9 @@ config. See `AGENTS.md` for the layout.
 git clone git@github.com:tpanum/dotfiles.git ~/.dotfiles
 ```
 
-**NixOS**
+**NixOS** (first commit `hosts/t480/hardware.nix` from
+`nixos-generate-config --show-hardware-config`, and create the password hash in
+`/etc/nixos/secrets/tpanum.hash` with `mkpasswd -m sha-512`)
 
 ```sh
 sudo nixos-rebuild switch --flake ~/.dotfiles#t480 \
