@@ -3,7 +3,7 @@
   imports = [
     <nixos-hardware/lenovo/thinkpad/t480>
     ./machines/laptops.nix
-    ./hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
     ./desktops/xmonad/xmonad.nix
   ];
 
