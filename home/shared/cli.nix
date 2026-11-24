@@ -10,6 +10,7 @@
     fd
     htop
     jq
+    bitwarden-cli # `bw`, password manager CLI
     pass
     pv
     rclone
